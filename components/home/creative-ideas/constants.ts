@@ -1,0 +1,68 @@
+import { CreativeIdea } from "./types";
+
+export const MOCK_DATA: CreativeIdea[] = [
+  {
+    id: 1,
+    image: "/images/idea-1.png",
+    title: "Academic Social Media",
+    description:
+      "Erazon is the new generation of academic social media — a space where learning meets connection — that gives educators all the tools to build a complete online learning environment with courses, content sharing, chats, discussions, and an academic e-commerce marketplace for selling educ...",
+    industries: ["Education", "Communication"],
+    types: ["Software (SAAS)", "Web App", "Mobile App"],
+    businessModel: ["Commission Marketplace"],
+    stage: ["MVP (Minimum Viable Product)"],
+    date: "23 / 10 / 2025",
+    location: "Egypt, Cairo",
+    likes: 68,
+    comments: 27,
+    rating: 4.8,
+  },
+  {
+    id: 2,
+    image: "/images/idea-2.png",
+    title: "Transportations and logistics system",
+    description:
+      "Transportation and Logistics System streamlines how educational materials and equipment move between institutions, instructors, and learners — ensuring fast, reliable, and transparent delivery. From managing orders to tracking shipments, it connects all stakeholders in one smart, efficient network bu...",
+    industries: ["Education", "Communication"],
+    types: ["Software (SAAS)", "Web App", "Mobile App"],
+    businessModel: ["Commission Marketplace"],
+    stage: ["MVP (Minimum Viable Product)"],
+    date: "23 / 10 / 2025",
+    location: "Egypt, Cairo",
+    likes: 68,
+    comments: 27,
+    rating: 4.8,
+  },
+  {
+    id: 3,
+    image: "/images/idea-3.png",
+    title: "Virtual GYM",
+    description:
+      "Virtual GYM brings fitness to the digital world — an interactive space where users can join live or recorded workouts, track their progress, and connect with professional trainers. It's not just exercise; it's a complete virtual fitness experience that motivates, measures, and maximizes your performance any...",
+    industries: ["Education", "Communication"],
+    types: ["Software (SAAS)", "Web App", "Mobile App"],
+    businessModel: ["Commission Marketplace"],
+    stage: ["MVP (Minimum Viable Product)"],
+    date: "23 / 10 / 2025",
+    location: "Egypt, Cairo",
+    likes: 68,
+    comments: 27,
+    rating: 4.8,
+  },
+  {
+    id: 4,
+    image: "/images/idea-2.png",
+    title: "Transportations and logistics system",
+    description:
+      "Transportation and Logistics System streamlines how educational materials and equipment move between institutions, instructors, and learners — ensuring fast, reliable, and transparent delivery. From managing orders to tracking shipments, it connects all stakeholders in one smart, efficient network bu...",
+    industries: ["Education", "Communication"],
+    types: ["Software (SAAS)", "Web App", "Mobile App"],
+    businessModel: ["Commission Marketplace"],
+    stage: ["MVP (Minimum Viable Product)"],
+    date: "23 / 10 / 2025",
+    location: "Egypt, Cairo",
+    likes: 68,
+    comments: 27,
+    rating: 4.8,
+  },
+];
