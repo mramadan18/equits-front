@@ -1,0 +1,33 @@
+{
+  "Navbar": {
+    "home": "Home",
+    "explore": "Explore",
+    "talents": "Talents",
+    "services": "Services",
+    "register": "Register",
+    "login": "Login",
+    "logoAlt": "Equits Logo",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "Hero": {
+    "title": "Every <yellow>Great Start-Up</yellow> Once <br></br> Started As A <yellow>Simple Idea</yellow>",
+    "subtitle": "The Founders Dared To See Potential Where Others Saw Nothing, And Kept <br></br> Building Until That Small Spark Became A Fire That Changed The World",
+    "exploreProjects": "Explore Projects",
+    "uploadYours": "Upload yours"
+  },
+  "WhatWeDo": {
+    "title": "What We Do?",
+    "description": "We help entrepreneurs especially students connect <br></br> easily with investors and the right team. We support <br></br> you every step of the way from shaping your idea to <br></br> bringing it to life and making shine.",
+    "startNow": "Start Now"
+  },
+  "CreativeIdeas": {
+    "title": "<underline>Creative Ideas</underline> & Start-Ups",
+    "industry": "Industry:",
+    "type": "Type:",
+    "businessModel": "Business Model:",
+    "stage": "Stage:",
+    "viewDetails": "View Details",
+    "seeMore": "See More"
+  }
+}
