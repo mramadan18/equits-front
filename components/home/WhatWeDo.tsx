@@ -21,9 +21,10 @@ export const WhatWeDo = () => {
               <Image
                 src="/images/line.png"
                 alt="underline"
-                width={150}
+                width={144}
                 height={10}
-                className="absolute -bottom-2 left-0 w-36 h-auto"
+                className="absolute -bottom-2 left-0"
+                style={{ width: "144px", height: "auto" }}
               />
             </div>
 

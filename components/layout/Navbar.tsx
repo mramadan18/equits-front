@@ -80,7 +80,7 @@ export const Navbar = () => {
               alt={t("logoAlt")}
               width={120}
               height={30}
-              className="object-contain"
+              style={{ width: "auto", height: "auto" }}
               priority
             />
           </Link>

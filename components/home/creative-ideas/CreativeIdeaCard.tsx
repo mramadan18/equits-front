@@ -23,6 +23,7 @@ export const CreativeIdeaCard = ({ item }: CreativeIdeaCardProps) => {
           alt={item.title}
           fill
           className="object-cover"
+          sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, (max-width: 1536px) 33vw, 25vw"
         />
       </div>
 
