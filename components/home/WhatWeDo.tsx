@@ -7,7 +7,7 @@ export default function WhatWeDo() {
 
   return (
     <section className="w-full bg-white py-16 md:py-24">
-      <div className="container px-4 sm:px-6 lg:px-8">
+      <div className="container">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-0 w-full">
           {/* Text Content */}
           <div className="w-full lg:w-[45%] flex flex-col items-center text-center order-2 lg:order-1 px-4 lg:px-0">

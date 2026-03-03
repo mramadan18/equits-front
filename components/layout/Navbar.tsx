@@ -69,7 +69,7 @@ export const Navbar = () => {
           "data-[active=true]:after:h-0.5",
           "data-[active=true]:after:bg-primary",
         ],
-        wrapper: "h-full container px-6 max-w-auto",
+        wrapper: "h-full container max-w-auto",
       }}
     >
       <NavbarContent justify="start">

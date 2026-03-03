@@ -23,7 +23,7 @@ export default function Faq() {
 
         <div className="mt-28 bg-gray3 rounded-3xl p-6 md:p-10 mb-20 md:mb-24 relative">
           {/* Top left decorative lines */}
-          <div className="absolute -top-20 -left-10 sm:left-0 md:-left-10 lg:-left-20">
+          <div className="absolute -top-20 -left-16 sm:left-0 md:-left-10 lg:-left-20">
             <Image
               src="/images/faq-lines.png"
               alt="faq-lines"

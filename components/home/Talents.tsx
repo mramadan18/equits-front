@@ -3,7 +3,6 @@
 import { Button } from "@heroui/button";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
-import { PiSparkleFill } from "react-icons/pi";
 import { BiRightArrowAlt } from "react-icons/bi";
 
 export default function Talents() {
@@ -26,7 +25,7 @@ export default function Talents() {
         </div>
 
         {/* Main Card */}
-        <div className="relative w-full rounded-2xl overflow-hidden min-h-[300px] md:min-h-[400px] flex items-end justify-center text-center pb-10">
+        <div className="relative w-full rounded-2xl overflow-hidden px-4 min-h-[300px] md:min-h-[400px] flex items-end justify-center text-center pb-10">
           {/* Background Image */}
           <Image
             src="/images/talents_bg.png"

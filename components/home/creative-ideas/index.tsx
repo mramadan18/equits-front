@@ -10,14 +10,8 @@ export default function CreativeIdeas() {
 
   return (
     <section className="w-full bg-white py-16 md:py-24">
-      <div className="container px-4 sm:px-6 lg:px-8">
-        <SectionHeader
-          title={t.rich("title", {
-            underline: (chunks) => (
-              <span className="inline-block">{chunks}</span>
-            ),
-          })}
-        />
+      <div className="container">
+        <SectionHeader title={t("title")} />
 
         {/* Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4">

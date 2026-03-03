@@ -25,7 +25,7 @@ export default function Hero() {
         }}
       ></div>
 
-      <div className="z-10 flex flex-col items-center justify-center text-center px-4 container pt-20 pb-24">
+      <div className="container z-10 flex flex-col items-center justify-center text-center pt-20 pb-24">
         <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold text-white leading-[1.5] mb-12">
           {t.rich("title", {
             yellow: (chunks) => (
