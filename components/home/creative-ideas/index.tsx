@@ -1,5 +1,3 @@
-"use client";
-
 import { useTranslations } from "next-intl";
 import { Button } from "@heroui/button";
 import { FaArrowRight } from "react-icons/fa";
@@ -7,12 +5,12 @@ import { MOCK_DATA } from "./constants";
 import { CreativeIdeaCard } from "./CreativeIdeaCard";
 import { SectionHeader } from "./SectionHeader";
 
-export const CreativeIdeas = () => {
+export default function CreativeIdeas() {
   const t = useTranslations("CreativeIdeas");
 
   return (
     <section className="w-full bg-white py-16 md:py-24">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container px-4 sm:px-6 lg:px-8">
         <SectionHeader />
 
         {/* Cards Grid */}
@@ -36,4 +34,4 @@ export const CreativeIdeas = () => {
       </div>
     </section>
   );
-};
+}

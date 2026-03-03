@@ -1,14 +1,10 @@
-"use client";
-
 import { Button } from "@heroui/button";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { BiRightArrowAlt } from "react-icons/bi";
 import { IoTelescopeOutline } from "react-icons/io5";
 
-export const Hero = () => {
-  const locale = useLocale();
+export default function Hero() {
   const t = useTranslations("Hero");
-  const isRtl = locale === "ar";
 
   return (
     <div
@@ -29,7 +25,7 @@ export const Hero = () => {
         }}
       ></div>
 
-      <div className="z-10 flex flex-col items-center justify-center text-center px-4 max-w-5xl mx-auto pt-20 pb-24">
+      <div className="z-10 flex flex-col items-center justify-center text-center px-4 container pt-20 pb-24">
         <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold text-white leading-[1.5] mb-12">
           {t.rich("title", {
             yellow: (chunks) => (
@@ -68,4 +64,4 @@ export const Hero = () => {
       </div>
     </div>
   );
-};
+}

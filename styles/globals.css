@@ -18,3 +18,18 @@
     0px 3.6px 5.99px 0px rgba(177, 177, 177, 0.08),
     0px 0.6px 1.8px 0px rgba(0, 0, 0, 0.05);
 }
+
+@utility container {
+  width: 100%;
+  max-width: 80rem; /* 1280px */
+  margin-inline: auto;
+  padding-inline: 1rem;
+
+  @variant sm {
+    padding-inline: 1.5rem;
+  }
+
+  @variant lg {
+    padding-inline: 2rem;
+  }
+}
