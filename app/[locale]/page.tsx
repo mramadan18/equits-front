@@ -1,6 +1,7 @@
 import Hero from "@/components/home/Hero";
 import WhatWeDo from "@/components/home/WhatWeDo";
 import CreativeIdeas from "@/components/home/creative-ideas";
+import Talents from "@/components/home/Talents";
 import Wisdom from "@/components/home/Wisdom";
 
 export default function Home() {
@@ -10,6 +11,7 @@ export default function Home() {
       <WhatWeDo />
       <CreativeIdeas />
       <Wisdom />
+      <Talents />
     </>
   );
 }
