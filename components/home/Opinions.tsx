@@ -61,7 +61,7 @@ export default function Opinions() {
               bulletActiveClass:
                 "swiper-pagination-bullet-active !bg-primary !opacity-100",
             }}
-            className="pb-24 h-[440px] !flex transition-all duration-300 [&>.swiper-wrapper]:items-center [&_.swiper-pagination]:!bottom-0 [&_.swiper-pagination-bullet]:!w-2 [&_.swiper-pagination-bullet]:!h-[3px] [&_.swiper-pagination-bullet]:!rounded-none [&_.swiper-pagination-bullet]:!bg-primary/30 [&_.swiper-pagination-bullet]:!opacity-100 [&_.swiper-pagination-bullet-active]:!bg-primary"
+            className="pb-24 h-[300px] md:h-[440px] !flex transition-all duration-300 [&>.swiper-wrapper]:items-center [&_.swiper-pagination]:!bottom-0 [&_.swiper-pagination-bullet]:!w-2 [&_.swiper-pagination-bullet]:!h-[3px] [&_.swiper-pagination-bullet]:!rounded-none [&_.swiper-pagination-bullet]:!bg-primary/30 [&_.swiper-pagination-bullet]:!opacity-100 [&_.swiper-pagination-bullet-active]:!bg-primary"
           >
             {opinions.map((opinion, idx) => {
               // We check if the translation has the key before rendering

@@ -62,5 +62,16 @@
         "quote": "\"Bitstarts felt refreshingly different. It connects you with the right people, but more importantly, it helps you present your startup in a way that truly stands out.\""
       }
     }
+  },
+  "Faq": {
+    "title": "Frequently Asked Questions",
+    "q1": "What is Bitstart",
+    "a1": "Bitstart is a platform that empowers entrepreneurs by giving them the right resources to present their startups.",
+    "q2": "Who can join Bitstarts?",
+    "a2": "Anyone with an innovative idea and a passion for entrepreneurship can join our platform.",
+    "q3": "How do investors benefit from Bitstarts?",
+    "a3": "Investors get access to a curated pipeline of promising startups and talented teams.",
+    "q4": "How does Bitstarts help entrepreneurs?",
+    "a4": "Bitstarts doesn't just connect you with investors - it supports you through mentorship, resources, and tools to help you present your startup effectively and attract funding."
   }
 }

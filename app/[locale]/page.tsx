@@ -4,6 +4,7 @@ import CreativeIdeas from "@/components/home/creative-ideas";
 import Talents from "@/components/home/Talents";
 import Wisdom from "@/components/home/Wisdom";
 import Opinions from "@/components/home/Opinions";
+import Faq from "@/components/home/Faq";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <Wisdom />
       <Talents />
       <Opinions />
+      <Faq />
     </>
   );
 }
