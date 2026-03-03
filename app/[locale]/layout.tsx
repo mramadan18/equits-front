@@ -6,6 +6,7 @@ import { hasLocale } from "next-intl";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 import { Navbar } from "@/components/layout/Navbar";
+import { Footer } from "@/components/layout/Footer";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 
@@ -63,6 +64,7 @@ export default async function RootLayout({ children, params }: Props) {
               <main className="flex-grow w-full flex flex-col items-center">
                 {children}
               </main>
+              <Footer />
             </div>
           </Providers>
         </NextIntlClientProvider>
