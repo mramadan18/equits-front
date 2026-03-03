@@ -3,7 +3,7 @@ import { Button } from "@heroui/button";
 import { FaArrowRight } from "react-icons/fa";
 import { MOCK_DATA } from "./constants";
 import { CreativeIdeaCard } from "./CreativeIdeaCard";
-import { SectionHeader } from "./SectionHeader";
+import { SectionHeader } from "@/components/shared/SectionHeader";
 
 export default function CreativeIdeas() {
   const t = useTranslations("CreativeIdeas");
@@ -11,7 +11,13 @@ export default function CreativeIdeas() {
   return (
     <section className="w-full bg-white py-16 md:py-24">
       <div className="container px-4 sm:px-6 lg:px-8">
-        <SectionHeader />
+        <SectionHeader
+          title={t.rich("title", {
+            underline: (chunks) => (
+              <span className="inline-block">{chunks}</span>
+            ),
+          })}
+        />
 
         {/* Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4">

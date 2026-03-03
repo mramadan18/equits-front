@@ -1,6 +1,6 @@
 import { useTranslations } from "next-intl";
 import { Button } from "@heroui/button";
-import Image from "next/image";
+import { SectionHeader } from "@/components/shared/SectionHeader";
 
 export default function WhatWeDo() {
   const t = useTranslations("WhatWeDo");
@@ -11,20 +11,13 @@ export default function WhatWeDo() {
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-0 w-full">
           {/* Text Content */}
           <div className="w-full lg:w-[45%] flex flex-col items-center text-center order-2 lg:order-1 px-4 lg:px-0">
-            <div className="relative inline-block mb-6">
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
-                {t("title")}
-              </h2>
-              {/* Blue underline accent */}
-              <Image
-                src="/images/line.png"
-                alt="underline"
-                width={144}
-                height={10}
-                className="absolute -bottom-2 left-0"
-                style={{ width: "144px", height: "auto" }}
-              />
-            </div>
+            <SectionHeader
+              title={t("title")}
+              className="mb-6"
+              titleClassName="text-gray-900"
+              underlineImage="/images/line.png"
+              underlineClassName="absolute -bottom-2 left-0 w-36 h-auto"
+            />
 
             <p className="text-gray-700 text-sm md:text-base font-medium leading-relaxed mb-10 w-full">
               {t.rich("description", {
