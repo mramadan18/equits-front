@@ -40,5 +40,27 @@
     "title": "Invest Through <yellow>Talents</yellow>, Not Just <yellow>Ideas</yellow>",
     "subtitle": "Great Minds And Strong Teams Build Enduring Enterprises",
     "cta": "Explore Talents"
+  },
+  "Opinions": {
+    "title": "Some Opinions about us",
+    "cards": {
+      "ahmed": {
+        "name": "Ahmed Sentawy",
+        "role": "Investor",
+        "quote": "\"Bitstarts made discovering promising startups easier than ever. It's not just a platform. It's an ecosystem where talent, innovation, and smart investment truly meet.\""
+      },
+      "jena": {
+        "name": "Jena Wahba",
+        "role": "Student BackEnd",
+        "org": "@ Faculty of computers and AI",
+        "quote": "\"Bitstarts gave me the push I needed to turn my idea into a real startup. It feels like having a real partner who believes in your dream. Thanks a lot\""
+      },
+      "alaa": {
+        "name": "Alaa Saber",
+        "role": "Senior Product Manager",
+        "org": "@ Equits",
+        "quote": "\"Bitstarts felt refreshingly different. It connects you with the right people, but more importantly, it helps you present your startup in a way that truly stands out.\""
+      }
+    }
   }
 }
