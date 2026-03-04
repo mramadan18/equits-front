@@ -102,6 +102,34 @@
       "submit": "تسجيل",
       "hasAccount": "لديك حساب بالفعل؟",
       "loginLink": "دخول"
+    },
+    "ForgotPassword": {
+      "title": "نسيت كلمة المرور",
+      "subtitle": "أدخل بريدك الإلكتروني لتلقي رمز إعادة التعيين.",
+      "emailLabel": "أدخل بريدك الإلكتروني",
+      "submit": "إرسال الرمز",
+      "backToLogin": "العودة لتسجيل الدخول"
+    },
+    "VerifyEmail": {
+      "title": "التحقق من البريد",
+      "subtitle": "أدخل الرمز المرسل إلى بريدك الإلكتروني.",
+      "submit": "تحقق",
+      "resendCode": "إعادة إرسال الرمز"
+    },
+    "ResetPassword": {
+      "title": "إعادة تعيين كلمة المرور",
+      "subtitle": "أدخل كلمة المرور الجديدة.",
+      "passwordLabel": "كلمة المرور الجديدة",
+      "confirmPasswordLabel": "تأكيد كلمة المرور",
+      "submit": "إعادة التعيين"
+    },
+    "ChangePassword": {
+      "title": "تغيير كلمة المرور",
+      "subtitle": "قم بتحديث كلمة المرور الخاصة بك.",
+      "oldPasswordLabel": "كلمة المرور القديمة",
+      "newPasswordLabel": "كلمة المرور الجديدة",
+      "confirmPasswordLabel": "تأكيد كلمة المرور",
+      "submit": "تغيير كلمة المرور"
     }
   }
 }

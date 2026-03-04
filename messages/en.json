@@ -102,6 +102,34 @@
       "submit": "Register",
       "hasAccount": "Already have an Account?",
       "loginLink": "Login"
+    },
+    "ForgotPassword": {
+      "title": "Forgot Password",
+      "subtitle": "Enter your email to receive a reset code.",
+      "emailLabel": "Enter your E-mail",
+      "submit": "Send Code",
+      "backToLogin": "Back to Login"
+    },
+    "VerifyEmail": {
+      "title": "Verify Email",
+      "subtitle": "Enter the code sent to your email.",
+      "submit": "Verify",
+      "resendCode": "Resend Code"
+    },
+    "ResetPassword": {
+      "title": "Reset Password",
+      "subtitle": "Enter your new password.",
+      "passwordLabel": "New Password",
+      "confirmPasswordLabel": "Confirm Password",
+      "submit": "Reset Password"
+    },
+    "ChangePassword": {
+      "title": "Change Password",
+      "subtitle": "Update your password.",
+      "oldPasswordLabel": "Old Password",
+      "newPasswordLabel": "New Password",
+      "confirmPasswordLabel": "Confirm Password",
+      "submit": "Change Password"
     }
   }
 }
