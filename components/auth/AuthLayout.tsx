@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { FadeIn } from "../shared/animations";
 
 interface AuthLayoutProps {
   children: React.ReactNode;
@@ -12,16 +15,25 @@ export const AuthLayout = ({
   imageAlt,
 }: AuthLayoutProps) => {
   return (
-    <div className="container py-8 lg:py-16 flex flex-col md:flex-row justify-center md:justify-between items-center gap-12 lg:gap-24 flex-grow">
+    <div className="container py-8 lg:py-16 flex flex-col md:flex-row justify-center md:justify-between items-center gap-12 lg:gap-24 flex-grow overflow-hidden">
       {/* Form Section */}
-      <div className="w-full md:w-1/2 flex justify-center md:justify-start">
+      <FadeIn
+        x={-50}
+        duration={0.7}
+        className="w-full md:w-1/2 flex justify-center md:justify-start"
+      >
         <div className="w-full max-w-[440px] flex flex-col gap-6">
           {children}
         </div>
-      </div>
+      </FadeIn>
 
       {/* Image Section */}
-      <div className="hidden md:flex w-full md:w-1/2 justify-end items-center">
+      <FadeIn
+        x={50}
+        delay={0.2}
+        duration={0.7}
+        className="hidden md:flex w-full md:w-1/2 justify-end items-center"
+      >
         <Image
           src={imageSrc}
           alt={imageAlt}
@@ -30,7 +42,7 @@ export const AuthLayout = ({
           className="object-contain w-full max-w-[500px]"
           priority
         />
-      </div>
+      </FadeIn>
     </div>
   );
 };

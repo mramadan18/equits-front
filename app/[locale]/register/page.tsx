@@ -12,6 +12,7 @@ import {
   PasswordField,
   AuthSubmitButton,
 } from "@/components/auth";
+import { StaggerContainer, StaggerItem } from "@/components/shared/animations";
 
 export default function RegisterPage() {
   const t = useTranslations("Auth.Register");
@@ -21,37 +22,55 @@ export default function RegisterPage() {
       imageSrc="/images/register.png"
       imageAlt="Register illustration"
     >
-      <AuthHeader title={t("title")} subtitle={t("subtitle")} />
+      <StaggerContainer delay={0.3} className="flex flex-col gap-6">
+        <StaggerItem>
+          <AuthHeader title={t("title")} subtitle={t("subtitle")} />
+        </StaggerItem>
 
-      <SocialButton text={t("continueGoogle")} />
+        <StaggerItem>
+          <SocialButton text={t("continueGoogle")} />
+        </StaggerItem>
 
-      <AuthDivider text={t("or")} />
+        <StaggerItem>
+          <AuthDivider text={t("or")} />
+        </StaggerItem>
 
-      <form className="flex flex-col gap-4">
-        <div className="flex gap-4">
-          <AuthInput type="text" placeholder={t("firstName")} />
-          <AuthInput type="text" placeholder={t("lastName")} />
-        </div>
+        <form className="flex flex-col gap-4">
+          <StaggerItem>
+            <div className="flex gap-4">
+              <AuthInput type="text" placeholder={t("firstName")} />
+              <AuthInput type="text" placeholder={t("lastName")} />
+            </div>
+          </StaggerItem>
 
-        <AuthInput
-          type="email"
-          placeholder={t("emailLabel")}
-          endContent={
-            <MdOutlineMailOutline className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
-          }
-        />
+          <StaggerItem>
+            <AuthInput
+              type="email"
+              placeholder={t("emailLabel")}
+              endContent={
+                <MdOutlineMailOutline className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
+              }
+            />
+          </StaggerItem>
 
-        <PasswordField placeholder={t("passwordLabel")} />
+          <StaggerItem>
+            <PasswordField placeholder={t("passwordLabel")} />
+          </StaggerItem>
 
-        <AuthSubmitButton className="mt-4">{t("submit")}</AuthSubmitButton>
-      </form>
+          <StaggerItem>
+            <AuthSubmitButton className="mt-4">{t("submit")}</AuthSubmitButton>
+          </StaggerItem>
+        </form>
 
-      <p className="text-center font-medium mt-2 text-dark">
-        {t("hasAccount")}{" "}
-        <Link href="/login" className="text-primary hover:underline">
-          {t("loginLink")}
-        </Link>
-      </p>
+        <StaggerItem>
+          <p className="text-center mt-2 text-dark">
+            {t("hasAccount")}{" "}
+            <Link href="/login" className="text-primary hover:underline">
+              {t("loginLink")}
+            </Link>
+          </p>
+        </StaggerItem>
+      </StaggerContainer>
     </AuthLayout>
   );
 }

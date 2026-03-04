@@ -26,6 +26,10 @@ export const Navbar = () => {
   const locale = useLocale();
   const t = useTranslations("Navbar");
 
+  const isLoginPage = pathname === "/login";
+  const isRegisterPage = pathname === "/register";
+  const isAuthPage = isLoginPage || isRegisterPage;
+
   const navItems = [
     {
       label: t("home"),
@@ -88,24 +92,25 @@ export const Navbar = () => {
       </NavbarContent>
 
       <NavbarContent className="hidden lg:flex gap-4" justify="center">
-        {navItems.map((item, index) => {
-          const isActive = pathname === item.href;
-          return (
-            <NavbarItem
-              key={`${item.label}-${index}`}
-              isActive={isActive}
-              className="h-full text-base"
-            >
-              <Link
-                href={item.href}
-                className={`flex items-center gap-2 h-full font-bold transition-colors ${isActive ? "text-primary font-bold" : "text-gray hover:text-primary font-medium"}`}
+        {!isAuthPage &&
+          navItems.map((item, index) => {
+            const isActive = pathname === item.href;
+            return (
+              <NavbarItem
+                key={`${item.label}-${index}`}
+                isActive={isActive}
+                className="h-full text-base"
               >
-                {item.icon}
-                {item.label}
-              </Link>
-            </NavbarItem>
-          );
-        })}
+                <Link
+                  href={item.href}
+                  className={`flex items-center gap-2 h-full font-bold transition-colors ${isActive ? "text-primary font-bold" : "text-gray hover:text-primary font-medium"}`}
+                >
+                  {item.icon}
+                  {item.label}
+                </Link>
+              </NavbarItem>
+            );
+          })}
       </NavbarContent>
 
       <NavbarContent justify="end">
@@ -117,25 +122,29 @@ export const Navbar = () => {
           >
             {locale === "en" ? "عربي" : "EN"}
           </Link>
-          <Button
-            as={Link}
-            href="/register"
-            variant="bordered"
-            radius="sm"
-            color="primary"
-            className="text-primary font-bold px-8"
-          >
-            {t("register")}
-          </Button>
-          <Button
-            as={Link}
-            href="/login"
-            radius="sm"
-            color="primary"
-            className="font-bold px-8"
-          >
-            {t("login")}
-          </Button>
+          {isLoginPage && (
+            <Button
+              as={Link}
+              href="/register"
+              variant="bordered"
+              radius="sm"
+              color="primary"
+              className="text-primary font-bold px-8"
+            >
+              {t("register")}
+            </Button>
+          )}
+          {isRegisterPage && (
+            <Button
+              as={Link}
+              href="/login"
+              radius="sm"
+              color="primary"
+              className="font-bold px-8"
+            >
+              {t("login")}
+            </Button>
+          )}
         </NavbarItem>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? t("closeMenu") : t("openMenu")}
@@ -145,21 +154,22 @@ export const Navbar = () => {
       </NavbarContent>
 
       <NavbarMenu className="pt-6">
-        {navItems.map((item, index) => {
-          const isActive = pathname === item.href;
-          return (
-            <NavbarMenuItem key={`${item.label}-${index}`}>
-              <Link
-                className={`w-full flex items-center gap-4 py-3 text-base ${isActive ? "text-primary font-bold" : "text-gray font-medium hover:text-primary"}`}
-                href={item.href}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {item.icon}
-                {item.label}
-              </Link>
-            </NavbarMenuItem>
-          );
-        })}
+        {!isAuthPage &&
+          navItems.map((item, index) => {
+            const isActive = pathname === item.href;
+            return (
+              <NavbarMenuItem key={`${item.label}-${index}`}>
+                <Link
+                  className={`w-full flex items-center gap-4 py-3 text-base ${isActive ? "text-primary font-bold" : "text-gray font-medium hover:text-primary"}`}
+                  href={item.href}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item.icon}
+                  {item.label}
+                </Link>
+              </NavbarMenuItem>
+            );
+          })}
         <div className="mt-8 flex flex-col gap-4">
           <Link
             href={pathname as string}
@@ -168,29 +178,33 @@ export const Navbar = () => {
           >
             {locale === "en" ? "عربي" : "English"}
           </Link>
-          <Button
-            as={Link}
-            href="/register"
-            variant="bordered"
-            fullWidth
-            color="primary"
-            radius="none"
-            size="lg"
-            className="text-primary font-bold text-lg"
-          >
-            {t("register")}
-          </Button>
-          <Button
-            as={Link}
-            href="/login"
-            fullWidth
-            color="primary"
-            radius="none"
-            size="lg"
-            className="font-bold text-lg"
-          >
-            {t("login")}
-          </Button>
+          {isLoginPage && (
+            <Button
+              as={Link}
+              href="/register"
+              variant="bordered"
+              fullWidth
+              color="primary"
+              radius="none"
+              size="lg"
+              className="text-primary font-bold text-lg"
+            >
+              {t("register")}
+            </Button>
+          )}
+          {isRegisterPage && (
+            <Button
+              as={Link}
+              href="/login"
+              fullWidth
+              color="primary"
+              radius="none"
+              size="lg"
+              className="font-bold text-lg"
+            >
+              {t("login")}
+            </Button>
+          )}
         </div>
       </NavbarMenu>
     </HeroUINavbar>
