@@ -1,4 +1,16 @@
 {
+  "Explore": {
+    "searchPlaceholder": "ابحث عن شيء ما",
+    "addYours": "أضف مشروعك",
+    "ideas": "أفكار",
+    "budget": "الميزانية",
+    "traction": "النمو",
+    "stage": "المرحلة",
+    "businessModel": "نموذج العمل",
+    "industry": "الصناعة",
+    "type": "النوع",
+    "allFilters": "كل الفلاتر"
+  },
   "Navbar": {
     "home": "الرئيسة",
     "explore": "استكشاف",

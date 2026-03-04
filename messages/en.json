@@ -1,4 +1,16 @@
 {
+  "Explore": {
+    "searchPlaceholder": "Search for something",
+    "addYours": "Add yours",
+    "ideas": "Ideas",
+    "budget": "Budget",
+    "traction": "Traction",
+    "stage": "Stage",
+    "businessModel": "Business Model",
+    "industry": "Industry",
+    "type": "Type",
+    "allFilters": "All filters"
+  },
   "Navbar": {
     "home": "Home",
     "explore": "Explore",

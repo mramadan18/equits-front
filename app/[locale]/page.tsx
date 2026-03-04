@@ -1,6 +1,6 @@
 import Hero from "@/components/home/Hero";
 import WhatWeDo from "@/components/home/WhatWeDo";
-import CreativeIdeas from "@/components/home/creative-ideas";
+import CreativeIdeas from "@/components/home/CreativeIdeas";
 import Talents from "@/components/home/Talents";
 import Wisdom from "@/components/home/Wisdom";
 import Opinions from "@/components/home/Opinions";

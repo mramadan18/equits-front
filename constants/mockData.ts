@@ -1,4 +1,4 @@
-import { CreativeIdea } from "./types";
+import { CreativeIdea } from "@/components/shared/creative-idea-card";
 
 export const MOCK_DATA: CreativeIdea[] = [
   {

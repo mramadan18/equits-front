@@ -1,8 +1,8 @@
 import { useTranslations } from "next-intl";
 import { Button } from "@heroui/button";
 import { FaArrowRight } from "react-icons/fa";
-import { MOCK_DATA } from "./constants";
-import { CreativeIdeaCard } from "./CreativeIdeaCard";
+import { MOCK_DATA } from "@/constants/mockData";
+import { CreativeIdeaCard } from "@/components/shared/creative-idea-card";
 import { SectionHeader } from "@/components/shared/SectionHeader";
 import {
   FadeIn,
