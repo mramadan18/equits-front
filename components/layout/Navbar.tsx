@@ -19,6 +19,15 @@ import { useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import { LuMenu } from "react-icons/lu";
+import { AuthRoutes } from "@/types";
+
+const authRoutes = [
+  AuthRoutes.REGISTER,
+  AuthRoutes.LOGIN,
+  AuthRoutes.FORGOT_PASSWORD,
+  AuthRoutes.RESET_PASSWORD,
+  AuthRoutes.CHANGE_PASSWORD,
+];
 
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -26,9 +35,9 @@ export const Navbar = () => {
   const locale = useLocale();
   const t = useTranslations("Navbar");
 
-  const isLoginPage = pathname === "/login";
-  const isRegisterPage = pathname === "/register";
-  const isAuthPage = isLoginPage || isRegisterPage;
+  const isAuthPage = authRoutes.includes(pathname as AuthRoutes);
+  const isLoginPage = pathname === AuthRoutes.LOGIN;
+  const isRegisterPage = pathname === AuthRoutes.REGISTER;
 
   const navItems = [
     {
@@ -122,7 +131,7 @@ export const Navbar = () => {
           >
             {locale === "en" ? "عربي" : "EN"}
           </Link>
-          {isLoginPage && (
+          {(!isAuthPage || !isRegisterPage) && (
             <Button
               as={Link}
               href="/register"
@@ -134,7 +143,7 @@ export const Navbar = () => {
               {t("register")}
             </Button>
           )}
-          {isRegisterPage && (
+          {(!isAuthPage || !isLoginPage) && (
             <Button
               as={Link}
               href="/login"
@@ -178,7 +187,7 @@ export const Navbar = () => {
           >
             {locale === "en" ? "عربي" : "English"}
           </Link>
-          {isLoginPage && (
+          {(!isAuthPage || !isRegisterPage) && (
             <Button
               as={Link}
               href="/register"
@@ -192,7 +201,7 @@ export const Navbar = () => {
               {t("register")}
             </Button>
           )}
-          {isRegisterPage && (
+          {(!isAuthPage || !isLoginPage) && (
             <Button
               as={Link}
               href="/login"
