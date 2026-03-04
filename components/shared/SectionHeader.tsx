@@ -1,5 +1,4 @@
 import Image from "next/image";
-import React from "react";
 
 interface SectionHeaderProps {
   title: React.ReactNode;
@@ -21,7 +20,7 @@ export const SectionHeader = ({
   return (
     <div className={`flex flex-col items-center text-center ${className}`}>
       <h2
-        className={`text-2xl md:text-3xl font-semibold mb-4 relative inline-block ${titleClassName}`}
+        className={`text-xl md:text-2xl font-semibold mb-4 relative inline-block ${titleClassName}`}
       >
         {title}
 

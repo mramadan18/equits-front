@@ -36,11 +36,11 @@ export default function Faq() {
             itemClasses={{
               base: "group shadow-none bg-transparent data-[open=true]:bg-[#0B5CA8] border-b border-gray-200 data-[open=true]:border-transparent last:border-none data-[open=true]:rounded-xl transition-all my-2 px-2",
               title:
-                "font-bold text-base md:text-lg text-dark2 group-data-[open=true]:text-white",
-              trigger: "py-4 md:py-6",
+                "font-bold text-sm md:text-base text-dark2 group-data-[open=true]:text-white",
+              trigger: "py-4",
               indicator: "text-medium",
               content:
-                "text-sm md:text-base pb-6 pt-0 group-data-[open=true]:text-white/90 leading-relaxed pr-8",
+                "text-xs md:text-sm pb-4 pt-0 group-data-[open=true]:text-white/90 leading-relaxed pr-8",
             }}
             defaultExpandedKeys={["4"]}
           >

@@ -10,11 +10,11 @@ export default function Wisdom() {
       <div className="container flex flex-col items-center text-center">
         <SectionHeader
           title={t("title")}
-          titleClassName="text-white lg:text-4xl font-semibold"
+          titleClassName="text-white font-semibold"
           showUnderline={false}
           className="mb-0"
         />
-        <p className="text-white text-sm lg:text-lg mb-10">{t("subtitle")}</p>
+        <p className="text-white text-sm lg:text-base mb-10">{t("subtitle")}</p>
         <Button
           className="bg-white text-primary font-bold min-w-60"
           radius="full"

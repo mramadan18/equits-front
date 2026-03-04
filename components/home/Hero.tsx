@@ -26,7 +26,7 @@ export default function Hero() {
       ></div>
 
       <div className="container z-10 flex flex-col items-center justify-center text-center pt-20 pb-24">
-        <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold text-white leading-[1.5] mb-12">
+        <h1 className="text-xl md:text-3xl lg:text-4xl font-bold text-white leading-[1.5] mb-12">
           {t.rich("title", {
             yellow: (chunks) => (
               <span className="text-secondary">{chunks}</span>
@@ -35,25 +35,27 @@ export default function Hero() {
           })}
         </h1>
 
-        <p className="text-white/90 text-xs md:text-base mb-12 leading-[1.7]">
+        <p className="text-white/90 text-xs md:text-sm mb-12 leading-[1.7]">
           {t.rich("subtitle", {
             br: () => <br className="hidden md:block" />,
           })}
         </p>
 
-        <div
-          className={`flex flex-col-reverse md:flex-row gap-6 w-full md:w-auto items-center justify-center`}
-        >
+        <div className="flex items-center gap-4">
           <Button
             variant="bordered"
-            className="text-base md:text-lg h-12 md:h-14 text-white border-white px-10 font-bold hover:bg-white/10 w-full md:w-auto flex items-center gap-3"
+            size="lg"
+            radius="sm"
+            className="text-white border-white px-10 font-bold"
             endContent={<IoTelescopeOutline size={24} />}
           >
             {t("exploreProjects")}
           </Button>
           <Button
             color="primary"
-            className="text-base md:text-lg h-12 md:h-14 bg-secondary text-primary px-10 font-bold w-full md:w-auto"
+            size="lg"
+            radius="sm"
+            className="bg-secondary text-primary px-10 font-bold"
             endContent={
               <BiRightArrowAlt className="rtl:rotate-180" size={24} />
             }

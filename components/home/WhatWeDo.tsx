@@ -19,7 +19,7 @@ export default function WhatWeDo() {
               underlineClassName="absolute -bottom-2 left-0 w-36 h-auto"
             />
 
-            <p className="text-gray-700 text-sm md:text-base font-medium leading-relaxed mb-10 w-full">
+            <p className="text-gray2 text-sm md:text-base font-medium leading-relaxed mb-10 w-full">
               {t.rich("description", {
                 br: () => <br className="hidden lg:block" />,
               })}

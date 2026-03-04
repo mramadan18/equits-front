@@ -17,10 +17,10 @@ export default function Talents() {
             <Image
               src="/images/star.png"
               alt="Talents Icon"
-              width={24}
-              height={24}
+              width={20}
+              height={20}
             />
-            <h2 className="text-xl md:text-2xl">{t("section")}</h2>
+            <h2 className="text-lg md:text-xl">{t("section")}</h2>
           </div>
         </div>
 
@@ -47,7 +47,7 @@ export default function Talents() {
 
           {/* Content */}
           <div className="relative z-20 max-w-5xl">
-            <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-6 leading-relaxed">
+            <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-6 leading-relaxed">
               {t.rich("title", {
                 yellow: (chunks) => (
                   <span className="text-secondary">{chunks}</span>
@@ -55,7 +55,7 @@ export default function Talents() {
               })}
             </h3>
 
-            <p className="text-white text-base md:text-lg lg:text-xl mb-12">
+            <p className="text-white text-sm md:text-base lg:text-lg mb-12">
               {t("subtitle")}
             </p>
 
