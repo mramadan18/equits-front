@@ -5,6 +5,7 @@ import { SectionHeader } from "@/components/shared/SectionHeader";
 import { Accordion, AccordionItem } from "@heroui/accordion";
 import Image from "next/image";
 import { FiPlus, FiMinus } from "react-icons/fi";
+import { FadeIn } from "@/components/shared/animations";
 
 export default function Faq() {
   const t = useTranslations("Faq");
@@ -17,20 +18,34 @@ export default function Faq() {
   ];
 
   return (
-    <section className="py-20 w-full bg-white">
+    <section className="py-20 w-full bg-white overflow-hidden">
       <div className="container">
-        <SectionHeader title={t("title")} />
+        <FadeIn y={30} duration={0.6}>
+          <SectionHeader title={t("title")} />
+        </FadeIn>
 
-        <div className="mt-28 bg-gray3 rounded-3xl p-6 md:p-10 mb-20 md:mb-24 relative">
+        <FadeIn
+          y={40}
+          duration={0.7}
+          delay={0.2}
+          className="mt-28 bg-gray3 rounded-3xl p-6 md:p-10 mb-20 md:mb-24 relative"
+        >
           {/* Top left decorative lines */}
-          <div className="absolute -top-20 -left-16 sm:left-0 md:-left-10 lg:-left-20">
+          <FadeIn
+            scale={0.5}
+            rotate={-20}
+            y={0}
+            delay={0.6}
+            duration={0.5}
+            className="absolute -top-20 -left-16 sm:left-0 md:-left-10 lg:-left-20"
+          >
             <Image
               src="/images/faq-lines.png"
               alt="faq-lines"
               width={100}
               height={100}
             />
-          </div>
+          </FadeIn>
           <Accordion
             selectionMode="single"
             itemClasses={{
@@ -61,7 +76,7 @@ export default function Faq() {
               </AccordionItem>
             ))}
           </Accordion>
-        </div>
+        </FadeIn>
       </div>
     </section>
   );

@@ -12,6 +12,7 @@ import "swiper/css/pagination";
 
 import { Avatar } from "@heroui/avatar";
 import { Card, CardBody } from "@heroui/card";
+import { FadeIn } from "@/components/shared/animations";
 
 export default function Opinions() {
   const t = useTranslations("Opinions");
@@ -38,9 +39,17 @@ export default function Opinions() {
   return (
     <section className="py-20 w-full overflow-hidden bg-white">
       <div className="container">
-        <SectionHeader title={t("title")} />
+        <FadeIn y={30} duration={0.6}>
+          <SectionHeader title={t("title")} />
+        </FadeIn>
 
-        <div className="mt-8 px-2 md:px-10">
+        <FadeIn
+          y={40}
+          amount={0.1}
+          duration={0.7}
+          delay={0.2}
+          className="mt-8 px-2 md:px-10"
+        >
           <Swiper
             modules={[Navigation, Pagination, Autoplay]}
             spaceBetween={30}
@@ -105,7 +114,7 @@ export default function Opinions() {
               );
             })}
           </Swiper>
-        </div>
+        </FadeIn>
       </div>
     </section>
   );

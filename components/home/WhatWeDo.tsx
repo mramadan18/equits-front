@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
 import { Button } from "@heroui/button";
 import { SectionHeader } from "@/components/shared/SectionHeader";
+import { FadeIn } from "@/components/shared/animations";
 
 export default function WhatWeDo() {
   const t = useTranslations("WhatWeDo");
@@ -10,7 +11,11 @@ export default function WhatWeDo() {
       <div className="container">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-0 w-full">
           {/* Text Content */}
-          <div className="w-full lg:w-[45%] flex flex-col items-center text-center order-2 lg:order-1 px-4 lg:px-0">
+          <FadeIn
+            y={40}
+            duration={0.7}
+            className="w-full lg:w-[45%] flex flex-col items-center text-center order-2 lg:order-1 px-4 lg:px-0"
+          >
             <SectionHeader
               title={t("title")}
               className="mb-6"
@@ -31,10 +36,16 @@ export default function WhatWeDo() {
             >
               {t("startNow")}
             </Button>
-          </div>
+          </FadeIn>
 
           {/* Video Content */}
-          <div className="w-full lg:w-[50%] order-1 lg:order-2 rounded-2xl overflow-hidden shadow-xl aspect-video bg-gray-100 relative">
+          <FadeIn
+            y={40}
+            scale={0.95}
+            duration={0.7}
+            delay={0.2}
+            className="w-full lg:w-[50%] order-1 lg:order-2 rounded-2xl overflow-hidden shadow-xl aspect-video bg-gray-100 relative"
+          >
             <iframe
               width="100%"
               height="100%"
@@ -45,7 +56,7 @@ export default function WhatWeDo() {
               allowFullScreen
               className="absolute inset-0 w-full h-full object-cover"
             ></iframe>
-          </div>
+          </FadeIn>
         </div>
       </div>
     </section>

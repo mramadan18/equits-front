@@ -2,6 +2,7 @@ import { Button } from "@heroui/button";
 import { useTranslations } from "next-intl";
 import { BiRightArrowAlt } from "react-icons/bi";
 import { IoTelescopeOutline } from "react-icons/io5";
+import { FadeIn } from "@/components/shared/animations";
 
 export default function Hero() {
   const t = useTranslations("Hero");
@@ -26,22 +27,32 @@ export default function Hero() {
       ></div>
 
       <div className="container z-10 flex flex-col items-center justify-center text-center pt-20 pb-24">
-        <h1 className="text-xl md:text-3xl lg:text-4xl font-bold text-white leading-[1.5] mb-12">
-          {t.rich("title", {
-            yellow: (chunks) => (
-              <span className="text-secondary">{chunks}</span>
-            ),
-            br: () => <br className="hidden md:block" />,
-          })}
-        </h1>
+        <FadeIn useInView={false} duration={0.8} y={30}>
+          <h1 className="text-xl md:text-3xl lg:text-4xl font-bold text-white leading-[1.5] mb-12">
+            {t.rich("title", {
+              yellow: (chunks) => (
+                <span className="text-secondary">{chunks}</span>
+              ),
+              br: () => <br className="hidden md:block" />,
+            })}
+          </h1>
+        </FadeIn>
 
-        <p className="text-white/90 text-xs md:text-sm mb-12 leading-[1.7]">
-          {t.rich("subtitle", {
-            br: () => <br className="hidden md:block" />,
-          })}
-        </p>
+        <FadeIn useInView={false} duration={0.8} delay={0.2} y={20}>
+          <p className="text-white/90 text-xs md:text-sm mb-12 leading-[1.7]">
+            {t.rich("subtitle", {
+              br: () => <br className="hidden md:block" />,
+            })}
+          </p>
+        </FadeIn>
 
-        <div className="flex items-center gap-4">
+        <FadeIn
+          useInView={false}
+          duration={0.8}
+          delay={0.4}
+          y={20}
+          className="flex items-center gap-4"
+        >
           <Button
             variant="bordered"
             size="lg"
@@ -62,7 +73,7 @@ export default function Hero() {
           >
             {t("uploadYours")}{" "}
           </Button>
-        </div>
+        </FadeIn>
       </div>
     </div>
   );
