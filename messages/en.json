@@ -76,5 +76,32 @@
   },
   "Footer": {
     "copyright": "© Bitstarts 2025 All Rights Reserved."
+  },
+  "Auth": {
+    "Login": {
+      "title": "Welcome Back!",
+      "subtitle": "Log in to Continue.",
+      "continueGoogle": "Continue with Google",
+      "or": "Or",
+      "emailLabel": "Enter your E-mail",
+      "passwordLabel": "Enter your Password",
+      "forgotPassword": "Forget Password?",
+      "submit": "LogIn",
+      "noAccount": "Don't have an Account?",
+      "registerLink": "Register"
+    },
+    "Register": {
+      "title": "Join Us!",
+      "subtitle": "Register to Continue.",
+      "continueGoogle": "Continue with Google",
+      "or": "Or",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "emailLabel": "Enter E-mail",
+      "passwordLabel": "Enter Password",
+      "submit": "Register",
+      "hasAccount": "Already have an Account?",
+      "loginLink": "Login"
+    }
   }
 }

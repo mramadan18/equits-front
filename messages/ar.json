@@ -76,5 +76,32 @@
   },
   "Footer": {
     "copyright": "© بيتستارتس 2025 جميع الحقوق محفوظة."
+  },
+  "Auth": {
+    "Login": {
+      "title": "مرحباً بعودتك!",
+      "subtitle": "سجل الدخول للمتابعة.",
+      "continueGoogle": "المتابعة باستخدام جوجل",
+      "or": "أو",
+      "emailLabel": "أدخل بريدك الإلكتروني",
+      "passwordLabel": "أدخل كلمة المرور",
+      "forgotPassword": "نسيت كلمة المرور؟",
+      "submit": "دخول",
+      "noAccount": "ليس لديك حساب؟",
+      "registerLink": "تسجيل"
+    },
+    "Register": {
+      "title": "انضم إلينا!",
+      "subtitle": "سجل للمتابعة.",
+      "continueGoogle": "المتابعة باستخدام جوجل",
+      "or": "أو",
+      "firstName": "الاسم الأول",
+      "lastName": "اسم العائلة",
+      "emailLabel": "أدخل البريد الإلكتروني",
+      "passwordLabel": "أدخل كلمة المرور",
+      "submit": "تسجيل",
+      "hasAccount": "لديك حساب بالفعل؟",
+      "loginLink": "دخول"
+    }
   }
 }
