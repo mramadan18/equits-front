@@ -143,5 +143,17 @@
       "confirmPasswordLabel": "Confirm Password",
       "submit": "Change Password"
     }
+  },
+  "TalentsExplore": {
+    "searchPlaceholder": "Search for someone",
+    "addYours": "Add yours",
+    "talents": "Talents",
+    "jobTitle": "Job Title",
+    "skills": "Skills",
+    "experienceLevel": "Experience Level",
+    "timeAvailability": "Time Availability",
+    "location": "Location",
+    "allFilters": "All filters",
+    "requestMeeting": "Request Meeting"
   }
 }

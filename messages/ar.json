@@ -143,5 +143,17 @@
       "confirmPasswordLabel": "تأكيد كلمة المرور",
       "submit": "تغيير كلمة المرور"
     }
+  },
+  "TalentsExplore": {
+    "searchPlaceholder": "ابحث عن شخص ما",
+    "addYours": "أضف نفسك",
+    "talents": "المواهب",
+    "jobTitle": "المسمى الوظيفي",
+    "skills": "المهارات",
+    "experienceLevel": "مستوى الخبرة",
+    "timeAvailability": "التفرغ",
+    "location": "الموقع",
+    "allFilters": "كل الفلاتر",
+    "requestMeeting": "طلب اجتماع"
   }
 }
