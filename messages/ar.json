@@ -155,5 +155,14 @@
     "location": "الموقع",
     "allFilters": "كل الفلاتر",
     "requestMeeting": "طلب اجتماع"
+  },
+  "TalentDetails": {
+    "contact": "تواصل",
+    "requestMeeting": "طلب اجتماع",
+    "about": "نبذة",
+    "peopleYouMayNeed": "أشخاص قد تحتاجهم",
+    "moreDetails": "مزيد من التفاصيل",
+    "showAll": "عرض الكل",
+    "viewDetails": "عرض التفاصيل"
   }
 }

@@ -155,5 +155,14 @@
     "location": "Location",
     "allFilters": "All filters",
     "requestMeeting": "Request Meeting"
+  },
+  "TalentDetails": {
+    "contact": "Contact",
+    "requestMeeting": "Request Meeting",
+    "about": "About",
+    "peopleYouMayNeed": "People You May Need",
+    "moreDetails": "More Details",
+    "showAll": "Show All",
+    "viewDetails": "View Details"
   }
 }

@@ -24,7 +24,7 @@ export default function CreativeIdeas() {
         <StaggerContainer
           staggerDelay={0.15}
           amount={0.1}
-          className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4"
+          className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4"
         >
           {MOCK_DATA.map((item) => (
             <StaggerItem key={item.id} y={30}>

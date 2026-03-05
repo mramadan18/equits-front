@@ -49,20 +49,4 @@ export const MOCK_DATA: CreativeIdea[] = [
     comments: 27,
     rating: 4.8,
   },
-  {
-    id: 4,
-    image: "/images/idea-2.png",
-    title: "Transportations and logistics system",
-    description:
-      "Transportation and Logistics System streamlines how educational materials and equipment move between institutions, instructors, and learners — ensuring fast, reliable, and transparent delivery. From managing orders to tracking shipments, it connects all stakeholders in one smart, efficient network bu...",
-    industries: ["Education", "Communication"],
-    types: ["Software (SAAS)", "Web App", "Mobile App"],
-    businessModel: ["Commission Marketplace"],
-    stage: ["MVP (Minimum Viable Product)"],
-    date: "23 / 10 / 2025",
-    location: "Egypt, Cairo",
-    likes: 68,
-    comments: 27,
-    rating: 4.8,
-  },
 ];
