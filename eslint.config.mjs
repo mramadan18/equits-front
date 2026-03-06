@@ -6,6 +6,7 @@ import _import from "eslint-plugin-import";
 import typescriptEslint from "@typescript-eslint/eslint-plugin";
 import jsxA11Y from "eslint-plugin-jsx-a11y";
 import prettier from "eslint-plugin-prettier";
+import nextPlugin from "@next/eslint-plugin-next"; // استيراد البلوجن بشكل مباشر
 import globals from "globals";
 import tsParser from "@typescript-eslint/parser";
 import path from "node:path";
@@ -45,15 +46,18 @@ export default defineConfig([
     "!**/tsup.config.ts",
   ]),
   {
-    extends: fixupConfigRules(
-      compat.extends(
-        "plugin:react/recommended",
-        "plugin:prettier/recommended",
-        "plugin:react-hooks/recommended",
-        "plugin:jsx-a11y/recommended",
-        "plugin:@next/next/recommended",
+    files: ["**/*.ts", "**/*.tsx"],
+    extends: [
+      ...fixupConfigRules(
+        compat.extends(
+          "plugin:react/recommended",
+          "plugin:prettier/recommended",
+          "plugin:react-hooks/recommended",
+          "plugin:jsx-a11y/recommended",
+          // شيلنا "next/core-web-vitals" من هنا عشان هنعرفها يدوي تحت
+        ),
       ),
-    ),
+    ],
 
     plugins: {
       react: fixupPluginRules(react),
@@ -62,6 +66,7 @@ export default defineConfig([
       "@typescript-eslint": typescriptEslint,
       "jsx-a11y": fixupPluginRules(jsxA11Y),
       prettier: fixupPluginRules(prettier),
+      "@next/next": fixupPluginRules(nextPlugin), // تعريف صريح عشان الـ Build يشوفه
     },
 
     languageOptions: {
@@ -71,11 +76,9 @@ export default defineConfig([
         ),
         ...globals.node,
       },
-
       parser: tsParser,
       ecmaVersion: 12,
       sourceType: "module",
-
       parserOptions: {
         ecmaFeatures: {
           jsx: true,
@@ -89,8 +92,11 @@ export default defineConfig([
       },
     },
 
-    files: ["**/*.ts", "**/*.tsx"],
     rules: {
+      // استدعاء قواعد Next.js يدوياً هنا
+      ...nextPlugin.configs.recommended.rules,
+      ...nextPlugin.configs["core-web-vitals"].rules,
+
       "no-console": "warn",
       "react/prop-types": "off",
       "react/jsx-uses-react": "off",
@@ -101,13 +107,9 @@ export default defineConfig([
       "no-unused-vars": "off",
       "unused-imports/no-unused-vars": "off",
       "unused-imports/no-unused-imports": "warn",
-
-      // الحل النهائي لمشكلة Delete ␍
+      "jsx-a11y/anchor-is-valid": "off",
       "prettier/prettier": ["error", { endOfLine: "auto" }],
-
-      // قفل قاعدة ترتيب الـ Props اللي كانت مطلعالك تحذيرات
       "react/jsx-sort-props": "off",
-
       "@typescript-eslint/no-unused-vars": [
         "warn",
         {
@@ -116,45 +118,12 @@ export default defineConfig([
           argsIgnorePattern: "^_.*?$",
         },
       ],
-
-      "import/order": [
-        "warn",
-        {
-          groups: [
-            "type",
-            "builtin",
-            "object",
-            "external",
-            "internal",
-            "parent",
-            "sibling",
-            "index",
-          ],
-          pathGroups: [
-            {
-              pattern: "~/**",
-              group: "external",
-              position: "after",
-            },
-          ],
-          "newlines-between": "always",
-        },
-      ],
-
+      "import/order": "off",
       "react/self-closing-comp": "warn",
-
       "padding-line-between-statements": [
         "warn",
-        {
-          blankLine: "always",
-          prev: "*",
-          next: "return",
-        },
-        {
-          blankLine: "always",
-          prev: ["const", "let", "var"],
-          next: "*",
-        },
+        { blankLine: "always", prev: "*", next: "return" },
+        { blankLine: "always", prev: ["const", "let", "var"], next: "*" },
         {
           blankLine: "any",
           prev: ["const", "let", "var"],

@@ -1,11 +1,6 @@
-"use client";
-
 import { FiCalendar, FiMapPin } from "react-icons/fi";
-import { useTranslations } from "next-intl";
 
 export function IdeaHeader() {
-  const t = useTranslations("ExploreDetails");
-
   return (
     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
       <h1 className="text-2xl md:text-3xl font-bold text-dark">

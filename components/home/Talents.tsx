@@ -52,7 +52,7 @@ export default function Talents() {
               background:
                 "linear-gradient(180deg, rgba(0, 82, 155, 0.6) 0%, #003366 100%)",
             }}
-          ></div>
+          />
 
           {/* Content */}
           <div className="relative z-20 max-w-5xl w-full">

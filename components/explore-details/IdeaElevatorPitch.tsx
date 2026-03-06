@@ -1,10 +1,4 @@
-"use client";
-
-import { useTranslations } from "next-intl";
-
 export function IdeaElevatorPitch() {
-  const t = useTranslations("ExploreDetails");
-
   return (
     <div className="flex flex-col gap-3 mt-2">
       <h3 className="text-lg font-bold text-dark">Elevator Pitch:</h3>

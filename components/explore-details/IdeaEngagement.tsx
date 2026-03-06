@@ -4,11 +4,8 @@ import { Avatar, AvatarGroup } from "@heroui/avatar";
 import { Divider } from "@heroui/divider";
 import { FiHeart, FiMessageSquare } from "react-icons/fi";
 import { FaStar } from "react-icons/fa";
-import { useTranslations } from "next-intl";
 
 export function IdeaEngagement() {
-  const t = useTranslations("ExploreDetails");
-
   return (
     <div className="flex flex-col gap-4 mt-2">
       <div className="flex items-center gap-4">

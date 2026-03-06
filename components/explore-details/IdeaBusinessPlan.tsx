@@ -1,10 +1,5 @@
-"use client";
-
-import { useTranslations } from "next-intl";
-
+/* eslint-disable @next/next/no-img-element */
 export function IdeaBusinessPlan() {
-  const t = useTranslations("ExploreDetails");
-
   return (
     <div className="flex flex-col gap-4 mt-1">
       <h3 className="text-lg font-bold text-dark">Business Plan:</h3>

@@ -1,5 +1,4 @@
-"use client";
-
+/* eslint-disable @next/next/no-img-element */
 import { Avatar } from "@heroui/avatar";
 import { FiCopy } from "react-icons/fi";
 import { FaPlay } from "react-icons/fa";

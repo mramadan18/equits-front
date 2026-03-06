@@ -5,7 +5,6 @@ import { TbListDetails } from "react-icons/tb";
 import { Button } from "@heroui/button";
 import { Divider } from "@heroui/divider";
 
-import { PersonYouMayNeed } from "./types";
 import { MOCK_PEOPLE_YOU_MAY_NEED } from "./mockData";
 
 export const PeopleYouMayNeedSidebar = () => {

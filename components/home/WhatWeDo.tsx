@@ -51,11 +51,10 @@ export default function WhatWeDo() {
               height="100%"
               src="https://www.youtube.com/embed/ipV29s_yN_U?autoplay=0&rel=0"
               title="YouTube video player"
-              frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
               className="absolute inset-0 w-full h-full object-cover"
-            ></iframe>
+            />
           </FadeIn>
         </div>
       </div>

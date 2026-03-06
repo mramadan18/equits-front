@@ -24,7 +24,7 @@ export default function Hero() {
           background:
             "linear-gradient(180deg, rgba(0, 82, 155, 0.3) -9.71%, #011C33 83.09%)",
         }}
-      ></div>
+      />
 
       <div className="container z-10 flex flex-col items-center justify-center text-center pt-20 pb-24">
         <FadeIn useInView={false} duration={0.8} y={30}>

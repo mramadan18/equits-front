@@ -104,6 +104,7 @@ export const Navbar = () => {
         {!isAuthPage &&
           navItems.map((item, index) => {
             const isActive = pathname === item.href;
+
             return (
               <NavbarItem
                 key={`${item.label}-${index}`}
@@ -166,6 +167,7 @@ export const Navbar = () => {
         {!isAuthPage &&
           navItems.map((item, index) => {
             const isActive = pathname === item.href;
+
             return (
               <NavbarMenuItem key={`${item.label}-${index}`}>
                 <Link

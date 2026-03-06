@@ -1,11 +1,6 @@
-"use client";
-
 import { Avatar } from "@heroui/avatar";
-import { useTranslations } from "next-intl";
 
 export function IdeaTeam() {
-  const t = useTranslations("ExploreDetails");
-
   return (
     <div className="flex flex-col gap-5 mt-1">
       <h3 className="text-lg font-bold text-dark">Reach out to the team:</h3>

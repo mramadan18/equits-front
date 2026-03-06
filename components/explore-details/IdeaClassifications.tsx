@@ -1,11 +1,6 @@
-"use client";
-
 import { Chip } from "@heroui/chip";
-import { useTranslations } from "next-intl";
 
 export function IdeaClassifications() {
-  const t = useTranslations("ExploreDetails");
-
   return (
     <div className="flex flex-col gap-5 mt-1">
       <h3 className="text-lg font-bold text-dark">Classifications:</h3>

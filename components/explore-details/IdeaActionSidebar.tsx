@@ -14,11 +14,8 @@ import {
   FaLinkedin,
   FaYoutube,
 } from "react-icons/fa6";
-import { useTranslations } from "next-intl";
 
 export function IdeaActionSidebar() {
-  const t = useTranslations("ExploreDetails");
-
   return (
     <div className="w-full lg:w-[340px] xl:w-[380px] flex-shrink-0 mt-8 lg:mt-0">
       <div className="lg:sticky lg:top-28 flex flex-col gap-5">

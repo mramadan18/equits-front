@@ -27,7 +27,7 @@ export const TalentProfileOverview = ({
           fill
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
       </div>
 
       <div className="relative px-6 md:px-8 pb-8 flex flex-col pt-0">
