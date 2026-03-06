@@ -9,6 +9,7 @@ import { CardHeader } from "./components/CardHeader";
 import { AttributeRow } from "./components/AttributeRow";
 import { CardInfo } from "./components/CardInfo";
 import { Stat } from "./components/Stat";
+import { Link } from "@/i18n/navigation";
 
 interface CreativeIdeaCardProps {
   item: CreativeIdea;
@@ -52,6 +53,8 @@ export const CreativeIdeaCard = ({ item }: CreativeIdeaCardProps) => {
 
         {/* Action Button */}
         <Button
+          as={Link}
+          href={`/explore/${item.id}`}
           variant="bordered"
           color="primary"
           fullWidth

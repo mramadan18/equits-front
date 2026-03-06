@@ -6,6 +6,7 @@ import { MdVerified } from "react-icons/md";
 import { FaVideo } from "react-icons/fa";
 
 import { Talent } from "./types";
+import { Link } from "@/i18n/navigation";
 
 interface TalentCardProps {
   talent: Talent;
@@ -57,6 +58,8 @@ export const TalentCard = ({ talent }: TalentCardProps) => {
         {/* Action Button */}
         <div className="mt-auto pt-2">
           <Button
+            as={Link}
+            href={`/talents/${talent.id}`}
             color="primary"
             variant="solid"
             fullWidth
