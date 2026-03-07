@@ -1,3 +1,4 @@
+"use client";
 import { Card, CardBody } from "@heroui/card";
 import { Button } from "@heroui/button";
 import { useTranslations } from "next-intl";
