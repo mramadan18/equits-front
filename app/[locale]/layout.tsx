@@ -1,3 +1,4 @@
+// @ts-expect-error -- global CSS is handled by Next.js at build time
 import "@/styles/globals.css";
 import { Metadata, Viewport } from "next";
 import { Providers } from "./providers";
@@ -9,6 +10,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
+import { ToastProvider } from "@heroui/toast";
 
 export const metadata: Metadata = {
   title: {
@@ -65,6 +67,7 @@ export default async function RootLayout({ children, params }: Props) {
                 {children}
               </main>
               <Footer />
+              <ToastProvider placement="top-center" />
             </div>
           </Providers>
         </NextIntlClientProvider>

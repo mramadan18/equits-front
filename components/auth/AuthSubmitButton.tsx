@@ -5,6 +5,7 @@ export const AuthSubmitButton = (props: ButtonProps) => {
 
   return (
     <Button
+      type="submit"
       fullWidth
       color="primary"
       size="lg"

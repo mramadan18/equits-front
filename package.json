@@ -16,6 +16,7 @@
     "@heroui/badge": "2.2.18",
     "@heroui/button": "2.2.31",
     "@heroui/card": "2.2.27",
+    "@heroui/checkbox": "^2.3.32",
     "@heroui/chip": "2.2.24",
     "@heroui/code": "2.2.24",
     "@heroui/divider": "2.2.23",
@@ -50,8 +51,13 @@
     "@heroui/toast": "2.0.21",
     "@heroui/tooltip": "2.2.28",
     "@heroui/user": "2.2.25",
+    "@hookform/resolvers": "^5.2.2",
     "@react-aria/ssr": "3.9.10",
     "@react-aria/visually-hidden": "3.8.30",
+    "@react-oauth/google": "^0.13.5",
+    "@tanstack/react-query": "^5.100.5",
+    "@tanstack/react-query-devtools": "^5.100.5",
+    "axios": "^1.15.2",
     "clsx": "2.1.1",
     "framer-motion": "11.18.2",
     "intl-messageformat": "10.7.16",
@@ -60,8 +66,10 @@
     "next-themes": "0.4.6",
     "react": "18.3.1",
     "react-dom": "18.3.1",
+    "react-hook-form": "^7.74.0",
     "react-icons": "^5.5.0",
-    "swiper": "^12.1.2"
+    "swiper": "^12.1.2",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@eslint/compat": "^2.0.2",

@@ -1,19 +1,18 @@
-import { Button } from "@heroui/button";
+import { Button, ButtonProps } from "@heroui/button";
 import { FcGoogle } from "react-icons/fc";
 
-interface SocialButtonProps {
+interface SocialButtonProps extends ButtonProps {
   text: string;
-  onClick?: () => void;
 }
 
-export const SocialButton = ({ text, onClick }: SocialButtonProps) => {
+export const SocialButton = ({ text, ...props }: SocialButtonProps) => {
   return (
     <Button
       variant="bordered"
       size="lg"
       radius="sm"
       className="w-full relative border-default-200 bg-transparent font-medium"
-      onClick={onClick}
+      {...props}
     >
       <FcGoogle className="text-xl absolute start-4" />
       <span className="font-bold text-gray text-sm select-none">{text}</span>

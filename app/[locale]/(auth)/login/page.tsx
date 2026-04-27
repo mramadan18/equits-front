@@ -2,7 +2,8 @@
 
 import { useTranslations } from "next-intl";
 import { MdOutlineMailOutline } from "react-icons/md";
-import { Link } from "@/i18n/navigation";
+import { Link, useRouter } from "@/i18n/navigation";
+import { Checkbox } from "@heroui/checkbox";
 import {
   AuthLayout,
   AuthHeader,
@@ -13,30 +14,104 @@ import {
   AuthSubmitButton,
 } from "@/components/auth";
 import { StaggerContainer, StaggerItem } from "@/components/shared/animations";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { getLoginSchema, LoginInput } from "@/validations/auth.validation";
+import { useLogin, useGoogleLogin } from "@/hooks/api/useAuth";
+import { addToast } from "@heroui/toast";
+import { useGoogleLogin as useGoogleAuth } from "@react-oauth/google";
+import { ApiResponse, AuthResponse } from "@/types/api";
+import { ApiError } from "@/types/error";
 
 export default function LoginPage() {
-  const t = useTranslations("Auth.Login");
+  const validationT = useTranslations("Auth.Validation");
+  const authT = useTranslations("Auth.Login");
+  const router = useRouter();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+  } = useForm<LoginInput>({
+    mode: "all",
+    resolver: zodResolver(getLoginSchema(validationT)),
+  });
+
+  const { mutate: login, isPending } = useLogin();
+  const { mutate: googleLogin, isPending: isGooglePending } = useGoogleLogin();
+
+  const handleGoogleLogin = useGoogleAuth({
+    flow: "auth-code",
+    onSuccess: (codeResponse) => {
+      googleLogin(codeResponse.code, {
+        onSuccess: (response: ApiResponse<AuthResponse>) => {
+          addToast({
+            title: response.message || "Logged in with Google successfully",
+            color: "success",
+          });
+          router.push("/");
+        },
+        onError: (error: ApiError) => {
+          addToast({
+            title: error.response?.data?.message || "Google login failed",
+            color: "danger",
+          });
+        },
+      });
+    },
+    onError: () => {
+      addToast({
+        title: "Google Login Failed",
+        color: "danger",
+      });
+    },
+  });
+
+  const onSubmit = (data: LoginInput) => {
+    login(data, {
+      onSuccess: (response: ApiResponse<AuthResponse>) => {
+        addToast({
+          title: response.message || authT("loginSuccess"),
+          color: "success",
+        });
+        router.push("/");
+      },
+      onError: (error: ApiError) => {
+        addToast({
+          title: error.response?.data?.message || "Login failed",
+          color: "danger",
+        });
+      },
+    });
+  };
 
   return (
     <AuthLayout imageSrc="/images/login.png" imageAlt="Login illustration">
       <StaggerContainer delay={0.3} className="flex flex-col gap-6">
         <StaggerItem>
-          <AuthHeader title={t("title")} subtitle={t("subtitle")} />
+          <AuthHeader title={authT("title")} subtitle={authT("subtitle")} />
         </StaggerItem>
 
         <StaggerItem>
-          <SocialButton text={t("continueGoogle")} />
+          <SocialButton
+            text={authT("continueGoogle")}
+            onPress={() => handleGoogleLogin()}
+            isLoading={isGooglePending}
+          />
         </StaggerItem>
 
         <StaggerItem>
-          <AuthDivider text={t("or")} />
+          <AuthDivider text={authT("or")} />
         </StaggerItem>
 
-        <form className="flex flex-col gap-4">
+        <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
           <StaggerItem>
             <AuthInput
               type="email"
-              placeholder={t("emailLabel")}
+              placeholder={authT("emailLabel")}
+              {...register("email")}
+              isInvalid={!!errors.email}
+              errorMessage={errors.email?.message}
               endContent={
                 <MdOutlineMailOutline className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
               }
@@ -45,28 +120,47 @@ export default function LoginPage() {
 
           <StaggerItem>
             <PasswordField
-              placeholder={t("passwordLabel")}
-              forgotPasswordLink={
-                <Link
-                  href="/forgot-password"
-                  className="text-primary text-sm hover:underline"
-                >
-                  {t("forgotPassword")}
-                </Link>
-              }
+              placeholder={authT("passwordLabel")}
+              {...register("password")}
+              isInvalid={!!errors.password}
+              errorMessage={errors.password?.message}
             />
           </StaggerItem>
 
           <StaggerItem>
-            <AuthSubmitButton className="mt-2">{t("submit")}</AuthSubmitButton>
+            <div className="flex items-center justify-between">
+              <Checkbox
+                size="sm"
+                color="primary"
+                classNames={{ label: "text-default-600" }}
+              >
+                {authT("rememberMe", { fallback: "تذكرني" })}
+              </Checkbox>
+              <Link
+                href="/forgot-password"
+                className="text-primary text-sm hover:underline"
+              >
+                {authT("forgotPassword")}
+              </Link>
+            </div>
+          </StaggerItem>
+
+          <StaggerItem>
+            <AuthSubmitButton
+              className="mt-2"
+              isLoading={isPending}
+              isDisabled={!isValid}
+            >
+              {authT("submit")}
+            </AuthSubmitButton>
           </StaggerItem>
         </form>
 
         <StaggerItem>
           <p className="text-center mt-2 text-dark">
-            {t("noAccount")}{" "}
+            {authT("noAccount")}{" "}
             <Link href="/register" className="text-primary hover:underline">
-              {t("registerLink")}
+              {authT("registerLink")}
             </Link>
           </p>
         </StaggerItem>

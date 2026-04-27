@@ -18,6 +18,8 @@
     "services": "الخدمات",
     "register": "تسجيل",
     "login": "دخول",
+    "logout": "خروج",
+    "profile": "الحساب الشخصي",
     "logoAlt": "شعار إكويتس",
     "openMenu": "فتح القائمة",
     "closeMenu": "إغلاق القائمة"
@@ -97,6 +99,7 @@
       "or": "أو",
       "emailLabel": "أدخل بريدك الإلكتروني",
       "passwordLabel": "أدخل كلمة المرور",
+      "rememberMe": "تذكرني",
       "forgotPassword": "نسيت كلمة المرور؟",
       "submit": "دخول",
       "noAccount": "ليس لديك حساب؟",
@@ -114,6 +117,20 @@
       "submit": "تسجيل",
       "hasAccount": "لديك حساب بالفعل؟",
       "loginLink": "دخول"
+    },
+    "Validation": {
+      "emailRequired": "البريد الإلكتروني مطلوب",
+      "emailInvalid": "البريد الإلكتروني غير صحيح",
+      "passwordMin": "كلمة المرور يجب أن تكون 8 أحرف على الأقل",
+      "firstNameMin": "الاسم الأول يجب أن يكون حرفين على الأقل",
+      "firstNameMax": "الاسم الأول طويل جداً",
+      "lastNameMin": "اسم العائلة يجب أن يكون حرفين على الأقل",
+      "lastNameMax": "اسم العائلة طويل جداً",
+      "otpRequired": "رمز التحقق مطلوب",
+      "otpLength": "يجب أن يتكون الرمز من 6 أرقام",
+      "confirmPasswordRequired": "يرجى تأكيد كلمة المرور",
+      "passwordsDoNotMatch": "كلمات المرور غير متطابقة",
+      "oldPasswordRequired": "كلمة المرور القديمة مطلوبة"
     },
     "ForgotPassword": {
       "title": "نسيت كلمة المرور",

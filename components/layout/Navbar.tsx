@@ -20,6 +20,14 @@ import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import { LuMenu } from "react-icons/lu";
 import { AuthRoutes } from "@/types";
+import { useMe, useLogout } from "@/hooks/api/useAuth";
+import {
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownItem,
+} from "@heroui/dropdown";
+import { Avatar } from "@heroui/avatar";
 
 const authRoutes = [
   AuthRoutes.REGISTER,
@@ -34,6 +42,9 @@ export const Navbar = () => {
   const pathname = usePathname();
   const locale = useLocale();
   const t = useTranslations("Navbar");
+  const { data: user } = useMe();
+
+  const { mutate: logout } = useLogout();
 
   const isAuthPage = authRoutes.includes(pathname as AuthRoutes);
   const isLoginPage = pathname === AuthRoutes.LOGIN;
@@ -132,28 +143,62 @@ export const Navbar = () => {
           >
             {locale === "en" ? "عربي" : "EN"}
           </Link>
-          {(!isAuthPage || !isRegisterPage) && (
-            <Button
-              as={Link}
-              href="/register"
-              variant="bordered"
-              radius="sm"
-              color="primary"
-              className="text-primary font-bold px-8"
-            >
-              {t("register")}
-            </Button>
-          )}
-          {(!isAuthPage || !isLoginPage) && (
-            <Button
-              as={Link}
-              href="/login"
-              radius="sm"
-              color="primary"
-              className="font-bold px-8"
-            >
-              {t("login")}
-            </Button>
+
+          {user ? (
+            <Dropdown placement="bottom-end">
+              <DropdownTrigger>
+                <Avatar
+                  src={user.avatar || "/images/default-avatar.png"}
+                  name={user?.firstName}
+                  isBordered
+                  as="button"
+                  className="transition-transform"
+                  color="primary"
+                  size="sm"
+                />
+              </DropdownTrigger>
+              <DropdownMenu aria-label="Profile Actions" variant="flat">
+                <DropdownItem key="profile" className="h-14 gap-2">
+                  <p className="font-semibold">{t("profile")}</p>
+                  <p className="font-semibold text-primary">
+                    {user?.firstName} {user?.lastName}
+                  </p>
+                </DropdownItem>
+                <DropdownItem
+                  key="logout"
+                  color="danger"
+                  onClick={() => logout()}
+                >
+                  {t("logout")}
+                </DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+          ) : (
+            <>
+              {(!isAuthPage || !isRegisterPage) && (
+                <Button
+                  as={Link}
+                  href="/register"
+                  variant="bordered"
+                  radius="sm"
+                  color="primary"
+                  className="text-primary font-bold px-8"
+                >
+                  {t("register")}
+                </Button>
+              )}
+              {(!isAuthPage || !isLoginPage) && (
+                <Button
+                  as={Link}
+                  href="/login"
+                  radius="sm"
+                  color="primary"
+                  className="font-bold px-8"
+                >
+                  {t("login")}
+                </Button>
+              )}
+            </>
           )}
         </NavbarItem>
         <NavbarMenuToggle

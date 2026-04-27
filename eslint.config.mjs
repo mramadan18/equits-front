@@ -121,7 +121,7 @@ export default defineConfig([
       "import/order": "off",
       "react/self-closing-comp": "warn",
       "padding-line-between-statements": [
-        "warn",
+        "off",
         { blankLine: "always", prev: "*", next: "return" },
         { blankLine: "always", prev: ["const", "let", "var"], next: "*" },
         {

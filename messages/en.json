@@ -18,6 +18,8 @@
     "services": "Services",
     "register": "Register",
     "login": "Login",
+    "logout": "Logout",
+    "profile": "Profile",
     "logoAlt": "Equits Logo",
     "openMenu": "Open menu",
     "closeMenu": "Close menu"
@@ -97,6 +99,7 @@
       "or": "Or",
       "emailLabel": "Enter your E-mail",
       "passwordLabel": "Enter your Password",
+      "rememberMe": "Remember me",
       "forgotPassword": "Forget Password?",
       "submit": "LogIn",
       "noAccount": "Don't have an Account?",
@@ -114,6 +117,20 @@
       "submit": "Register",
       "hasAccount": "Already have an Account?",
       "loginLink": "Login"
+    },
+    "Validation": {
+      "emailRequired": "Email is required",
+      "emailInvalid": "Invalid email address",
+      "passwordMin": "Password must be at least 8 characters",
+      "firstNameMin": "First name must be at least 2 characters",
+      "firstNameMax": "First name is too long",
+      "lastNameMin": "Last name must be at least 2 characters",
+      "lastNameMax": "Last name is too long",
+      "otpRequired": "OTP is required",
+      "otpLength": "OTP must be 6 digits",
+      "confirmPasswordRequired": "Please confirm your password",
+      "passwordsDoNotMatch": "Passwords do not match",
+      "oldPasswordRequired": "Old password is required"
     },
     "ForgotPassword": {
       "title": "Forgot Password",
