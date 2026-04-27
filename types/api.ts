@@ -79,7 +79,11 @@ export interface SuccessResponse {
 
 export type LoginRequest = LoginInput;
 export type RegisterRequest = RegisterInput;
-export type ResetPasswordRequest = ResetPasswordInput;
+export type ResetPasswordRequest = {
+  otp: string;
+  password: string;
+  confirmPassword: string;
+};
 export type ChangePasswordRequest = ChangePasswordInput;
 export type UpdateMeRequest = Partial<
   Omit<User, "id" | "createdAt" | "updatedAt" | "role" | "email">

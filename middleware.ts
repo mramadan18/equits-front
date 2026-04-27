@@ -1,30 +1,28 @@
 import createMiddleware from "next-intl/middleware";
 import { routing } from "./i18n/routing";
 import { NextRequest, NextResponse } from "next/server";
+import { AuthRoutes } from "./types";
 
 const intlMiddleware = createMiddleware(routing);
 
-const publicAuthPages = [
-  "/login",
-  "/register",
-  "/forgot-password",
-  "/reset-password",
+const authPages = [
+  AuthRoutes.LOGIN,
+  AuthRoutes.REGISTER,
+  AuthRoutes.VERIFY_EMAIL,
+  AuthRoutes.FORGOT_PASSWORD,
+  AuthRoutes.RESET_PASSWORD,
+  AuthRoutes.CHANGE_PASSWORD,
 ];
 
 export default function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
+  const session = request.cookies.get("jwt")?.value;
+  const isVerified = request.cookies.get("isVerified")?.value === "true";
 
-  // نفحص وجود الـ Cookie (اسم الـ cookie يعتمد على الباك-أند ولكن غالباً يكون session أو token)
-  // وبما أن الباك-أند هيدير الـ cookies فنحن نفترض وجودها
-  const session =
-    request.cookies.get("session") || request.cookies.get("token");
+  const isAuthPage = authPages.some((page) => pathname.includes(page));
 
-  // إذا كان المستخدم مسجل دخول ويحاول دخول صفحة login/register
-  const isAuthPage = publicAuthPages.some((page) => pathname.includes(page));
-
-  if (session && isAuthPage) {
-    const locale = pathname.split("/")[1] || "en";
-    return NextResponse.redirect(new URL(`/${locale}/`, request.url));
+  if (session && isVerified && isAuthPage) {
+    return NextResponse.redirect(new URL(`/`, request.url));
   }
 
   return intlMiddleware(request);

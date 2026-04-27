@@ -26,7 +26,7 @@ export default function ResetPasswordPage() {
   const validationT = useTranslations("Auth.Validation");
   const router = useRouter();
   const searchParams = useSearchParams();
-  const token = searchParams.get("token");
+  const urlOtp = searchParams.get("otp");
 
   const { mutate: resetPassword, isPending } = useResetPassword();
 
@@ -36,19 +36,27 @@ export default function ResetPasswordPage() {
     formState: { errors },
   } = useForm<ResetPasswordInput>({
     resolver: zodResolver(getResetPasswordSchema(validationT)),
+    defaultValues: {
+      password: "",
+      confirmPassword: "",
+    },
   });
 
   const onSubmit = (data: ResetPasswordInput) => {
-    if (!token) {
+    if (!urlOtp) {
       addToast({
-        title: "Reset token is missing from URL",
+        title: "OTP is missing from URL",
         color: "danger",
       });
       return;
     }
 
     resetPassword(
-      { ...data, token },
+      {
+        otp: urlOtp,
+        password: data.password,
+        confirmPassword: data.confirmPassword,
+      },
       {
         onSuccess: (response: ApiResponse<AuthResponse>) => {
           addToast({

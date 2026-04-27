@@ -11,6 +11,7 @@ import { Footer } from "@/components/layout/Footer";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { ToastProvider } from "@heroui/toast";
+import { cookies } from "next/headers";
 
 export const metadata: Metadata = {
   title: {
@@ -38,6 +39,9 @@ type Props = {
 
 export default async function RootLayout({ children, params }: Props) {
   const { locale } = await params;
+  const storeCookies = await cookies();
+  const session = storeCookies.get("jwt")?.value;
+  const isVerified = storeCookies.get("isVerified")?.value === "true";
 
   if (!hasLocale(routing.locales, locale)) {
     notFound();
@@ -62,7 +66,7 @@ export default async function RootLayout({ children, params }: Props) {
             }}
           >
             <div className="relative flex flex-col min-h-screen">
-              <Navbar />
+              <Navbar session={session} isVerified={isVerified} />
               <main className="flex-grow w-full flex flex-col items-center">
                 {children}
               </main>

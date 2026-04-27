@@ -20,6 +20,9 @@ export const useLogin = () => {
     mutationFn: (data: LoginRequest) => authService.login(data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["me"] });
+      if (typeof window !== "undefined") {
+        window.location.reload();
+      }
     },
   });
 };
@@ -31,6 +34,9 @@ export const useGoogleLogin = () => {
     mutationFn: (code: string) => authService.googleLogin(code),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["me"] });
+      if (typeof window !== "undefined") {
+        window.location.reload();
+      }
     },
   });
 };
@@ -46,17 +52,29 @@ export const useRegister = () => {
   });
 };
 
-export const useMe = () => {
+export const useMe = (options?: { enabled?: boolean }) => {
   return useQuery<User, ApiError>({
     queryKey: ["me"],
     queryFn: () => authService.getMe(),
     retry: false,
+    ...options,
   });
 };
 
 export const useVerifyEmail = () => {
   return useMutation<ApiResponse<SuccessResponse>, ApiError, string>({
     mutationFn: (otp: string) => authService.verifyEmail(otp),
+    onSuccess: () => {
+      if (typeof window !== "undefined") {
+        window.location.reload();
+      }
+    },
+  });
+};
+
+export const useResendVerifyEmail = () => {
+  return useMutation<ApiResponse<SuccessResponse>, ApiError, void>({
+    mutationFn: () => authService.resendVerifyEmail(),
   });
 };
 
@@ -66,15 +84,19 @@ export const useForgotPassword = () => {
   });
 };
 
-export const useResetPassword = () => {
-  return useMutation<
-    ApiResponse<AuthResponse>,
-    ApiError,
-    ResetPasswordRequest & { token: string }
-  >({
-    mutationFn: (data: ResetPasswordRequest & { token: string }) =>
-      authService.resetPassword(data),
+export const useVerifyForgotPasswordOtp = () => {
+  return useMutation<ApiResponse<SuccessResponse>, ApiError, string>({
+    mutationFn: (otp: string) => authService.verifyForgotPasswordOtp(otp),
   });
+};
+
+export const useResetPassword = () => {
+  return useMutation<ApiResponse<AuthResponse>, ApiError, ResetPasswordRequest>(
+    {
+      mutationFn: (data: ResetPasswordRequest) =>
+        authService.resetPassword(data),
+    },
+  );
 };
 
 export const useUpdateMe = () => {
@@ -107,7 +129,7 @@ export const useLogout = () => {
     onSuccess: () => {
       queryClient.clear();
       if (typeof window !== "undefined") {
-        window.location.href = "/";
+        window.location.reload();
       }
     },
   });

@@ -133,6 +133,7 @@ export default function LoginPage() {
                 size="sm"
                 color="primary"
                 classNames={{ label: "text-default-600" }}
+                {...register("rememberMe")}
               >
                 {authT("rememberMe", { fallback: "تذكرني" })}
               </Checkbox>

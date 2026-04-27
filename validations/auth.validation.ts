@@ -4,6 +4,7 @@ export const getLoginSchema = (t: (key: string) => string) =>
   z.object({
     email: z.string().min(1, t("emailRequired")).email(t("emailInvalid")),
     password: z.string().min(8, t("passwordMin")),
+    rememberMe: z.boolean().optional(),
   });
 
 export const getRegisterSchema = (t: (key: string) => string) =>

@@ -61,19 +61,19 @@
       "ahmed": {
         "name": "Ahmed Sentawy",
         "role": "Investor",
-        "quote": "\"Bitstarts made discovering promising startups easier than ever. It's not just a platform. It's an ecosystem where talent, innovation, and smart investment truly meet.\""
+        "quote": "\"Equits made discovering promising startups easier than ever. It's not just a platform. It's an ecosystem where talent, innovation, and smart investment truly meet.\""
       },
       "jena": {
         "name": "Jena Wahba",
         "role": "Student BackEnd",
         "org": "@ Faculty of computers and AI",
-        "quote": "\"Bitstarts gave me the push I needed to turn my idea into a real startup. It feels like having a real partner who believes in your dream. Thanks a lot\""
+        "quote": "\"Equits gave me the push I needed to turn my idea into a real startup. It feels like having a real partner who believes in your dream. Thanks a lot\""
       },
       "alaa": {
         "name": "Alaa Saber",
         "role": "Senior Product Manager",
         "org": "@ Equits",
-        "quote": "\"Bitstarts felt refreshingly different. It connects you with the right people, but more importantly, it helps you present your startup in a way that truly stands out.\""
+        "quote": "\"Equits felt refreshingly different. It connects you with the right people, but more importantly, it helps you present your startup in a way that truly stands out.\""
       }
     }
   },
@@ -81,15 +81,15 @@
     "title": "Frequently Asked Questions",
     "q1": "What is Bitstart",
     "a1": "Bitstart is a platform that empowers entrepreneurs by giving them the right resources to present their startups.",
-    "q2": "Who can join Bitstarts?",
+    "q2": "Who can join Equits?",
     "a2": "Anyone with an innovative idea and a passion for entrepreneurship can join our platform.",
-    "q3": "How do investors benefit from Bitstarts?",
+    "q3": "How do investors benefit from Equits?",
     "a3": "Investors get access to a curated pipeline of promising startups and talented teams.",
-    "q4": "How does Bitstarts help entrepreneurs?",
-    "a4": "Bitstarts doesn't just connect you with investors - it supports you through mentorship, resources, and tools to help you present your startup effectively and attract funding."
+    "q4": "How does Equits help entrepreneurs?",
+    "a4": "Equits doesn't just connect you with investors - it supports you through mentorship, resources, and tools to help you present your startup effectively and attract funding."
   },
   "Footer": {
-    "copyright": "© Bitstarts 2025 All Rights Reserved."
+    "copyright": "© Equits 2025 All Rights Reserved."
   },
   "Auth": {
     "Login": {
@@ -143,7 +143,15 @@
       "title": "Verify Email",
       "subtitle": "Enter the code sent to your email.",
       "submit": "Verify",
-      "resendCode": "Resend Code"
+      "resendCode": "Resend Code",
+      "resendSuccess": "Verification code resent successfully"
+    },
+    "VerifyResetOtp": {
+      "title": "Verify Identity",
+      "subtitle": "Enter the 6-digit code sent to {email} to verify your identity.",
+      "submit": "Confirm",
+      "resendCode": "Resend Code",
+      "resendSuccess": "Reset code resent successfully"
     },
     "ResetPassword": {
       "title": "Reset Password",

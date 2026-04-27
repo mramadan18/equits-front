@@ -5,22 +5,28 @@ import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { addToast } from "@heroui/toast";
 import { useRouter } from "@/i18n/navigation";
+import { useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import {
   getVerifyEmailSchema,
   VerifyEmailInput,
 } from "@/validations/auth.validation";
-import { useVerifyEmail, useResendVerifyEmail } from "@/hooks/api/useAuth";
+import {
+  useVerifyForgotPasswordOtp,
+  useForgotPassword,
+} from "@/hooks/api/useAuth";
 import { AuthLayout, AuthHeader, AuthSubmitButton } from "@/components/auth";
 import { StaggerContainer, StaggerItem } from "@/components/shared/animations";
 import { InputOtp } from "@heroui/input-otp";
 import { ApiResponse, SuccessResponse } from "@/types/api";
 import { ApiError } from "@/types/error";
 
-export default function VerifyEmailPage() {
-  const authT = useTranslations("Auth.VerifyEmail");
+export default function VerifyResetOtpPage() {
+  const authT = useTranslations("Auth.VerifyResetOtp");
   const validationT = useTranslations("Auth.Validation");
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const email = searchParams.get("email");
 
   const [timeLeft, setTimeLeft] = useState(0);
 
@@ -32,13 +38,12 @@ export default function VerifyEmailPage() {
     return () => clearInterval(timer);
   }, [timeLeft]);
 
-  const { mutate: verifyEmail, isPending } = useVerifyEmail();
-  const { mutate: resendEmail, isPending: isResending } =
-    useResendVerifyEmail();
+  const { mutate: verifyOtp, isPending } = useVerifyForgotPasswordOtp();
+  const { mutate: resendOtp, isPending: isResending } = useForgotPassword();
 
   const handleResend = () => {
-    if (timeLeft > 0) return;
-    resendEmail(undefined, {
+    if (!email || timeLeft > 0) return;
+    resendOtp(email, {
       onSuccess: (response) => {
         addToast({
           title: response.message || authT("resendSuccess"),
@@ -67,13 +72,25 @@ export default function VerifyEmailPage() {
   });
 
   const onSubmit = (data: VerifyEmailInput) => {
-    verifyEmail(data.otp, {
+    if (!email) {
+      addToast({
+        title: "Email is missing",
+        color: "danger",
+      });
+      return;
+    }
+
+    verifyOtp(data.otp, {
       onSuccess: (response: ApiResponse<SuccessResponse>) => {
         addToast({
-          title: response.message || authT("verifySuccess"),
+          title: response.message || "OTP Verified",
           color: "success",
         });
-        router.push("/login");
+        const queryParams = new URLSearchParams({
+          email: email,
+          otp: data.otp,
+        });
+        router.push(`/reset-password?${queryParams.toString()}`);
       },
       onError: (error: ApiError) => {
         addToast({
@@ -85,13 +102,14 @@ export default function VerifyEmailPage() {
   };
 
   return (
-    <AuthLayout
-      imageSrc="/images/login.png"
-      imageAlt="Verify Email illustration"
-    >
+    <AuthLayout imageSrc="/images/login.png" imageAlt="Verify OTP illustration">
       <StaggerContainer delay={0.3} className="flex flex-col gap-6">
         <StaggerItem>
-          <AuthHeader title={authT("title")} subtitle={authT("subtitle")} />
+          {/* We handle subtitle text replacement to inject the email dynamically */}
+          <AuthHeader
+            title={authT("title")}
+            subtitle={authT("subtitle", { email: email || "" })}
+          />
         </StaggerItem>
 
         <form
@@ -127,22 +145,22 @@ export default function VerifyEmailPage() {
               {authT("submit")}
             </AuthSubmitButton>
           </StaggerItem>
-        </form>
 
-        <StaggerItem>
-          <p className="text-center mt-2 text-dark">
-            <button
-              type="button"
-              onClick={handleResend}
-              disabled={timeLeft > 0 || isResending}
-              className={`text-primary hover:underline bg-transparent border-none cursor-pointer disabled:text-default-400 disabled:no-underline disabled:cursor-not-allowed`}
-            >
-              {timeLeft > 0
-                ? `${authT("resendCode")} (${timeLeft}s)`
-                : authT("resendCode")}
-            </button>
-          </p>
-        </StaggerItem>
+          <StaggerItem>
+            <p className="text-center mt-2 text-dark">
+              <button
+                type="button"
+                onClick={handleResend}
+                disabled={timeLeft > 0 || isResending}
+                className={`text-primary hover:underline bg-transparent border-none cursor-pointer disabled:text-default-400 disabled:no-underline disabled:cursor-not-allowed`}
+              >
+                {timeLeft > 0
+                  ? `${authT("resendCode")} (${timeLeft}s)`
+                  : authT("resendCode")}
+              </button>
+            </p>
+          </StaggerItem>
+        </form>
       </StaggerContainer>
     </AuthLayout>
   );

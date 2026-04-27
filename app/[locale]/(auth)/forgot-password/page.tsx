@@ -20,8 +20,10 @@ import {
 import { StaggerContainer, StaggerItem } from "@/components/shared/animations";
 import { ApiResponse, SuccessResponse } from "@/types/api";
 import { ApiError } from "@/types/error";
+import { useRouter } from "next/navigation";
 
 export default function ForgotPasswordPage() {
+  const router = useRouter();
   const authT = useTranslations("Auth.ForgotPassword");
   const validationT = useTranslations("Auth.Validation");
 
@@ -42,6 +44,8 @@ export default function ForgotPasswordPage() {
           title: response.message || authT("resetSent"),
           color: "success",
         });
+        const queryParams = new URLSearchParams({ email: data.email });
+        router.push(`/verify-reset-otp?${queryParams.toString()}`);
       },
       onError: (error: ApiError) => {
         addToast({

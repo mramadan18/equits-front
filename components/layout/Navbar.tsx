@@ -37,12 +37,18 @@ const authRoutes = [
   AuthRoutes.CHANGE_PASSWORD,
 ];
 
-export const Navbar = () => {
+export const Navbar = ({
+  session,
+  isVerified,
+}: {
+  session: string | undefined;
+  isVerified: boolean;
+}) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
   const locale = useLocale();
   const t = useTranslations("Navbar");
-  const { data: user } = useMe();
+  const { data: user } = useMe({ enabled: !!session });
 
   const { mutate: logout } = useLogout();
 
@@ -144,11 +150,11 @@ export const Navbar = () => {
             {locale === "en" ? "عربي" : "EN"}
           </Link>
 
-          {user ? (
+          {session && isVerified ? (
             <Dropdown placement="bottom-end">
               <DropdownTrigger>
                 <Avatar
-                  src={user.avatar || "/images/default-avatar.png"}
+                  src={user?.avatar || "/images/default-avatar.png"}
                   name={user?.firstName}
                   isBordered
                   as="button"
