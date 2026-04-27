@@ -1,4 +1,3 @@
-// @ts-expect-error -- global CSS is handled by Next.js at build time
 import "@/styles/globals.css";
 import { Metadata, Viewport } from "next";
 import { Providers } from "./providers";
