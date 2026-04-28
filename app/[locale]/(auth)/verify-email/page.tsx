@@ -16,6 +16,7 @@ import { StaggerContainer, StaggerItem } from "@/components/shared/animations";
 import { InputOtp } from "@heroui/input-otp";
 import { ApiResponse, SuccessResponse } from "@/types/api";
 import { ApiError } from "@/types/error";
+import { AuthRoutes } from "@/types";
 
 export default function VerifyEmailPage() {
   const authT = useTranslations("Auth.VerifyEmail");
@@ -73,7 +74,7 @@ export default function VerifyEmailPage() {
           title: response.message || authT("verifySuccess"),
           color: "success",
         });
-        router.push("/login");
+        router.push(AuthRoutes.LOGIN);
       },
       onError: (error: ApiError) => {
         addToast({

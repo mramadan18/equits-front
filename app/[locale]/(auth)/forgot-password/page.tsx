@@ -21,6 +21,7 @@ import { StaggerContainer, StaggerItem } from "@/components/shared/animations";
 import { ApiResponse, SuccessResponse } from "@/types/api";
 import { ApiError } from "@/types/error";
 import { useRouter } from "next/navigation";
+import { AuthRoutes } from "@/types";
 
 export default function ForgotPasswordPage() {
   const router = useRouter();
@@ -45,7 +46,7 @@ export default function ForgotPasswordPage() {
           color: "success",
         });
         const queryParams = new URLSearchParams({ email: data.email });
-        router.push(`/verify-reset-otp?${queryParams.toString()}`);
+        router.push(`${AuthRoutes.VERIFY_RESET_OTP}?${queryParams.toString()}`);
       },
       onError: (error: ApiError) => {
         addToast({
@@ -89,7 +90,10 @@ export default function ForgotPasswordPage() {
 
         <StaggerItem>
           <p className="text-center mt-2 text-dark">
-            <Link href="/login" className="text-primary hover:underline">
+            <Link
+              href={AuthRoutes.LOGIN}
+              className="text-primary hover:underline"
+            >
               {authT("backToLogin")}
             </Link>
           </p>

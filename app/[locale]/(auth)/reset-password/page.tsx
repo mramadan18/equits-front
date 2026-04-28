@@ -20,6 +20,7 @@ import {
 import { StaggerContainer, StaggerItem } from "@/components/shared/animations";
 import { ApiResponse, AuthResponse } from "@/types/api";
 import { ApiError } from "@/types/error";
+import { AuthRoutes } from "@/types";
 
 export default function ResetPasswordPage() {
   const authT = useTranslations("Auth.ResetPassword");
@@ -63,7 +64,7 @@ export default function ResetPasswordPage() {
             title: response.message || authT("resetSuccess"),
             color: "success",
           });
-          router.push("/login");
+          router.push(AuthRoutes.LOGIN);
         },
         onError: (error: ApiError) => {
           addToast({

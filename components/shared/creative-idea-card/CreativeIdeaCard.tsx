@@ -11,6 +11,7 @@ import { AttributeRow } from "./components/AttributeRow";
 import { CardInfo } from "./components/CardInfo";
 import { Stat } from "./components/Stat";
 import { Link } from "@/i18n/navigation";
+import { MainRoutes } from "@/types";
 
 interface CreativeIdeaCardProps {
   item: CreativeIdea;
@@ -55,7 +56,7 @@ export const CreativeIdeaCard = ({ item }: CreativeIdeaCardProps) => {
         {/* Action Button */}
         <Button
           as={Link}
-          href={`/explore/${item.id}`}
+          href={`${MainRoutes.EXPLORE}/${item.id}`}
           variant="bordered"
           color="primary"
           fullWidth

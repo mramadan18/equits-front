@@ -11,7 +11,7 @@ export const PeopleYouMayNeedSidebar = () => {
   const t = useTranslations("TalentDetails");
 
   return (
-    <div className="w-full lg:w-[320px] xl:w-[380px] bg-white rounded-2xl shadow-sm border border-gray-200 flex flex-col h-max overflow-hidden sticky top-24">
+    <div className="bg-white rounded-2xl shadow-sm border border-gray2 flex flex-col h-max overflow-hidden sticky top-24">
       {/* Header */}
       <div className="p-6 pb-4">
         <h2 className="text-lg md:text-xl font-semibold text-dark">

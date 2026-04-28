@@ -6,7 +6,7 @@ import Wisdom from "@/components/home/Wisdom";
 import Opinions from "@/components/home/Opinions";
 import Faq from "@/components/home/Faq";
 
-export default function Home() {
+export default function LandingPage() {
   return (
     <>
       <Hero />

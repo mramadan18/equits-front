@@ -24,6 +24,7 @@ import { addToast } from "@heroui/toast";
 import { useGoogleLogin as useGoogleAuth } from "@react-oauth/google";
 import { ApiResponse, AuthResponse } from "@/types/api";
 import { ApiError } from "@/types/error";
+import { AuthRoutes, MainRoutes } from "@/types";
 
 export default function RegisterPage() {
   const validationT = useTranslations("Auth.Validation");
@@ -51,7 +52,7 @@ export default function RegisterPage() {
             title: response.message || "Logged in with Google successfully",
             color: "success",
           });
-          router.push("/");
+          router.push(MainRoutes.HOME);
         },
         onError: (error: ApiError) => {
           addToast({
@@ -77,7 +78,7 @@ export default function RegisterPage() {
           title: response.message || authT("registerSuccess"),
           color: "success",
         });
-        router.push("/verify-email");
+        router.push(AuthRoutes.VERIFY_EMAIL);
       },
       onError: (error: ApiError) => {
         addToast({
@@ -166,7 +167,10 @@ export default function RegisterPage() {
         <StaggerItem>
           <p className="text-center mt-2 text-dark">
             {authT("hasAccount")}{" "}
-            <Link href="/login" className="text-primary hover:underline">
+            <Link
+              href={AuthRoutes.LOGIN}
+              className="text-primary hover:underline"
+            >
               {authT("loginLink")}
             </Link>
           </p>

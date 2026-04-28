@@ -22,6 +22,7 @@ import { addToast } from "@heroui/toast";
 import { useGoogleLogin as useGoogleAuth } from "@react-oauth/google";
 import { ApiResponse, AuthResponse } from "@/types/api";
 import { ApiError } from "@/types/error";
+import { AuthRoutes, MainRoutes } from "@/types";
 
 export default function LoginPage() {
   const validationT = useTranslations("Auth.Validation");
@@ -49,7 +50,7 @@ export default function LoginPage() {
             title: response.message || "Logged in with Google successfully",
             color: "success",
           });
-          router.push("/");
+          router.push(MainRoutes.HOME);
         },
         onError: (error: ApiError) => {
           addToast({
@@ -74,7 +75,7 @@ export default function LoginPage() {
           title: response.message || authT("loginSuccess"),
           color: "success",
         });
-        router.push("/");
+        router.push(MainRoutes.HOME);
       },
       onError: (error: ApiError) => {
         addToast({
@@ -138,7 +139,7 @@ export default function LoginPage() {
                 {authT("rememberMe", { fallback: "تذكرني" })}
               </Checkbox>
               <Link
-                href="/forgot-password"
+                href={AuthRoutes.FORGOT_PASSWORD}
                 className="text-primary text-sm hover:underline"
               >
                 {authT("forgotPassword")}
@@ -160,7 +161,10 @@ export default function LoginPage() {
         <StaggerItem>
           <p className="text-center mt-2 text-dark">
             {authT("noAccount")}{" "}
-            <Link href="/register" className="text-primary hover:underline">
+            <Link
+              href={AuthRoutes.REGISTER}
+              className="text-primary hover:underline"
+            >
               {authT("registerLink")}
             </Link>
           </p>

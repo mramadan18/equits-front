@@ -20,6 +20,7 @@ import { StaggerContainer, StaggerItem } from "@/components/shared/animations";
 import { InputOtp } from "@heroui/input-otp";
 import { ApiResponse, SuccessResponse } from "@/types/api";
 import { ApiError } from "@/types/error";
+import { AuthRoutes } from "@/types";
 
 export default function VerifyResetOtpPage() {
   const authT = useTranslations("Auth.VerifyResetOtp");
@@ -90,7 +91,7 @@ export default function VerifyResetOtpPage() {
           email: email,
           otp: data.otp,
         });
-        router.push(`/reset-password?${queryParams.toString()}`);
+        router.push(`${AuthRoutes.RESET_PASSWORD}?${queryParams.toString()}`);
       },
       onError: (error: ApiError) => {
         addToast({

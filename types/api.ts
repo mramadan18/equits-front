@@ -2,7 +2,6 @@ import {
   ChangePasswordInput,
   LoginInput,
   RegisterInput,
-  ResetPasswordInput,
 } from "../validations/auth.validation";
 
 export type MessageKey =
@@ -60,6 +59,8 @@ export interface User {
   createdAt: string;
   updatedAt: string;
   role: "USER" | "ADMIN";
+  hasDraftProjects: boolean;
+  draftProjectsCount: number;
 }
 
 export interface ApiResponse<T> {

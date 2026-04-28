@@ -6,14 +6,17 @@ export enum AuthRoutes {
   VERIFY_EMAIL = "/verify-email",
   FORGOT_PASSWORD = "/forgot-password",
   RESET_PASSWORD = "/reset-password",
-  CHANGE_PASSWORD = "/change-password",
+  VERIFY_RESET_OTP = "/verify-reset-otp",
 }
 
 export enum MainRoutes {
-  HOME = "/",
+  LANDING = "/",
+  HOME = "/home",
   EXPLORE = "/explore",
+  REPO = "/repo",
   TALENTS = "/talents",
   SERVICES = "/services",
+  BOOST = "/boost",
 }
 
 export type IconSvgProps = SVGProps<SVGSVGElement> & {
