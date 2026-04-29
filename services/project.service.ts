@@ -7,6 +7,11 @@ export const projectService = {
     return response.data;
   },
 
+  getMyProjects: async (): Promise<ApiResponse<Project[]>> => {
+    const response = await apiClient.get("/projects/my-projects");
+    return response.data;
+  },
+
   getProjectById: async (
     id: number | string,
   ): Promise<ApiResponse<Project>> => {

@@ -171,7 +171,7 @@ export interface Project {
   updatedAt: string;
   deletedAt: string | null;
   serviceArea: string | null;
-  status: "DRAFT" | "PUBLISHED" | "ARCHIVED"; // Adjust based on your enum
+  status: "DRAFT" | "PENDING_APPROVAL" | "PUBLISHED" | "REJECTED";
   currentStep: number;
   owner?: {
     firstName: string;

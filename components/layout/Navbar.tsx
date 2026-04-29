@@ -14,7 +14,7 @@ import { Link, usePathname, useRouter } from "@/i18n/navigation";
 import { BiHomeAlt2 } from "react-icons/bi";
 import { IoTelescopeOutline } from "react-icons/io5";
 import { TiGroupOutline } from "react-icons/ti";
-import { MdOutlineDesignServices } from "react-icons/md";
+// import { MdOutlineDesignServices } from "react-icons/md";
 import { useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
@@ -95,19 +95,19 @@ export const Navbar = ({
     },
     {
       label: isLoggedIn ? t("repo") : t("explore"),
-      href: "/explore",
+      href: isLoggedIn ? MainRoutes.REPO : MainRoutes.EXPLORE,
       icon: <IoTelescopeOutline size={24} />,
     },
     {
       label: t("talents"),
-      href: "/talents",
+      href: MainRoutes.TALENTS,
       icon: <TiGroupOutline size={24} />,
     },
-    {
-      label: isLoggedIn ? t("services") : t("boost"),
-      href: "/services",
-      icon: <MdOutlineDesignServices size={24} />,
-    },
+    // {
+    //   label: isLoggedIn ? t("services") : t("boost"),
+    //   href: "/services",
+    //   icon: <MdOutlineDesignServices size={24} />,
+    // },
   ];
 
   return (
