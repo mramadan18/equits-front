@@ -421,5 +421,30 @@
     "errorTitle": "Error",
     "errorDescription": "Failed to upload file",
     "browse": "Browse to upload"
+  },
+  "Drafts": {
+    "title": "Continue Existing Project",
+    "subtitle": "Resume your uncompleted project drafts to get them ready for publishing.",
+    "loading": "Loading your drafts...",
+    "noDrafts": {
+      "title": "No Active Drafts",
+      "description": "You do not have any unfinished projects. Start a new one to pitch your idea!",
+      "action": "Start New Project"
+    },
+    "card": {
+      "defaultTitle": "Draft Project #{id}",
+      "badge": "Draft",
+      "description": "You have an unfinished project.",
+      "progress": "Current Progress",
+      "stepInfo": "Step {current} of {total}",
+      "continue": "Continue Project",
+      "delete": "Delete"
+    },
+    "deleteModal": {
+      "title": "Delete Draft",
+      "description": "Are you sure you want to delete this draft? This action cannot be undone.",
+      "confirm": "Delete",
+      "cancel": "Cancel"
+    }
   }
 }

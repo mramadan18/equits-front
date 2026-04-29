@@ -125,6 +125,7 @@ export interface UploadResponse {
 
 export interface ProjectDraft {
   id: number;
+  title: string | null;
   currentStep: number;
 }
 

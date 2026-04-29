@@ -72,8 +72,14 @@ export const step1Schema = z
       .optional()
       .or(z.literal("")),
     isAcademic: z.boolean(),
-    universityId: z.preprocess((val) => val ?? 0, z.number()),
-    facultyId: z.preprocess((val) => val ?? 0, z.number()),
+    universityId: z.preprocess(
+      (val) => (val === "" || val === undefined ? null : val),
+      z.number().nullable(),
+    ),
+    facultyId: z.preprocess(
+      (val) => (val === "" || val === undefined ? null : val),
+      z.number().nullable(),
+    ),
   })
   .refine(
     (data) => {

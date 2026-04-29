@@ -2,7 +2,7 @@ import { ApiResponse, Project, ProjectDraft } from "../types/api";
 import apiClient from "./api-client";
 
 export const projectService = {
-  getActiveDraft: async (): Promise<ApiResponse<ProjectDraft>> => {
+  getActiveDraft: async (): Promise<ApiResponse<ProjectDraft[]>> => {
     const response = await apiClient.get("/projects/active-draft");
     return response.data;
   },
@@ -32,6 +32,11 @@ export const projectService = {
 
   submitProject: async (id: number | string): Promise<ApiResponse<Project>> => {
     const response = await apiClient.post(`/projects/${id}/submit`);
+    return response.data;
+  },
+
+  deleteProject: async (id: number | string): Promise<ApiResponse<any>> => {
+    const response = await apiClient.delete(`/projects/${id}`);
     return response.data;
   },
 };

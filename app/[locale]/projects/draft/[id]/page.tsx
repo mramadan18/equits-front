@@ -1,6 +1,8 @@
 "use client";
 
+import { use } from "react";
 import { Button } from "@heroui/button";
+import { Spinner } from "@heroui/spinner";
 import { ProjectStepper } from "@/components/projects/new-project/ProjectStepper";
 import { ProjectBasicsStep } from "@/components/projects/new-project/steps/ProjectBasicsStep";
 import { ProjectMarketStep } from "@/components/projects/new-project/steps/ProjectMarketStep";
@@ -9,7 +11,12 @@ import { ProjectFundingStep } from "@/components/projects/new-project/steps/Proj
 import { useProjectWizard } from "@/hooks/ui/useProjectWizard";
 import { useTranslations } from "next-intl";
 
-export default function NewProjectPage() {
+interface PageProps {
+  params: Promise<{ id: string }>;
+}
+
+export default function DraftProjectPage({ params }: PageProps) {
+  const { id } = use(params);
   const {
     step,
     control,
@@ -20,8 +27,17 @@ export default function NewProjectPage() {
     goBack,
     isUpdating,
     isSubmitting,
-  } = useProjectWizard();
+    isLoading,
+  } = useProjectWizard(id);
   const t = useTranslations("Pitch");
+
+  if (isLoading) {
+    return (
+      <div className="flex h-[70vh] items-center justify-center">
+        <Spinner size="lg" color="primary" />
+      </div>
+    );
+  }
 
   return (
     <div className="container max-w-6xl py-12 px-4">
