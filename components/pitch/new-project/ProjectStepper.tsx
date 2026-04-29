@@ -1,16 +1,16 @@
 "use client";
 
-import { PitchStep } from "./types";
+import { ProjectStep } from "@/types/project";
 
-interface PitchStepperProps {
-  step: PitchStep;
+interface ProjectStepperProps {
+  step: ProjectStep;
 }
 
-export const PitchStepper = ({ step }: PitchStepperProps) => {
+export const ProjectStepper = ({ step }: ProjectStepperProps) => {
   return (
     <div className="flex items-center justify-between mb-12 relative px-4">
       {[1, 2, 3, 4].map((itemStep) => {
-        const currentStep = itemStep as PitchStep;
+        const currentStep = itemStep as ProjectStep;
 
         return (
           <div

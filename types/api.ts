@@ -89,3 +89,30 @@ export type ChangePasswordRequest = ChangePasswordInput;
 export type UpdateMeRequest = Partial<
   Omit<User, "id" | "createdAt" | "updatedAt" | "role" | "email">
 >;
+
+export interface University {
+  id: number;
+  name: string;
+}
+
+export interface Faculty {
+  id: number;
+  name: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface SubIndustry {
+  id: number;
+  name: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface Industry {
+  id: number;
+  name: string;
+  subIndustries: SubIndustry[];
+  createdAt: string;
+  updatedAt: string;
+}

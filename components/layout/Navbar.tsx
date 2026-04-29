@@ -10,7 +10,7 @@ import {
   NavbarMenuItem,
 } from "@heroui/navbar";
 import { Button } from "@heroui/button";
-import { Link, usePathname } from "@/i18n/navigation";
+import { Link, usePathname, useRouter } from "@/i18n/navigation";
 import { BiHomeAlt2 } from "react-icons/bi";
 import { IoTelescopeOutline } from "react-icons/io5";
 import { TiGroupOutline } from "react-icons/ti";
@@ -30,18 +30,11 @@ import {
 import { Avatar } from "@heroui/avatar";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { PiOpenAiLogoThin } from "react-icons/pi";
-import { FiPlus } from "react-icons/fi";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { Badge } from "@heroui/badge";
-import {
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalHeader,
-  useDisclosure,
-} from "@heroui/modal";
-import { RadioGroup, Radio } from "@heroui/radio";
-import { useRouter } from "next/navigation";
+import { useDisclosure } from "@heroui/modal";
+import { PitchModal } from "./PitchModal";
+import { FiPlus } from "react-icons/fi";
 
 const authRoutes = [
   AuthRoutes.REGISTER,
@@ -71,16 +64,7 @@ export const Navbar = ({
     onOpen: onPitchOpen,
     onOpenChange: onPitchOpenChange,
   } = useDisclosure();
-  const [pitchAction, setPitchAction] = useState<string>("new");
   const router = useRouter();
-
-  const handlePitchContinue = () => {
-    if (pitchAction === "new") {
-      router.push(`/${locale}/pitch/new`);
-    } else {
-      router.push(`/${locale}/pitch/existing`);
-    }
-  };
 
   const isAuthPage = authRoutes.includes(pathname as AuthRoutes);
   const isLoginPage = pathname === AuthRoutes.LOGIN;
@@ -113,41 +97,11 @@ export const Navbar = ({
 
   return (
     <>
-      <Modal isOpen={isPitchOpen} onOpenChange={onPitchOpenChange}>
-        <ModalContent>
-          {(onClose) => (
-            <>
-              <ModalHeader className="flex flex-col gap-1">
-                Create a Project
-              </ModalHeader>
-              <ModalBody className="pb-6">
-                <RadioGroup
-                  label="Do you want to create a new project or continue an existing one?"
-                  value={pitchAction}
-                  onValueChange={setPitchAction}
-                >
-                  <Radio value="new">Create a new project</Radio>
-                  <Radio value="existing">Continue an existing project</Radio>
-                </RadioGroup>
-                <div className="flex justify-end gap-2 mt-4">
-                  <Button color="danger" variant="light" onPress={onClose}>
-                    Close
-                  </Button>
-                  <Button
-                    color="primary"
-                    onPress={() => {
-                      onClose();
-                      handlePitchContinue();
-                    }}
-                  >
-                    Continue
-                  </Button>
-                </div>
-              </ModalBody>
-            </>
-          )}
-        </ModalContent>
-      </Modal>
+      <PitchModal
+        isOpen={isPitchOpen}
+        onOpenChange={onPitchOpenChange}
+        user={user || null}
+      />
       <HeroUINavbar
         onMenuOpenChange={setIsMenuOpen}
         maxWidth="full"
@@ -223,7 +177,11 @@ export const Navbar = ({
                 <Button
                   className="bg-[#E9EAEB] text-black font-semibold rounded-full px-4 py-3"
                   endContent={<FiPlus size={20} />}
-                  onPress={onPitchOpen}
+                  onPress={
+                    user?.hasDraftProjects
+                      ? onPitchOpen
+                      : () => router.push(MainRoutes.NEW_PROJECT)
+                  }
                 >
                   Pitch
                 </Button>
@@ -257,7 +215,13 @@ export const Navbar = ({
                   <DropdownTrigger>
                     <div className="flex items-center gap-2 cursor-pointer">
                       <Avatar
-                        src={user?.avatar || "/images/default-avatar.png"}
+                        fallback={
+                          <div className="flex items-center gap-1">
+                            <span>{user?.firstName?.charAt(0)}</span>
+                            <span>{user?.lastName?.charAt(0)}</span>
+                          </div>
+                        }
+                        src={`${user?.avatar}`}
                         name={user?.firstName}
                         isBordered
                         className="transition-transform"

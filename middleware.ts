@@ -14,7 +14,13 @@ const authPages = [
   AuthRoutes.VERIFY_RESET_OTP,
 ];
 
-const protectedPages = [MainRoutes.HOME, MainRoutes.REPO];
+const protectedPages = [
+  MainRoutes.HOME,
+  MainRoutes.REPO,
+  MainRoutes.PROJECTS,
+  MainRoutes.DRAFT_PROJECTS,
+  MainRoutes.NEW_PROJECT,
+];
 
 export default function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;

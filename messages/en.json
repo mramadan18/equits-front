@@ -17,13 +17,28 @@
     "repo": "Repo",
     "talents": "Talents",
     "services": "Services",
+    "boost": "Boost",
     "register": "Register",
     "login": "Login",
     "logout": "Logout",
     "profile": "Profile",
     "logoAlt": "Equits Logo",
     "openMenu": "Open menu",
-    "closeMenu": "Close menu"
+    "closeMenu": "Close menu",
+    "PitchModal": {
+      "title": "Create a Project",
+      "description": "Choose how you want to start your pitch journey.",
+      "newProject": {
+        "title": "Start New Project",
+        "description": "Create a fresh project from scratch and showcase your idea."
+      },
+      "continueProject": {
+        "title": "Continue Drafting",
+        "description": "You have {count} draft projects. Pick up where you left off."
+      },
+      "close": "Close",
+      "continue": "Continue"
+    }
   },
   "Hero": {
     "title": "Every <yellow>Great Start-Up</yellow> Once <br></br> Started As A <yellow>Simple Idea</yellow>",
@@ -190,5 +205,201 @@
     "moreDetails": "More Details",
     "showAll": "Show All",
     "viewDetails": "View Details"
+  },
+  "Pitch": {
+    "title": "Pitch Your Project",
+    "subtitle": "Fill in the details to pitch your project.",
+    "steps": {
+      "basics": "Project Basics",
+      "market": "Market & Product",
+      "traction": "Traction",
+      "funding": "Funding & Files"
+    },
+    "buttons": {
+      "next": "Next",
+      "back": "Back",
+      "submit": "Submit"
+    },
+    "Basics": {
+      "projectName": "Project Name",
+      "projectNamePlaceholder": "Enter the official or commercial name of your project",
+      "tagline": "Tagline",
+      "taglinePlaceholder": "A short, catchy sentence that describes your startup in one line",
+      "logo": "Logo",
+      "logoSubLabel": "(optional)",
+      "cover": "Cover / Thumbnail",
+      "browse": "Browse to upload",
+      "elevatorPitch": "Text Elevator Pitch",
+      "elevatorPitchPlaceholder": "Explain your idea in 5 minutes as if you were in an elevator with an investor.",
+      "youtubeVideo": "Youtube Video",
+      "youtubeVideoPlaceholder": "Provide a YouTube video link that showcases your idea and pitch.",
+      "liveLink": "Project Live Link / Prototype",
+      "liveLinkPlaceholder": "Provide a link to your live product or prototype (e.g. Figma, website, demo)",
+      "socialMedia": "Social Media Links",
+      "optional": "(Optional)",
+      "academicToggle": "Is it Academic / Graduation Project?",
+      "university": "Select University",
+      "faculty": "Select Faculty / Major",
+      "selectPlaceholder": "Select"
+    },
+    "Market": {
+      "industry": "Industry",
+      "selectPlaceholder": "Select",
+      "subIndustry": "Sub-Industry",
+      "projectType": "Project Type",
+      "stage": "Stage",
+      "revenueModel": "Revenue Model",
+      "marketFocus": "Market Focus",
+      "problem": "Problem",
+      "problemPlaceholder": "Describe the problem you're solving.",
+      "solution": "Solution",
+      "solutionPlaceholder": "Explain your solution clearly.",
+      "valueProp": "Value Proposition",
+      "valuePropPlaceholder": "Why your solution is better or unique."
+    },
+    "Traction": {
+      "currentTraction": "Current Traction",
+      "growthRate": "Growth Rate",
+      "totalUsers": "Total Users",
+      "totalUsersPlaceholder": "Enter Number of Total Users",
+      "dau": "Daily Active Users - DAU",
+      "dauPlaceholder": "Enter Number of Daily Active Users.",
+      "mrr": "Monthly Revenue - MRR",
+      "mrrPlaceholder": "Total recurring revenue generated every month in USD",
+      "growthRatePct": "Growth Rate %",
+      "growthRatePctPlaceholder": "How fast your use revenue is growing every month.",
+      "retentionRate": "Retention Rate %",
+      "retentionRatePlaceholder": "Percentage of users who keep using your product over time.",
+      "conversionRate": "Conversion Rate %",
+      "conversionRatePlaceholder": "Percentage of users who become paying customers."
+    },
+    "Funding": {
+      "fundingStage": "Funding Stage",
+      "serviceArea": "Service Area",
+      "fundingAsk": "Funding Ask in USD",
+      "fundingAskPlaceholder": "Enter amount of funding you are currently seeking",
+      "equityStake": "Equity Stake %",
+      "equityStakePlaceholder": "Enter amount of equity stake.",
+      "useOfFunds": "Use of Funds",
+      "useOfFundsPlaceholder": "Briefly explain how you will use the investment.",
+      "businessPlan": "Business Plan PDF URL",
+      "businessPlanPlaceholder": "Paste a hosted PDF URL if you have one"
+    },
+    "Enums": {
+      "ProjectType": {
+        "SOFTWARE": "Software",
+        "HARDWARE": "Hardware",
+        "SERVICE": "Service",
+        "MARKETPLACE": "Marketplace",
+        "HYBRID": "Hybrid"
+      },
+      "ProjectStage": {
+        "IDEA": "Idea",
+        "VALIDATION": "Validation",
+        "PROTOTYPE": "Prototype",
+        "MVP": "MVP",
+        "BETA": "Beta",
+        "GO_TO_MARKET": "Go-to-Market",
+        "PMF": "Product-Market Fit",
+        "SCALING": "Scaling",
+        "OPTIMIZATION": "Optimization",
+        "PIVOT": "Pivot",
+        "SUNSETTING": "Sunsetting"
+      },
+      "RevenueModel": {
+        "SUBSCRIPTION": "Subscription",
+        "MARKETPLACE": "Marketplace",
+        "FREEMIUM": "Freemium",
+        "DIRECT_SALES": "Direct Sales",
+        "ADVERTISING": "Advertising",
+        "LICENSING": "Licensing"
+      },
+      "MarketFocus": {
+        "B2B": "B2B",
+        "B2C": "B2C",
+        "B2B2C": "B2B2C",
+        "C2C": "C2C",
+        "C2B": "C2B",
+        "B2G": "B2G",
+        "G2B": "G2B",
+        "G2C": "G2C",
+        "D2C": "D2C"
+      },
+      "TractionType": {
+        "IDEA": "Idea",
+        "EARLY_USERS": "Early Users",
+        "ACTIVE_USERS": "Active Users",
+        "GENERATING_REVENUE": "Generating Revenue",
+        "PROFITABLE": "Profitable"
+      },
+      "GrowthRate": {
+        "NO_GROWTH": "No Growth",
+        "SLOW": "Slow",
+        "STEADY": "Steady",
+        "FAST": "Fast",
+        "RAPID": "Rapid"
+      },
+      "FundingStage": {
+        "ANGEL": "Angel",
+        "SEED": "Seed",
+        "BRIDGE": "Bridge",
+        "SERIES_A": "Series A",
+        "SERIES_B": "Series B",
+        "SERIES_C_PLUS": "Series C+",
+        "PRE_IPO": "Pre-IPO"
+      },
+      "ServiceArea": {
+        "CITY": "City",
+        "GOVERNORATE": "Governorate",
+        "EGYPT": "Egypt",
+        "MENA": "MENA",
+        "GCC": "GCC",
+        "AFRICA": "Africa",
+        "EUROPE": "Europe",
+        "NORTH_AMERICA": "North America",
+        "LATIN_AMERICA": "Latin America",
+        "ASIA": "Asia",
+        "GLOBAL": "Global"
+      }
+    },
+    "Validation": {
+      "projectNameRequired": "Project name is required",
+      "projectNameMin": "Project name must be at least 3 characters",
+      "projectNameMax": "Project name cannot exceed 32 characters",
+      "taglineRequired": "Tagline is required",
+      "taglineMin": "Tagline must be at least 10 characters",
+      "taglineMax": "Tagline cannot exceed 100 characters",
+      "coverRequired": "Cover image is required",
+      "elevatorPitchRequired": "Elevator pitch is required",
+      "elevatorPitchMin": "Elevator pitch must be at least 50 characters",
+      "elevatorPitchMax": "Elevator pitch cannot exceed 1000 characters",
+      "academicRequired": "University and Faculty are required for academic projects",
+      "industryRequired": "Industry is required",
+      "subIndustryRequired": "At least one sub-industry is required",
+      "projectTypeRequired": "At least one project type is required",
+      "stageRequired": "Project stage is required",
+      "revenueModelRequired": "Revenue model is required",
+      "marketFocusRequired": "Market focus is required",
+      "problemRequired": "Problem description is required",
+      "problemMin": "Problem description must be at least 50 characters",
+      "problemMax": "Problem description cannot exceed 2000 characters",
+      "solutionRequired": "Solution description is required",
+      "solutionMin": "Solution description must be at least 50 characters",
+      "solutionMax": "Solution description cannot exceed 2000 characters",
+      "valuePropRequired": "Value proposition is required",
+      "valuePropMin": "Value proposition must be at least 50 characters",
+      "valuePropMax": "Value proposition cannot exceed 2000 characters",
+      "tractionRequired": "Current traction is required",
+      "fundingStageRequired": "Funding stage is required",
+      "serviceAreaRequired": "Service area is required",
+      "fundingAskRequired": "Funding ask amount is required",
+      "equityStakeRequired": "Equity stake percentage is required",
+      "equityStakeMax": "Equity stake cannot exceed 100%",
+      "useOfFundsRequired": "Use of funds description is required",
+      "useOfFundsMin": "Use of funds must be at least 20 characters",
+      "useOfFundsMax": "Use of funds cannot exceed 1000 characters",
+      "invalidUrl": "Please enter a valid URL",
+      "invalidOption": "Invalid option selected"
+    }
   }
 }

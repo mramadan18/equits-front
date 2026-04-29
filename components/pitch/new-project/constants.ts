@@ -1,4 +1,4 @@
-import { Step1Form, Step2Form, Step3Form, Step4Form } from "./types";
+import { Step1Form, Step2Form, Step3Form, Step4Form } from "@/types/project";
 
 export const initialStep1Form: Step1Form = {
   title: "",
@@ -18,8 +18,8 @@ export const initialStep1Form: Step1Form = {
 
 export const initialStep2Form: Step2Form = {
   industryId: "",
-  subIndustryId: "",
-  projectType: "",
+  subIndustryIds: [],
+  projectTypes: [],
   stage: "",
   revenueModel: "",
   marketFocus: "",

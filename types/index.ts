@@ -17,6 +17,9 @@ export enum MainRoutes {
   TALENTS = "/talents",
   SERVICES = "/services",
   BOOST = "/boost",
+  PROJECTS = "/projects",
+  NEW_PROJECT = "/projects/new",
+  DRAFT_PROJECTS = "/projects/draft",
 }
 
 export type IconSvgProps = SVGProps<SVGSVGElement> & {

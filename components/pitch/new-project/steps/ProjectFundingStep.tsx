@@ -2,102 +2,176 @@
 
 import { Input, Textarea } from "@heroui/input";
 import { Select, SelectItem } from "@heroui/select";
-import { Step4Form } from "../types";
+import { FundingStage, ServiceArea } from "@/types/project";
+import { useTranslations } from "next-intl";
+import { Controller, Control, useWatch } from "react-hook-form";
+import { ProjectFormData } from "@/types/project";
 
 interface ProjectFundingStepProps {
-  form: Step4Form;
-  setForm: React.Dispatch<React.SetStateAction<Step4Form>>;
+  control: Control<ProjectFormData>;
 }
 
-export const ProjectFundingStep = ({
-  form,
-  setForm,
-}: ProjectFundingStepProps) => {
+export const ProjectFundingStep = ({ control }: ProjectFundingStepProps) => {
+  const t = useTranslations("Pitch");
+  const useOfFunds = useWatch({ control, name: "useOfFunds" }) as string;
+
+  const safeTranslate = (key: string | undefined) => {
+    if (!key) return "";
+    return key.startsWith("Validation.") ? t(key) : key;
+  };
+
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <Select
-          label="Funding Stage"
-          placeholder="Select"
-          labelPlacement="outside"
-          selectedKeys={form.fundingStage ? [form.fundingStage] : []}
-          onSelectionChange={(selection) => {
-            const value = Array.from(selection)[0];
-            setForm((current) => ({
-              ...current,
-              fundingStage: typeof value === "string" ? value : "",
-            }));
-          }}
-        >
-          <SelectItem key="1">Stage 1</SelectItem>
-        </Select>
-        <Select
-          label="Service Area"
-          placeholder="Select"
-          labelPlacement="outside"
-          selectedKeys={form.serviceArea ? [form.serviceArea] : []}
-          onSelectionChange={(selection) => {
-            const value = Array.from(selection)[0];
-            setForm((current) => ({
-              ...current,
-              serviceArea: typeof value === "string" ? value : "",
-            }));
-          }}
-        >
-          <SelectItem key="1">Area 1</SelectItem>
-        </Select>
-        <Input
-          label="Funding Ask in USD"
-          placeholder="Enter amount of funding you are currently seeking"
-          labelPlacement="outside"
-          type="number"
-          value={form.fundingAsk}
-          onChange={(event) =>
-            setForm((current) => ({
-              ...current,
-              fundingAsk: event.target.value,
-            }))
-          }
+        <Controller
+          name="fundingStage"
+          control={control}
+          render={({ field, fieldState }) => (
+            <Select
+              label={t("Funding.fundingStage")}
+              placeholder={t("Basics.selectPlaceholder")}
+              labelPlacement="outside"
+              variant="bordered"
+              radius="sm"
+              selectedKeys={field.value ? [field.value as string] : []}
+              isInvalid={!!fieldState.error}
+              errorMessage={safeTranslate(fieldState.error?.message)}
+              classNames={{ label: "text-foreground pb-1" }}
+              onSelectionChange={(selection) => {
+                const value = Array.from(selection)[0] as FundingStage;
+                field.onChange(value || "");
+              }}
+              onBlur={field.onBlur}
+            >
+              {Object.values(FundingStage).map((stage) => (
+                <SelectItem
+                  key={stage}
+                  textValue={t(`Enums.FundingStage.${stage}`)}
+                >
+                  {t(`Enums.FundingStage.${stage}`)}
+                </SelectItem>
+              ))}
+            </Select>
+          )}
         />
-        <Input
-          label="Equity Stake %"
-          placeholder="Enter amount of equity stake."
-          labelPlacement="outside"
-          type="number"
-          value={form.equityStake}
-          onChange={(event) =>
-            setForm((current) => ({
-              ...current,
-              equityStake: event.target.value,
-            }))
-          }
+        <Controller
+          name="serviceArea"
+          control={control}
+          render={({ field, fieldState }) => (
+            <Select
+              label={t("Funding.serviceArea")}
+              placeholder={t("Basics.selectPlaceholder")}
+              labelPlacement="outside"
+              variant="bordered"
+              radius="sm"
+              selectedKeys={field.value ? [field.value as string] : []}
+              isInvalid={!!fieldState.error}
+              errorMessage={safeTranslate(fieldState.error?.message)}
+              classNames={{ label: "text-foreground pb-1" }}
+              onSelectionChange={(selection) => {
+                const value = Array.from(selection)[0] as ServiceArea;
+                field.onChange(value || "");
+              }}
+              onBlur={field.onBlur}
+            >
+              {Object.values(ServiceArea).map((area) => (
+                <SelectItem
+                  key={area}
+                  textValue={t(`Enums.ServiceArea.${area}`)}
+                >
+                  {t(`Enums.ServiceArea.${area}`)}
+                </SelectItem>
+              ))}
+            </Select>
+          )}
+        />
+        <Controller
+          name="fundingAsk"
+          control={control}
+          render={({ field, fieldState }) => (
+            <Input
+              label={t("Funding.fundingAsk")}
+              placeholder={t("Funding.fundingAskPlaceholder")}
+              labelPlacement="outside"
+              variant="bordered"
+              radius="sm"
+              type="number"
+              value={field.value as string}
+              isInvalid={!!fieldState.error}
+              errorMessage={safeTranslate(fieldState.error?.message)}
+              onChange={field.onChange}
+              onBlur={field.onBlur}
+            />
+          )}
+        />
+        <Controller
+          name="equityStake"
+          control={control}
+          render={({ field, fieldState }) => (
+            <Input
+              label={t("Funding.equityStake")}
+              placeholder={t("Funding.equityStakePlaceholder")}
+              labelPlacement="outside"
+              variant="bordered"
+              radius="sm"
+              type="number"
+              value={field.value as string}
+              isInvalid={!!fieldState.error}
+              errorMessage={safeTranslate(fieldState.error?.message)}
+              onChange={field.onChange}
+              onBlur={field.onBlur}
+            />
+          )}
         />
       </div>
 
-      <Textarea
-        label="Use of Funds"
-        placeholder="Briefly explain how you will use the investment."
-        labelPlacement="outside"
-        minRows={3}
-        value={form.useOfFunds}
-        onChange={(event) =>
-          setForm((current) => ({ ...current, useOfFunds: event.target.value }))
-        }
+      <Controller
+        name="useOfFunds"
+        control={control}
+        render={({ field, fieldState }) => (
+          <Textarea
+            label={t("Funding.useOfFunds")}
+            placeholder={t("Funding.useOfFundsPlaceholder")}
+            labelPlacement="outside"
+            minRows={4}
+            variant="bordered"
+            radius="sm"
+            value={field.value as string}
+            isInvalid={!!fieldState.error}
+            errorMessage={safeTranslate(fieldState.error?.message)}
+            maxLength={1000}
+            classNames={{
+              description: "absolute bottom-4 end-4 text-tiny text-gray2",
+              inputWrapper: "relative",
+            }}
+            description={
+              <div className="flex justify-end w-full">
+                <span>{useOfFunds?.length ?? 0}/1000</span>
+              </div>
+            }
+            onChange={field.onChange}
+            onBlur={field.onBlur}
+          />
+        )}
       />
 
-      <Input
-        label="Business Plan PDF URL (Optional)"
-        placeholder="Paste a hosted PDF URL if you have one"
-        labelPlacement="outside"
-        variant="bordered"
-        radius="sm"
-        value={form.businessPlanUrl}
-        onChange={(event) =>
-          setForm((current) => ({
-            ...current,
-            businessPlanUrl: event.target.value,
-          }))
-        }
+      <Controller
+        name="businessPlanUrl"
+        control={control}
+        render={({ field, fieldState }) => (
+          <Input
+            label={`${t("Funding.businessPlan")} ${t("Basics.optional")}`}
+            placeholder={t("Funding.businessPlanPlaceholder")}
+            labelPlacement="outside"
+            variant="bordered"
+            radius="sm"
+            value={field.value as string}
+            isInvalid={!!fieldState.error}
+            errorMessage={safeTranslate(fieldState.error?.message)}
+            onChange={field.onChange}
+            onBlur={field.onBlur}
+          />
+        )}
       />
     </div>
   );

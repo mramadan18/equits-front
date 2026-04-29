@@ -17,13 +17,28 @@
     "repo": "المستودع",
     "talents": "المواهب",
     "services": "الخدمات",
+    "boost": "ادعم",
     "register": "تسجيل",
     "login": "دخول",
     "logout": "خروج",
     "profile": "الحساب",
     "logoAlt": "شعار إكويتس",
     "openMenu": "فتح القائمة",
-    "closeMenu": "إغلاق القائمة"
+    "closeMenu": "إغلاق القائمة",
+    "PitchModal": {
+      "title": "إنشاء مشروع",
+      "description": "اختر كيف تود البدء في رحلة عرض مشروعك.",
+      "newProject": {
+        "title": "ابدأ مشروع جديد",
+        "description": "أنشئ مشروعاً جديداً من الصفر واعرض فكرتك."
+      },
+      "continueProject": {
+        "title": "متابعة المسودات",
+        "description": "لديك {count} مسودات مشاريع. ابدأ من حيث توقفت."
+      },
+      "close": "إغلاق",
+      "continue": "متابعة"
+    }
   },
   "Hero": {
     "title": "كل <yellow>شركة ناشئة عظيمة</yellow> <br></br> بدأت بـ <yellow>فكرة بسيطة</yellow>",
@@ -168,6 +183,202 @@
       "newPasswordLabel": "كلمة المرور الجديدة",
       "confirmPasswordLabel": "تأكيد كلمة المرور",
       "submit": "تغيير كلمة المرور"
+    }
+  },
+  "Pitch": {
+    "title": "اعرض مشروعك",
+    "subtitle": "املأ التفاصيل لعرض مشروعك.",
+    "steps": {
+      "basics": "أساسيات المشروع",
+      "market": "السوق والمنتج",
+      "traction": "النمو",
+      "funding": "التمويل والملفات"
+    },
+    "buttons": {
+      "next": "التالي",
+      "back": "رجوع",
+      "submit": "إرسال"
+    },
+    "Basics": {
+      "projectName": "اسم المشروع",
+      "projectNamePlaceholder": "أدخل الاسم الرسمي أو التجاري لمشروعك",
+      "tagline": "شعار المشروع (Tagline)",
+      "taglinePlaceholder": "جملة قصيرة وجذابة تصف شركتك الناشئة في سطر واحد",
+      "logo": "الشعار",
+      "logoSubLabel": "(اختياري)",
+      "cover": "صورة الغلاف",
+      "browse": "تصفح للرفع",
+      "elevatorPitch": "عرض المشروع (Elevator Pitch)",
+      "elevatorPitchPlaceholder": "اشرح فكرتك في 5 دقائق كما لو كنت في مصعد مع مستثمر.",
+      "youtubeVideo": "فيديو يوتيوب",
+      "youtubeVideoPlaceholder": "قدم رابط فيديو يوتيوب يعرض فكرتك.",
+      "liveLink": "رابط المشروع المباشر / النموذج الأولي",
+      "liveLinkPlaceholder": "قدم رابطاً لمنتجك المباشر أو النموذج الأولي (مثل Figma، موقع إلكتروني، عرض توضيحي)",
+      "socialMedia": "روابط التواصل الاجتماعي",
+      "optional": "(اختياري)",
+      "academicToggle": "هل هو مشروع أكاديمي / تخرج؟",
+      "university": "اختر الجامعة",
+      "faculty": "اختر الكلية / التخصص",
+      "selectPlaceholder": "اختر"
+    },
+    "Market": {
+      "industry": "الصناعة",
+      "selectPlaceholder": "اختر",
+      "subIndustry": "الصناعة الفرعية",
+      "projectType": "نوع المشروع",
+      "stage": "المرحلة",
+      "revenueModel": "نموذج الإيرادات",
+      "marketFocus": "التركيز على السوق",
+      "problem": "المشكلة",
+      "problemPlaceholder": "صف المشكلة التي تحلها.",
+      "solution": "الحل",
+      "solutionPlaceholder": "اشرح حلك بوضوح.",
+      "valueProp": "القيمة المقترحة",
+      "valuePropPlaceholder": "لماذا حلك أفضل أو فريد."
+    },
+    "Traction": {
+      "currentTraction": "النمو الحالي",
+      "growthRate": "معدل النمو",
+      "totalUsers": "إجمالي المستخدمين",
+      "totalUsersPlaceholder": "أدخل عدد إجمالي المستخدمين",
+      "dau": "المستخدمون النشطون يومياً - DAU",
+      "dauPlaceholder": "أدخل عدد المستخدمين النشطين يومياً.",
+      "mrr": "الإيرادات الشهرية - MRR",
+      "mrrPlaceholder": "إجمالي الإيرادات المتكررة شهرياً بالدولار الأمريكي",
+      "growthRatePct": "نسبة معدل النمو %",
+      "growthRatePctPlaceholder": "مدى سرعة نمو إيراداتك كل شهر.",
+      "retentionRate": "نسبة الاحتفاظ %",
+      "retentionRatePlaceholder": "نسبة المستخدمين الذين يستمرون في استخدام منتجك.",
+      "conversionRate": "نسبة التحويل %",
+      "conversionRatePlaceholder": "نسبة المستخدمين الذين يتحولون إلى عملاء يدفعون."
+    },
+    "Funding": {
+      "fundingStage": "مرحلة التمويل",
+      "serviceArea": "منطقة الخدمة",
+      "fundingAsk": "مبلغ التمويل المطلوب (USD)",
+      "fundingAskPlaceholder": "أدخل مبلغ التمويل الذي تطلبه حالياً",
+      "equityStake": "حصة الملكية %",
+      "equityStakePlaceholder": "أدخل نسبة حصة الملكية.",
+      "useOfFunds": "استخدام الأموال",
+      "useOfFundsPlaceholder": "اشرح باختصار كيف ستستخدم الاستثمار.",
+      "businessPlan": "رابط خطة العمل (PDF)",
+      "businessPlanPlaceholder": "الصق رابط ملف PDF لخطة العمل"
+    },
+    "Enums": {
+      "ProjectType": {
+        "SOFTWARE": "برمجيات",
+        "HARDWARE": "أجهزة",
+        "SERVICE": "خدمة",
+        "MARKETPLACE": "منصة تداول",
+        "HYBRID": "هجين"
+      },
+      "ProjectStage": {
+        "IDEA": "فكرة",
+        "VALIDATION": "تحقق من الصحة",
+        "PROTOTYPE": "نموذج أولي",
+        "MVP": "المنتج الأدنى القابل للتطبيق",
+        "BETA": "نسخة بيتا",
+        "GO_TO_MARKET": "طرح في السوق",
+        "PMF": "ملاءمة المنتج للسوق",
+        "SCALING": "توسع",
+        "OPTIMIZATION": "تحسين",
+        "PIVOT": "تغيير المسار",
+        "SUNSETTING": "إغلاق"
+      },
+      "RevenueModel": {
+        "SUBSCRIPTION": "اشتراك",
+        "MARKETPLACE": "منصة عمولة",
+        "FREEMIUM": "مجاني مدفوع",
+        "DIRECT_SALES": "مبيعات مباشرة",
+        "ADVERTISING": "إعلانات",
+        "LICENSING": "ترخيص"
+      },
+      "MarketFocus": {
+        "B2B": "B2B",
+        "B2C": "B2C",
+        "B2B2C": "B2B2C",
+        "C2C": "C2C",
+        "C2B": "C2B",
+        "B2G": "B2G",
+        "G2B": "G2B",
+        "G2C": "G2C",
+        "D2C": "D2C"
+      },
+      "TractionType": {
+        "IDEA": "فكرة",
+        "EARLY_USERS": "مستخدمون مبكرون",
+        "ACTIVE_USERS": "مستخدمون نشطون",
+        "GENERATING_REVENUE": "تحقيق إيرادات",
+        "PROFITABLE": "ربحي"
+      },
+      "GrowthRate": {
+        "NO_GROWTH": "لا يوجد نمو",
+        "SLOW": "بطيء",
+        "STEADY": "ثابت",
+        "FAST": "سريع",
+        "RAPID": "نمو هائل"
+      },
+      "FundingStage": {
+        "ANGEL": "استثمار ملائكي",
+        "SEED": "جولة بذرة",
+        "BRIDGE": "جولة تجسير",
+        "SERIES_A": "سلسلة أ",
+        "SERIES_B": "سلسلة ب",
+        "SERIES_C_PLUS": "سلسلة ج فأكثر",
+        "PRE_IPO": "ما قبل الاكتتاب"
+      },
+      "ServiceArea": {
+        "CITY": "مدينة",
+        "GOVERNORATE": "محافظة",
+        "EGYPT": "مصر",
+        "MENA": "الشرق الأوسط وشمال أفريقيا",
+        "GCC": "دول الخليج",
+        "AFRICA": "أفريقيا",
+        "EUROPE": "أوروبا",
+        "NORTH_AMERICA": "أمريكا الشمالية",
+        "LATIN_AMERICA": "أمريكا اللاتينية",
+        "ASIA": "آسيا",
+        "GLOBAL": "عالمي"
+      }
+    },
+    "Validation": {
+      "projectNameRequired": "اسم المشروع مطلوب",
+      "projectNameMin": "يجب أن يكون اسم المشروع 3 أحرف على الأقل",
+      "projectNameMax": "لا يمكن أن يتجاوز اسم المشروع 32 حرفاً",
+      "taglineRequired": "شعار المشروع مطلوب",
+      "taglineMin": "يجب أن يكون شعار المشروع 10 أحرف على الأقل",
+      "taglineMax": "لا يمكن أن يتجاوز شعار المشروع 100 حرف",
+      "coverRequired": "صورة الغلاف مطلوبة",
+      "elevatorPitchRequired": "عرض المشروع مطلوب",
+      "elevatorPitchMin": "يجب أن يكون عرض المشروع 50 حرفاً على الأقل",
+      "elevatorPitchMax": "لا يمكن أن يتجاوز عرض المشروع 1000 حرف",
+      "academicRequired": "الجامعة والكلية مطلوبان للمشاريع الأكاديمية",
+      "industryRequired": "الصناعة مطلوبة",
+      "subIndustryRequired": "يجب اختيار صناعة فرعية واحدة على الأقل",
+      "projectTypeRequired": "يجب اختيار نوع مشروع واحد على الأقل",
+      "stageRequired": "المرحلة مطلوبة",
+      "revenueModelRequired": "نموذج الإيرادات مطلوب",
+      "marketFocusRequired": "التركيز على السوق مطلوب",
+      "problemRequired": "وصف المشكلة مطلوب",
+      "problemMin": "يجب أن يكون وصف المشكلة 50 حرفاً على الأقل",
+      "problemMax": "لا يمكن أن يتجاوز وصف المشكلة 2000 حرف",
+      "solutionRequired": "وصف الحل مطلوب",
+      "solutionMin": "يجب أن يكون وصف الحل 50 حرفاً على الأقل",
+      "solutionMax": "لا يمكن أن يتجاوز وصف الحل 2000 حرف",
+      "valuePropRequired": "القيمة المقترحة مطلوبة",
+      "valuePropMin": "يجب أن تكون القيمة المقترحة 50 حرفاً على الأقل",
+      "valuePropMax": "لا يمكن أن تتجاوز القيمة المقترحة 2000 حرف",
+      "tractionRequired": "النمو الحالي مطلوب",
+      "fundingStageRequired": "مرحلة التمويل مطلوبة",
+      "serviceAreaRequired": "منطقة الخدمة مطلوبة",
+      "fundingAskRequired": "مبلغ التمويل المطلوب إلزامي",
+      "equityStakeRequired": "نسبة الملكية مطلوبة",
+      "equityStakeMax": "لا يمكن أن تتجاوز نسبة الملكية 100%",
+      "useOfFundsRequired": "وصف استخدام الأموال مطلوب",
+      "useOfFundsMin": "يجب أن يكون وصف استخدام الأموال 20 حرفاً على الأقل",
+      "useOfFundsMax": "لا يمكن أن يتجاوز وصف استخدام الأموال 1000 حرف",
+      "invalidUrl": "يرجى إدخال رابط صحيح",
+      "invalidOption": "خيار غير صالح"
     }
   }
 }
