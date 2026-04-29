@@ -1,21 +1,33 @@
 "use client";
 
-import { Avatar, AvatarGroup } from "@heroui/avatar";
+// import { Avatar, AvatarGroup } from "@heroui/avatar";
 import { Divider } from "@heroui/divider";
 import { FiHeart, FiMessageSquare } from "react-icons/fi";
 import { FaStar } from "react-icons/fa";
+import { Project } from "@/types/api";
 
-export function IdeaEngagement() {
+interface IdeaEngagementProps {
+  project: Project;
+}
+
+export function IdeaEngagement({ project }: IdeaEngagementProps) {
   return (
     <div className="flex flex-col gap-4 mt-2">
       <div className="flex items-center gap-4">
-        <AvatarGroup max={3} size="sm" isBordered className="justify-start">
-          <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
-          <Avatar src="https://i.pravatar.cc/150?u=a04258a2462d826712d" />
-          <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026704d" />
-        </AvatarGroup>
+        {/* {likesCount > 0 && (
+          <AvatarGroup max={3} size="sm" isBordered className="justify-start">
+            {project.likes
+              ?.slice(0, 3)
+              .map((like, index) => (
+                <Avatar
+                  key={index}
+                  src={`${like.avatar}`}
+                />
+              ))}
+          </AvatarGroup>
+        )} */}
         <span className="text-sm font-medium text-gray">
-          68 Likes . 27 Comments
+          {project.likesCount} Likes . {project.commentsCount} Comments
         </span>
       </div>
 
@@ -34,7 +46,9 @@ export function IdeaEngagement() {
         </div>
 
         <div className="flex items-center gap-3">
-          <span className="text-4xl font-extrabold text-dark">4.8</span>
+          <span className="text-4xl font-extrabold text-dark">
+            {project?.rating || "0.0"}
+          </span>
           <div className="flex flex-col gap-0.5 mt-1">
             <div className="flex items-center gap-1 text-secondary">
               <FaStar className="w-4 h-4" />
@@ -43,7 +57,9 @@ export function IdeaEngagement() {
               <FaStar className="w-4 h-4" />
               <FaStar className="w-4 h-4 text-gray-300" />
             </div>
-            <span className="text-xs font-semibold text-gray">28 reviews</span>
+            <span className="text-xs font-semibold text-gray">
+              {project?.reviewsCount || 0} reviews
+            </span>
           </div>
         </div>
       </div>

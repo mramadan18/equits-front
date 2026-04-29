@@ -63,10 +63,18 @@ export interface User {
   draftProjectsCount: number;
 }
 
+export interface PaginationData {
+  total: number;
+  page: number;
+  limit: number;
+  totalPages: number;
+}
+
 export interface ApiResponse<T> {
   status: "success" | "error";
   message?: string | MessageKey;
   data: T;
+  pagination?: PaginationData;
 }
 
 export interface AuthResponse {
@@ -129,6 +137,21 @@ export interface ProjectDraft {
   currentStep: number;
 }
 
+export type ProjectStage =
+  | "IDEA"
+  | "VALIDATION"
+  | "PROTOTYPE"
+  | "MVP"
+  | "BUSINESS";
+
+export interface ProjectFilters {
+  industryId?: number;
+  stage?: ProjectStage | string;
+  search?: string;
+  page?: number;
+  limit?: number;
+}
+
 export interface Project {
   id: number;
   title: string | null;
@@ -173,13 +196,27 @@ export interface Project {
   serviceArea: string | null;
   status: "DRAFT" | "PENDING_APPROVAL" | "PUBLISHED" | "REJECTED";
   currentStep: number;
-  owner?: {
-    firstName: string;
-    lastName: string;
-    email: string;
-  };
+  owner?: User;
+  teamMembers?: User[];
   university?: University | null;
   faculty?: Faculty | null;
   industry?: Industry | null;
   subIndustries?: SubIndustry[];
+  likesCount?: number;
+  commentsCount?: number;
+  reviewsCount?: number;
+  rating?: number;
+}
+
+interface Like {
+  id: number;
+  userId: number;
+  projectId: number;
+}
+
+interface Comment {
+  id: number;
+  content: string;
+  projectId: number;
+  userId: number;
 }

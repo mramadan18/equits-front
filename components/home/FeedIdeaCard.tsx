@@ -1,26 +1,23 @@
+import { Project } from "@/types/api";
+import { formatCurrency } from "@/utils";
 import { Button } from "@heroui/button";
 import Image from "next/image";
 import { FaRegBookmark } from "react-icons/fa";
+import moment from "moment";
+import { Avatar, AvatarGroup } from "@heroui/avatar";
+import { Link } from "@/i18n/navigation";
+import { MainRoutes } from "@/types";
 
-export interface FeedIdea {
-  id: string | number;
-  title: string;
-  stage: string;
-  description: string;
-  likes: number;
-  comments: number;
-  fundingAsk: string;
-  image: string;
-  updatedAt: string;
-}
-
-export const FeedIdeaCard = ({ idea }: { idea: FeedIdea }) => {
+export const FeedIdeaCard = ({ idea }: { idea: Project }) => {
   return (
-    <div className="bg-white rounded-xl border border-gray2 p-5 flex flex-col gap-4 shadow-sm hover:shadow-md transition-shadow">
+    <Link
+      href={`${MainRoutes.PROJECTS}/${idea.id}`}
+      className="bg-white rounded-xl border border-gray2 p-5 flex flex-col gap-4 shadow-sm hover:shadow-md transition-shadow"
+    >
       {/* Header Info */}
       <div className="flex justify-between items-center">
         <span className="text-xs font-semibold text-gray2">
-          Updated {idea.updatedAt}
+          Updated {moment(idea.updatedAt).fromNow()}
         </span>
         <Button
           isIconOnly
@@ -37,8 +34,8 @@ export const FeedIdeaCard = ({ idea }: { idea: FeedIdea }) => {
         {/* Thumbnail */}
         <div className="relative w-full md:w-56 h-48 md:h-28 flex-shrink-0 rounded-xl overflow-hidden border">
           <Image
-            src={idea.image}
-            alt={idea.title}
+            src={`${idea?.cover}`}
+            alt={`${idea?.title}`}
             fill
             className="object-cover"
           />
@@ -57,50 +54,30 @@ export const FeedIdeaCard = ({ idea }: { idea: FeedIdea }) => {
           </div>
 
           {/* Description */}
-          <p className="text-sm text-gray2 leading-relaxed mb-6">
-            {idea.description}
+          <p className="text-sm font-medium text-gray2 leading-relaxed text-wrap break-all mb-6">
+            {idea.elevatorPitch}
           </p>
 
           {/* Bottom Bar (Stats & Ask) */}
           <div className="flex justify-between items-end mt-auto pt-2 border-t border-transparent">
             {/* Social Stats */}
             <div className="flex items-center gap-2">
-              <div className="flex -space-x-3">
-                <div className="w-8 h-8 rounded-full border-2 border-white overflow-hidden relative bg-gray-200">
-                  <Image
-                    src="/images/idea-1.png"
-                    alt="User"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <div className="w-8 h-8 rounded-full border-2 border-white overflow-hidden relative bg-gray-200">
-                  <Image
-                    src="/images/idea-2.png"
-                    alt="User"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <div className="w-8 h-8 rounded-full border-2 border-white overflow-hidden relative bg-gray-200">
-                  <Image
-                    src="/images/idea-3.png"
-                    alt="User"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-              </div>
+              <AvatarGroup isBordered max={3}>
+                <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
+                <Avatar src="https://i.pravatar.cc/150?u=a04258a2462d826712d" />
+                <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026704d" />
+              </AvatarGroup>
               <div className="text-xs text-gray2 font-medium ml-2">
-                {idea.likes} Likes <span className="mx-1.5 font-bold">·</span>{" "}
-                {idea.comments} Comments
+                {idea.likes?.length || 0} Likes{" "}
+                <span className="mx-1.5 font-bold">·</span>{" "}
+                {idea.comments?.length || 0} Comments
               </div>
             </div>
 
             {/* Funding Ask */}
             <div className="flex items-baseline gap-1.5">
               <span className="text-2xl font-semibold text-dark">
-                {idea.fundingAsk}
+                {formatCurrency(idea.fundingAsk || 0)}
               </span>
               <span className="text-sm text-gray2 font-medium mb-1">
                 Funding Ask
@@ -109,6 +86,6 @@ export const FeedIdeaCard = ({ idea }: { idea: FeedIdea }) => {
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };

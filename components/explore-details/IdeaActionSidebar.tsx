@@ -14,8 +14,13 @@ import {
   FaLinkedin,
   FaYoutube,
 } from "react-icons/fa6";
+import { Project } from "@/types/api";
 
-export function IdeaActionSidebar() {
+interface IdeaActionSidebarProps {
+  project: Project;
+}
+
+export function IdeaActionSidebar({ project }: IdeaActionSidebarProps) {
   return (
     <div className="w-full lg:w-[340px] xl:w-[380px] flex-shrink-0 mt-8 lg:mt-0">
       <div className="lg:sticky lg:top-28 flex flex-col gap-5">
@@ -40,15 +45,20 @@ export function IdeaActionSidebar() {
             Leave your Opinion
           </Button>
 
-          <Button
-            variant="bordered"
-            className="w-full justify-start py-6 border-gray-200 text-dark2 font-semibold hover:bg-gray-50 transition-colors text-base"
-            startContent={
-              <FiExternalLink className="w-5 h-5 text-gray-400 mr-2" />
-            }
-          >
-            Demo Link
-          </Button>
+          {project.projectUrl && (
+            <Button
+              variant="bordered"
+              as="a"
+              href={project.projectUrl}
+              target="_blank"
+              className="w-full justify-start py-6 border-gray-200 text-dark2 font-semibold hover:bg-gray-50 transition-colors text-base"
+              startContent={
+                <FiExternalLink className="w-5 h-5 text-gray-400 mr-2" />
+              }
+            >
+              Demo Link
+            </Button>
+          )}
 
           <Button
             variant="bordered"
@@ -68,30 +78,46 @@ export function IdeaActionSidebar() {
         </div>
 
         <div className="flex items-center gap-3.5 px-1 mt-2">
-          <a
-            href="#"
-            className="w-11 h-11 rounded-xl bg-[#1877F2] text-white flex items-center justify-center hover:bg-blue-700 transition-colors shadow-sm"
-          >
-            <FaFacebook className="w-5 h-5" />
-          </a>
-          <a
-            href="#"
-            className="w-11 h-11 rounded-xl bg-gradient-to-tr from-[#FFDC80] via-[#F56040] to-[#833AB4] text-white flex items-center justify-center hover:opacity-90 transition-opacity shadow-sm"
-          >
-            <FaInstagram className="w-5 h-5" />
-          </a>
-          <a
-            href="#"
-            className="w-11 h-11 rounded-xl bg-[#0A66C2] text-white flex items-center justify-center hover:bg-blue-800 transition-colors shadow-sm"
-          >
-            <FaLinkedin className="w-5 h-5" />
-          </a>
-          <a
-            href="#"
-            className="w-11 h-11 rounded-xl bg-[#FF0000] text-white flex items-center justify-center hover:bg-red-700 transition-colors shadow-sm"
-          >
-            <FaYoutube className="w-5 h-5" />
-          </a>
+          {project.facebookUrl && (
+            <a
+              href={project.facebookUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-11 h-11 rounded-xl bg-[#1877F2] text-white flex items-center justify-center hover:bg-blue-700 transition-colors shadow-sm"
+            >
+              <FaFacebook className="w-5 h-5" />
+            </a>
+          )}
+          {project.instagramUrl && (
+            <a
+              href={project.instagramUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-11 h-11 rounded-xl bg-gradient-to-tr from-[#FFDC80] via-[#F56040] to-[#833AB4] text-white flex items-center justify-center hover:opacity-90 transition-opacity shadow-sm"
+            >
+              <FaInstagram className="w-5 h-5" />
+            </a>
+          )}
+          {project.linkedinUrl && (
+            <a
+              href={project.linkedinUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-11 h-11 rounded-xl bg-[#0A66C2] text-white flex items-center justify-center hover:bg-blue-800 transition-colors shadow-sm"
+            >
+              <FaLinkedin className="w-5 h-5" />
+            </a>
+          )}
+          {project.youtubeUrl && (
+            <a
+              href={project.youtubeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-11 h-11 rounded-xl bg-[#FF0000] text-white flex items-center justify-center hover:bg-red-700 transition-colors shadow-sm"
+            >
+              <FaYoutube className="w-5 h-5" />
+            </a>
+          )}
         </div>
       </div>
     </div>

@@ -129,15 +129,6 @@ export default function RepoPage() {
             Manage, track, and iterate on all your pitches in one place.
           </p>
         </div>
-        <Button
-          color="primary"
-          radius="lg"
-          className="font-semibold shadow-md shadow-primary/20"
-          startContent={<HiOutlineDocumentAdd className="w-5 h-5" />}
-          onPress={() => router.push(`/${locale}/projects/new`)}
-        >
-          New Project
-        </Button>
       </div>
 
       {/* ── filter tabs ────────────────────────────────── */}

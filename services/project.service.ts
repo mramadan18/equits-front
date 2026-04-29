@@ -1,4 +1,9 @@
-import { ApiResponse, Project, ProjectDraft } from "../types/api";
+import {
+  ApiResponse,
+  Project,
+  ProjectDraft,
+  ProjectFilters,
+} from "../types/api";
 import apiClient from "./api-client";
 
 export const projectService = {
@@ -9,6 +14,13 @@ export const projectService = {
 
   getMyProjects: async (): Promise<ApiResponse<Project[]>> => {
     const response = await apiClient.get("/projects/my-projects");
+    return response.data;
+  },
+
+  getProjects: async (
+    filters?: ProjectFilters,
+  ): Promise<ApiResponse<Project[]>> => {
+    const response = await apiClient.get("/projects", { params: filters });
     return response.data;
   },
 

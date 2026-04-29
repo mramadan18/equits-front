@@ -1,6 +1,11 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { projectService } from "@/services/project.service";
-import { ApiResponse, Project, ProjectDraft } from "@/types/api";
+import {
+  ApiResponse,
+  Project,
+  ProjectDraft,
+  ProjectFilters,
+} from "@/types/api";
 import { ApiError } from "@/types/error";
 
 export const useActiveDraft = () => {
@@ -44,6 +49,13 @@ export const useUpdateProjectStep = () => {
       queryClient.invalidateQueries({ queryKey: ["active-draft"] });
       queryClient.invalidateQueries({ queryKey: ["project"] });
     },
+  });
+};
+
+export const useProjects = (filters?: ProjectFilters) => {
+  return useQuery<ApiResponse<Project[]>, ApiError>({
+    queryKey: ["projects", filters],
+    queryFn: () => projectService.getProjects(filters),
   });
 };
 

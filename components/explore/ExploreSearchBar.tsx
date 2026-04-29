@@ -3,12 +3,20 @@ import { Input } from "@heroui/input";
 import { Button } from "@heroui/button";
 import { IoSearchOutline, IoAddOutline } from "react-icons/io5";
 
-export const ExploreSearchBar = () => {
+export const ExploreSearchBar = ({
+  value,
+  onValueChange,
+}: {
+  value: string;
+  onValueChange: (value: string) => void;
+}) => {
   const t = useTranslations("Explore");
 
   return (
     <div className="flex flex-row items-center gap-3 md:gap-4 mb-6 md:mb-8 w-full">
       <Input
+        value={value}
+        onValueChange={onValueChange}
         placeholder={t("searchPlaceholder")}
         radius="full"
         variant="bordered"

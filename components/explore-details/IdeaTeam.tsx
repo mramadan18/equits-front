@@ -1,47 +1,68 @@
-import { Avatar } from "@heroui/avatar";
+"use client";
 
-export function IdeaTeam() {
+import { Avatar } from "@heroui/avatar";
+import { Project } from "@/types/api";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination } from "swiper/modules";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/pagination";
+
+interface IdeaTeamProps {
+  project: Project;
+}
+
+export function IdeaTeam({ project }: IdeaTeamProps) {
+  const allTeamMembers = [
+    ...(project.owner ? [project.owner] : []),
+    ...(project.teamMembers || []),
+  ];
+
+  if (allTeamMembers.length === 0) return null;
+
   return (
-    <div className="flex flex-col gap-5 mt-1">
-      <h3 className="text-lg font-bold text-dark">Reach out to the team:</h3>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div className="flex items-center gap-4">
-          <Avatar
-            src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
-            className="w-14 h-14 text-large"
-          />
-          <div className="flex flex-col gap-0.5">
-            <span className="font-bold text-dark text-sm">Remon Eskander</span>
-            <span className="text-xs font-semibold text-gray">
-              Product Manager - CEO
-            </span>
-          </div>
-        </div>
-        <div className="flex items-center gap-4">
-          <Avatar
-            src="https://i.pravatar.cc/150?u=a04258a2462d826712d"
-            className="w-14 h-14 text-large"
-          />
-          <div className="flex flex-col gap-0.5">
-            <span className="font-bold text-dark text-sm">Hisham Maher</span>
-            <span className="text-xs font-semibold text-gray">
-              Backend Developer
-            </span>
-          </div>
-        </div>
-        <div className="flex items-center gap-4">
-          <Avatar
-            src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
-            className="w-14 h-14 text-large"
-          />
-          <div className="flex flex-col gap-0.5">
-            <span className="font-bold text-dark text-sm">Mahmoud</span>
-            <span className="text-xs font-semibold text-gray">
-              Frontend Developer
-            </span>
-          </div>
-        </div>
-      </div>
+    <div className="flex flex-col gap-5 mt-1 w-full overflow-hidden">
+      <h3 className="text-lg font-medium text-gray2">Reach out to the team:</h3>
+
+      <Swiper
+        modules={[Autoplay, Pagination]}
+        spaceBetween={24}
+        slidesPerView={1}
+        autoplay={{
+          delay: 3000,
+          disableOnInteraction: false,
+        }}
+        pagination={{ clickable: true }}
+        breakpoints={{
+          640: {
+            slidesPerView: 2,
+          },
+          1024: {
+            slidesPerView: 3,
+          },
+        }}
+        className="w-full pb-10 team-swiper [&_.swiper-pagination-bullet-active]:!bg-primary [&_.swiper-pagination]:!bottom-0"
+      >
+        {allTeamMembers.map((member, index) => (
+          <SwiperSlide key={index}>
+            <div className="flex items-center gap-4 p-4 bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+              <Avatar
+                src={`${member.avatar}`}
+                className="w-14 h-14 text-large shrink-0"
+              />
+              <div className="flex flex-col gap-0.5 overflow-hidden">
+                <span className="font-semibold text-dark text-sm truncate">
+                  {member.firstName} {member.lastName}
+                </span>
+                <span className="text-xs font-medium text-gray truncate">
+                  {member.jobTitle}
+                </span>
+              </div>
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </div>
   );
 }
