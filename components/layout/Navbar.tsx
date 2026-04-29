@@ -35,6 +35,7 @@ import { Badge } from "@heroui/badge";
 import { useDisclosure } from "@heroui/modal";
 import { PitchModal } from "./PitchModal";
 import { FiPlus } from "react-icons/fi";
+import { useCreateProject } from "@/hooks/api/useProject";
 
 const authRoutes = [
   AuthRoutes.REGISTER,
@@ -65,6 +66,20 @@ export const Navbar = ({
     onOpenChange: onPitchOpenChange,
   } = useDisclosure();
   const router = useRouter();
+  const { mutate: createProject, isPending: isCreatingProject } =
+    useCreateProject();
+
+  const handlePitchPress = () => {
+    if (user?.hasDraftProjects) {
+      onPitchOpen();
+    } else {
+      createProject(undefined, {
+        onSuccess: (response) => {
+          router.push(`${MainRoutes.NEW_PROJECT}?id=${response.data.id}`);
+        },
+      });
+    }
+  };
 
   const isAuthPage = authRoutes.includes(pathname as AuthRoutes);
   const isLoginPage = pathname === AuthRoutes.LOGIN;
@@ -177,11 +192,8 @@ export const Navbar = ({
                 <Button
                   className="bg-[#E9EAEB] text-black font-semibold rounded-full px-4 py-3"
                   endContent={<FiPlus size={20} />}
-                  onPress={
-                    user?.hasDraftProjects
-                      ? onPitchOpen
-                      : () => router.push(MainRoutes.NEW_PROJECT)
-                  }
+                  onPress={handlePitchPress}
+                  isLoading={isCreatingProject}
                 >
                   Pitch
                 </Button>

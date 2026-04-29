@@ -240,7 +240,15 @@
       "academicToggle": "Is it Academic / Graduation Project?",
       "university": "Select University",
       "faculty": "Select Faculty / Major",
-      "selectPlaceholder": "Select"
+      "selectPlaceholder": "Select",
+      "linkedinLabel": "LinkedIn Profile",
+      "linkedinPlaceholder": "Share your startup's LinkedIn page (if available).",
+      "facebookLabel": "Facebook Page",
+      "facebookPlaceholder": "Share your startup's Facebook page (if available).",
+      "instagramLabel": "Instagram Profile",
+      "instagramPlaceholder": "Share your startup's Instagram profile (if available).",
+      "youtubeLabel": "YouTube Channel",
+      "youtubePlaceholder": "Share your startup's YouTube channel (if available)."
     },
     "Market": {
       "industry": "Industry",
@@ -400,6 +408,18 @@
       "useOfFundsMax": "Use of funds cannot exceed 1000 characters",
       "invalidUrl": "Please enter a valid URL",
       "invalidOption": "Invalid option selected"
+    },
+    "toasts": {
+      "saveError": "Failed to save progress",
+      "submitSuccess": "Project submitted successfully!",
+      "submitError": "Failed to submit project",
+      "error": "Error",
+      "success": "Success"
     }
+  },
+  "FileUploader": {
+    "errorTitle": "Error",
+    "errorDescription": "Failed to upload file",
+    "browse": "Browse to upload"
   }
 }

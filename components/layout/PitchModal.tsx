@@ -9,6 +9,7 @@ import clsx from "clsx";
 import { FiPlus, FiFileText } from "react-icons/fi";
 import { MainRoutes } from "@/types";
 import { User } from "@/types/api";
+import { useCreateProject } from "@/hooks/api/useProject";
 
 interface PitchModalProps {
   isOpen: boolean;
@@ -20,11 +21,19 @@ export const PitchModal = ({ isOpen, onOpenChange, user }: PitchModalProps) => {
   const t = useTranslations("Navbar");
   const router = useRouter();
   const [pitchAction, setPitchAction] = useState<"new" | "existing">("new");
+  const { mutate: createProject, isPending: isCreatingProject } =
+    useCreateProject();
 
-  const handlePitchContinue = () => {
+  const handlePitchContinue = (onClose: () => void) => {
     if (pitchAction === "new") {
-      router.push(MainRoutes.NEW_PROJECT);
+      createProject(undefined, {
+        onSuccess: (response) => {
+          onClose();
+          router.push(`${MainRoutes.NEW_PROJECT}?id=${response.data.id}`);
+        },
+      });
     } else {
+      onClose();
       router.push(MainRoutes.DRAFT_PROJECTS);
     }
   };
@@ -122,9 +131,9 @@ export const PitchModal = ({ isOpen, onOpenChange, user }: PitchModalProps) => {
                 <Button
                   color="primary"
                   className="rounded-full px-8 font-bold"
+                  isLoading={isCreatingProject}
                   onPress={() => {
-                    onClose();
-                    handlePitchContinue();
+                    handlePitchContinue(onClose);
                   }}
                 >
                   {t("PitchModal.continue")}

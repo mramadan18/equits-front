@@ -18,6 +18,8 @@ export default function NewProjectPage() {
     handleNext,
     handlePublish,
     goBack,
+    isUpdating,
+    isSubmitting,
   } = useProjectWizard();
   const t = useTranslations("Pitch");
 
@@ -54,6 +56,7 @@ export default function NewProjectPage() {
             <Button
               variant="bordered"
               onPress={goBack}
+              disabled={isUpdating || isSubmitting}
               className="px-8 rounded-full border-gray-300 text-gray-600 font-medium"
             >
               {t("buttons.back")}
@@ -65,6 +68,7 @@ export default function NewProjectPage() {
               color="primary"
               radius="full"
               onPress={handleNext}
+              isLoading={isUpdating}
             >
               {t("buttons.next")}
             </Button>
@@ -74,6 +78,7 @@ export default function NewProjectPage() {
               color="primary"
               radius="full"
               onPress={handlePublish}
+              isLoading={isUpdating || isSubmitting}
             >
               {t("buttons.submit")}
             </Button>

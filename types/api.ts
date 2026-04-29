@@ -116,3 +116,69 @@ export interface Industry {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface UploadResponse {
+  url: string;
+  filename: string;
+  folder: string;
+}
+
+export interface ProjectDraft {
+  id: number;
+  currentStep: number;
+}
+
+export interface Project {
+  id: number;
+  title: string | null;
+  tagline: string | null;
+  logo: string | null;
+  cover: string | null;
+  elevatorPitch: string | null;
+  videoUrl: string | null;
+  projectUrl: string | null;
+  isAcademic: boolean;
+  universityId: number | null;
+  facultyId: number | null;
+  projectTypes: any[]; // Adjust if you have a specific type for project types
+  stage: string | null;
+  revenueModel: string | null;
+  marketFocus: string | null;
+  problem: string | null;
+  solution: string | null;
+  valueProp: string | null;
+  currentTraction: string | null;
+  growthRate: string | null;
+  totalUsers: string | null;
+  dailyActiveUsers: string | null;
+  monthlyRevenue: string | null;
+  growthRatePct: string | null;
+  retentionRate: string | null;
+  conversionRate: string | null;
+  fundingStage: string | null;
+  fundingAsk: string | null;
+  equityStake: string | null;
+  useOfFunds: string | null;
+  businessPlanUrl: string | null;
+  facebookUrl: string | null;
+  instagramUrl: string | null;
+  linkedinUrl: string | null;
+  youtubeUrl: string | null;
+  industryId: number | null;
+  ownerId: number;
+  createdAt: string;
+  updatedAt: string;
+  deletedAt: string | null;
+  serviceArea: string | null;
+  status: "DRAFT" | "PUBLISHED" | "ARCHIVED"; // Adjust based on your enum
+  currentStep: number;
+  owner?: {
+    firstName: string;
+    lastName: string;
+    email: string;
+  };
+  university?: University | null;
+  faculty?: Faculty | null;
+  industry?: Industry | null;
+  subIndustries?: SubIndustry[];
+}

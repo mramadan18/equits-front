@@ -95,13 +95,13 @@ export interface Step1Form {
   facebookUrl: string;
   instagramUrl: string;
   youtubeUrl: string;
-  universityId: string; // Keep as string for form state, convert to number on submission
-  facultyId: string; // Keep as string for form state, convert to number on submission
+  universityId: number | null;
+  facultyId: number | null;
 }
 
 export interface Step2Form {
-  industryId: string;
-  subIndustryIds: string[]; // Backend wants array of numbers
+  industryId: number | null;
+  subIndustryIds: number[]; // Backend wants array of numbers
   projectTypes: ProjectType[];
   stage: ProjectStage | "";
   revenueModel: RevenueModel | "";
@@ -114,19 +114,19 @@ export interface Step2Form {
 export interface Step3Form {
   currentTraction: TractionType | "";
   growthRate: GrowthRate | "";
-  totalUsers: string;
-  dailyActiveUsers: string;
-  monthlyRevenue: string;
-  growthRatePct: string;
-  retentionRate: string;
-  conversionRate: string;
+  totalUsers: number | null;
+  dailyActiveUsers: number | null;
+  monthlyRevenue: number | null;
+  growthRatePct: number | null;
+  retentionRate: number | null;
+  conversionRate: number | null;
 }
 
 export interface Step4Form {
   fundingStage: FundingStage | "";
   serviceArea: ServiceArea | "";
-  fundingAsk: string;
-  equityStake: string;
+  fundingAsk: number | null;
+  equityStake: number | null;
   useOfFunds: string;
   businessPlanUrl: string;
 }

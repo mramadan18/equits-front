@@ -26,7 +26,7 @@ export const step1Schema = z
         .min(10, "Validation.taglineMin")
         .max(100, "Validation.taglineMax"),
     ),
-    logo: z.string().url().optional().or(z.literal("")),
+    logo: z.string().url("Validation.invalidUrl").optional().or(z.literal("")),
     cover: z.preprocess(
       (val) => val ?? "",
       z
@@ -41,15 +41,39 @@ export const step1Schema = z
         .min(50, "Validation.elevatorPitchMin")
         .max(1000, "Validation.elevatorPitchMax"),
     ),
-    videoUrl: z.string().url().optional().or(z.literal("")),
-    projectUrl: z.string().url().optional().or(z.literal("")),
-    linkedinUrl: z.string().url().optional().or(z.literal("")),
-    facebookUrl: z.string().url().optional().or(z.literal("")),
-    instagramUrl: z.string().url().optional().or(z.literal("")),
-    youtubeUrl: z.string().url().optional().or(z.literal("")),
+    videoUrl: z
+      .string()
+      .url("Validation.invalidUrl")
+      .optional()
+      .or(z.literal("")),
+    projectUrl: z
+      .string()
+      .url("Validation.invalidUrl")
+      .optional()
+      .or(z.literal("")),
+    linkedinUrl: z
+      .string()
+      .url("Validation.invalidUrl")
+      .optional()
+      .or(z.literal("")),
+    facebookUrl: z
+      .string()
+      .url("Validation.invalidUrl")
+      .optional()
+      .or(z.literal("")),
+    instagramUrl: z
+      .string()
+      .url("Validation.invalidUrl")
+      .optional()
+      .or(z.literal("")),
+    youtubeUrl: z
+      .string()
+      .url("Validation.invalidUrl")
+      .optional()
+      .or(z.literal("")),
     isAcademic: z.boolean(),
-    universityId: z.preprocess((val) => val ?? "", z.string()),
-    facultyId: z.preprocess((val) => val ?? "", z.string()),
+    universityId: z.preprocess((val) => val ?? 0, z.number()),
+    facultyId: z.preprocess((val) => val ?? 0, z.number()),
   })
   .refine(
     (data) => {
@@ -66,10 +90,10 @@ export const step1Schema = z
 
 export const step2Schema = z.object({
   industryId: z.preprocess(
-    (val) => val ?? "",
-    z.string().min(1, "Validation.industryRequired"),
+    (val) => (val === "" ? undefined : Number(val)),
+    z.number().min(1, "Validation.industryRequired"),
   ),
-  subIndustryIds: z.array(z.string()).min(1, "Validation.subIndustryRequired"),
+  subIndustryIds: z.array(z.number()).min(1, "Validation.subIndustryRequired"),
   projectTypes: z
     .array(
       z.nativeEnum(ProjectType, { message: "Validation.projectTypeRequired" }),
@@ -163,5 +187,9 @@ export const step4Schema = z.object({
       .min(20, "Validation.useOfFundsMin")
       .max(1000, "Validation.useOfFundsMax"),
   ),
-  businessPlanUrl: z.string().url().optional().or(z.literal("")),
+  businessPlanUrl: z
+    .string()
+    .url("Validation.invalidUrl")
+    .optional()
+    .or(z.literal("")),
 });

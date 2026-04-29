@@ -69,7 +69,7 @@ export const ProjectTractionStep = ({ control }: ProjectTractionStepProps) => {
                 selectedKeys={field.value ? [field.value as string] : []}
                 isInvalid={!!fieldState.error}
                 errorMessage={safeTranslate(fieldState.error?.message)}
-                classNames={{ label: "text-foreground pb-1" }}
+                classNames={{ base: "mt-0!", label: "text-foreground pb-1" }}
                 onSelectionChange={(selection) => {
                   const value = Array.from(selection)[0] as GrowthRate;
                   field.onChange(value || "");
@@ -100,10 +100,14 @@ export const ProjectTractionStep = ({ control }: ProjectTractionStepProps) => {
                 variant="bordered"
                 radius="sm"
                 type="number"
-                value={field.value as string}
+                value={field.value?.toString() || ""}
                 isInvalid={!!fieldState.error}
                 errorMessage={safeTranslate(fieldState.error?.message)}
-                onChange={field.onChange}
+                onChange={(e) =>
+                  field.onChange(
+                    e.target.value === "" ? null : Number(e.target.value),
+                  )
+                }
                 onBlur={field.onBlur}
               />
             )}
@@ -121,10 +125,14 @@ export const ProjectTractionStep = ({ control }: ProjectTractionStepProps) => {
                 variant="bordered"
                 radius="sm"
                 type="number"
-                value={field.value as string}
+                value={field.value?.toString() || ""}
                 isInvalid={!!fieldState.error}
                 errorMessage={safeTranslate(fieldState.error?.message)}
-                onChange={field.onChange}
+                onChange={(e) =>
+                  field.onChange(
+                    e.target.value === "" ? null : Number(e.target.value),
+                  )
+                }
                 onBlur={field.onBlur}
               />
             )}
@@ -142,10 +150,14 @@ export const ProjectTractionStep = ({ control }: ProjectTractionStepProps) => {
                 variant="bordered"
                 radius="sm"
                 type="number"
-                value={field.value as string}
+                value={field.value?.toString() || ""}
                 isInvalid={!!fieldState.error}
                 errorMessage={safeTranslate(fieldState.error?.message)}
-                onChange={field.onChange}
+                onChange={(e) =>
+                  field.onChange(
+                    e.target.value === "" ? null : Number(e.target.value),
+                  )
+                }
                 onBlur={field.onBlur}
               />
             )}
@@ -163,10 +175,14 @@ export const ProjectTractionStep = ({ control }: ProjectTractionStepProps) => {
                 variant="bordered"
                 radius="sm"
                 type="number"
-                value={field.value as string}
+                value={field.value?.toString() || ""}
                 isInvalid={!!fieldState.error}
                 errorMessage={safeTranslate(fieldState.error?.message)}
-                onChange={field.onChange}
+                onChange={(e) =>
+                  field.onChange(
+                    e.target.value === "" ? null : Number(e.target.value),
+                  )
+                }
                 onBlur={field.onBlur}
               />
             )}
@@ -184,10 +200,14 @@ export const ProjectTractionStep = ({ control }: ProjectTractionStepProps) => {
                 variant="bordered"
                 radius="sm"
                 type="number"
-                value={field.value as string}
+                value={field.value?.toString() || ""}
                 isInvalid={!!fieldState.error}
                 errorMessage={safeTranslate(fieldState.error?.message)}
-                onChange={field.onChange}
+                onChange={(e) =>
+                  field.onChange(
+                    e.target.value === "" ? null : Number(e.target.value),
+                  )
+                }
                 onBlur={field.onBlur}
               />
             )}
@@ -205,10 +225,14 @@ export const ProjectTractionStep = ({ control }: ProjectTractionStepProps) => {
                 variant="bordered"
                 radius="sm"
                 type="number"
-                value={field.value as string}
+                value={field.value?.toString() || ""}
                 isInvalid={!!fieldState.error}
                 errorMessage={safeTranslate(fieldState.error?.message)}
-                onChange={field.onChange}
+                onChange={(e) =>
+                  field.onChange(
+                    e.target.value === "" ? null : Number(e.target.value),
+                  )
+                }
                 onBlur={field.onBlur}
               />
             )}

@@ -219,7 +219,15 @@
       "academicToggle": "هل هو مشروع أكاديمي / تخرج؟",
       "university": "اختر الجامعة",
       "faculty": "اختر الكلية / التخصص",
-      "selectPlaceholder": "اختر"
+      "selectPlaceholder": "اختر",
+      "linkedinLabel": "الملف الشخصي على لينكد إن",
+      "linkedinPlaceholder": "شارك صفحة لينكد إن الخاصة بمشروعك (إذا وجدت).",
+      "facebookLabel": "صفحة فيسبوك",
+      "facebookPlaceholder": "شارك صفحة فيسبوك الخاصة بمشروعك (إذا وجدت).",
+      "instagramLabel": "الملف الشخصي على إنستغرام",
+      "instagramPlaceholder": "شارك الملف الشخصي على إنستغرام الخاص بمشروعك (إذا وجدت).",
+      "youtubeLabel": "قناة يوتيوب",
+      "youtubePlaceholder": "شارك قناة يوتيوب الخاصة بمشروعك (إذا وجدت)."
     },
     "Market": {
       "industry": "الصناعة",
@@ -379,6 +387,18 @@
       "useOfFundsMax": "لا يمكن أن يتجاوز وصف استخدام الأموال 1000 حرف",
       "invalidUrl": "يرجى إدخال رابط صحيح",
       "invalidOption": "خيار غير صالح"
+    },
+    "toasts": {
+      "saveError": "فشل حفظ التقدم",
+      "submitSuccess": "تم إرسال المشروع بنجاح!",
+      "submitError": "فشل إرسال المشروع",
+      "error": "خطأ",
+      "success": "نجاح"
     }
+  },
+  "FileUploader": {
+    "errorTitle": "خطأ",
+    "errorDescription": "فشل رفع الملف",
+    "browse": "تصفح للرفع"
   }
 }

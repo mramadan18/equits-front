@@ -27,13 +27,11 @@ export const ProjectMarketStep = ({ control }: ProjectMarketStepProps) => {
   const selectedIndustryId = useWatch({
     control,
     name: "industryId",
-  }) as string;
+  }) as number | string | undefined;
 
   const subIndustries = useMemo(() => {
     if (!selectedIndustryId) return [];
-    const industry = industries.find(
-      (i) => i.id.toString() === selectedIndustryId,
-    );
+    const industry = industries.find((i) => i.id === selectedIndustryId);
     return industry?.subIndustries || [];
   }, [selectedIndustryId, industries]);
 
@@ -56,11 +54,11 @@ export const ProjectMarketStep = ({ control }: ProjectMarketStepProps) => {
                 labelPlacement="outside"
                 variant="bordered"
                 radius="sm"
-                selectedKey={field.value as string}
+                selectedKey={field.value?.toString()}
                 isInvalid={!!fieldState.error}
                 errorMessage={safeTranslate(fieldState.error?.message)}
                 onSelectionChange={(key) =>
-                  field.onChange((key as string) || "")
+                  field.onChange(key ? Number(key) : null)
                 }
                 onBlur={field.onBlur}
               >
@@ -85,13 +83,17 @@ export const ProjectMarketStep = ({ control }: ProjectMarketStepProps) => {
                 variant="bordered"
                 radius="sm"
                 selectionMode="multiple"
-                selectedKeys={new Set(field.value as string[])}
+                selectedKeys={
+                  new Set(
+                    (field.value as number[])?.map((id) => id.toString()) || [],
+                  )
+                }
                 isInvalid={!!fieldState.error}
                 errorMessage={safeTranslate(fieldState.error?.message)}
                 isDisabled={!selectedIndustryId}
-                classNames={{ base: "mt-0!", label: "text-foreground pb-1" }}
+                classNames={{ label: "text-foreground pb-1" }}
                 onSelectionChange={(selection) =>
-                  field.onChange(Array.from(selection) as string[])
+                  field.onChange(Array.from(selection).map(Number))
                 }
                 onBlur={field.onBlur}
               >

@@ -6,6 +6,7 @@ import { FundingStage, ServiceArea } from "@/types/project";
 import { useTranslations } from "next-intl";
 import { Controller, Control, useWatch } from "react-hook-form";
 import { ProjectFormData } from "@/types/project";
+import { FileUploader } from "@/components/ui/FileUploader";
 
 interface ProjectFundingStepProps {
   control: Control<ProjectFormData>;
@@ -37,7 +38,7 @@ export const ProjectFundingStep = ({ control }: ProjectFundingStepProps) => {
                 selectedKeys={field.value ? [field.value as string] : []}
                 isInvalid={!!fieldState.error}
                 errorMessage={safeTranslate(fieldState.error?.message)}
-                classNames={{ label: "text-foreground pb-1" }}
+                classNames={{ base: "mt-0!", label: "text-foreground pb-1" }}
                 onSelectionChange={(selection) => {
                   const value = Array.from(selection)[0] as FundingStage;
                   field.onChange(value || "");
@@ -70,7 +71,7 @@ export const ProjectFundingStep = ({ control }: ProjectFundingStepProps) => {
                 selectedKeys={field.value ? [field.value as string] : []}
                 isInvalid={!!fieldState.error}
                 errorMessage={safeTranslate(fieldState.error?.message)}
-                classNames={{ label: "text-foreground pb-1" }}
+                classNames={{ base: "mt-0!", label: "text-foreground pb-1" }}
                 onSelectionChange={(selection) => {
                   const value = Array.from(selection)[0] as ServiceArea;
                   field.onChange(value || "");
@@ -101,10 +102,14 @@ export const ProjectFundingStep = ({ control }: ProjectFundingStepProps) => {
                 variant="bordered"
                 radius="sm"
                 type="number"
-                value={field.value as string}
+                value={field.value?.toString() || ""}
                 isInvalid={!!fieldState.error}
                 errorMessage={safeTranslate(fieldState.error?.message)}
-                onChange={field.onChange}
+                onChange={(e) =>
+                  field.onChange(
+                    e.target.value === "" ? null : Number(e.target.value),
+                  )
+                }
                 onBlur={field.onBlur}
               />
             )}
@@ -122,10 +127,14 @@ export const ProjectFundingStep = ({ control }: ProjectFundingStepProps) => {
                 variant="bordered"
                 radius="sm"
                 type="number"
-                value={field.value as string}
+                value={field.value?.toString() || ""}
                 isInvalid={!!fieldState.error}
                 errorMessage={safeTranslate(fieldState.error?.message)}
-                onChange={field.onChange}
+                onChange={(e) =>
+                  field.onChange(
+                    e.target.value === "" ? null : Number(e.target.value),
+                  )
+                }
                 onBlur={field.onBlur}
               />
             )}
@@ -170,17 +179,14 @@ export const ProjectFundingStep = ({ control }: ProjectFundingStepProps) => {
           name="businessPlanUrl"
           control={control}
           render={({ field, fieldState }) => (
-            <Input
+            <FileUploader
               label={`${t("Funding.businessPlan")} ${t("Basics.optional")}`}
               placeholder={t("Funding.businessPlanPlaceholder")}
-              labelPlacement="outside"
-              variant="bordered"
-              radius="sm"
               value={field.value as string}
+              onChange={field.onChange}
               isInvalid={!!fieldState.error}
               errorMessage={safeTranslate(fieldState.error?.message)}
-              onChange={field.onChange}
-              onBlur={field.onBlur}
+              accept=".pdf,image/*"
             />
           )}
         />
