@@ -23,7 +23,7 @@ export const PitchModal = ({ isOpen, onOpenChange, user }: PitchModalProps) => {
 
   const handlePitchContinue = () => {
     if (pitchAction === "new") {
-      router.push(`${MainRoutes.NEW_PROJECT}?step=1`);
+      router.push(MainRoutes.NEW_PROJECT);
     } else {
       router.push(MainRoutes.DRAFT_PROJECTS);
     }
