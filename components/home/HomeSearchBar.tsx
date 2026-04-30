@@ -4,38 +4,21 @@ import { useTranslations } from "next-intl";
 import { Input } from "@heroui/input";
 import { Button } from "@heroui/button";
 import { IoSearchOutline, IoAddOutline } from "react-icons/io5";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
-import { useDebounce } from "@/hooks/ui/useDebounce";
 
-export const ExploreSearchBar = () => {
+export const HomeSearchBar = ({
+  value,
+  onValueChange,
+}: {
+  value: string;
+  onValueChange: (value: string) => void;
+}) => {
   const t = useTranslations("Explore");
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-
-  const [value, setValue] = useState(searchParams.get("search") || "");
-  const debouncedValue = useDebounce(value, 500);
-
-  useEffect(() => {
-    const currentSearch = searchParams.get("search") || "";
-    if (debouncedValue === currentSearch) return;
-
-    const params = new URLSearchParams(searchParams.toString());
-    if (debouncedValue) {
-      params.set("search", debouncedValue);
-    } else {
-      params.delete("search");
-    }
-    params.set("page", "1"); // Reset to page 1 on search change
-    router.push(`${pathname}?${params.toString()}`, { scroll: false });
-  }, [debouncedValue, pathname, router, searchParams]);
 
   return (
     <div className="flex flex-row items-center gap-3 md:gap-4 mb-6 md:mb-8 w-full">
       <Input
         value={value}
-        onValueChange={setValue}
+        onValueChange={onValueChange}
         placeholder={t("searchPlaceholder")}
         radius="full"
         variant="bordered"

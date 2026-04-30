@@ -2,20 +2,20 @@ import { Chip } from "@heroui/chip";
 
 interface AttributeRowProps {
   label: string;
-  items: string[];
+  items?: any[];
 }
 
 export const AttributeRow = ({ label, items }: AttributeRowProps) => (
-  <div className="flex items-start gap-1">
+  <div className="flex items-center gap-1">
     <span className="text-xs text-gray2">{label}</span>
     <div className="flex flex-wrap gap-1">
-      {items.map((text, idx) => (
+      {items?.map((item, idx) => (
         <Chip
           key={idx}
           size="sm"
           className="bg-gray3 text-dark2 font-medium text-xs"
         >
-          {text}
+          {item?.name}
         </Chip>
       ))}
     </div>

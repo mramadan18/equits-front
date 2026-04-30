@@ -1,5 +1,7 @@
 "use client";
 
+import { useAuthStore } from "@/stores/useAuthStore";
+
 import {
   Navbar as HeroUINavbar,
   NavbarBrand,
@@ -20,7 +22,7 @@ import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import { LuMenu } from "react-icons/lu";
 import { AuthRoutes, MainRoutes } from "@/types";
-import { useMe, useLogout } from "@/hooks/api/useAuth";
+import { useLogout } from "@/hooks/api/useAuth";
 import {
   Dropdown,
   DropdownTrigger,
@@ -57,7 +59,7 @@ export const Navbar = ({
   const pathname = usePathname();
   const locale = useLocale();
   const t = useTranslations("Navbar");
-  const { data: user } = useMe({ enabled: !!session });
+  const { user } = useAuthStore();
 
   const { mutate: logout } = useLogout();
   const {

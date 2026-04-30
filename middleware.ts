@@ -17,7 +17,7 @@ const authPages = [
 const protectedPages = [
   MainRoutes.HOME,
   MainRoutes.REPO,
-  MainRoutes.PROJECTS,
+  MainRoutes.NEW_PROJECT,
   MainRoutes.DRAFT_PROJECTS,
 ];
 

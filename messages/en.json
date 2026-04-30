@@ -9,7 +9,17 @@
     "businessModel": "Business Model",
     "industry": "Industry",
     "type": "Type",
-    "allFilters": "All filters"
+    "allFilters": "All filters",
+    "allStages": "All Stages",
+    "allIndustries": "All Industries",
+    "stageIdea": "Idea",
+    "stageValidation": "Validation",
+    "stagePrototype": "Prototype",
+    "stageMvp": "MVP",
+    "stageBusiness": "Business",
+    "noResultsTitle": "No projects found",
+    "noResultsDescription": "Try adjusting your filters or search terms to find what you're looking for.",
+    "clearAllFilters": "Clear all filters"
   },
   "Navbar": {
     "home": "Home",
@@ -417,6 +427,7 @@
       "success": "Success"
     }
   },
+
   "FileUploader": {
     "errorTitle": "Error",
     "errorDescription": "Failed to upload file",
@@ -445,6 +456,70 @@
       "description": "Are you sure you want to delete this draft? This action cannot be undone.",
       "confirm": "Delete",
       "cancel": "Cancel"
+    }
+  },
+  "Engagement": {
+    "ratingTitle": "Give a quick rating",
+    "commentTitle": "Leave your Opinion",
+    "ratingModal": {
+      "title": "Rate Project",
+      "scoreLabel": "Your Score",
+      "feedbackLabel": "Feedback",
+      "feedbackPlaceholder": "Tell us what you think...",
+      "submit": "Submit Rating",
+      "success": "Rating submitted successfully!",
+      "error": "Failed to submit rating",
+      "scoreRequired": "Please select a rating"
+    },
+    "commentModal": {
+      "title": "Leave your Opinion",
+      "contentLabel": "Comment",
+      "contentPlaceholder": "Write your opinion here...",
+      "submit": "Post Comment",
+      "success": "Comment posted successfully!",
+      "error": "Failed to post comment",
+      "contentRequired": "Please write a comment"
+    }
+  },
+  "ProjectDetails": {
+    "notFound": "Project not found",
+    "header": {
+      "updated": "Updated",
+      "recently": "Recently",
+      "na": "N/A"
+    },
+    "engagement": {
+      "likes": "Likes",
+      "comments": "Comments",
+      "like": "Like",
+      "comment": "Comment",
+      "reviews": "reviews",
+      "showMore": "Show More"
+    },
+    "pitch": {
+      "title": "Elevator Pitch"
+    },
+    "classifications": {
+      "title": "Classifications",
+      "industry": "Industry",
+      "type": "Type",
+      "revenueModel": "Revenue Model",
+      "stage": "Stage",
+      "marketFocus": "Market Focus",
+      "serviceArea": "Service Area"
+    },
+    "team": {
+      "title": "Reach out to the team"
+    },
+    "businessPlan": {
+      "title": "Business Plan",
+      "viewPdf": "View PDF"
+    },
+    "sidebar": {
+      "actions": "Actions",
+      "demoLink": "Demo Link",
+      "saveForLater": "Save For Later",
+      "requestMeeting": "Request Meeting"
     }
   }
 }

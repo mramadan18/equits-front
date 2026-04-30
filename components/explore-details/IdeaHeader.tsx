@@ -2,15 +2,18 @@ import Image from "next/image";
 import { FiCalendar } from "react-icons/fi";
 import { Project } from "@/types/api";
 import moment from "moment";
+import { useTranslations } from "next-intl";
 
 interface IdeaHeaderProps {
   project: Project;
 }
 
 export function IdeaHeader({ project }: IdeaHeaderProps) {
+  const t = useTranslations("ProjectDetails.header");
+
   const formattedDate = project.createdAt
     ? moment(project.createdAt).format("DD / MM / YYYY")
-    : "N/A";
+    : t("na");
 
   return (
     <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
@@ -36,8 +39,10 @@ export function IdeaHeader({ project }: IdeaHeaderProps) {
           <span className="text-sm">{formattedDate}</span>
         </div>
         <span className="text-xs">
-          Updated:{" "}
-          {project.updatedAt ? moment(project.updatedAt).fromNow() : "Recently"}
+          {t("updated")}:{" "}
+          {project.updatedAt
+            ? moment(project.updatedAt).fromNow()
+            : t("recently")}
         </span>
       </div>
     </div>

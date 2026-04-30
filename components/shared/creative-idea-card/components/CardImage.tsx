@@ -1,18 +1,24 @@
+import { Link } from "@/i18n/navigation";
+import { MainRoutes } from "@/types";
 import Image from "next/image";
 
 interface CardImageProps {
-  image: string;
+  projectId: number;
+  image?: string;
   title: string;
 }
 
-export const CardImage = ({ image, title }: CardImageProps) => (
-  <div className="relative w-full h-[220px]">
+export const CardImage = ({ image, title, projectId }: CardImageProps) => (
+  <Link
+    href={`${MainRoutes.PROJECTS}/${projectId}`}
+    className="relative w-full h-[220px]"
+  >
     <Image
-      src={image}
+      src={`${image}`}
       alt={title}
       fill
       className="object-cover"
       sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, (max-width: 1536px) 33vw, 25vw"
     />
-  </div>
+  </Link>
 );

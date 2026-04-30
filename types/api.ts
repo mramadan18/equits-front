@@ -154,17 +154,17 @@ export interface ProjectFilters {
 
 export interface Project {
   id: number;
-  title: string | null;
-  tagline: string | null;
+  title: string;
+  tagline: string;
   logo: string | null;
-  cover: string | null;
-  elevatorPitch: string | null;
+  cover: string;
+  elevatorPitch: string;
   videoUrl: string | null;
   projectUrl: string | null;
   isAcademic: boolean;
   universityId: number | null;
   facultyId: number | null;
-  projectTypes: any[]; // Adjust if you have a specific type for project types
+  projectTypes: string[];
   stage: string | null;
   revenueModel: string | null;
   marketFocus: string | null;
@@ -201,22 +201,48 @@ export interface Project {
   university?: University | null;
   faculty?: Faculty | null;
   industry?: Industry | null;
-  subIndustries?: SubIndustry[];
+  subIndustries: SubIndustry[];
   likesCount?: number;
   commentsCount?: number;
   reviewsCount?: number;
   rating?: number;
+  isLiked?: boolean;
+  likes: ProjectLike[];
+  comments: ProjectComment[];
 }
 
-interface Like {
+export interface ProjectLike {
   id: number;
   userId: number;
   projectId: number;
+  createdAt: string;
+  user: {
+    id: number;
+    firstName: string;
+    lastName: string;
+    avatar: string | null;
+  };
 }
 
-interface Comment {
+export interface ProjectComment {
   id: number;
   content: string;
-  projectId: number;
   userId: number;
+  projectId: number;
+  createdAt: string;
+  user: {
+    firstName: string;
+    lastName: string;
+    avatar: string | null;
+  };
+}
+
+export interface ProjectRating {
+  average: number;
+  total: number;
+}
+
+export interface ProjectRatingResponse {
+  average: number;
+  total: number;
 }

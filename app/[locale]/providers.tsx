@@ -10,9 +10,12 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 
+import { AuthInitializer } from "@/components/auth/AuthInitializer";
+
 export interface ProvidersProps {
   children: React.ReactNode;
   themeProps?: ThemeProviderProps;
+  session?: string;
 }
 
 declare module "@react-types/shared" {
@@ -23,7 +26,7 @@ declare module "@react-types/shared" {
   }
 }
 
-export function Providers({ children, themeProps }: ProvidersProps) {
+export function Providers({ children, themeProps, session }: ProvidersProps) {
   const router = useRouter();
   const [queryClient] = React.useState(
     () =>
@@ -43,7 +46,10 @@ export function Providers({ children, themeProps }: ProvidersProps) {
         clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || ""}
       >
         <HeroUIProvider navigate={router.push}>
-          <NextThemesProvider {...themeProps}>{children}</NextThemesProvider>
+          <NextThemesProvider {...themeProps}>
+            <AuthInitializer session={session} />
+            {children}
+          </NextThemesProvider>
         </HeroUIProvider>
       </GoogleOAuthProvider>
       <ReactQueryDevtools initialIsOpen={false} />

@@ -1,19 +1,23 @@
 import { Chip } from "@heroui/chip";
 import { Project } from "@/types/api";
+import { useTranslations } from "next-intl";
 
 interface IdeaClassificationsProps {
   project: Project;
 }
 
 export function IdeaClassifications({ project }: IdeaClassificationsProps) {
+  const t = useTranslations("ProjectDetails.classifications");
+  const te = useTranslations("Pitch.Enums");
+
   return (
     <div className="flex flex-col gap-5 mt-1">
-      <h3 className="text-lg font-medium text-gray2">Classifications:</h3>
+      <h3 className="text-lg font-medium text-gray2">{t("title")}:</h3>
 
       {project?.industry && (
         <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
           <span className="text-sm font-semibold text-gray2 min-w-[120px]">
-            Industry:
+            {t("industry")}:
           </span>
           <div className="flex flex-wrap gap-2">
             <Chip
@@ -42,7 +46,7 @@ export function IdeaClassifications({ project }: IdeaClassificationsProps) {
       {project?.projectTypes && project?.projectTypes.length > 0 && (
         <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
           <span className="text-sm font-semibold text-gray2 min-w-[120px]">
-            Type:
+            {t("type")}:
           </span>
           <div className="flex flex-wrap gap-2">
             {project.projectTypes.map((type: string, index: number) => (
@@ -53,7 +57,7 @@ export function IdeaClassifications({ project }: IdeaClassificationsProps) {
                   base: "bg-gray3 text-dark font-semibold h-8 px-1",
                 }}
               >
-                {type}
+                {te(`ProjectType.${type}` as any) || type}
               </Chip>
             ))}
           </div>
@@ -63,7 +67,7 @@ export function IdeaClassifications({ project }: IdeaClassificationsProps) {
       {project.revenueModel && (
         <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
           <span className="text-sm font-semibold text-gray2 min-w-[120px]">
-            Revenue Model:
+            {t("revenueModel")}:
           </span>
           <div className="flex flex-wrap gap-2">
             <Chip
@@ -72,7 +76,8 @@ export function IdeaClassifications({ project }: IdeaClassificationsProps) {
                 base: "bg-gray3 text-dark font-semibold h-8 px-1",
               }}
             >
-              {project.revenueModel}
+              {te(`RevenueModel.${project.revenueModel}` as any) ||
+                project.revenueModel}
             </Chip>
           </div>
         </div>
@@ -81,7 +86,7 @@ export function IdeaClassifications({ project }: IdeaClassificationsProps) {
       {project?.stage && (
         <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
           <span className="text-sm font-semibold text-gray2 min-w-[120px]">
-            Stage:
+            {t("stage")}:
           </span>
           <div className="flex flex-wrap gap-2">
             <Chip
@@ -90,7 +95,7 @@ export function IdeaClassifications({ project }: IdeaClassificationsProps) {
                 base: "bg-gray3 text-dark font-semibold h-8 px-1",
               }}
             >
-              {project?.stage}
+              {te(`ProjectStage.${project?.stage}` as any) || project?.stage}
             </Chip>
           </div>
         </div>
@@ -98,7 +103,7 @@ export function IdeaClassifications({ project }: IdeaClassificationsProps) {
       {project?.marketFocus && (
         <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
           <span className="text-sm font-semibold text-gray2 min-w-[120px]">
-            Market Focus:
+            {t("marketFocus")}:
           </span>
           <div className="flex flex-wrap gap-2">
             <Chip
@@ -107,7 +112,8 @@ export function IdeaClassifications({ project }: IdeaClassificationsProps) {
                 base: "bg-gray3 text-dark font-semibold h-8 px-1",
               }}
             >
-              {project?.marketFocus}
+              {te(`MarketFocus.${project?.marketFocus}` as any) ||
+                project?.marketFocus}
             </Chip>
           </div>
         </div>
@@ -115,7 +121,7 @@ export function IdeaClassifications({ project }: IdeaClassificationsProps) {
       {project?.serviceArea && (
         <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
           <span className="text-sm font-semibold text-gray2 min-w-[120px]">
-            Service Area:
+            {t("serviceArea")}:
           </span>
           <div className="flex flex-wrap gap-2">
             <Chip
@@ -124,7 +130,8 @@ export function IdeaClassifications({ project }: IdeaClassificationsProps) {
                 base: "bg-gray3 text-dark font-semibold h-8 px-1",
               }}
             >
-              {project?.serviceArea}
+              {te(`ServiceArea.${project?.serviceArea}` as any) ||
+                project?.serviceArea}
             </Chip>
           </div>
         </div>

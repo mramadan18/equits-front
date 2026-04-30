@@ -63,6 +63,7 @@ export default async function RootLayout({ children, params }: Props) {
               defaultTheme: "light",
               forcedTheme: "light", // TODO: remove this when we have a way to switch themes
             }}
+            session={session}
           >
             <div className="relative flex flex-col min-h-screen">
               <Navbar session={session} isVerified={isVerified} />

@@ -1,6 +1,8 @@
 "use client";
 
 import { Button } from "@heroui/button";
+import { useDisclosure } from "@heroui/modal";
+import { useTranslations } from "next-intl";
 import {
   FiMessageSquare,
   FiBookmark,
@@ -8,6 +10,8 @@ import {
   FiVideo,
 } from "react-icons/fi";
 import { FaStar } from "react-icons/fa";
+import { RatingModal } from "./RatingModal";
+import { CommentModal } from "./CommentModal";
 import {
   FaFacebook,
   FaInstagram,
@@ -15,24 +19,45 @@ import {
   FaYoutube,
 } from "react-icons/fa6";
 import { Project } from "@/types/api";
+import { useMe } from "@/hooks/api/useAuth";
 
 interface IdeaActionSidebarProps {
   project: Project;
 }
 
 export function IdeaActionSidebar({ project }: IdeaActionSidebarProps) {
+  const { data: user } = useMe();
+  const t = useTranslations("Engagement");
+  const ts = useTranslations("ProjectDetails.sidebar");
+
+  const isOwner = user?.id === project.ownerId;
+  const {
+    isOpen: isRatingOpen,
+    onOpen: onRatingOpen,
+    onOpenChange: onRatingOpenChange,
+  } = useDisclosure();
+  const {
+    isOpen: isCommentOpen,
+    onOpen: onCommentOpen,
+    onOpenChange: onCommentOpenChange,
+  } = useDisclosure();
+
   return (
     <div className="w-full lg:w-[340px] xl:w-[380px] flex-shrink-0 mt-8 lg:mt-0">
       <div className="lg:sticky lg:top-28 flex flex-col gap-5">
-        <h3 className="text-sm font-semibold text-gray px-1">Actions:</h3>
+        <h3 className="text-sm font-semibold text-gray px-1">
+          {ts("actions")}:
+        </h3>
 
         <div className="bg-white border border-gray-200 rounded-2xl p-5 shadow-card flex flex-col gap-3.5">
           <Button
             variant="bordered"
             className="w-full justify-start py-6 border-gray-200 text-dark2 font-semibold hover:bg-gray-50 transition-colors text-base"
             startContent={<FaStar className="w-5 h-5 text-secondary mr-2" />}
+            onPress={onRatingOpen}
+            isDisabled={isOwner}
           >
-            Give a quick rating
+            {t("ratingTitle")}
           </Button>
 
           <Button
@@ -41,8 +66,9 @@ export function IdeaActionSidebar({ project }: IdeaActionSidebarProps) {
             startContent={
               <FiMessageSquare className="w-5 h-5 text-[#8ac760] mr-2" />
             }
+            onPress={onCommentOpen}
           >
-            Leave your Opinion
+            {t("commentTitle")}
           </Button>
 
           {project.projectUrl && (
@@ -56,7 +82,7 @@ export function IdeaActionSidebar({ project }: IdeaActionSidebarProps) {
                 <FiExternalLink className="w-5 h-5 text-gray-400 mr-2" />
               }
             >
-              Demo Link
+              {ts("demoLink")}
             </Button>
           )}
 
@@ -65,7 +91,7 @@ export function IdeaActionSidebar({ project }: IdeaActionSidebarProps) {
             className="w-full justify-start py-6 border-gray-200 text-dark2 font-semibold hover:bg-gray-50 transition-colors text-base"
             startContent={<FiBookmark className="w-5 h-5 text-gray-400 mr-2" />}
           >
-            Save For Later
+            {ts("saveForLater")}
           </Button>
 
           <Button
@@ -73,7 +99,7 @@ export function IdeaActionSidebar({ project }: IdeaActionSidebarProps) {
             className="w-full justify-start py-6 mt-1 font-semibold text-base shadow-md"
             startContent={<FiVideo className="w-5 h-5 mr-2" />}
           >
-            Request Meeting
+            {ts("requestMeeting")}
           </Button>
         </div>
 
@@ -120,6 +146,18 @@ export function IdeaActionSidebar({ project }: IdeaActionSidebarProps) {
           )}
         </div>
       </div>
+
+      <RatingModal
+        isOpen={isRatingOpen}
+        onOpenChange={onRatingOpenChange}
+        projectId={project.id}
+      />
+
+      <CommentModal
+        isOpen={isCommentOpen}
+        onOpenChange={onCommentOpenChange}
+        projectId={project.id}
+      />
     </div>
   );
 }

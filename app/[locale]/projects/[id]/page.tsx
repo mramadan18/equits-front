@@ -1,3 +1,5 @@
+"use client";
+
 import {
   IdeaActionSidebar,
   IdeaBusinessPlan,
@@ -7,24 +9,31 @@ import {
   IdeaHeader,
   IdeaTeam,
   IdeaVideoHero,
+  ProjectSkeleton,
 } from "@/components/explore-details";
-import { projectService } from "@/services/project.service";
 import { Divider } from "@heroui/divider";
+import { useTranslations } from "next-intl";
+import { useParams } from "next/navigation";
+import { useProject } from "@/hooks/api/useProject";
 
-export default async function ProjectPage({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
-  const { id } = await params;
-  const projectId = id;
+export default function ProjectPage() {
+  const params = useParams();
+  const id = params.id as string;
+  const t = useTranslations("ProjectDetails");
 
-  const { data: project } = await projectService.getProjectById(projectId);
+  const { data: projectResponse, isLoading, error } = useProject(id);
+  const project = projectResponse?.data;
 
-  if (!project) {
+  if (isLoading) {
+    return <ProjectSkeleton />;
+  }
+
+  if (error || !project) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <p className="text-xl font-semibold text-gray-500">Project not found</p>
+        <p className="text-xl font-semibold text-gray-500">
+          {error?.response?.data?.message || t("notFound")}
+        </p>
       </div>
     );
   }

@@ -12,6 +12,7 @@ import {
   User,
 } from "@/types/api";
 import { ApiError } from "@/types/error";
+import { useAuthStore } from "@/stores/useAuthStore";
 
 export const useLogin = () => {
   const queryClient = useQueryClient();
@@ -123,11 +124,13 @@ export const useChangePassword = () => {
 
 export const useLogout = () => {
   const queryClient = useQueryClient();
+  const logoutStore = useAuthStore((state) => state.logout);
 
   return useMutation<ApiResponse<SuccessResponse>, ApiError, void>({
     mutationFn: () => authService.logout(),
     onSuccess: () => {
       queryClient.clear();
+      logoutStore();
       if (typeof window !== "undefined") {
         window.location.reload();
       }

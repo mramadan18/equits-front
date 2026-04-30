@@ -4,6 +4,7 @@ import { Avatar } from "@heroui/avatar";
 import { Project } from "@/types/api";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
+import { useTranslations } from "next-intl";
 
 // Import Swiper styles
 import "swiper/css";
@@ -14,6 +15,7 @@ interface IdeaTeamProps {
 }
 
 export function IdeaTeam({ project }: IdeaTeamProps) {
+  const t = useTranslations("ProjectDetails.team");
   const allTeamMembers = [
     ...(project.owner ? [project.owner] : []),
     ...(project.teamMembers || []),
@@ -23,7 +25,7 @@ export function IdeaTeam({ project }: IdeaTeamProps) {
 
   return (
     <div className="flex flex-col gap-5 mt-1 w-full overflow-hidden">
-      <h3 className="text-lg font-medium text-gray2">Reach out to the team:</h3>
+      <h3 className="text-lg font-medium text-gray2">{t("title")}:</h3>
 
       <Swiper
         modules={[Autoplay, Pagination]}

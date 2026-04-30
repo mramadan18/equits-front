@@ -9,7 +9,17 @@
     "businessModel": "نموذج العمل",
     "industry": "الصناعة",
     "type": "النوع",
-    "allFilters": "كل الفلاتر"
+    "allFilters": "كل الفلاتر",
+    "allStages": "جميع المراحل",
+    "allIndustries": "جميع الصناعات",
+    "stageIdea": "فكرة",
+    "stageValidation": "تحقق من الصحة",
+    "stagePrototype": "نموذج أولي",
+    "stageMvp": "المنتج الأدنى القابل للتطبيق",
+    "stageBusiness": "عمل تجاري",
+    "noResultsTitle": "لم يتم العثور على مشاريع",
+    "noResultsDescription": "حاول تعديل الفلاتر أو كلمات البحث للعثور على ما تبحث عنه.",
+    "clearAllFilters": "مسح جميع الفلاتر"
   },
   "Navbar": {
     "home": "الرئيسة",
@@ -197,7 +207,8 @@
     "buttons": {
       "next": "التالي",
       "back": "رجوع",
-      "submit": "إرسال"
+      "submit": "إرسال",
+      "showMore": "عرض المزيد"
     },
     "Basics": {
       "projectName": "اسم المشروع",
@@ -424,6 +435,70 @@
       "description": "هل أنت متأكد أنك تريد حذف هذه المسودة؟ لا يمكن التراجع عن هذا الإجراء.",
       "confirm": "حذف",
       "cancel": "إلغاء"
+    }
+  },
+  "Engagement": {
+    "ratingTitle": "أعطِ تقييماً سريعاً",
+    "commentTitle": "اترك رأيك",
+    "ratingModal": {
+      "title": "تقييم المشروع",
+      "scoreLabel": "تقييمك",
+      "feedbackLabel": "ملاحظاتك",
+      "feedbackPlaceholder": "أخبرنا برأيك...",
+      "submit": "إرسال التقييم",
+      "success": "تم إرسال التقييم بنجاح!",
+      "error": "فشل إرسال التقييم",
+      "scoreRequired": "يرجى اختيار تقييم"
+    },
+    "commentModal": {
+      "title": "اترك رأيك",
+      "contentLabel": "التعليق",
+      "contentPlaceholder": "اكتب رأيك هنا...",
+      "submit": "نشر التعليق",
+      "success": "تم نشر التعليق بنجاح!",
+      "error": "فشل نشر التعليق",
+      "contentRequired": "يرجى كتابة تعليق"
+    }
+  },
+  "ProjectDetails": {
+    "notFound": "المشروع غير موجود",
+    "header": {
+      "updated": "آخر تحديث",
+      "recently": "مؤخراً",
+      "na": "غير متوفر"
+    },
+    "engagement": {
+      "likes": "إعجابات",
+      "comments": "تعليقات",
+      "like": "أعجبني",
+      "comment": "تعليق",
+      "reviews": "تقييمات",
+      "showMore": "عرض المزيد"
+    },
+    "pitch": {
+      "title": "عرض الفكرة"
+    },
+    "classifications": {
+      "title": "التصنيفات",
+      "industry": "المجال",
+      "type": "النوع",
+      "revenueModel": "نموذج الإيرادات",
+      "stage": "المرحلة",
+      "marketFocus": "التركيز السوقي",
+      "serviceArea": "منطقة الخدمة"
+    },
+    "team": {
+      "title": "تواصل مع الفريق"
+    },
+    "businessPlan": {
+      "title": "خطة العمل",
+      "viewPdf": "عرض ملف PDF"
+    },
+    "sidebar": {
+      "actions": "الإجراءات",
+      "demoLink": "رابط تجريبي",
+      "saveForLater": "حفظ لوقت لاحق",
+      "requestMeeting": "طلب اجتماع"
     }
   }
 }

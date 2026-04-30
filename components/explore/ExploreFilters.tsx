@@ -1,17 +1,51 @@
+"use client";
+
 import { useTranslations } from "next-intl";
 import { Button } from "@heroui/button";
-import {
-  Dropdown,
-  DropdownTrigger,
-  DropdownMenu,
-  DropdownItem,
-} from "@heroui/dropdown";
-import { IoFilterOutline, IoChevronDown } from "react-icons/io5";
-
+import { IoFilterOutline } from "react-icons/io5";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useIndustries } from "@/hooks/api/useLookup";
 import { FilterDropdown } from "@/components/shared/FilterDropdown";
 
 export const ExploreFilters = () => {
   const t = useTranslations("Explore");
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const { data: industriesData } = useIndustries();
+  const industries = industriesData?.data || [];
+
+  const updateParam = (key: string, value: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+    if (value && value !== "all") {
+      params.set(key, value);
+    } else {
+      params.delete(key);
+    }
+    params.set("page", "1"); // Reset to page 1 on filter change
+    router.push(`${pathname}?${params.toString()}`, { scroll: false });
+  };
+
+  const currentStage = searchParams.get("stage") || "all";
+  const currentIndustry = searchParams.get("industryId") || "all";
+
+  const stageItems = [
+    { key: "all", label: t("allStages") },
+    { key: "IDEA", label: t("stageIdea") },
+    { key: "VALIDATION", label: t("stageValidation") },
+    { key: "PROTOTYPE", label: t("stagePrototype") },
+    { key: "MVP", label: t("stageMvp") },
+    { key: "BUSINESS", label: t("stageBusiness") },
+  ];
+
+  const industryItems = [
+    { key: "all", label: t("allIndustries") },
+    ...industries.map((ind) => ({
+      key: ind.id.toString(),
+      label: ind.name,
+    })),
+  ];
 
   return (
     <div className="flex items-center w-full gap-2 md:gap-4 mb-6 md:mb-10 relative">
@@ -29,43 +63,23 @@ export const ExploreFilters = () => {
 
       {/* Horizontally Scrollable Filters */}
       <div className="flex flex-1 items-center gap-2 md:gap-3 overflow-x-auto pb-2 -mb-2 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-        <Dropdown>
-          <DropdownTrigger>
-            <Button
-              color="primary"
-              radius="full"
-              className="font-semibold shadow-md px-5 md:px-6 h-10 md:h-11 flex-shrink-0 text-sm md:text-base"
-              endContent={
-                <IoChevronDown className="text-white text-base md:text-lg" />
-              }
-            >
-              {t("ideas")}
-            </Button>
-          </DropdownTrigger>
-          <DropdownMenu aria-label="Ideas Filter">
-            <DropdownItem key="all">All Ideas</DropdownItem>
-            <DropdownItem key="new">New Ideas</DropdownItem>
-          </DropdownMenu>
-        </Dropdown>
+        <FilterDropdown
+          label={t("stage")}
+          items={stageItems}
+          selectedKey={currentStage}
+          onSelectionChange={(key) => updateParam("stage", key)}
+          color={currentStage !== "all" ? "primary" : "default"}
+          variant={currentStage !== "all" ? "solid" : "bordered"}
+        />
 
-        <div className="flex-shrink-0">
-          <FilterDropdown label={t("budget")} />
-        </div>
-        <div className="flex-shrink-0">
-          <FilterDropdown label={t("traction")} />
-        </div>
-        <div className="flex-shrink-0">
-          <FilterDropdown label={t("stage")} />
-        </div>
-        <div className="flex-shrink-0">
-          <FilterDropdown label={t("businessModel")} />
-        </div>
-        <div className="flex-shrink-0">
-          <FilterDropdown label={t("industry")} />
-        </div>
-        <div className="flex-shrink-0">
-          <FilterDropdown label={t("type")} />
-        </div>
+        <FilterDropdown
+          label={t("industry")}
+          items={industryItems}
+          selectedKey={currentIndustry}
+          onSelectionChange={(key) => updateParam("industryId", key)}
+          color={currentIndustry !== "all" ? "primary" : "default"}
+          variant={currentIndustry !== "all" ? "solid" : "bordered"}
+        />
       </div>
     </div>
   );

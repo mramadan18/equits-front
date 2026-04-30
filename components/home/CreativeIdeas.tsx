@@ -1,7 +1,4 @@
 import { useTranslations } from "next-intl";
-import { Button } from "@heroui/button";
-import { FaArrowRight } from "react-icons/fa";
-import { MOCK_DATA } from "@/constants/mockData";
 import { CreativeIdeaCard } from "@/components/shared/creative-idea-card";
 import { SectionHeader } from "@/components/shared/SectionHeader";
 import {
@@ -9,8 +6,10 @@ import {
   StaggerContainer,
   StaggerItem,
 } from "@/components/shared/animations";
+import { Project } from "@/types/api";
+import SeeMoreButton from "./SeeMoreButton";
 
-export default function CreativeIdeas() {
+export default function CreativeIdeas({ projects }: { projects: Project[] }) {
   const t = useTranslations("CreativeIdeas");
 
   return (
@@ -26,7 +25,7 @@ export default function CreativeIdeas() {
           amount={0.1}
           className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4"
         >
-          {MOCK_DATA.map((item) => (
+          {projects.map((item) => (
             <StaggerItem key={item.id} y={30}>
               <CreativeIdeaCard item={item} />
             </StaggerItem>
@@ -41,14 +40,7 @@ export default function CreativeIdeas() {
           amount={0.5}
           className="flex justify-center mt-28"
         >
-          <Button
-            color="primary"
-            className="font-semibold flex items-center gap-2 min-w-60 md:min-w-96"
-            radius="full"
-            endContent={<FaArrowRight className="text-sm rtl:rotate-180" />}
-          >
-            {t("seeMore")}
-          </Button>
+          <SeeMoreButton />
         </FadeIn>
       </div>
     </section>

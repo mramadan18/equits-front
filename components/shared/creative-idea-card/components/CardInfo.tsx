@@ -1,3 +1,4 @@
+import moment from "moment";
 import { IoCalendarOutline, IoLocationOutline } from "react-icons/io5";
 
 interface CardInfoProps {
@@ -9,7 +10,7 @@ export const CardInfo = ({ date, location }: CardInfoProps) => (
   <div className="flex items-center gap-6 mb-6 text-sm text-gray2 font-medium">
     <div className="flex items-center gap-2">
       <IoCalendarOutline className="text-gray2 text-lg" />
-      <span>{date}</span>
+      <span>{moment(date).format("DD/MM/YYYY")}</span>
     </div>
     <div className="flex items-center gap-2">
       <IoLocationOutline className="text-gray2 text-lg" />
