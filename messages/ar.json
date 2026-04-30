@@ -195,6 +195,27 @@
       "submit": "تغيير كلمة المرور"
     }
   },
+  "TalentsExplore": {
+    "searchPlaceholder": "ابحث عن شخص ما",
+    "addYours": "أضف ملفك",
+    "talents": "المواهب",
+    "jobTitle": "المسمى الوظيفي",
+    "skills": "المهارات",
+    "experienceLevel": "مستوى الخبرة",
+    "timeAvailability": "التفرغ الزمني",
+    "location": "الموقع",
+    "allFilters": "كل الفلاتر",
+    "requestMeeting": "طلب اجتماع"
+  },
+  "TalentDetails": {
+    "contact": "اتصال",
+    "requestMeeting": "طلب اجتماع",
+    "about": "عن",
+    "peopleYouMayNeed": "أشخاص قد تحتاجهم",
+    "moreDetails": "مزيد من التفاصيل",
+    "showAll": "إظهار الكل",
+    "viewDetails": "عرض التفاصيل"
+  },
   "Pitch": {
     "title": "اعرض مشروعك",
     "subtitle": "املأ التفاصيل لعرض مشروعك.",
