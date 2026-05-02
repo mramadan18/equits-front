@@ -32,6 +32,7 @@
     "login": "Login",
     "logout": "Logout",
     "profile": "Profile",
+    "settings": "Settings",
     "logoAlt": "Equits Logo",
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
@@ -156,7 +157,18 @@
       "otpLength": "OTP must be 6 digits",
       "confirmPasswordRequired": "Please confirm your password",
       "passwordsDoNotMatch": "Passwords do not match",
-      "oldPasswordRequired": "Old password is required"
+      "oldPasswordRequired": "Old password is required",
+      "overviewMin": "Overview must be at least 10 characters",
+      "overviewMax": "Overview is too long",
+      "userTypeRequired": "Please select who you are",
+      "invalidUrl": "Invalid URL",
+      "jobTitleMin": "Job title must be at least 2 characters",
+      "jobTitleMax": "Job title is too long",
+      "experienceLevelRequired": "Please select your experience level",
+      "universityRequired": "University is required",
+      "degreeRequired": "Degree is required",
+      "facultyRequired": "Faculty is required",
+      "startDateRequired": "Start date is required"
     },
     "ForgotPassword": {
       "title": "Forgot Password",
@@ -521,5 +533,150 @@
       "saveForLater": "Save For Later",
       "requestMeeting": "Request Meeting"
     }
+  },
+  "FeedProfileCard": {
+    "coverAlt": "Cover",
+    "soon": "Soon",
+    "completeProfile": "Complete Your Profile",
+    "completePct": "{pct}% Complete",
+    "defaultUniversity": "Computer Science, Beni Suif University",
+    "waitingCover": "Waiting for your unique cover",
+    "addAvatar": "Add Photo"
+  },
+  "CompleteProfileModal": {
+    "progressText": "{progress}% Complete",
+    "wayText": "You're on your way !",
+    "title": "Complete Your Profile",
+    "subtitle": "Build trust and help partners decide faster.",
+    "tasks": {
+      "profilePictures": {
+        "title": "Profile pictures",
+        "description": "Upload professional profile and cover pictures (+20%)"
+      },
+      "jobTitle": {
+        "title": "Job title",
+        "description": "Showcase your job role and experience level (+20%)"
+      },
+      "overview": {
+        "title": "Overview",
+        "description": "Add a professional bio and video (+20%)"
+      },
+      "education": {
+        "title": "Education",
+        "description": "Include degrees and diplomas (+20%)"
+      },
+      "contactInfo": {
+        "title": "Contact info",
+        "description": "WhatsApp, e-mail and social media links (+20%)"
+      }
+    },
+    "close": "Close"
+  },
+  "Settings": {
+    "title": "Settings",
+    "editProfile": {
+      "title": "Edit Profile",
+      "jobTitle": "Job title",
+      "overview": "Overview",
+      "education": "Education",
+      "contactInfo": "Contact info"
+    },
+    "account": {
+      "title": "Account",
+      "security": "Security & Privacy",
+      "language": "Language",
+      "appearance": "Appearance"
+    },
+    "jobTitleForm": {
+      "title": "Job title",
+      "description": "Specify your job title to clearly represent your role, making it easier for investors and collaborators to understand your position and connect with you.",
+      "yourJobTitle": "Your job title",
+      "yourJobTitlePlaceholder": "Example: Web Developer",
+      "experienceLevel": "Experience level",
+      "organization": "Organization",
+      "organizationLink": "Organization website or social media link (Optional)",
+      "organizationLinkPlaceholder": "Example: https://erazone.org",
+      "cancel": "Cancel",
+      "save": "Save",
+      "levels": {
+        "STUDENT": "Student",
+        "JUNIOR": "Junior",
+        "MID_LEVEL": "Mid-level",
+        "SENIOR": "Senior",
+        "EXPERT": "Expert"
+      }
+    },
+    "overviewForm": {
+      "title": "Profile Overview",
+      "description": "Describe who you are, what you do, and what you’re aiming for to attract the right opportunities.",
+      "bullet1": "Describe your strengths and skills",
+      "bullet2": "Highlight projects, accomplishments and education",
+      "bullet3": "Keep it short and make sure it’s error-free",
+      "overview": "Overview",
+      "overviewPlaceholder": "Write a short overview about yourself.",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "firstNamePlaceholder": "Example: Ahmed",
+      "lastNamePlaceholder": "Example: Ramadan",
+      "userType": "Who are you?",
+      "talent": "Talent",
+      "investor": "Investor",
+      "videoLink": "Youtube Video Link (Optional)",
+      "videoLinkPlaceholder": "Example: https://www.youtube.com/watch?v=ipV29s_yN_U",
+      "cancel": "Cancel",
+      "save": "Save",
+      "saveSuccess": "Profile updated successfully!",
+      "saveError": "Failed to update profile"
+    },
+    "educationForm": {
+      "title": "Education Certificates",
+      "description": "Highlight your academic background and certifications to strengthen your profile and stand out.",
+      "educationLabel": "Education {index}",
+      "university": "University",
+      "degree": "Degree",
+      "faculty": "Faculty / Major",
+      "programLink": "Program Link (Optional)",
+      "programLinkPlaceholder": "Example: https://www.fci.bsu.edu.eg",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "present": "Present",
+      "addEducation": "Add Education",
+      "cancel": "Cancel",
+      "save": "Save",
+      "selectPlaceholder": "Select",
+      "degrees": {
+        "DIPLOMA": "Diploma",
+        "HIGHER_DIPLOMA": "Higher Diploma",
+        "BACHELOR": "Bachelor",
+        "MASTER": "Master",
+        "MBA": "MBA",
+        "PHD": "PHD"
+      }
+    },
+    "contactInfoForm": {
+      "title": "Contact Info",
+      "description": "Add your contact details so others can easily reach you.",
+      "accountEmail": "Account E-mail (Primary)",
+      "emailPlaceholder": "Example: remonawad101@gmail.com",
+      "contactEmail": "Contact E-mail (Extra)",
+      "contactEmailPlaceholder": "Example: contact@example.com",
+      "whatsapp": "WhatsApp / Phone Num",
+      "whatsappPlaceholder": "Example: 01023224594",
+      "socialMedia": "Social Media Links (Optional)",
+      "linkedinPlaceholder": "Share your LinkedIn Profile (if available).",
+      "facebookPlaceholder": "Share your Facebook Profile (if available).",
+      "instagramPlaceholder": "Share your Instagram Profile (if available).",
+      "youtubePlaceholder": "Share your Youtube Channel (if available).",
+      "cancel": "Cancel",
+      "save": "Save"
+    }
+  },
+  "ImageCropModal": {
+    "title": "Crop Image",
+    "zoom": "Zoom",
+    "rotation": "Rotation",
+    "reset": "Reset",
+    "cancel": "Cancel",
+    "save": "Save"
   }
 }

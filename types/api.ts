@@ -4,6 +4,23 @@ import {
   RegisterInput,
 } from "../validations/auth.validation";
 
+export enum ExperienceLevel {
+  STUDENT = "STUDENT",
+  JUNIOR = "JUNIOR",
+  MID_LEVEL = "MID_LEVEL",
+  SENIOR = "SENIOR",
+  EXPERT = "EXPERT",
+}
+
+export enum EducationDegree {
+  DIPLOMA = "DIPLOMA",
+  HIGHER_DIPLOMA = "HIGHER_DIPLOMA",
+  BACHELOR = "BACHELOR",
+  MASTER = "MASTER",
+  MBA = "MBA",
+  PHD = "PHD",
+}
+
 export type MessageKey =
   | "welcome"
   | "registerSuccess"
@@ -43,24 +60,39 @@ export interface User {
   firstName: string;
   lastName: string;
   email: string;
+  contactEmail?: string | null;
   googleId?: string | null;
   isEmailVerified: boolean;
   isTrusted: boolean;
+  userType?: UserType;
   avatar?: string | null;
   cover?: string | null;
   phone?: string | null;
   jobTitle?: string | null;
   company?: string | null;
-  isTalent: boolean;
-  isInvestor: boolean;
   about?: string | null;
+  overview?: string | null;
   address?: string | null;
+  experienceLevel?: ExperienceLevel | null;
+  companyLink?: string | null;
+  videoLink?: string | null;
   universityId?: number | null;
+  university?: University | null;
+  facebookUrl?: string | null;
+  instagramUrl?: string | null;
+  linkedinUrl?: string | null;
+  youtubeUrl?: string | null;
   createdAt: string;
   updatedAt: string;
   role: "USER" | "ADMIN";
   hasDraftProjects: boolean;
   draftProjectsCount: number;
+  educationCertificates?: EducationCertificate[];
+}
+
+export enum UserType {
+  TALENT = "TALENT",
+  INVESTOR = "INVESTOR",
 }
 
 export interface PaginationData {
@@ -97,6 +129,64 @@ export type ChangePasswordRequest = ChangePasswordInput;
 export type UpdateMeRequest = Partial<
   Omit<User, "id" | "createdAt" | "updatedAt" | "role" | "email">
 >;
+
+export interface ProfileStatus {
+  progress: number;
+  checklist: {
+    profilePictures: boolean;
+    jobTitle: boolean;
+    overview: boolean;
+    education: boolean;
+    contactInfo: boolean;
+  };
+}
+
+export interface UpdateJobTitleRequest {
+  jobTitle: string;
+  experienceLevel: ExperienceLevel;
+  company?: string;
+  companyLink?: string;
+}
+
+export interface UpdateOverviewRequest {
+  firstName?: string;
+  lastName?: string;
+  userType: UserType;
+  overview: string;
+  videoLink?: string;
+}
+
+export interface EducationCertificate {
+  id?: number;
+  university: string;
+  degree: EducationDegree;
+  faculty: string;
+  programLink?: string;
+  startDate: string;
+  endDate?: string | null;
+  present: boolean;
+}
+
+export interface UpdateEducationRequest {
+  certificates: EducationCertificate[];
+}
+
+export interface UpdateContactRequest {
+  email?: string;
+  contactEmail?: string;
+  phone?: string;
+  address?: string;
+  facebook?: string;
+  linkedin?: string;
+  instagram?: string;
+  youtube?: string;
+  website?: string;
+}
+
+export interface UpdatePicturesRequest {
+  avatar?: string;
+  cover?: string;
+}
 
 export interface University {
   id: number;

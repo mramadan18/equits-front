@@ -4,7 +4,6 @@ import { ExploreFilters } from "@/components/explore/ExploreFilters";
 import { FeedGrid } from "@/components/home/FeedGrid";
 import { FeedProfileCard } from "@/components/home/FeedProfileCard";
 import { PeopleYouMayNeedSidebar } from "@/components/talent-details";
-import { MOCK_TALENT_DETAILS } from "@/components/talent-details/mockData";
 import { useProjectsFeed } from "@/hooks/api/useProject";
 import { ProjectFilters } from "@/types/api";
 import { Pagination } from "@heroui/pagination";
@@ -55,7 +54,7 @@ export default function HomePage() {
 
         {/* Right Sidebar */}
         <div className="lg:col-span-4 flex flex-col gap-6">
-          <FeedProfileCard talent={MOCK_TALENT_DETAILS} />
+          <FeedProfileCard />
           <PeopleYouMayNeedSidebar />
         </div>
       </div>

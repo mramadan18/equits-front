@@ -16,7 +16,7 @@ import { Link, usePathname, useRouter } from "@/i18n/navigation";
 import { BiHomeAlt2 } from "react-icons/bi";
 import { IoTelescopeOutline } from "react-icons/io5";
 import { TiGroupOutline } from "react-icons/ti";
-// import { MdOutlineDesignServices } from "react-icons/md";
+import { SiHubspot } from "react-icons/si";
 import { useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
@@ -98,7 +98,11 @@ export const Navbar = ({
     {
       label: isLoggedIn ? t("repo") : t("explore"),
       href: isLoggedIn ? MainRoutes.REPO : MainRoutes.EXPLORE,
-      icon: <IoTelescopeOutline size={24} />,
+      icon: isLoggedIn ? (
+        <SiHubspot size={24} />
+      ) : (
+        <IoTelescopeOutline size={24} />
+      ),
     },
     {
       label: t("talents"),
@@ -156,7 +160,7 @@ export const Navbar = ({
           </NavbarBrand>
         </NavbarContent>
 
-        <NavbarContent className="hidden lg:flex gap-12 ml-10" justify="start">
+        <NavbarContent className="hidden lg:flex gap-12 ms-10" justify="start">
           {!isAuthPage &&
             navItems.map((item, index) => {
               const isActive = pathname === item.href;
@@ -254,6 +258,9 @@ export const Navbar = ({
                       <p className="font-semibold text-primary">
                         {user?.firstName} {user?.lastName}
                       </p>
+                    </DropdownItem>
+                    <DropdownItem key="settings" as={Link} href="/settings">
+                      {t("settings")}
                     </DropdownItem>
                     <DropdownItem
                       key="logout"

@@ -32,6 +32,7 @@
     "login": "دخول",
     "logout": "خروج",
     "profile": "الحساب",
+    "settings": "الإعدادات",
     "logoAlt": "شعار إكويتس",
     "openMenu": "فتح القائمة",
     "closeMenu": "إغلاق القائمة",
@@ -156,7 +157,18 @@
       "otpLength": "يجب أن يتكون الرمز من 6 أرقام",
       "confirmPasswordRequired": "يرجى تأكيد كلمة المرور",
       "passwordsDoNotMatch": "كلمات المرور غير متطابقة",
-      "oldPasswordRequired": "كلمة المرور القديمة مطلوبة"
+      "oldPasswordRequired": "كلمة المرور القديمة مطلوبة",
+      "overviewMin": "يجب أن تكون النظرة العامة 10 أحرف على الأقل",
+      "overviewMax": "النظرة العامة طويلة جداً",
+      "userTypeRequired": "يرجى تحديد من أنت",
+      "invalidUrl": "رابط غير صالح",
+      "jobTitleMin": "المسمى الوظيفي يجب أن يكون حرفين على الأقل",
+      "jobTitleMax": "المسمى الوظيفي طويل جداً",
+      "experienceLevelRequired": "يرجى تحديد مستوى خبرتك",
+      "universityRequired": "الجامعة مطلوبة",
+      "degreeRequired": "الدرجة العلمية مطلوبة",
+      "facultyRequired": "الكلية مطلوبة",
+      "startDateRequired": "تاريخ البدء مطلوب"
     },
     "ForgotPassword": {
       "title": "نسيت كلمة المرور",
@@ -521,5 +533,150 @@
       "saveForLater": "حفظ لوقت لاحق",
       "requestMeeting": "طلب اجتماع"
     }
+  },
+  "FeedProfileCard": {
+    "coverAlt": "الغلاف",
+    "soon": "قريباً",
+    "completeProfile": "أكمل ملفك الشخصي",
+    "completePct": "{pct}% مكتمل",
+    "defaultUniversity": "علوم الحاسب، جامعة بني سويف",
+    "waitingCover": "في انتظار غلافك الفريد",
+    "addAvatar": "أضف صورة"
+  },
+  "CompleteProfileModal": {
+    "progressText": "{progress}% مكتمل",
+    "wayText": "أنت في طريقك!",
+    "title": "أكمل ملفك الشخصي",
+    "subtitle": "ابنِ الثقة وساعد الشركاء على اتخاذ القرار بشكل أسرع.",
+    "tasks": {
+      "profilePictures": {
+        "title": "صور الملف الشخصي",
+        "description": "ارفع صوراً احترافية للملف الشخصي والغلاف (+20%)"
+      },
+      "jobTitle": {
+        "title": "المسمى الوظيفي",
+        "description": "اعرض دورك الوظيفي ومستوى خبرتك (+20%)"
+      },
+      "overview": {
+        "title": "نظرة عامة",
+        "description": "أضف سيرة ذاتية وفيديو احترافي (+20%)"
+      },
+      "education": {
+        "title": "التعليم",
+        "description": "أضف الدرجات العلمية والدبلومات (+20%)"
+      },
+      "contactInfo": {
+        "title": "معلومات الاتصال",
+        "description": "واتساب، البريد الإلكتروني وروابط التواصل الاجتماعي (+20%)"
+      }
+    },
+    "close": "إغلاق"
+  },
+  "Settings": {
+    "title": "الإعدادات",
+    "editProfile": {
+      "title": "تعديل الملف الشخصي",
+      "jobTitle": "المسمى الوظيفي",
+      "overview": "نظرة عامة",
+      "education": "التعليم",
+      "contactInfo": "معلومات الاتصال"
+    },
+    "account": {
+      "title": "الحساب",
+      "security": "الأمان والخصوصية",
+      "language": "اللغة",
+      "appearance": "المظهر"
+    },
+    "jobTitleForm": {
+      "title": "المسمى الوظيفي",
+      "description": "حدد مسماك الوظيفي لتمثيل دورك بوضوح، مما يسهل على المستثمرين والمتعاونين فهم موقعك والتواصل معك.",
+      "yourJobTitle": "مسماك الوظيفي",
+      "yourJobTitlePlaceholder": "مثال: مطور ويب",
+      "experienceLevel": "مستوى الخبرة",
+      "organization": "المنظمة",
+      "organizationLink": "رابط موقع المنظمة أو وسائل التواصل الاجتماعي (اختياري)",
+      "organizationLinkPlaceholder": "مثال: https://erazone.org",
+      "cancel": "إلغاء",
+      "save": "حفظ",
+      "levels": {
+        "STUDENT": "طالب",
+        "JUNIOR": "مبتدئ",
+        "MID_LEVEL": "متوسط الخبرة",
+        "SENIOR": "خبير",
+        "EXPERT": "محترف"
+      }
+    },
+    "overviewForm": {
+      "title": "نظرة عامة على الملف الشخصي",
+      "description": "صف من أنت، وماذا تفعل، وما الذي تطمح إليه لجذب الفرص المناسبة.",
+      "bullet1": "صف نقاط قوتك ومهاراتك",
+      "bullet2": "سلط الضوء على المشاريع والإنجازات والتعليم",
+      "bullet3": "اجعلها قصيرة وتأكد من خلوها من الأخطاء",
+      "overview": "نظرة عامة",
+      "overviewPlaceholder": "اكتب نبذة قصيرة عن نفسك.",
+      "firstName": "الاسم الأول",
+      "lastName": "اسم العائلة",
+      "firstNamePlaceholder": "مثال: أحمد",
+      "lastNamePlaceholder": "مثال: رمضان",
+      "userType": "من أنت؟",
+      "talent": "موهبة",
+      "investor": "مستثمر",
+      "videoLink": "رابط فيديو يوتيوب (اختياري)",
+      "videoLinkPlaceholder": "مثال: https://www.youtube.com/watch?v=ipV29s_yN_U",
+      "cancel": "إلغاء",
+      "save": "حفظ",
+      "saveSuccess": "تم تحديث الملف الشخصي بنجاح!",
+      "saveError": "فشل تحديث الملف الشخصي"
+    },
+    "educationForm": {
+      "title": "شهادات التعليم",
+      "description": "سلط الضوء على خلفيتك الأكاديمية وشهاداتك لتعزيز ملفك الشخصي والتميز.",
+      "educationLabel": "التعليم {index}",
+      "university": "الجامعة",
+      "degree": "الدرجة العلمية",
+      "faculty": "الكلية / التخصص",
+      "programLink": "رابط البرنامج (اختياري)",
+      "programLinkPlaceholder": "مثال: https://www.fci.bsu.edu.eg",
+      "startDate": "تاريخ البدء",
+      "endDate": "تاريخ الانتهاء",
+      "present": "حتى الآن",
+      "addEducation": "إضافة تعليم",
+      "cancel": "إلغاء",
+      "save": "حفظ",
+      "selectPlaceholder": "اختر",
+      "degrees": {
+        "DIPLOMA": "دبلوم",
+        "HIGHER_DIPLOMA": "دبلوم عالي",
+        "BACHELOR": "بكالوريوس",
+        "MASTER": "ماجستير",
+        "MBA": "ماجستير إدارة أعمال",
+        "PHD": "دكتوراة"
+      }
+    },
+    "contactInfoForm": {
+      "title": "معلومات الاتصال",
+      "description": "أضف تفاصيل الاتصال الخاصة بك ليتمكن الآخرون من الوصول إليك بسهولة.",
+      "accountEmail": "البريد الإلكتروني للحساب (أساسي)",
+      "emailPlaceholder": "مثال: remonawad101@gmail.com",
+      "contactEmail": "البريد الإلكتروني للتواصل (إضافي)",
+      "contactEmailPlaceholder": "مثال: contact@example.com",
+      "whatsapp": "واتساب / رقم الهاتف",
+      "whatsappPlaceholder": "مثال: 01023224594",
+      "socialMedia": "روابط التواصل الاجتماعي (اختياري)",
+      "linkedinPlaceholder": "شارك ملفك الشخصي على LinkedIn (إذا وجد).",
+      "facebookPlaceholder": "شارك ملفك الشخصي على Facebook (إذا وجد).",
+      "instagramPlaceholder": "شارك ملفك الشخصي على Instagram (إذا وجد).",
+      "youtubePlaceholder": "شارك قناتك على Youtube (إذا وجد).",
+      "cancel": "إلغاء",
+      "save": "حفظ"
+    }
+  },
+  "ImageCropModal": {
+    "title": "قص الصورة",
+    "zoom": "تكبير/تصغير",
+    "rotation": "التدوير",
+    "reset": "إعادة ضبط",
+    "cancel": "إلغاء",
+    "save": "حفظ"
   }
 }
