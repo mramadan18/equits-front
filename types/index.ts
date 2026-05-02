@@ -20,6 +20,12 @@ export enum MainRoutes {
   PROJECTS = "/projects",
   NEW_PROJECT = "/projects/new",
   DRAFT_PROJECTS = "/projects/draft",
+  SETTINGS = "/settings",
+  SETTINGS_ACCOUNT = "/settings/account",
+  SETTINGS_JOB_TITLE = "/settings/jobtitle",
+  SETTINGS_OVERVIEW = "/settings/overview",
+  SETTINGS_EDUCATION = "/settings/education",
+  SETTINGS_CONTACT_INFO = "/settings/contactinfo",
 }
 
 export type IconSvgProps = SVGProps<SVGSVGElement> & {

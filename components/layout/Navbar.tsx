@@ -147,7 +147,7 @@ export const Navbar = ({
       >
         <NavbarContent justify="start" className="max-w-fit">
           <NavbarBrand className="mr-4">
-            <Link href="/">
+            <Link href={MainRoutes.LANDING}>
               <Image
                 src="/images/logo.png"
                 alt={t("logoAlt")}
@@ -185,13 +185,15 @@ export const Navbar = ({
 
         <NavbarContent justify="end">
           <NavbarItem className="hidden lg:flex items-center gap-6">
-            <Link
-              href={pathname as string}
-              locale={locale === "en" ? "ar" : "en"}
-              className="text-primary font-bold text-sm hover:opacity-80 transition-opacity uppercase"
-            >
-              {locale === "en" ? "عربي" : "EN"}
-            </Link>
+            {!isLoggedIn && (
+              <Link
+                href={pathname as string}
+                locale={locale === "en" ? "ar" : "en"}
+                className="text-primary font-bold text-sm hover:opacity-80 transition-opacity uppercase"
+              >
+                {locale === "en" ? "عربي" : "EN"}
+              </Link>
+            )}
 
             {session && isVerified ? (
               <div className="flex items-center gap-4">
@@ -259,7 +261,11 @@ export const Navbar = ({
                         {user?.firstName} {user?.lastName}
                       </p>
                     </DropdownItem>
-                    <DropdownItem key="settings" as={Link} href="/settings">
+                    <DropdownItem
+                      key="settings"
+                      as={Link}
+                      href={MainRoutes.SETTINGS_OVERVIEW}
+                    >
                       {t("settings")}
                     </DropdownItem>
                     <DropdownItem

@@ -70,14 +70,11 @@ export interface User {
   phone?: string | null;
   jobTitle?: string | null;
   company?: string | null;
-  about?: string | null;
   overview?: string | null;
   address?: string | null;
   experienceLevel?: ExperienceLevel | null;
   companyLink?: string | null;
   videoLink?: string | null;
-  universityId?: number | null;
-  university?: University | null;
   facebookUrl?: string | null;
   instagramUrl?: string | null;
   linkedinUrl?: string | null;

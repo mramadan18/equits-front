@@ -68,9 +68,7 @@ export default function SettingsLayout({ children }: { children: ReactNode }) {
               variant="light"
               classNames={tabClassNames}
             >
-              <Tab key="security" title={t("account.security")} />
-              <Tab key="language" title={t("account.language")} />
-              <Tab key="appearance" title={t("account.appearance")} />
+              <Tab key="account" title={t("account.settings")} />
             </Tabs>
           </div>
         </div>

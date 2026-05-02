@@ -583,6 +583,7 @@
     },
     "account": {
       "title": "Account",
+      "settings": "Account Settings",
       "security": "Security & Privacy",
       "language": "Language",
       "appearance": "Appearance"
@@ -662,6 +663,8 @@
       "contactEmailPlaceholder": "Example: contact@example.com",
       "whatsapp": "WhatsApp / Phone Num",
       "whatsappPlaceholder": "Example: 01023224594",
+      "address": "Address",
+      "addressPlaceholder": "Example: Cairo, Egypt",
       "socialMedia": "Social Media Links (Optional)",
       "linkedinPlaceholder": "Share your LinkedIn Profile (if available).",
       "facebookPlaceholder": "Share your Facebook Profile (if available).",
@@ -669,6 +672,24 @@
       "youtubePlaceholder": "Share your Youtube Channel (if available).",
       "cancel": "Cancel",
       "save": "Save"
+    },
+    "accountForm": {
+      "title": "Account Settings",
+      "description": "Manage your account security, email, and language preferences.",
+      "passwordSection": "Change Password",
+      "currentPassword": "Current Password",
+      "newPassword": "New Password",
+      "confirmPassword": "Confirm Password",
+      "emailSection": "Change Email",
+      "newEmail": "New Email",
+      "languageSection": "Language",
+      "language": "Select Language",
+      "dangerZone": "Danger Zone",
+      "deleteAccount": "Delete Account",
+      "deleteAccountDescription": "Once you delete your account, there is no going back. Please be certain.",
+      "deleteButton": "Delete Account",
+      "save": "Save Changes",
+      "cancel": "Cancel"
     }
   },
   "ImageCropModal": {

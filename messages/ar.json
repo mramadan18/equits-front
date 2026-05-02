@@ -583,6 +583,7 @@
     },
     "account": {
       "title": "الحساب",
+      "settings": "إعدادات الحساب",
       "security": "الأمان والخصوصية",
       "language": "اللغة",
       "appearance": "المظهر"
@@ -662,6 +663,8 @@
       "contactEmailPlaceholder": "مثال: contact@example.com",
       "whatsapp": "واتساب / رقم الهاتف",
       "whatsappPlaceholder": "مثال: 01023224594",
+      "address": "العنوان",
+      "addressPlaceholder": "مثال: القاهرة، مصر",
       "socialMedia": "روابط التواصل الاجتماعي (اختياري)",
       "linkedinPlaceholder": "شارك ملفك الشخصي على LinkedIn (إذا وجد).",
       "facebookPlaceholder": "شارك ملفك الشخصي على Facebook (إذا وجد).",
@@ -669,6 +672,24 @@
       "youtubePlaceholder": "شارك قناتك على Youtube (إذا وجد).",
       "cancel": "إلغاء",
       "save": "حفظ"
+    },
+    "accountForm": {
+      "title": "إعدادات الحساب",
+      "description": "إدارة أمان حسابك والبريد الإلكتروني وتفضيلات اللغة.",
+      "passwordSection": "تغيير كلمة المرور",
+      "currentPassword": "كلمة المرور الحالية",
+      "newPassword": "كلمة المرور الجديدة",
+      "confirmPassword": "تأكيد كلمة المرور الجديدة",
+      "emailSection": "تغيير البريد الإلكتروني",
+      "newEmail": "البريد الإلكتروني الجديد",
+      "languageSection": "اللغة",
+      "language": "اختر اللغة",
+      "dangerZone": "منطقة الخطر",
+      "deleteAccount": "حذف الحساب",
+      "deleteAccountDescription": "بمجرد حذف حسابك، لا يمكنك التراجع عن هذه الخطوة. يرجى التأكد.",
+      "deleteButton": "حذف الحساب",
+      "save": "حفظ التغييرات",
+      "cancel": "إلغاء"
     }
   },
   "ImageCropModal": {

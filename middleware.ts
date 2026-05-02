@@ -19,6 +19,7 @@ const protectedPages = [
   MainRoutes.REPO,
   MainRoutes.NEW_PROJECT,
   MainRoutes.DRAFT_PROJECTS,
+  MainRoutes.SETTINGS,
 ];
 
 export default function middleware(request: NextRequest) {

@@ -35,6 +35,7 @@ export default function ContactInfoSettingsPage() {
     defaultValues: {
       contactEmail: user?.contactEmail || "",
       phone: user?.phone || "",
+      address: user?.address || "",
       facebookUrl: user?.facebookUrl || "",
       linkedinUrl: user?.linkedinUrl || "",
       instagramUrl: user?.instagramUrl || "",
@@ -67,6 +68,7 @@ export default function ContactInfoSettingsPage() {
       reset({
         contactEmail: user.contactEmail || "",
         phone: user.phone || "",
+        address: user.address || "",
         facebookUrl: user.facebookUrl || "",
         linkedinUrl: user.linkedinUrl || "",
         instagramUrl: user.instagramUrl || "",
@@ -80,6 +82,7 @@ export default function ContactInfoSettingsPage() {
       reset({
         contactEmail: user.contactEmail || "",
         phone: user.phone || "",
+        address: user.address || "",
         facebookUrl: user.facebookUrl || "",
         linkedinUrl: user.linkedinUrl || "",
         instagramUrl: user.instagramUrl || "",
@@ -118,6 +121,16 @@ export default function ContactInfoSettingsPage() {
             {...register("phone")}
             isInvalid={!!errors.phone}
             errorMessage={errors.phone?.message}
+          />
+          <Input
+            label={t("contactInfoForm.address")}
+            placeholder={t("contactInfoForm.addressPlaceholder")}
+            labelPlacement="outside"
+            variant="bordered"
+            radius="sm"
+            {...register("address")}
+            isInvalid={!!errors.address}
+            errorMessage={errors.address?.message}
           />
         </div>
 

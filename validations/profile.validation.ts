@@ -60,6 +60,7 @@ export const getUpdateContactSchema = (t: any) =>
       .optional()
       .or(z.literal("")),
     phone: z.string().optional().or(z.literal("")),
+    address: z.string().optional().or(z.literal("")),
     facebookUrl: z.string().url(t("invalidUrl")).optional().or(z.literal("")),
     linkedinUrl: z.string().url(t("invalidUrl")).optional().or(z.literal("")),
     instagramUrl: z.string().url(t("invalidUrl")).optional().or(z.literal("")),

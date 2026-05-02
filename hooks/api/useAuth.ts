@@ -137,3 +137,19 @@ export const useLogout = () => {
     },
   });
 };
+
+export const useDeleteMe = () => {
+  const queryClient = useQueryClient();
+  const logoutStore = useAuthStore((state) => state.logout);
+
+  return useMutation<ApiResponse<SuccessResponse>, ApiError, void>({
+    mutationFn: () => authService.deleteMe(),
+    onSuccess: () => {
+      queryClient.clear();
+      logoutStore();
+      if (typeof window !== "undefined") {
+        window.location.reload();
+      }
+    },
+  });
+};

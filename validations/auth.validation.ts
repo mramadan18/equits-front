@@ -39,7 +39,7 @@ export const getResetPasswordSchema = (t: (key: string) => string) =>
 export const getChangePasswordSchema = (t: (key: string) => string) =>
   z
     .object({
-      oldPassword: z.string().min(1, t("oldPasswordRequired")),
+      currentPassword: z.string().min(1, t("oldPasswordRequired")),
       newPassword: z.string().min(8, t("passwordMin")),
       confirmPassword: z.string().min(1, t("confirmPasswordRequired")),
     })

@@ -74,4 +74,8 @@ export const authService = {
     const response = await apiClient.post("/auth/logout");
     return response.data;
   },
+  deleteMe: async (): Promise<ApiResponse<SuccessResponse>> => {
+    const response = await apiClient.delete("/auth/delete-me");
+    return response.data;
+  },
 };
