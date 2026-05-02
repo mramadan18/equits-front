@@ -1,11 +1,41 @@
+"use client";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { MdVerified } from "react-icons/md";
 import { TbListDetails } from "react-icons/tb";
 import { Button } from "@heroui/button";
 import { Divider } from "@heroui/divider";
+import { useState } from "react";
 
 import { MOCK_PEOPLE_YOU_MAY_NEED } from "./mockData";
+
+const AvatarWrapper = ({ person }: { person: any }) => {
+  const [error, setError] = useState(false);
+  const initials = person.name
+    .split(" ")
+    .map((n: string) => n[0])
+    .join("")
+    .toUpperCase()
+    .substring(0, 2);
+
+  return (
+    <div className="w-14 h-14 md:w-16 md:h-16 rounded-full border border-gray-200 bg-gray-100 overflow-hidden relative flex-shrink-0 shadow-sm">
+      {person.avatar && !error ? (
+        <Image
+          src={person.avatar}
+          alt={person.name}
+          fill
+          className="object-cover"
+          onError={() => setError(true)}
+        />
+      ) : (
+        <div className="w-full h-full bg-gradient-to-br from-gray-500 to-gray-700 flex items-center justify-center text-white text-xl font-bold">
+          {initials}
+        </div>
+      )}
+    </div>
+  );
+};
 
 export const PeopleYouMayNeedSidebar = () => {
   const t = useTranslations("TalentDetails");
@@ -28,14 +58,7 @@ export const PeopleYouMayNeedSidebar = () => {
           >
             {/* Person Header Info */}
             <div className="flex items-start gap-4 mb-3">
-              <div className="w-14 h-14 md:w-16 md:h-16 rounded-full border border-gray-200 bg-gray-100 overflow-hidden relative flex-shrink-0 shadow-sm">
-                <Image
-                  src={person.avatar}
-                  alt={person.name}
-                  fill
-                  className="object-cover"
-                />
-              </div>
+              <AvatarWrapper person={person} />
 
               <div className="flex-1 flex flex-col justify-center">
                 <div className="flex items-center gap-1 mb-0.5">

@@ -11,6 +11,16 @@ import {
 import apiClient from "./api-client";
 
 export const profileService = {
+  getAllProfiles: async (): Promise<ApiResponse<User[]>> => {
+    const response = await apiClient.get("/profile");
+    return response.data;
+  },
+
+  getProfileById: async (id: number): Promise<ApiResponse<User>> => {
+    const response = await apiClient.get(`/profile/${id}`);
+    return response.data;
+  },
+
   getStatus: async (): Promise<ApiResponse<ProfileStatus>> => {
     const response = await apiClient.get("/profile/status");
     return response.data;

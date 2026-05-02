@@ -1,18 +1,17 @@
-import { TalentExperience } from "./types";
 import { TalentExperienceCard } from "./TalentExperienceCard";
 
 interface TalentExperiencesListProps {
-  experiences: TalentExperience[];
+  talent: any;
 }
 
 export const TalentExperiencesList = ({
-  experiences,
+  talent,
 }: TalentExperiencesListProps) => {
-  if (!experiences || experiences.length === 0) return null;
+  if (!talent?.experiences || talent.experiences.length === 0) return null;
 
   return (
     <div className="flex flex-col gap-6 w-full">
-      {experiences.map((exp) => (
+      {talent.experiences.map((exp: any) => (
         <TalentExperienceCard key={exp.id} experience={exp} />
       ))}
     </div>

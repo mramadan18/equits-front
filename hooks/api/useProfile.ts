@@ -12,6 +12,20 @@ import {
 } from "@/types/api";
 import { ApiError } from "@/types/error";
 
+export const useGetAllProfiles = () => {
+  return useQuery<ApiResponse<User[]>, ApiError>({
+    queryKey: ["all-profiles"],
+    queryFn: () => profileService.getAllProfiles(),
+  });
+};
+
+export const useProfile = (id: number) => {
+  return useQuery<ApiResponse<User>, ApiError>({
+    queryKey: ["profile", id],
+    queryFn: () => profileService.getProfileById(id),
+  });
+};
+
 export const useProfileStatus = () => {
   return useQuery<ApiResponse<ProfileStatus>, ApiError>({
     queryKey: ["profile-status"],

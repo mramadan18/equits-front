@@ -7,7 +7,6 @@ import {
   DropdownItem,
 } from "@heroui/dropdown";
 import { IoFilterOutline, IoChevronDown } from "react-icons/io5";
-
 import { FilterDropdown } from "@/components/shared/FilterDropdown";
 
 export const TalentsFilters = () => {
@@ -46,7 +45,7 @@ export const TalentsFilters = () => {
           </DropdownMenu>
         </Dropdown>
 
-        <div className="flex-shrink-0">
+        {/* <div className="flex-shrink-0">
           <FilterDropdown label={t("jobTitle")} />
         </div>
         <div className="flex-shrink-0">
@@ -60,7 +59,7 @@ export const TalentsFilters = () => {
         </div>
         <div className="flex-shrink-0">
           <FilterDropdown label={t("location")} />
-        </div>
+        </div> */}
       </div>
     </div>
   );

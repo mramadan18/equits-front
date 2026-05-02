@@ -16,6 +16,7 @@ export const ProfileCover = ({ user }: { user: User | null }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [imageError, setImageError] = useState(false);
 
   const { mutateAsync: uploadSingle } = useUploadSingle();
   const { mutateAsync: updatePictures } = useUpdatePictures();
@@ -64,6 +65,7 @@ export const ProfileCover = ({ user }: { user: User | null }) => {
 
       onOpenChange();
       setSelectedImage(null);
+      setImageError(false); // Reset error state on new upload
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error("Error updating cover:", error);
@@ -82,13 +84,14 @@ export const ProfileCover = ({ user }: { user: User | null }) => {
         onChange={handleFileChange}
       />
 
-      {user?.cover ? (
+      {user?.cover && !imageError ? (
         <>
           <Image
             src={user.cover}
             alt={`${user.firstName} ${user.lastName}`}
             fill
             className="object-cover opacity-80"
+            onError={() => setImageError(true)}
           />
           <div className="absolute inset-0 bg-black/20 opacity-0 group-hover/cover:opacity-100 transition-opacity" />
         </>
