@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { ExploreFilters } from "@/components/explore/ExploreFilters";
 import { FeedGrid } from "@/components/home/FeedGrid";
 import { FeedProfileCard } from "@/components/home/FeedProfileCard";
-import { PeopleYouMayNeedSidebar } from "@/components/talent-details";
+// import { PeopleYouMayNeedSidebar } from "@/components/talent-details";
 import { useProjectsFeed } from "@/hooks/api/useProject";
 import { ProjectFilters } from "@/types/api";
 import { Pagination } from "@heroui/pagination";

@@ -7,7 +7,7 @@ import {
   DropdownItem,
 } from "@heroui/dropdown";
 import { IoFilterOutline, IoChevronDown } from "react-icons/io5";
-import { FilterDropdown } from "@/components/shared/FilterDropdown";
+// import { FilterDropdown } from "@/components/shared/FilterDropdown";
 
 export const TalentsFilters = () => {
   const t = useTranslations("TalentsExplore");

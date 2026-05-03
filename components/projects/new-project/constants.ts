@@ -12,12 +12,12 @@ export const initialStep1Form: Step1Form = {
   facebookUrl: "",
   instagramUrl: "",
   youtubeUrl: "",
-  universityId: "",
-  facultyId: "",
+  universityId: null,
+  facultyId: null,
 };
 
 export const initialStep2Form: Step2Form = {
-  industryId: "",
+  industryId: null,
   subIndustryIds: [],
   projectTypes: [],
   stage: "",
@@ -31,19 +31,19 @@ export const initialStep2Form: Step2Form = {
 export const initialStep3Form: Step3Form = {
   currentTraction: "",
   growthRate: "",
-  totalUsers: "",
-  dailyActiveUsers: "",
-  monthlyRevenue: "",
-  growthRatePct: "",
-  retentionRate: "",
-  conversionRate: "",
+  totalUsers: 0,
+  dailyActiveUsers: 0,
+  monthlyRevenue: 0,
+  growthRatePct: 0,
+  retentionRate: 0,
+  conversionRate: 0,
 };
 
 export const initialStep4Form: Step4Form = {
   fundingStage: "",
   serviceArea: "",
-  fundingAsk: "",
-  equityStake: "",
+  fundingAsk: 0,
+  equityStake: 0,
   useOfFunds: "",
   businessPlanUrl: "",
 };
