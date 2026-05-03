@@ -8,8 +8,6 @@ import {
   AuthHeader,
   SocialButton,
   AuthDivider,
-  AuthInput,
-  PasswordField,
   AuthSubmitButton,
 } from "@/components/auth";
 import { StaggerContainer, StaggerItem } from "@/components/shared/animations";
@@ -23,8 +21,8 @@ import { useRegister, useGoogleLogin } from "@/hooks/api/useAuth";
 import { addToast } from "@heroui/toast";
 import { useGoogleLogin as useGoogleAuth } from "@react-oauth/google";
 import { ApiResponse, AuthResponse } from "@/types/api";
-import { ApiError } from "@/types/error";
 import { AuthRoutes, MainRoutes } from "@/types";
+import { FormInput } from "@/components/ui/form/FormInput";
 
 export default function RegisterPage() {
   const validationT = useTranslations("Auth.Validation");
@@ -32,9 +30,9 @@ export default function RegisterPage() {
   const router = useRouter();
 
   const {
-    register,
     handleSubmit,
-    formState: { errors, isValid },
+    control,
+    formState: { isValid },
   } = useForm<RegisterInput>({
     mode: "all",
     resolver: zodResolver(getRegisterSchema(validationT)),
@@ -54,19 +52,6 @@ export default function RegisterPage() {
           });
           router.push(MainRoutes.HOME);
         },
-        onError: (error: ApiError) => {
-          addToast({
-            title:
-              error.response?.data?.message || "Google registration failed",
-            color: "danger",
-          });
-        },
-      });
-    },
-    onError: () => {
-      addToast({
-        title: "Google Login Failed",
-        color: "danger",
       });
     },
   });
@@ -79,12 +64,6 @@ export default function RegisterPage() {
           color: "success",
         });
         router.push(AuthRoutes.VERIFY_EMAIL);
-      },
-      onError: (error: ApiError) => {
-        addToast({
-          title: error.response?.data?.message || "Registration failed",
-          color: "danger",
-        });
       },
     });
   };
@@ -114,42 +93,67 @@ export default function RegisterPage() {
         <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
           <StaggerItem>
             <div className="flex gap-4">
-              <AuthInput
+              <FormInput
+                name="firstName"
+                control={control}
                 type="text"
                 placeholder={authT("firstName")}
-                {...register("firstName")}
-                isInvalid={!!errors.firstName}
-                errorMessage={errors.firstName?.message}
+                variant="bordered"
+                radius="sm"
+                size="lg"
+                classNames={{
+                  inputWrapper:
+                    "border-default-200 bg-transparent text-default-700 shadow-none",
+                }}
               />
-              <AuthInput
+              <FormInput
+                name="lastName"
+                control={control}
                 type="text"
                 placeholder={authT("lastName")}
-                {...register("lastName")}
-                isInvalid={!!errors.lastName}
-                errorMessage={errors.lastName?.message}
+                variant="bordered"
+                radius="sm"
+                size="lg"
+                classNames={{
+                  inputWrapper:
+                    "border-default-200 bg-transparent text-default-700 shadow-none",
+                }}
               />
             </div>
           </StaggerItem>
 
           <StaggerItem>
-            <AuthInput
+            <FormInput
+              name="email"
+              control={control}
               type="email"
               placeholder={authT("emailLabel")}
-              {...register("email")}
-              isInvalid={!!errors.email}
-              errorMessage={errors.email?.message}
               endContent={
                 <MdOutlineMailOutline className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
               }
+              variant="bordered"
+              radius="sm"
+              size="lg"
+              classNames={{
+                inputWrapper:
+                  "border-default-200 bg-transparent text-default-700 shadow-none",
+              }}
             />
           </StaggerItem>
 
           <StaggerItem>
-            <PasswordField
+            <FormInput
+              name="password"
+              control={control}
+              type="password"
               placeholder={authT("passwordLabel")}
-              {...register("password")}
-              isInvalid={!!errors.password}
-              errorMessage={errors.password?.message}
+              variant="bordered"
+              radius="sm"
+              size="lg"
+              classNames={{
+                inputWrapper:
+                  "border-default-200 bg-transparent text-default-700 shadow-none",
+              }}
             />
           </StaggerItem>
 

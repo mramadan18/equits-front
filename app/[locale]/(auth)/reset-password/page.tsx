@@ -11,16 +11,11 @@ import {
   ResetPasswordInput,
 } from "@/validations/auth.validation";
 import { useResetPassword } from "@/hooks/api/useAuth";
-import {
-  AuthLayout,
-  AuthHeader,
-  PasswordField,
-  AuthSubmitButton,
-} from "@/components/auth";
+import { AuthLayout, AuthHeader, AuthSubmitButton } from "@/components/auth";
 import { StaggerContainer, StaggerItem } from "@/components/shared/animations";
 import { ApiResponse, AuthResponse } from "@/types/api";
-import { ApiError } from "@/types/error";
 import { AuthRoutes } from "@/types";
+import { FormInput } from "@/components/ui/form/FormInput";
 
 export default function ResetPasswordPage() {
   const authT = useTranslations("Auth.ResetPassword");
@@ -31,11 +26,7 @@ export default function ResetPasswordPage() {
 
   const { mutate: resetPassword, isPending } = useResetPassword();
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<ResetPasswordInput>({
+  const { handleSubmit, control } = useForm<ResetPasswordInput>({
     resolver: zodResolver(getResetPasswordSchema(validationT)),
     defaultValues: {
       password: "",
@@ -66,12 +57,6 @@ export default function ResetPasswordPage() {
           });
           router.push(AuthRoutes.LOGIN);
         },
-        onError: (error: ApiError) => {
-          addToast({
-            title: error.response?.data?.message || "Reset password failed",
-            color: "danger",
-          });
-        },
       },
     );
   };
@@ -88,20 +73,34 @@ export default function ResetPasswordPage() {
 
         <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
           <StaggerItem>
-            <PasswordField
+            <FormInput
+              name="password"
+              control={control}
+              type="password"
               placeholder={authT("passwordLabel")}
-              {...register("password")}
-              isInvalid={!!errors.password}
-              errorMessage={errors.password?.message}
+              variant="bordered"
+              radius="sm"
+              size="lg"
+              classNames={{
+                inputWrapper:
+                  "border-default-200 bg-transparent text-default-700 shadow-none",
+              }}
             />
           </StaggerItem>
 
           <StaggerItem>
-            <PasswordField
+            <FormInput
+              name="confirmPassword"
+              control={control}
+              type="password"
               placeholder={authT("confirmPasswordLabel")}
-              {...register("confirmPassword")}
-              isInvalid={!!errors.confirmPassword}
-              errorMessage={errors.confirmPassword?.message}
+              variant="bordered"
+              radius="sm"
+              size="lg"
+              classNames={{
+                inputWrapper:
+                  "border-default-200 bg-transparent text-default-700 shadow-none",
+              }}
             />
           </StaggerItem>
 

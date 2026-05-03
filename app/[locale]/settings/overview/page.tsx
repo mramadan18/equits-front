@@ -1,7 +1,6 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { Input, Textarea } from "@heroui/input";
 import { Button } from "@heroui/button";
 import { RadioGroup, Radio } from "@heroui/radio";
 import { useAuthStore } from "@/stores/useAuthStore";
@@ -15,6 +14,8 @@ import {
   UpdateOverviewFormData,
 } from "@/validations/profile.validation";
 import { useEffect } from "react";
+import { FormInput } from "@/components/ui/form/FormInput";
+import { FormTextarea } from "@/components/ui/form/FormTextarea";
 
 export default function OverviewSettingsPage() {
   const t = useTranslations("Settings");
@@ -23,11 +24,10 @@ export default function OverviewSettingsPage() {
   const { mutate: updateOverview, isPending } = useUpdateOverview();
 
   const {
-    register,
     handleSubmit,
     reset,
     control,
-    formState: { errors, isDirty },
+    formState: { isDirty, errors },
   } = useForm<UpdateOverviewFormData>({
     mode: "all",
     defaultValues: {
@@ -48,12 +48,6 @@ export default function OverviewSettingsPage() {
           title:
             t("overviewForm.saveSuccess") || "Profile updated successfully",
           color: "success",
-        });
-      },
-      onError: () => {
-        addToast({
-          title: t("overviewForm.saveError") || "Failed to update profile",
-          color: "danger",
         });
       },
     });
@@ -101,27 +95,25 @@ export default function OverviewSettingsPage() {
 
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <Input
+          <FormInput
+            name="firstName"
+            control={control}
             label={t("overviewForm.firstName")}
             placeholder={t("overviewForm.firstNamePlaceholder")}
             labelPlacement="outside"
             variant="bordered"
             size="lg"
             radius="sm"
-            {...register("firstName")}
-            isInvalid={!!errors.firstName}
-            errorMessage={errors.firstName?.message}
           />
-          <Input
+          <FormInput
+            name="lastName"
+            control={control}
             label={t("overviewForm.lastName")}
             placeholder={t("overviewForm.lastNamePlaceholder")}
             labelPlacement="outside"
             variant="bordered"
             size="lg"
             radius="sm"
-            {...register("lastName")}
-            isInvalid={!!errors.lastName}
-            errorMessage={errors.lastName?.message}
           />
         </div>
 
@@ -145,7 +137,9 @@ export default function OverviewSettingsPage() {
           )}
         />
 
-        <Textarea
+        <FormTextarea
+          name="overview"
+          control={control}
           label={t("overviewForm.overview")}
           placeholder={t("overviewForm.overviewPlaceholder")}
           labelPlacement="outside"
@@ -153,21 +147,17 @@ export default function OverviewSettingsPage() {
           size="lg"
           radius="sm"
           minRows={6}
-          {...register("overview")}
-          isInvalid={!!errors.overview}
-          errorMessage={errors.overview?.message}
         />
 
-        <Input
+        <FormInput
+          name="videoLink"
+          control={control}
           label={t("overviewForm.videoLink")}
           placeholder={t("overviewForm.videoLinkPlaceholder")}
           labelPlacement="outside"
           variant="bordered"
           size="lg"
           radius="sm"
-          {...register("videoLink")}
-          isInvalid={!!errors.videoLink}
-          errorMessage={errors.videoLink?.message}
         />
 
         <div className="flex justify-end gap-6 mt-12">

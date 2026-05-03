@@ -1,22 +1,24 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { Input } from "@heroui/input";
-import { Select, SelectItem } from "@heroui/select";
+import { SelectItem } from "@heroui/select";
 import { Button } from "@heroui/button";
 import { useAuthStore } from "@/stores/useAuthStore";
 import { useUpdateJobTitle } from "@/hooks/api/useProfile";
 import { addToast } from "@heroui/toast";
 import { ExperienceLevel } from "@/types/api";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   getUpdateJobTitleSchema,
   UpdateJobTitleFormData,
 } from "@/validations/profile.validation";
 import { useEffect } from "react";
-import { Autocomplete, AutocompleteItem } from "@heroui/autocomplete";
+import { AutocompleteItem } from "@heroui/autocomplete";
 import { useUniversities } from "@/hooks/api/useLookup";
+import { FormInput } from "@/components/ui/form/FormInput";
+import { FormSelect } from "@/components/ui/form/FormSelect";
+import { FormAutocomplete } from "@/components/ui/form/FormAutocomplete";
 
 export default function JobTitleSettingsPage() {
   const t = useTranslations("Settings");
@@ -29,11 +31,10 @@ export default function JobTitleSettingsPage() {
   const universities = universitiesRes?.data || [];
 
   const {
-    register,
     handleSubmit,
     reset,
     control,
-    formState: { errors, isDirty },
+    formState: { isDirty },
   } = useForm<UpdateJobTitleFormData>({
     mode: "all",
     defaultValues: {
@@ -53,12 +54,6 @@ export default function JobTitleSettingsPage() {
           title:
             t("overviewForm.saveSuccess") || "Profile updated successfully",
           color: "success",
-        });
-      },
-      onError: () => {
-        addToast({
-          title: t("overviewForm.saveError") || "Failed to update profile",
-          color: "danger",
         });
       },
     });
@@ -98,86 +93,60 @@ export default function JobTitleSettingsPage() {
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-10">
-        <Input
+        <FormInput
+          name="jobTitle"
+          control={control}
           label={t("jobTitleForm.yourJobTitle")}
           placeholder={t("jobTitleForm.yourJobTitlePlaceholder")}
           labelPlacement="outside"
           variant="bordered"
           radius="sm"
-          {...register("jobTitle")}
-          isInvalid={!!errors.jobTitle}
-          errorMessage={errors.jobTitle?.message}
         />
 
-        <Controller
+        <FormSelect
           name="experienceLevel"
           control={control}
-          render={({ field }) => (
-            <Select
-              label={t("jobTitleForm.experienceLevel")}
-              labelPlacement="outside"
-              placeholder={tp("selectPlaceholder")}
-              variant="bordered"
-              radius="sm"
-              selectedKeys={field.value ? [field.value] : []}
-              onSelectionChange={(keys) => {
-                const value = Array.from(keys)[0] as ExperienceLevel;
-                field.onChange(value);
-              }}
-              isInvalid={!!errors.experienceLevel}
-              errorMessage={errors.experienceLevel?.message}
+          label={t("jobTitleForm.experienceLevel")}
+          labelPlacement="outside"
+          placeholder={tp("selectPlaceholder")}
+          variant="bordered"
+          radius="sm"
+        >
+          {experienceLevels.map((level) => (
+            <SelectItem
+              key={level}
+              textValue={t(`jobTitleForm.levels.${level}`)}
             >
-              {experienceLevels.map((level) => (
-                <SelectItem
-                  key={level}
-                  textValue={t(`jobTitleForm.levels.${level}`)}
-                >
-                  {t(`jobTitleForm.levels.${level}`)}
-                </SelectItem>
-              ))}
-            </Select>
-          )}
-        />
+              {t(`jobTitleForm.levels.${level}`)}
+            </SelectItem>
+          ))}
+        </FormSelect>
 
-        <Controller
+        <FormAutocomplete
           name="company"
           control={control}
-          render={({ field }) => (
-            <Autocomplete
-              label={t("jobTitleForm.organization")}
-              placeholder={t("jobTitleForm.organization")}
-              labelPlacement="outside"
-              variant="bordered"
-              radius="sm"
-              allowsCustomValue
-              inputValue={field.value}
-              onInputChange={(value) => field.onChange(value)}
-              onSelectionChange={(key) => {
-                if (key) {
-                  field.onChange(key as string);
-                }
-              }}
-              isInvalid={!!errors.company}
-              errorMessage={errors.company?.message}
-            >
-              {universities.map((uni) => (
-                <AutocompleteItem key={uni.name} textValue={uni.name}>
-                  {uni.name}
-                </AutocompleteItem>
-              ))}
-            </Autocomplete>
-          )}
-        />
+          label={t("jobTitleForm.organization")}
+          placeholder={t("jobTitleForm.organization")}
+          labelPlacement="outside"
+          variant="bordered"
+          radius="sm"
+          allowsCustomValue
+        >
+          {universities.map((uni) => (
+            <AutocompleteItem key={uni.name} textValue={uni.name}>
+              {uni.name}
+            </AutocompleteItem>
+          ))}
+        </FormAutocomplete>
 
-        <Input
+        <FormInput
+          name="companyLink"
+          control={control}
           label={t("jobTitleForm.organizationLink")}
           placeholder={t("jobTitleForm.organizationLinkPlaceholder")}
           labelPlacement="outside"
           variant="bordered"
           radius="sm"
-          {...register("companyLink")}
-          isInvalid={!!errors.companyLink}
-          errorMessage={errors.companyLink?.message}
         />
 
         <div className="flex justify-end gap-6 mt-12">

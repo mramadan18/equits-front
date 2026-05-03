@@ -11,17 +11,12 @@ import {
   ForgotPasswordInput,
 } from "@/validations/auth.validation";
 import { useForgotPassword } from "@/hooks/api/useAuth";
-import {
-  AuthLayout,
-  AuthHeader,
-  AuthInput,
-  AuthSubmitButton,
-} from "@/components/auth";
+import { AuthLayout, AuthHeader, AuthSubmitButton } from "@/components/auth";
 import { StaggerContainer, StaggerItem } from "@/components/shared/animations";
 import { ApiResponse, SuccessResponse } from "@/types/api";
-import { ApiError } from "@/types/error";
 import { useRouter } from "next/navigation";
 import { AuthRoutes } from "@/types";
+import { FormInput } from "@/components/ui/form/FormInput";
 
 export default function ForgotPasswordPage() {
   const router = useRouter();
@@ -30,11 +25,7 @@ export default function ForgotPasswordPage() {
 
   const { mutate: forgotPassword, isPending } = useForgotPassword();
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<ForgotPasswordInput>({
+  const { handleSubmit, control } = useForm<ForgotPasswordInput>({
     resolver: zodResolver(getForgotPasswordSchema(validationT)),
   });
 
@@ -47,12 +38,6 @@ export default function ForgotPasswordPage() {
         });
         const queryParams = new URLSearchParams({ email: data.email });
         router.push(`${AuthRoutes.VERIFY_RESET_OTP}?${queryParams.toString()}`);
-      },
-      onError: (error: ApiError) => {
-        addToast({
-          title: error.response?.data?.message || "Operation failed",
-          color: "danger",
-        });
       },
     });
   };
@@ -69,15 +54,21 @@ export default function ForgotPasswordPage() {
 
         <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
           <StaggerItem>
-            <AuthInput
+            <FormInput
+              name="email"
+              control={control}
               type="email"
               placeholder={authT("emailLabel")}
-              {...register("email")}
-              isInvalid={!!errors.email}
-              errorMessage={errors.email?.message}
               endContent={
                 <MdOutlineMailOutline className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
               }
+              variant="bordered"
+              radius="sm"
+              size="lg"
+              classNames={{
+                inputWrapper:
+                  "border-default-200 bg-transparent text-default-700 shadow-none",
+              }}
             />
           </StaggerItem>
 

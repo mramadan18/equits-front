@@ -18,8 +18,7 @@ import {
 } from "@/validations/auth.validation";
 import { ApiResponse, SuccessResponse } from "@/types/api";
 import { useAuthStore } from "@/stores/useAuthStore";
-import { useState } from "react";
-import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
+import { FormInput } from "@/components/ui/form/FormInput";
 
 export default function AccountSettingsPage() {
   const t = useTranslations("Settings");
@@ -33,18 +32,10 @@ export default function AccountSettingsPage() {
   const { mutate: changePassword, isPending: isChangePending } =
     useChangePassword();
 
-  const [isVisibleCurrent, setIsVisibleCurrent] = useState(false);
-  const [isVisibleNew, setIsVisibleNew] = useState(false);
-  const [isVisibleConfirm, setIsVisibleConfirm] = useState(false);
-
-  const toggleVisibilityCurrent = () => setIsVisibleCurrent(!isVisibleCurrent);
-  const toggleVisibilityNew = () => setIsVisibleNew(!isVisibleNew);
-  const toggleVisibilityConfirm = () => setIsVisibleConfirm(!isVisibleConfirm);
-
   const {
-    register,
     handleSubmit,
-    formState: { errors, isDirty },
+    control,
+    formState: { isDirty },
   } = useForm<ChangePasswordInput>({
     resolver: zodResolver(getChangePasswordSchema(validationT)),
     mode: "all",
@@ -63,24 +54,11 @@ export default function AccountSettingsPage() {
         });
         window.location.reload();
       },
-      onError: (error: any) => {
-        addToast({
-          title: error.response.data.message || "Failed to update password",
-          color: "danger",
-        });
-      },
     });
   };
 
   const handleDeleteAccount = () => {
-    deleteAccount(undefined, {
-      onError: () => {
-        addToast({
-          title: "Failed to delete account",
-          color: "danger",
-        });
-      },
-    });
+    deleteAccount();
   };
 
   return (
@@ -103,81 +81,36 @@ export default function AccountSettingsPage() {
             {t("accountForm.passwordSection")}
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <Input
+            <FormInput
+              name="currentPassword"
+              control={control}
               label={t("accountForm.currentPassword")}
-              type={isVisibleCurrent ? "text" : "password"}
+              type="password"
               variant="bordered"
               radius="sm"
               labelPlacement="outside"
               placeholder="••••••••"
-              {...register("currentPassword")}
-              isInvalid={!!errors.currentPassword}
-              errorMessage={errors.currentPassword?.message}
-              endContent={
-                <button
-                  className="focus:outline-none"
-                  type="button"
-                  onClick={toggleVisibilityCurrent}
-                  aria-label="toggle password visibility"
-                >
-                  {isVisibleCurrent ? (
-                    <IoEyeOffOutline className="text-2xl text-default-400 pointer-events-none" />
-                  ) : (
-                    <IoEyeOutline className="text-2xl text-default-400 pointer-events-none" />
-                  )}
-                </button>
-              }
             />
             <div className="hidden md:block" /> {/* Spacer */}
-            <Input
+            <FormInput
+              name="newPassword"
+              control={control}
               label={t("accountForm.newPassword")}
-              type={isVisibleNew ? "text" : "password"}
+              type="password"
               variant="bordered"
               radius="sm"
               labelPlacement="outside"
               placeholder="••••••••"
-              {...register("newPassword")}
-              isInvalid={!!errors.newPassword}
-              errorMessage={errors.newPassword?.message}
-              endContent={
-                <button
-                  className="focus:outline-none"
-                  type="button"
-                  onClick={toggleVisibilityNew}
-                  aria-label="toggle password visibility"
-                >
-                  {isVisibleNew ? (
-                    <IoEyeOffOutline className="text-2xl text-default-400 pointer-events-none" />
-                  ) : (
-                    <IoEyeOutline className="text-2xl text-default-400 pointer-events-none" />
-                  )}
-                </button>
-              }
             />
-            <Input
+            <FormInput
+              name="confirmPassword"
+              control={control}
               label={t("accountForm.confirmPassword")}
-              type={isVisibleConfirm ? "text" : "password"}
+              type="password"
               variant="bordered"
               radius="sm"
               labelPlacement="outside"
               placeholder="••••••••"
-              {...register("confirmPassword")}
-              isInvalid={!!errors.confirmPassword}
-              errorMessage={errors.confirmPassword?.message}
-              endContent={
-                <button
-                  className="focus:outline-none"
-                  type="button"
-                  onClick={toggleVisibilityConfirm}
-                  aria-label="toggle password visibility"
-                >
-                  {isVisibleConfirm ? (
-                    <IoEyeOffOutline className="text-2xl text-default-400 pointer-events-none" />
-                  ) : (
-                    <IoEyeOutline className="text-2xl text-default-400 pointer-events-none" />
-                  )}
-                </button>
-              }
             />
           </div>
           <div className="flex justify-start">
@@ -208,7 +141,7 @@ export default function AccountSettingsPage() {
               labelPlacement="outside"
               readOnly
               placeholder="example@email.com"
-              value={user?.email}
+              value={user?.email || ""}
             />
           </div>
           <div className="flex justify-start">
@@ -252,9 +185,6 @@ export default function AccountSettingsPage() {
         {/* Danger Zone */}
         <div className="flex flex-col gap-6 p-6 border-2 border-danger/20 rounded-xl bg-danger/5">
           <div className="flex flex-col gap-2">
-            {/* <h3 className="text-xl font-semibold text-danger">
-              {t("accountForm.dangerZone")}
-            </h3> */}
             <p className="text-gray2 text-sm">
               {t("accountForm.deleteAccountDescription")}
             </p>

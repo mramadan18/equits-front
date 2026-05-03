@@ -2,6 +2,8 @@
 
 import { Input, InputProps } from "@heroui/input";
 import { Controller, Control, FieldValues, Path } from "react-hook-form";
+import { useState } from "react";
+import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 
 interface FormInputProps<T extends FieldValues>
   extends Omit<InputProps, "name"> {
@@ -16,6 +18,11 @@ export const FormInput = <T extends FieldValues>({
   t,
   ...props
 }: FormInputProps<T>) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const isPassword = props.type === "password";
+
+  const toggleVisibility = () => setIsVisible(!isVisible);
+
   const safeTranslate = (key: string | undefined) => {
     if (!key) return "";
     if (t && key.startsWith("Validation.")) {
@@ -31,6 +38,7 @@ export const FormInput = <T extends FieldValues>({
       render={({ field, fieldState }) => (
         <Input
           {...props}
+          type={isPassword && isVisible ? "text" : props.type}
           value={field.value?.toString() || ""}
           isInvalid={!!fieldState.error}
           errorMessage={safeTranslate(fieldState.error?.message)}
@@ -43,6 +51,24 @@ export const FormInput = <T extends FieldValues>({
             }
           }}
           onBlur={field.onBlur}
+          endContent={
+            isPassword ? (
+              <button
+                className="focus:outline-none"
+                type="button"
+                onClick={toggleVisibility}
+                aria-label="toggle password visibility"
+              >
+                {isVisible ? (
+                  <IoEyeOffOutline className="text-2xl text-default-400 pointer-events-none" />
+                ) : (
+                  <IoEyeOutline className="text-2xl text-default-400 pointer-events-none" />
+                )}
+              </button>
+            ) : (
+              props.endContent
+            )
+          }
         />
       )}
     />

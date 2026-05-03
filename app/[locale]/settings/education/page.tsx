@@ -1,9 +1,8 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { Input } from "@heroui/input";
-import { Select, SelectItem } from "@heroui/select";
-import { Autocomplete, AutocompleteItem } from "@heroui/autocomplete";
+import { SelectItem } from "@heroui/select";
+import { AutocompleteItem } from "@heroui/autocomplete";
 import { Button } from "@heroui/button";
 import { Checkbox } from "@heroui/checkbox";
 import { useUniversities, useFaculties } from "@/hooks/api/useLookup";
@@ -19,6 +18,9 @@ import {
 } from "@/validations/profile.validation";
 import { useEffect } from "react";
 import { IoTrashOutline } from "react-icons/io5";
+import { FormInput } from "@/components/ui/form/FormInput";
+import { FormSelect } from "@/components/ui/form/FormSelect";
+import { FormAutocomplete } from "@/components/ui/form/FormAutocomplete";
 
 export default function EducationSettingsPage() {
   const t = useTranslations("Settings");
@@ -32,12 +34,11 @@ export default function EducationSettingsPage() {
   const faculties = facultiesRes?.data || [];
 
   const {
-    register,
     handleSubmit,
     reset,
     control,
     watch,
-    formState: { errors, isDirty },
+    formState: { isDirty },
   } = useForm<UpdateEducationFormData>({
     mode: "all",
     defaultValues: {
@@ -85,12 +86,6 @@ export default function EducationSettingsPage() {
           title:
             t("overviewForm.saveSuccess") || "Profile updated successfully",
           color: "success",
-        });
-      },
-      onError: () => {
-        addToast({
-          title: t("overviewForm.saveError") || "Failed to update profile",
-          color: "danger",
         });
       },
     });
@@ -189,167 +184,101 @@ export default function EducationSettingsPage() {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-10">
-                  <Controller
+                  <FormAutocomplete
                     name={`certificates.${index}.university`}
                     control={control}
-                    render={({ field }) => (
-                      <Autocomplete
-                        label={t("educationForm.university")}
-                        labelPlacement="outside"
-                        placeholder={t("educationForm.selectPlaceholder")}
-                        variant="bordered"
-                        radius="sm"
-                        selectedKey={field.value}
-                        onSelectionChange={(key) => {
-                          field.onChange(key);
-                        }}
-                        isInvalid={!!errors.certificates?.[index]?.university}
-                        errorMessage={
-                          errors.certificates?.[index]?.university?.message
-                        }
-                      >
-                        {universities.map((uni) => (
-                          <AutocompleteItem key={uni.name} textValue={uni.name}>
-                            {uni.name}
-                          </AutocompleteItem>
-                        ))}
-                      </Autocomplete>
-                    )}
-                  />
+                    label={t("educationForm.university")}
+                    labelPlacement="outside"
+                    placeholder={t("educationForm.selectPlaceholder")}
+                    variant="bordered"
+                    radius="sm"
+                  >
+                    {universities.map((uni) => (
+                      <AutocompleteItem key={uni.name} textValue={uni.name}>
+                        {uni.name}
+                      </AutocompleteItem>
+                    ))}
+                  </FormAutocomplete>
 
-                  <Controller
+                  <FormSelect
                     name={`certificates.${index}.degree`}
                     control={control}
-                    render={({ field }) => (
-                      <Select
-                        label={t("educationForm.degree")}
-                        labelPlacement="outside"
-                        placeholder={t("educationForm.selectPlaceholder")}
-                        variant="bordered"
-                        radius="sm"
-                        selectedKeys={field.value ? [field.value] : []}
-                        onSelectionChange={(keys) => {
-                          const value = Array.from(keys)[0] as EducationDegree;
-                          field.onChange(value);
-                        }}
-                        isInvalid={!!errors.certificates?.[index]?.degree}
-                        errorMessage={
-                          errors.certificates?.[index]?.degree?.message
-                        }
+                    label={t("educationForm.degree")}
+                    labelPlacement="outside"
+                    placeholder={t("educationForm.selectPlaceholder")}
+                    variant="bordered"
+                    radius="sm"
+                  >
+                    {degrees.map((degree) => (
+                      <SelectItem
+                        key={degree}
+                        textValue={t(`educationForm.degrees.${degree}`)}
                       >
-                        {degrees.map((degree) => (
-                          <SelectItem
-                            key={degree}
-                            textValue={t(`educationForm.degrees.${degree}`)}
-                          >
-                            {t(`educationForm.degrees.${degree}`)}
-                          </SelectItem>
-                        ))}
-                      </Select>
-                    )}
-                  />
+                        {t(`educationForm.degrees.${degree}`)}
+                      </SelectItem>
+                    ))}
+                  </FormSelect>
 
-                  <Controller
+                  <FormAutocomplete
                     name={`certificates.${index}.faculty`}
                     control={control}
-                    render={({ field }) => (
-                      <Autocomplete
-                        label={t("educationForm.faculty")}
-                        labelPlacement="outside"
-                        placeholder={t("educationForm.selectPlaceholder")}
-                        variant="bordered"
-                        radius="sm"
-                        selectedKey={field.value}
-                        onSelectionChange={(key) => {
-                          field.onChange(key);
-                        }}
-                        isInvalid={!!errors.certificates?.[index]?.faculty}
-                        errorMessage={
-                          errors.certificates?.[index]?.faculty?.message
-                        }
-                      >
-                        {faculties.map((fac) => (
-                          <AutocompleteItem key={fac.name} textValue={fac.name}>
-                            {fac.name}
-                          </AutocompleteItem>
-                        ))}
-                      </Autocomplete>
-                    )}
-                  />
+                    label={t("educationForm.faculty")}
+                    labelPlacement="outside"
+                    placeholder={t("educationForm.selectPlaceholder")}
+                    variant="bordered"
+                    radius="sm"
+                  >
+                    {faculties.map((fac) => (
+                      <AutocompleteItem key={fac.name} textValue={fac.name}>
+                        {fac.name}
+                      </AutocompleteItem>
+                    ))}
+                  </FormAutocomplete>
 
-                  <Input
+                  <FormInput
+                    name={`certificates.${index}.programLink`}
+                    control={control}
                     label={t("educationForm.programLink")}
                     placeholder={t("educationForm.programLinkPlaceholder")}
                     labelPlacement="outside"
                     variant="bordered"
                     radius="sm"
-                    {...register(`certificates.${index}.programLink`)}
-                    isInvalid={!!errors.certificates?.[index]?.programLink}
-                    errorMessage={
-                      errors.certificates?.[index]?.programLink?.message
-                    }
                   />
 
                   <div className="md:col-span-2 grid grid-cols-1 md:grid-cols-2 place-items-start gap-x-10 gap-y-10">
-                    <Controller
+                    <FormSelect
                       name={`certificates.${index}.startDate`}
                       control={control}
-                      render={({ field }) => (
-                        <Select
-                          label={t("educationForm.startDate")}
-                          labelPlacement="outside"
-                          placeholder={t("educationForm.selectPlaceholder")}
-                          variant="bordered"
-                          radius="sm"
-                          selectedKeys={field.value ? [field.value] : []}
-                          onSelectionChange={(keys) => {
-                            const value = Array.from(keys)[0] as string;
-                            field.onChange(value);
-                          }}
-                          isInvalid={!!errors.certificates?.[index]?.startDate}
-                          errorMessage={
-                            errors.certificates?.[index]?.startDate?.message
-                          }
-                        >
-                          {years.map((year) => (
-                            <SelectItem key={year} textValue={year}>
-                              {year}
-                            </SelectItem>
-                          ))}
-                        </Select>
-                      )}
-                    />
+                      label={t("educationForm.startDate")}
+                      labelPlacement="outside"
+                      placeholder={t("educationForm.selectPlaceholder")}
+                      variant="bordered"
+                      radius="sm"
+                    >
+                      {years.map((year) => (
+                        <SelectItem key={year} textValue={year}>
+                          {year}
+                        </SelectItem>
+                      ))}
+                    </FormSelect>
 
                     <div className="w-full flex flex-col gap-4">
-                      <Controller
+                      <FormSelect
                         name={`certificates.${index}.endDate`}
                         control={control}
-                        render={({ field }) => (
-                          <Select
-                            label={t("educationForm.endDate")}
-                            labelPlacement="outside"
-                            placeholder={t("educationForm.selectPlaceholder")}
-                            variant="bordered"
-                            radius="sm"
-                            isDisabled={isPresent}
-                            selectedKeys={field.value ? [field.value] : []}
-                            onSelectionChange={(keys) => {
-                              const value = Array.from(keys)[0] as string;
-                              field.onChange(value);
-                            }}
-                            isInvalid={!!errors.certificates?.[index]?.endDate}
-                            errorMessage={
-                              errors.certificates?.[index]?.endDate?.message
-                            }
-                          >
-                            {years.map((year) => (
-                              <SelectItem key={year} textValue={year}>
-                                {year}
-                              </SelectItem>
-                            ))}
-                          </Select>
-                        )}
-                      />
+                        label={t("educationForm.endDate")}
+                        labelPlacement="outside"
+                        placeholder={t("educationForm.selectPlaceholder")}
+                        variant="bordered"
+                        radius="sm"
+                        isDisabled={isPresent}
+                      >
+                        {years.map((year) => (
+                          <SelectItem key={year} textValue={year}>
+                            {year}
+                          </SelectItem>
+                        ))}
+                      </FormSelect>
                       <Controller
                         name={`certificates.${index}.present`}
                         control={control}

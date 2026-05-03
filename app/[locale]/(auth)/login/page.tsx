@@ -9,8 +9,6 @@ import {
   AuthHeader,
   SocialButton,
   AuthDivider,
-  AuthInput,
-  PasswordField,
   AuthSubmitButton,
 } from "@/components/auth";
 import { StaggerContainer, StaggerItem } from "@/components/shared/animations";
@@ -21,8 +19,8 @@ import { useLogin, useGoogleLogin } from "@/hooks/api/useAuth";
 import { addToast } from "@heroui/toast";
 import { useGoogleLogin as useGoogleAuth } from "@react-oauth/google";
 import { ApiResponse, AuthResponse } from "@/types/api";
-import { ApiError } from "@/types/error";
 import { AuthRoutes, MainRoutes } from "@/types";
+import { FormInput } from "@/components/ui/form/FormInput";
 
 export default function LoginPage() {
   const validationT = useTranslations("Auth.Validation");
@@ -30,9 +28,10 @@ export default function LoginPage() {
   const router = useRouter();
 
   const {
-    register,
     handleSubmit,
-    formState: { errors, isValid },
+    control,
+    register,
+    formState: { isValid },
   } = useForm<LoginInput>({
     mode: "all",
     resolver: zodResolver(getLoginSchema(validationT)),
@@ -52,18 +51,6 @@ export default function LoginPage() {
           });
           router.push(MainRoutes.HOME);
         },
-        onError: (error: ApiError) => {
-          addToast({
-            title: error.response?.data?.message || "Google login failed",
-            color: "danger",
-          });
-        },
-      });
-    },
-    onError: () => {
-      addToast({
-        title: "Google Login Failed",
-        color: "danger",
       });
     },
   });
@@ -76,12 +63,6 @@ export default function LoginPage() {
           color: "success",
         });
         router.push(MainRoutes.HOME);
-      },
-      onError: (error: ApiError) => {
-        addToast({
-          title: error.response?.data?.message || "Login failed",
-          color: "danger",
-        });
       },
     });
   };
@@ -107,24 +88,37 @@ export default function LoginPage() {
 
         <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
           <StaggerItem>
-            <AuthInput
+            <FormInput
+              name="email"
+              control={control}
               type="email"
               placeholder={authT("emailLabel")}
-              {...register("email")}
-              isInvalid={!!errors.email}
-              errorMessage={errors.email?.message}
               endContent={
                 <MdOutlineMailOutline className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
               }
+              variant="bordered"
+              radius="sm"
+              size="lg"
+              classNames={{
+                inputWrapper:
+                  "border-default-200 bg-transparent text-default-700 shadow-none",
+              }}
             />
           </StaggerItem>
 
           <StaggerItem>
-            <PasswordField
+            <FormInput
+              name="password"
+              control={control}
+              type="password"
               placeholder={authT("passwordLabel")}
-              {...register("password")}
-              isInvalid={!!errors.password}
-              errorMessage={errors.password?.message}
+              variant="bordered"
+              radius="sm"
+              size="lg"
+              classNames={{
+                inputWrapper:
+                  "border-default-200 bg-transparent text-default-700 shadow-none",
+              }}
             />
           </StaggerItem>
 

@@ -1,6 +1,5 @@
 "use client";
 import { useTranslations } from "next-intl";
-import { Input } from "@heroui/input";
 import { Button } from "@heroui/button";
 import {
   FaLinkedinIn,
@@ -18,6 +17,7 @@ import { useAuthStore } from "@/stores/useAuthStore";
 import { useUpdateContact } from "@/hooks/api/useProfile";
 import { addToast } from "@heroui/toast";
 import { useEffect } from "react";
+import { FormInput } from "@/components/ui/form/FormInput";
 
 export default function ContactInfoSettingsPage() {
   const t = useTranslations("Settings");
@@ -26,10 +26,10 @@ export default function ContactInfoSettingsPage() {
   const { mutate: updateContact, isPending } = useUpdateContact();
 
   const {
-    register,
     handleSubmit,
     reset,
-    formState: { errors, isDirty },
+    control,
+    formState: { isDirty },
   } = useForm<UpdateContactFormData>({
     mode: "all",
     defaultValues: {
@@ -52,12 +52,6 @@ export default function ContactInfoSettingsPage() {
           title:
             t("overviewForm.saveSuccess") || "Profile updated successfully",
           color: "success",
-        });
-      },
-      onError: () => {
-        addToast({
-          title: t("overviewForm.saveError") || "Failed to update profile",
-          color: "danger",
         });
       },
     });
@@ -102,35 +96,32 @@ export default function ContactInfoSettingsPage() {
 
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-          <Input
+          <FormInput
+            name="contactEmail"
+            control={control}
             label={t("contactInfoForm.contactEmail")}
             placeholder={t("contactInfoForm.contactEmailPlaceholder")}
             labelPlacement="outside"
             variant="bordered"
             radius="sm"
-            {...register("contactEmail")}
-            isInvalid={!!errors.contactEmail}
-            errorMessage={errors.contactEmail?.message}
           />
-          <Input
+          <FormInput
+            name="phone"
+            control={control}
             label={t("contactInfoForm.whatsapp")}
             placeholder={t("contactInfoForm.whatsappPlaceholder")}
             labelPlacement="outside"
             variant="bordered"
             radius="sm"
-            {...register("phone")}
-            isInvalid={!!errors.phone}
-            errorMessage={errors.phone?.message}
           />
-          <Input
+          <FormInput
+            name="address"
+            control={control}
             label={t("contactInfoForm.address")}
             placeholder={t("contactInfoForm.addressPlaceholder")}
             labelPlacement="outside"
             variant="bordered"
             radius="sm"
-            {...register("address")}
-            isInvalid={!!errors.address}
-            errorMessage={errors.address?.message}
           />
         </div>
 
@@ -144,14 +135,13 @@ export default function ContactInfoSettingsPage() {
               <div className="w-12 h-12 flex items-center justify-center bg-[#0077b5] rounded-lg text-white text-2xl shrink-0">
                 <FaLinkedinIn />
               </div>
-              <Input
+              <FormInput
+                name="linkedinUrl"
+                control={control}
                 placeholder={t("contactInfoForm.linkedinPlaceholder")}
                 variant="bordered"
                 radius="sm"
                 className="w-full"
-                {...register("linkedinUrl")}
-                isInvalid={!!errors.linkedinUrl}
-                errorMessage={errors.linkedinUrl?.message}
               />
             </div>
 
@@ -159,14 +149,13 @@ export default function ContactInfoSettingsPage() {
               <div className="w-12 h-12 flex items-center justify-center bg-[#1877f2] rounded-lg text-white text-2xl shrink-0">
                 <FaFacebookF />
               </div>
-              <Input
+              <FormInput
+                name="facebookUrl"
+                control={control}
                 placeholder={t("contactInfoForm.facebookPlaceholder")}
                 variant="bordered"
                 radius="sm"
                 className="w-full"
-                {...register("facebookUrl")}
-                isInvalid={!!errors.facebookUrl}
-                errorMessage={errors.facebookUrl?.message}
               />
             </div>
 
@@ -174,14 +163,13 @@ export default function ContactInfoSettingsPage() {
               <div className="w-12 h-12 flex items-center justify-center bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] rounded-lg text-white text-2xl shrink-0">
                 <FaInstagram />
               </div>
-              <Input
+              <FormInput
+                name="instagramUrl"
+                control={control}
                 placeholder={t("contactInfoForm.instagramPlaceholder")}
                 variant="bordered"
                 radius="sm"
                 className="w-full"
-                {...register("instagramUrl")}
-                isInvalid={!!errors.instagramUrl}
-                errorMessage={errors.instagramUrl?.message}
               />
             </div>
 
@@ -189,14 +177,13 @@ export default function ContactInfoSettingsPage() {
               <div className="w-12 h-12 flex items-center justify-center bg-[#ff0000] rounded-lg text-white text-2xl shrink-0">
                 <FaYoutube />
               </div>
-              <Input
+              <FormInput
+                name="youtubeUrl"
+                control={control}
                 placeholder={t("contactInfoForm.youtubePlaceholder")}
                 variant="bordered"
                 radius="sm"
                 className="w-full"
-                {...register("youtubeUrl")}
-                isInvalid={!!errors.youtubeUrl}
-                errorMessage={errors.youtubeUrl?.message}
               />
             </div>
           </div>
