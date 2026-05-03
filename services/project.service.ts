@@ -6,104 +6,68 @@ import {
   ProjectComment,
   ProjectRating,
 } from "../types/api";
-import apiClient from "./api-client";
+import apiClient, { unwrap } from "./api-client";
 
 export const projectService = {
-  getActiveDraft: async (): Promise<ApiResponse<ProjectDraft[]>> => {
-    const response = await apiClient.get("/projects/active-draft");
-    return response.data;
-  },
+  getActiveDraft: (): Promise<ApiResponse<ProjectDraft[]>> =>
+    unwrap(apiClient.get("/projects/active-draft")),
 
-  getMyProjects: async (): Promise<ApiResponse<Project[]>> => {
-    const response = await apiClient.get("/projects/my-projects");
-    return response.data;
-  },
+  getMyProjects: (): Promise<ApiResponse<Project[]>> =>
+    unwrap(apiClient.get("/projects/my-projects")),
 
-  getProjects: async (
+  getProjects: (filters?: ProjectFilters): Promise<ApiResponse<Project[]>> =>
+    unwrap(apiClient.get("/projects", { params: filters })),
+
+  getProjectsFeed: (
     filters?: ProjectFilters,
-  ): Promise<ApiResponse<Project[]>> => {
-    const response = await apiClient.get("/projects", { params: filters });
-    return response.data;
-  },
+  ): Promise<ApiResponse<Project[]>> =>
+    unwrap(apiClient.get("/projects/feed", { params: filters })),
 
-  getProjectsFeed: async (
-    filters?: ProjectFilters,
-  ): Promise<ApiResponse<Project[]>> => {
-    const response = await apiClient.get("/projects/feed", { params: filters });
-    return response.data;
-  },
+  getProjectById: (id: number | string): Promise<ApiResponse<Project>> =>
+    unwrap(apiClient.get(`/projects/${id}`)),
 
-  getProjectById: async (
-    id: number | string,
-  ): Promise<ApiResponse<Project>> => {
-    const response = await apiClient.get(`/projects/${id}`);
-    return response.data;
-  },
+  createProject: (): Promise<ApiResponse<Project>> =>
+    unwrap(apiClient.post("/projects", {})),
 
-  createProject: async (): Promise<ApiResponse<Project>> => {
-    const response = await apiClient.post("/projects", {});
-    return response.data;
-  },
-
-  updateProjectStep: async (
+  updateProjectStep: (
     id: number | string,
     step: number,
     data: any,
-  ): Promise<ApiResponse<Project>> => {
-    const response = await apiClient.patch(`/projects/${id}`, data, {
-      params: { step },
-    });
-    return response.data;
-  },
+  ): Promise<ApiResponse<Project>> =>
+    unwrap(apiClient.patch(`/projects/${id}`, data, { params: { step } })),
 
-  submitProject: async (id: number | string): Promise<ApiResponse<Project>> => {
-    const response = await apiClient.post(`/projects/${id}/submit`);
-    return response.data;
-  },
+  submitProject: (id: number | string): Promise<ApiResponse<Project>> =>
+    unwrap(apiClient.post(`/projects/${id}/submit`)),
 
-  deleteProject: async (id: number | string): Promise<ApiResponse<any>> => {
-    const response = await apiClient.delete(`/projects/${id}`);
-    return response.data;
-  },
+  deleteProject: (id: number | string): Promise<ApiResponse<any>> =>
+    unwrap(apiClient.delete(`/projects/${id}`)),
 
-  likeProject: async (id: number | string): Promise<ApiResponse<any>> => {
-    const response = await apiClient.post(`/projects/${id}/like`, {});
-    return response.data;
-  },
+  likeProject: (id: number | string): Promise<ApiResponse<any>> =>
+    unwrap(apiClient.post(`/projects/${id}/like`, {})),
 
-  getProjectComments: async (
+  getProjectComments: (
     id: number | string,
     page: number = 1,
     limit: number = 10,
-  ): Promise<ApiResponse<ProjectComment[]>> => {
-    const response = await apiClient.get(`/projects/${id}/comments`, {
-      params: { page, limit },
-    });
-    return response.data;
-  },
+  ): Promise<ApiResponse<ProjectComment[]>> =>
+    unwrap(
+      apiClient.get(`/projects/${id}/comments`, { params: { page, limit } }),
+    ),
 
-  commentOnProject: async (
+  commentOnProject: (
     id: number | string,
     content: string,
-  ): Promise<ApiResponse<ProjectComment>> => {
-    const response = await apiClient.post(`/projects/${id}/comments`, {
-      content,
-    });
-    return response.data;
-  },
+  ): Promise<ApiResponse<ProjectComment>> =>
+    unwrap(apiClient.post(`/projects/${id}/comments`, { content })),
 
-  rateProject: async (
+  rateProject: (
     id: number | string,
     rating: { score: number; feedback?: string },
-  ): Promise<ApiResponse<any>> => {
-    const response = await apiClient.post(`/projects/${id}/rating`, rating);
-    return response.data;
-  },
+  ): Promise<ApiResponse<any>> =>
+    unwrap(apiClient.post(`/projects/${id}/rating`, rating)),
 
-  getProjectRating: async (
+  getProjectRating: (
     id: number | string,
-  ): Promise<ApiResponse<ProjectRating>> => {
-    const response = await apiClient.get(`/projects/${id}/rating`);
-    return response.data;
-  },
+  ): Promise<ApiResponse<ProjectRating>> =>
+    unwrap(apiClient.get(`/projects/${id}/rating`)),
 };

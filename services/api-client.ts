@@ -44,4 +44,7 @@ apiClient.interceptors.response.use(
   },
 );
 
+export const unwrap = <T>(promise: Promise<{ data: T }>) =>
+  promise.then((res) => res.data);
+
 export default apiClient;

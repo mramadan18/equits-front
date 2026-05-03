@@ -9,71 +9,39 @@ import {
   User,
   Project,
 } from "../types/api";
-import apiClient from "./api-client";
+import apiClient, { unwrap } from "./api-client";
 
 export const profileService = {
-  getAllProfiles: async (): Promise<ApiResponse<User[]>> => {
-    const response = await apiClient.get("/profile");
-    return response.data;
-  },
+  getAllProfiles: (): Promise<ApiResponse<User[]>> =>
+    unwrap(apiClient.get("/profile")),
 
-  getProfileById: async (id: number): Promise<ApiResponse<User>> => {
-    const response = await apiClient.get(`/profile/${id}`);
-    return response.data;
-  },
+  getProfileById: (id: number): Promise<ApiResponse<User>> =>
+    unwrap(apiClient.get(`/profile/${id}`)),
 
-  getStatus: async (): Promise<ApiResponse<ProfileStatus>> => {
-    const response = await apiClient.get("/profile/status");
-    return response.data;
-  },
+  getStatus: (): Promise<ApiResponse<ProfileStatus>> =>
+    unwrap(apiClient.get("/profile/status")),
 
-  updateJobTitle: async (
-    data: UpdateJobTitleRequest,
-  ): Promise<ApiResponse<User>> => {
-    const response = await apiClient.patch("/profile/job-title", data);
-    return response.data;
-  },
+  updateJobTitle: (data: UpdateJobTitleRequest): Promise<ApiResponse<User>> =>
+    unwrap(apiClient.patch("/profile/job-title", data)),
 
-  updateOverview: async (
-    data: UpdateOverviewRequest,
-  ): Promise<ApiResponse<User>> => {
-    const response = await apiClient.patch("/profile/overview", data);
-    return response.data;
-  },
+  updateOverview: (data: UpdateOverviewRequest): Promise<ApiResponse<User>> =>
+    unwrap(apiClient.patch("/profile/overview", data)),
 
-  updateEducation: async (
-    data: UpdateEducationRequest,
-  ): Promise<ApiResponse<User>> => {
-    const response = await apiClient.patch("/profile/education", data);
-    return response.data;
-  },
+  updateEducation: (data: UpdateEducationRequest): Promise<ApiResponse<User>> =>
+    unwrap(apiClient.patch("/profile/education", data)),
 
-  updateContact: async (
-    data: UpdateContactRequest,
-  ): Promise<ApiResponse<User>> => {
-    const response = await apiClient.patch("/profile/contact", data);
-    return response.data;
-  },
+  updateContact: (data: UpdateContactRequest): Promise<ApiResponse<User>> =>
+    unwrap(apiClient.patch("/profile/contact", data)),
 
-  updatePictures: async (
-    data: UpdatePicturesRequest,
-  ): Promise<ApiResponse<User>> => {
-    const response = await apiClient.patch("/profile/pictures", data);
-    return response.data;
-  },
+  updatePictures: (data: UpdatePicturesRequest): Promise<ApiResponse<User>> =>
+    unwrap(apiClient.patch("/profile/pictures", data)),
 
-  getProfileProjects: async (id: string): Promise<ApiResponse<Project[]>> => {
-    const response = await apiClient.get(`/profile/${id}/projects`);
-    return response.data;
-  },
+  getProfileProjects: (id: string): Promise<ApiResponse<Project[]>> =>
+    unwrap(apiClient.get(`/profile/${id}/projects`)),
 
-  getRelatedProfiles: async (
+  getRelatedProfiles: (
     id: string,
     limit: number = 3,
-  ): Promise<ApiResponse<User[]>> => {
-    const response = await apiClient.get(`/profile/${id}/related`, {
-      params: { limit },
-    });
-    return response.data;
-  },
+  ): Promise<ApiResponse<User[]>> =>
+    unwrap(apiClient.get(`/profile/${id}/related`, { params: { limit } })),
 };

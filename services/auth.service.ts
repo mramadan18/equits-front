@@ -9,73 +9,53 @@ import {
   UpdateMeRequest,
   ChangePasswordRequest,
 } from "../types/api";
-import apiClient from "./api-client";
+import apiClient, { unwrap } from "./api-client";
 
 export const authService = {
-  login: async (data: LoginRequest): Promise<ApiResponse<AuthResponse>> => {
-    const response = await apiClient.post("/auth/login", data);
-    return response.data;
-  },
-  register: async (
-    data: RegisterRequest,
-  ): Promise<ApiResponse<AuthResponse>> => {
-    const response = await apiClient.post("/auth/register", data);
-    return response.data;
-  },
-  getMe: async (): Promise<User> => {
-    const response = await apiClient.get("/auth/me");
-    return response.data.data;
-  },
-  googleLogin: async (code: string): Promise<ApiResponse<AuthResponse>> => {
-    const response = await apiClient.post("/auth/google-login", {
-      idToken: code,
-    });
-    return response.data;
-  },
-  verifyEmail: async (otp: string): Promise<ApiResponse<SuccessResponse>> => {
-    const response = await apiClient.post("/auth/verify-email", { otp });
-    return response.data;
-  },
-  resendVerifyEmail: async (): Promise<ApiResponse<SuccessResponse>> => {
-    const response = await apiClient.post("/auth/verify-email/resend");
-    return response.data;
-  },
-  forgotPassword: async (
-    email: string,
-  ): Promise<ApiResponse<SuccessResponse>> => {
-    const response = await apiClient.post("/auth/forgot-password", { email });
-    return response.data;
-  },
-  verifyForgotPasswordOtp: async (
+  login: (data: LoginRequest): Promise<ApiResponse<AuthResponse>> =>
+    unwrap(apiClient.post("/auth/login", data)),
+
+  register: (data: RegisterRequest): Promise<ApiResponse<AuthResponse>> =>
+    unwrap(apiClient.post("/auth/register", data)),
+
+  getMe: (): Promise<User> =>
+    unwrap<ApiResponse<User>>(apiClient.get("/auth/me")).then(
+      (res) => res.data,
+    ),
+
+  googleLogin: (code: string): Promise<ApiResponse<AuthResponse>> =>
+    unwrap(apiClient.post("/auth/google-login", { idToken: code })),
+
+  verifyEmail: (otp: string): Promise<ApiResponse<SuccessResponse>> =>
+    unwrap(apiClient.post("/auth/verify-email", { otp })),
+
+  resendVerifyEmail: (): Promise<ApiResponse<SuccessResponse>> =>
+    unwrap(apiClient.post("/auth/verify-email/resend")),
+
+  forgotPassword: (email: string): Promise<ApiResponse<SuccessResponse>> =>
+    unwrap(apiClient.post("/auth/forgot-password", { email })),
+
+  verifyForgotPasswordOtp: (
     otp: string,
-  ): Promise<ApiResponse<SuccessResponse>> => {
-    const response = await apiClient.post("/auth/forgot-password/verify", {
-      otp,
-    });
-    return response.data;
-  },
-  resetPassword: async (
+  ): Promise<ApiResponse<SuccessResponse>> =>
+    unwrap(apiClient.post("/auth/forgot-password/verify", { otp })),
+
+  resetPassword: (
     data: ResetPasswordRequest,
-  ): Promise<ApiResponse<AuthResponse>> => {
-    const response = await apiClient.patch("/auth/forgot-password/reset", data);
-    return response.data;
-  },
-  updateMe: async (data: UpdateMeRequest): Promise<ApiResponse<User>> => {
-    const response = await apiClient.patch("/auth/update-me", data);
-    return response.data;
-  },
-  changePassword: async (
+  ): Promise<ApiResponse<AuthResponse>> =>
+    unwrap(apiClient.patch("/auth/forgot-password/reset", data)),
+
+  updateMe: (data: UpdateMeRequest): Promise<ApiResponse<User>> =>
+    unwrap(apiClient.patch("/auth/update-me", data)),
+
+  changePassword: (
     data: ChangePasswordRequest,
-  ): Promise<ApiResponse<SuccessResponse>> => {
-    const response = await apiClient.patch("/auth/change-password", data);
-    return response.data;
-  },
-  logout: async (): Promise<ApiResponse<SuccessResponse>> => {
-    const response = await apiClient.post("/auth/logout");
-    return response.data;
-  },
-  deleteMe: async (): Promise<ApiResponse<SuccessResponse>> => {
-    const response = await apiClient.delete("/auth/delete-me");
-    return response.data;
-  },
+  ): Promise<ApiResponse<SuccessResponse>> =>
+    unwrap(apiClient.patch("/auth/change-password", data)),
+
+  logout: (): Promise<ApiResponse<SuccessResponse>> =>
+    unwrap(apiClient.post("/auth/logout")),
+
+  deleteMe: (): Promise<ApiResponse<SuccessResponse>> =>
+    unwrap(apiClient.delete("/auth/delete-me")),
 };
