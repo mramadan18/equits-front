@@ -3,14 +3,12 @@
 import { useTranslations, useLocale } from "next-intl";
 import { useDisclosure } from "@heroui/modal";
 import { User } from "@/types/api";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { useUploadSingle } from "@/hooks/api/useUpload";
-import { useProfileStatus, useUpdatePictures } from "@/hooks/api/useProfile";
-import { getCroppedImg } from "@/utils/cropImage";
-import { Area } from "react-easy-crop";
+import { useProfileStatus } from "@/hooks/api/useProfile";
 import { ImageCropModal } from "@/components/common/ImageCropModal";
 import { useAuthStore } from "@/stores/useAuthStore";
+import { useImageUpload } from "@/hooks/ui/useImageUpload";
 
 // Sub-components
 import { ProfileCover } from "./profile-overview/ProfileCover";
@@ -35,71 +33,38 @@ export const TalentProfileOverview = ({ talent }: { talent: User }) => {
   const { data: statusResponse } = useProfileStatus(isOwnProfile);
   const progress = statusResponse?.data?.progress || 0;
 
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [cropType, setCropType] = useState<"avatar" | "cover">("avatar");
-  const [isProcessing, setIsProcessing] = useState(false);
 
-  const { mutateAsync: uploadSingle } = useUploadSingle();
-  const { mutateAsync: updatePictures } = useUpdatePictures();
+  const {
+    selectedImage,
+    isProcessing,
+    handleFileChange,
+    uploadAndSave,
+    cancelSelection,
+  } = useImageUpload({
+    onSuccess: () => {
+      cropDisclosure.onClose();
+      router.refresh();
+    },
+  });
 
-  const handleFileChange = (
+  // Open modal when image is selected
+  useEffect(() => {
+    if (selectedImage) {
+      cropDisclosure.onOpen();
+    }
+  }, [selectedImage, cropDisclosure]);
+
+  const onFileChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     type: "avatar" | "cover",
   ) => {
-    if (e.target.files && e.target.files.length > 0) {
-      const file = e.target.files[0];
-      const reader = new FileReader();
-      reader.onload = () => {
-        setSelectedImage(reader.result as string);
-        setCropType(type);
-        cropDisclosure.onOpen();
-      };
-      reader.readAsDataURL(file);
-    }
+    setCropType(type);
+    handleFileChange(e);
   };
 
-  const handleCropComplete = async (
-    croppedAreaPixels: Area,
-    rotation: number,
-  ) => {
-    if (!selectedImage) return;
-
-    try {
-      setIsProcessing(true);
-
-      const croppedBlob = await getCroppedImg(
-        selectedImage,
-        croppedAreaPixels,
-        rotation,
-      );
-      if (!croppedBlob) throw new Error("Failed to crop image");
-
-      const file = new File(
-        [croppedBlob],
-        cropType === "avatar" ? "avatar.jpg" : "cover.jpg",
-        {
-          type: "image/jpeg",
-        },
-      );
-
-      const uploadResponse = await uploadSingle({
-        file,
-        folder: cropType === "avatar" ? "avatars" : "covers",
-      });
-      const imageUrl = uploadResponse.data.url;
-
-      await updatePictures({
-        [cropType]: imageUrl,
-      });
-
-      router.refresh();
-
-      cropDisclosure.onClose();
-      setSelectedImage(null);
-    } catch {
-    } finally {
-      setIsProcessing(false);
-    }
+  const handleCropComplete = (croppedAreaPixels: any, rotation: number) => {
+    uploadAndSave(croppedAreaPixels, rotation, cropType);
   };
 
   return (
@@ -109,7 +74,7 @@ export const TalentProfileOverview = ({ talent }: { talent: User }) => {
         isOwnProfile={isOwnProfile}
         isProcessing={isProcessing}
         cropType={cropType}
-        onFileChange={handleFileChange}
+        onFileChange={onFileChange}
       />
 
       <div className="relative px-6 md:px-8 pb-8 flex flex-col pt-0">
@@ -118,7 +83,7 @@ export const TalentProfileOverview = ({ talent }: { talent: User }) => {
           isOwnProfile={isOwnProfile}
           isProcessing={isProcessing}
           cropType={cropType}
-          onFileChange={handleFileChange}
+          onFileChange={onFileChange}
         />
 
         <ProfileBio talent={talent} />
@@ -146,7 +111,10 @@ export const TalentProfileOverview = ({ talent }: { talent: User }) => {
       {selectedImage && (
         <ImageCropModal
           isOpen={cropDisclosure.isOpen}
-          onOpenChange={cropDisclosure.onOpenChange}
+          onOpenChange={() => {
+            cropDisclosure.onOpenChange();
+            cancelSelection();
+          }}
           image={selectedImage}
           onCropComplete={handleCropComplete}
           aspectRatio={cropType === "avatar" ? 1 / 1 : 16 / 9}

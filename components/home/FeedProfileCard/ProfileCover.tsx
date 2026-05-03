@@ -1,77 +1,48 @@
-import React, { useRef, useState } from "react";
+"use client";
+
+import React, { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import { Button } from "@heroui/button";
 import { FiCamera } from "react-icons/fi";
 import { User } from "@/types/api";
 import { useDisclosure } from "@heroui/modal";
-import { ImageCropModal } from "@/components/common/ImageCropModal";
-import { useUploadSingle } from "@/hooks/api/useUpload";
-import { useUpdatePictures } from "@/hooks/api/useProfile";
-import { getCroppedImg } from "@/utils/cropImage";
-import { Spinner } from "@heroui/spinner";
 import { Area } from "react-easy-crop";
+import { ImageCropModal } from "@/components/common/ImageCropModal";
+import { Spinner } from "@heroui/spinner";
+import { useImageUpload } from "@/hooks/ui/useImageUpload";
 
 export const ProfileCover = ({ user }: { user: User | null }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  const [isProcessing, setIsProcessing] = useState(false);
   const [imageError, setImageError] = useState(false);
 
-  const { mutateAsync: uploadSingle } = useUploadSingle();
-  const { mutateAsync: updatePictures } = useUpdatePictures();
+  const {
+    selectedImage,
+    isProcessing,
+    handleFileChange,
+    uploadAndSave,
+    cancelSelection,
+  } = useImageUpload({
+    onSuccess: () => onOpenChange(),
+  });
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length > 0) {
-      const file = e.target.files[0];
-      const reader = new FileReader();
-      reader.onload = () => {
-        setSelectedImage(reader.result as string);
-        onOpen();
-      };
-      reader.readAsDataURL(file);
+  // Open modal when image is selected
+  useEffect(() => {
+    if (selectedImage) {
+      onOpen();
     }
+  }, [selectedImage, onOpen]);
+
+  const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    handleFileChange(e);
   };
 
   const handleCameraButtonClick = () => {
     fileInputRef.current?.click();
   };
 
-  const handleCropComplete = async (
-    croppedAreaPixels: Area,
-    rotation: number,
-  ) => {
-    if (!selectedImage) return;
-
-    try {
-      setIsProcessing(true);
-
-      // 1. Crop image
-      const croppedBlob = await getCroppedImg(
-        selectedImage,
-        croppedAreaPixels,
-        rotation,
-      );
-      if (!croppedBlob) throw new Error("Failed to crop image");
-
-      const file = new File([croppedBlob], "cover.jpg", { type: "image/jpeg" });
-
-      // 2. Upload to server
-      const uploadResponse = await uploadSingle({ file, folder: "covers" });
-      const coverUrl = uploadResponse.data.url;
-
-      // 3. Update profile
-      await updatePictures({ cover: coverUrl });
-
-      onOpenChange();
-      setSelectedImage(null);
-      setImageError(false); // Reset error state on new upload
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error("Error updating cover:", error);
-    } finally {
-      setIsProcessing(false);
-    }
+  const handleCropComplete = (croppedAreaPixels: Area, rotation: number) => {
+    uploadAndSave(croppedAreaPixels, rotation, "cover");
   };
 
   return (
@@ -81,7 +52,7 @@ export const ProfileCover = ({ user }: { user: User | null }) => {
         ref={fileInputRef}
         className="hidden"
         accept="image/*"
-        onChange={handleFileChange}
+        onChange={onFileChange}
       />
 
       {user?.cover && !imageError ? (
@@ -118,7 +89,10 @@ export const ProfileCover = ({ user }: { user: User | null }) => {
       {selectedImage && (
         <ImageCropModal
           isOpen={isOpen}
-          onOpenChange={onOpenChange}
+          onOpenChange={() => {
+            onOpenChange();
+            cancelSelection();
+          }}
           image={selectedImage}
           onCropComplete={handleCropComplete}
           aspectRatio={16 / 9}
