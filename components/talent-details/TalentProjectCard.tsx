@@ -16,16 +16,16 @@ export const TalentProjectCard = ({ project }: { project: Project }) => {
       {/* Image */}
       <div className="w-full md:w-56 h-36 md:h-auto relative flex-shrink-0">
         <Image
-          src={project.cover}
-          alt={project.title}
+          src={project?.cover}
+          alt={project?.title}
           fill
           className="size-full object-cover rounded-xl overflow-hidden"
         />
-        {project.logo && (
+        {project?.logo && (
           <div className="absolute -top-2 -end-4 w-12 h-12 rounded-full border-2 border-white bg-gray-200 overflow-hidden">
             <Image
-              src={project.logo}
-              alt={project.title}
+              src={project?.logo}
+              alt={project?.title}
               fill
               className="object-cover"
             />
@@ -37,13 +37,13 @@ export const TalentProjectCard = ({ project }: { project: Project }) => {
       <div className="flex-1 flex flex-col">
         <div className="flex flex-col md:flex-row md:items-center gap-2 mb-3">
           <h3 className="font-medium text-dark text-base md:text-lg">
-            {project.title}
+            {project?.title}
           </h3>
           {/* <span className="text-gray2 font-medium">@ {project.title}</span> */}
         </div>
 
         <p className="text-gray2 mb-6 line-clamp-3 leading-relaxed">
-          {project.elevatorPitch}
+          {project?.elevatorPitch}
         </p>
 
         {/* Stats & Actions Row */}
@@ -51,21 +51,21 @@ export const TalentProjectCard = ({ project }: { project: Project }) => {
           <div className="flex items-center gap-4 text-sm font-semibold">
             <Stat
               icon={<FaHeart className="text-red-500 text-lg" />}
-              value={project.likesCount}
+              value={project?.likesCount}
             />
             <Stat
               icon={<FaCommentDots className="text-green-500 text-xl" />}
-              value={project.commentsCount}
+              value={project?.commentsCount}
             />
             <Stat
               icon={<FaStar className="text-orange-400 text-lg" />}
-              value={project.rating}
+              value={project?.rating}
             />
           </div>
 
           <Button
             as={Link}
-            href={`${MainRoutes.PROJECTS}/${project.id}`}
+            href={`${MainRoutes.PROJECTS}/${project?.id}`}
             className="text-primary font-bold"
             endContent={<FaArrowRightLong className="rtl:rotate-180" />}
             color="primary"

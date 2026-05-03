@@ -31,10 +31,9 @@ export const TalentProfileOverview = ({ talent }: { talent: User }) => {
   const profileCompleteDisclosure = useDisclosure();
   const cropDisclosure = useDisclosure();
 
-  const { data: statusResponse } = useProfileStatus();
-  const progress = statusResponse?.data?.progress || 0;
-
   const isOwnProfile = user?.id === talent?.id;
+  const { data: statusResponse } = useProfileStatus(isOwnProfile);
+  const progress = statusResponse?.data?.progress || 0;
 
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [cropType, setCropType] = useState<"avatar" | "cover">("avatar");

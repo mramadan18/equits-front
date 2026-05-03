@@ -37,9 +37,9 @@ export const PeopleYouMayNeedSidebar = ({ talents }: { talents: User[] }) => {
 
       {/* List */}
       <div className="flex flex-col">
-        {talents.map((talent, index) => (
+        {talents?.map((talent, index) => (
           <div
-            key={talent.id}
+            key={talent?.id}
             className="flex flex-col px-6 py-4 hover:bg-gray-50 transition-colors"
           >
             {/* Person Header Info */}
@@ -49,19 +49,19 @@ export const PeopleYouMayNeedSidebar = ({ talents }: { talents: User[] }) => {
               <div className="flex-1 flex flex-col justify-center">
                 <div className="flex items-center gap-1 mb-0.5">
                   <h3 className="font-medium text-dark text-lg whitespace-nowrap overflow-hidden text-ellipsis max-w-[150px]">
-                    {talent.firstName} {talent.lastName}
+                    {talent?.firstName} {talent?.lastName}
                   </h3>
-                  {talent.isTrusted ? (
+                  {talent?.isTrusted ? (
                     <MdVerified className="text-primary text-xl flex-shrink-0" />
                   ) : (
                     <MdVerified className="text-gray-400 text-xl flex-shrink-0" />
                   )}
                 </div>
                 <div className="text-sm font-medium text-gray-700 leading-tight">
-                  {talent.experienceLevel && (
-                    <span className="me-1">{talent.experienceLevel}</span>
+                  {talent?.experienceLevel && (
+                    <span className="me-1">{talent?.experienceLevel}</span>
                   )}
-                  {talent.userType}
+                  {talent?.userType}
                 </div>
                 {/* <div className="text-sm text-gray-500 font-medium">
                 @ {talent.company}
@@ -71,7 +71,7 @@ export const PeopleYouMayNeedSidebar = ({ talents }: { talents: User[] }) => {
 
             {/* Description */}
             <p className="text-sm text-gray2 font-medium line-clamp-3 leading-relaxed mb-4">
-              {talent.overview}
+              {talent?.overview}
             </p>
 
             {/* Action Button */}
@@ -88,7 +88,7 @@ export const PeopleYouMayNeedSidebar = ({ talents }: { talents: User[] }) => {
             </Button>
 
             {/* Divider if not the last item */}
-            {index < talents.length - 1 && <Divider className="mt-6" />}
+            {index < talents?.length - 1 && <Divider className="mt-6" />}
           </div>
         ))}
       </div>

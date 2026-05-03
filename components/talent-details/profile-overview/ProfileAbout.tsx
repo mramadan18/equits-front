@@ -17,7 +17,7 @@ export const ProfileAbout = ({ talent, t }: ProfileAboutProps) => {
           {t("about")}
         </h2>
         <p className="text-gray2 leading-relaxed font-medium">
-          {talent.overview}
+          {talent?.overview}
         </p>
       </div>
     </>

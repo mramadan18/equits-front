@@ -33,10 +33,11 @@ export const useProfile = (id: number) => {
   });
 };
 
-export const useProfileStatus = () => {
+export const useProfileStatus = (enabled: boolean = true) => {
   return useQuery<ApiResponse<ProfileStatus>, ApiError>({
     queryKey: queryKeys.profiles.status,
     queryFn: () => profileService.getStatus(),
+    enabled,
   });
 };
 

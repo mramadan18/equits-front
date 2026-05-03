@@ -1,3 +1,5 @@
+"use client";
+
 import { useAuthStore } from "@/stores/useAuthStore";
 import {
   Navbar as HeroUINavbar,
