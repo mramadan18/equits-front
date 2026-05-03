@@ -1,47 +1,22 @@
-import { useTranslations } from "next-intl";
+"use client";
+
 import { Radio } from "@heroui/radio";
-import { useUpdateOverview } from "@/hooks/api/useProfile";
 import { UserType } from "@/types/api";
-import {
-  getUpdateOverviewSchema,
-  UpdateOverviewFormData,
-} from "@/validations/profile.validation";
-import { useSettingsForm } from "@/hooks/ui/useSettingsForm";
 import { FormInput, FormTextarea, FormRadioGroup } from "@/components/ui/form";
 import { SettingsFormActions } from "@/components/shared/SettingsFormActions";
 import { SettingsPageHeader } from "@/components/shared/SettingsPageHeader";
+import { useOverviewController } from "@/hooks/ui/useOverviewController";
 
 export default function OverviewSettingsPage() {
-  const t = useTranslations("Settings");
-  const validationT = useTranslations("Auth.Validation");
-  const updateMutation = useUpdateOverview();
-
-  const { control, onSubmit, handleCancel, isPending, isDirty } =
-    useSettingsForm<UpdateOverviewFormData>({
-      schema: getUpdateOverviewSchema(validationT),
-      mutation: updateMutation,
-      successMessage: t("overviewForm.saveSuccess"),
-      userToForm: (user) => ({
-        firstName: user?.firstName || "",
-        lastName: user?.lastName || "",
-        userType: user?.userType as UserType,
-        overview: user?.overview || "",
-        videoLink: user?.videoLink || "",
-      }),
-    });
+  const { t, control, onSubmit, handleCancel, isPending, isDirty } =
+    useOverviewController();
 
   return (
     <div className="flex flex-col gap-12">
       <SettingsPageHeader
         title={t("overviewForm.title")}
         description={t("overviewForm.description")}
-      >
-        <ul className="list-disc list-inside text-gray2 text-sm ml-2">
-          <li>{t("overviewForm.bullet1")}</li>
-          <li>{t("overviewForm.bullet2")}</li>
-          <li>{t("overviewForm.bullet3")}</li>
-        </ul>
-      </SettingsPageHeader>
+      />
 
       <form onSubmit={onSubmit} className="flex flex-col gap-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

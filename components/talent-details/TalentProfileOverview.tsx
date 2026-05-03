@@ -1,14 +1,9 @@
 "use client";
 
 import { useTranslations, useLocale } from "next-intl";
-import { useDisclosure } from "@heroui/modal";
 import { User } from "@/types/api";
-import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { useProfileStatus } from "@/hooks/api/useProfile";
 import { ImageCropModal } from "@/components/common/ImageCropModal";
-import { useAuthStore } from "@/stores/useAuthStore";
-import { useImageUpload } from "@/hooks/ui/useImageUpload";
+import { useTalentProfileController } from "@/hooks/ui/useTalentProfileController";
 
 // Sub-components
 import { ProfileCover } from "./profile-overview/ProfileCover";
@@ -20,52 +15,20 @@ import { ProfileAbout } from "./profile-overview/ProfileAbout";
 export const TalentProfileOverview = ({ talent }: { talent: User }) => {
   const t = useTranslations("TalentDetails");
   const locale = useLocale();
-  const { user } = useAuthStore();
-  const router = useRouter();
-
-  // Disclosures
-  const contactDisclosure = useDisclosure();
-  const meetingDisclosure = useDisclosure();
-  const profileCompleteDisclosure = useDisclosure();
-  const cropDisclosure = useDisclosure();
-
-  const isOwnProfile = user?.id === talent?.id;
-  const { data: statusResponse } = useProfileStatus(isOwnProfile);
-  const progress = statusResponse?.data?.progress || 0;
-
-  const [cropType, setCropType] = useState<"avatar" | "cover">("avatar");
-
   const {
+    isOwnProfile,
+    progress,
+    cropType,
     selectedImage,
     isProcessing,
-    handleFileChange,
-    uploadAndSave,
-    cancelSelection,
-  } = useImageUpload({
-    onSuccess: () => {
-      cropDisclosure.onClose();
-      router.refresh();
-    },
-  });
-
-  // Open modal when image is selected
-  useEffect(() => {
-    if (selectedImage) {
-      cropDisclosure.onOpen();
-    }
-  }, [selectedImage, cropDisclosure]);
-
-  const onFileChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    type: "avatar" | "cover",
-  ) => {
-    setCropType(type);
-    handleFileChange(e);
-  };
-
-  const handleCropComplete = (croppedAreaPixels: any, rotation: number) => {
-    uploadAndSave(croppedAreaPixels, rotation, cropType);
-  };
+    contactDisclosure,
+    meetingDisclosure,
+    profileCompleteDisclosure,
+    cropDisclosure,
+    onFileChange,
+    handleCropComplete,
+    handleCropClose,
+  } = useTalentProfileController(talent);
 
   return (
     <div className="bg-white rounded-2xl shadow-sm border border-gray2 overflow-hidden mb-6 flex flex-col">
@@ -111,10 +74,7 @@ export const TalentProfileOverview = ({ talent }: { talent: User }) => {
       {selectedImage && (
         <ImageCropModal
           isOpen={cropDisclosure.isOpen}
-          onOpenChange={() => {
-            cropDisclosure.onOpenChange();
-            cancelSelection();
-          }}
+          onOpenChange={handleCropClose}
           image={selectedImage}
           onCropComplete={handleCropComplete}
           aspectRatio={cropType === "avatar" ? 1 / 1 : 16 / 9}

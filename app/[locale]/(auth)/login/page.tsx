@@ -1,8 +1,7 @@
 "use client";
 
-import { useTranslations } from "next-intl";
 import { MdOutlineMailOutline } from "react-icons/md";
-import { Link, useRouter } from "@/i18n/navigation";
+import { Link } from "@/i18n/navigation";
 import {
   AuthLayout,
   AuthHeader,
@@ -11,59 +10,21 @@ import {
   AuthSubmitButton,
 } from "@/components/auth";
 import { StaggerContainer, StaggerItem } from "@/components/shared/animations";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { getLoginSchema, LoginInput } from "@/validations/auth.validation";
-import { useLogin, useGoogleLogin } from "@/hooks/api/useAuth";
-import { addToast } from "@heroui/toast";
-import { useGoogleLogin as useGoogleAuth } from "@react-oauth/google";
-import { ApiResponse, AuthResponse } from "@/types/api";
-import { AuthRoutes, MainRoutes } from "@/types";
+import { AuthRoutes } from "@/types";
 import { FormInput, FormCheckbox } from "@/components/ui/form";
+import { useLoginController } from "@/hooks/ui/useLoginController";
 
 export default function LoginPage() {
-  const validationT = useTranslations("Auth.Validation");
-  const authT = useTranslations("Auth.Login");
-  const router = useRouter();
-
   const {
-    handleSubmit,
+    authT,
     control,
-    formState: { isValid },
-  } = useForm<LoginInput>({
-    mode: "all",
-    resolver: zodResolver(getLoginSchema(validationT)),
-  });
-
-  const { mutate: login, isPending } = useLogin();
-  const { mutate: googleLogin, isPending: isGooglePending } = useGoogleLogin();
-
-  const handleGoogleLogin = useGoogleAuth({
-    flow: "auth-code",
-    onSuccess: (codeResponse) => {
-      googleLogin(codeResponse.code, {
-        onSuccess: (response: ApiResponse<AuthResponse>) => {
-          addToast({
-            title: response.message || "Logged in with Google successfully",
-            color: "success",
-          });
-          router.push(MainRoutes.HOME);
-        },
-      });
-    },
-  });
-
-  const onSubmit = (data: LoginInput) => {
-    login(data, {
-      onSuccess: (response: ApiResponse<AuthResponse>) => {
-        addToast({
-          title: response.message || authT("loginSuccess"),
-          color: "success",
-        });
-        router.push(MainRoutes.HOME);
-      },
-    });
-  };
+    isPending,
+    isGooglePending,
+    isValid,
+    handleSubmit,
+    onSubmit,
+    handleGoogleLogin,
+  } = useLoginController();
 
   return (
     <AuthLayout imageSrc="/images/login.png" imageAlt="Login illustration">
