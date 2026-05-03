@@ -4,6 +4,8 @@ import { useTranslations } from "next-intl";
 import { Input } from "@heroui/input";
 import { Button } from "@heroui/button";
 import { IoSearchOutline, IoAddOutline } from "react-icons/io5";
+import { Link } from "@/i18n/navigation";
+import { MainRoutes } from "@/types";
 
 export const HomeSearchBar = ({
   value,
@@ -48,6 +50,8 @@ export const HomeSearchBar = ({
 
       {/* Desktop Add Button: Text + Icon */}
       <Button
+        as={Link}
+        href={MainRoutes.NEW_PROJECT}
         color="primary"
         variant="flat"
         radius="full"

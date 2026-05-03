@@ -20,6 +20,7 @@ import {
 } from "react-icons/fa6";
 import { Project } from "@/types/api";
 import { useMe } from "@/hooks/api/useAuth";
+import { Link } from "@/i18n/navigation";
 
 interface IdeaActionSidebarProps {
   project: Project;
@@ -50,12 +51,28 @@ export function IdeaActionSidebar({ project }: IdeaActionSidebarProps) {
         </h3>
 
         <div className="bg-white border border-gray-200 rounded-2xl p-5 shadow-card flex flex-col gap-3.5">
+          {!user && (
+            <div className="bg-primary/5 border border-primary/20 rounded-xl p-4 mb-2">
+              <p className="text-sm text-dark2 font-medium mb-3">
+                {ts("loginRequired")}
+              </p>
+              <Button
+                as={Link}
+                href="/login"
+                color="primary"
+                size="sm"
+                className="w-full font-semibold"
+              >
+                {ts("loginNow")}
+              </Button>
+            </div>
+          )}
           <Button
             variant="bordered"
             className="w-full justify-start py-6 border-gray-200 text-dark2 font-semibold hover:bg-gray-50 transition-colors text-base"
             startContent={<FaStar className="w-5 h-5 text-secondary mr-2" />}
             onPress={onRatingOpen}
-            isDisabled={isOwner}
+            isDisabled={isOwner || !user}
           >
             {t("ratingTitle")}
           </Button>
@@ -67,6 +84,7 @@ export function IdeaActionSidebar({ project }: IdeaActionSidebarProps) {
               <FiMessageSquare className="w-5 h-5 text-[#8ac760] mr-2" />
             }
             onPress={onCommentOpen}
+            isDisabled={!user}
           >
             {t("commentTitle")}
           </Button>
@@ -90,6 +108,7 @@ export function IdeaActionSidebar({ project }: IdeaActionSidebarProps) {
             variant="bordered"
             className="w-full justify-start py-6 border-gray-200 text-dark2 font-semibold hover:bg-gray-50 transition-colors text-base"
             startContent={<FiBookmark className="w-5 h-5 text-gray-400 mr-2" />}
+            isDisabled={!user}
           >
             {ts("saveForLater")}
           </Button>
@@ -98,6 +117,7 @@ export function IdeaActionSidebar({ project }: IdeaActionSidebarProps) {
             color="primary"
             className="w-full justify-start py-6 mt-1 font-semibold text-base shadow-md"
             startContent={<FiVideo className="w-5 h-5 mr-2" />}
+            isDisabled={!user}
           >
             {ts("requestMeeting")}
           </Button>

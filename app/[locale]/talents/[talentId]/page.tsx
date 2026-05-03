@@ -5,6 +5,7 @@ import {
 } from "@/components/talent-details";
 import { fetchServer } from "@/utils/api-utils";
 import { Project, User } from "@/types/api";
+import { getTranslations } from "next-intl/server";
 
 export default async function TalentDetailsPage({
   params,
@@ -12,6 +13,21 @@ export default async function TalentDetailsPage({
   params: Promise<{ talentId: string }>;
 }) {
   const { talentId } = await params;
+  const t = await getTranslations("TalentDetails");
+
+  // Basic validation for talentId
+  if (!talentId || talentId === "null" || isNaN(Number(talentId))) {
+    return (
+      <div className="flex items-center justify-center min-h-[60vh]">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-gray-800 mb-2">
+            {t("notFoundTitle")}
+          </h1>
+          <p className="text-gray-600">{t("notFoundDescription")}</p>
+        </div>
+      </div>
+    );
+  }
 
   const [talentRes, projectsRes, relatedRes] = await Promise.allSettled([
     fetchServer<User>(`/profile/${talentId}`, { cache: "no-store" }),
@@ -24,8 +40,20 @@ export default async function TalentDetailsPage({
     }),
   ]);
 
-  const talent =
-    talentRes.status === "fulfilled" ? talentRes.value.data : ({} as User);
+  if (talentRes.status === "rejected" || !talentRes.value?.data) {
+    return (
+      <div className="flex items-center justify-center min-h-[60vh]">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-gray-800 mb-2">
+            {t("notFoundTitle")}
+          </h1>
+          <p className="text-gray-600">{t("retrievalError")}</p>
+        </div>
+      </div>
+    );
+  }
+
+  const talent = talentRes.value.data;
   const projects =
     projectsRes.status === "fulfilled" ? projectsRes.value.data : [];
   const talents =

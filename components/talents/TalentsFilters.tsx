@@ -40,8 +40,8 @@ export const TalentsFilters = () => {
             </Button>
           </DropdownTrigger>
           <DropdownMenu aria-label="Talents Filter">
-            <DropdownItem key="all">All Talents</DropdownItem>
-            <DropdownItem key="new">New Talents</DropdownItem>
+            <DropdownItem key="all">{t("all")}</DropdownItem>
+            <DropdownItem key="new">{t("new")}</DropdownItem>
           </DropdownMenu>
         </Dropdown>
 

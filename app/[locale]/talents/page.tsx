@@ -10,8 +10,7 @@ export default async function TalentsPage({
   searchParams: Promise<{ [key: string]: string }>;
 }) {
   const params = await searchParams;
-  const search = params.search || "";
-  const page = params.page || "1";
+  const { search, page = "1" } = params;
 
   let allProfiles: User[] = [];
   let pagination: PaginationData = {

@@ -10,10 +10,7 @@ export default async function ExplorePage({
   searchParams: Promise<{ [key: string]: string }>;
 }) {
   const params = await searchParams;
-  const search = params.search || "";
-  const page = params.page || "1";
-  const industryId = params.industryId || "";
-  const stage = params.stage || "";
+  const { search, page = "1", industryId, stage } = params;
 
   let projects: Project[] = [];
   let pagination: PaginationData = {

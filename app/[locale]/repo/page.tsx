@@ -7,7 +7,7 @@ import { MyProjectCard } from "@/components/repo/MyProjectCard";
 import { Spinner } from "@heroui/spinner";
 import { Button } from "@heroui/button";
 import { Chip } from "@heroui/chip";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import {
   HiOutlineDocumentAdd,
@@ -25,34 +25,43 @@ type StatusFilter =
   | "PUBLISHED"
   | "REJECTED";
 
-const FILTERS: { key: StatusFilter; label: string; icon: React.ReactNode }[] = [
-  { key: "ALL", label: "All", icon: <HiOutlineViewGrid className="w-4 h-4" /> },
-  {
-    key: "DRAFT",
-    label: "Drafts",
-    icon: <HiOutlineFolder className="w-4 h-4" />,
-  },
-  {
-    key: "PENDING_APPROVAL",
-    label: "Pending",
-    icon: <HiOutlineClipboardCheck className="w-4 h-4" />,
-  },
-  {
-    key: "PUBLISHED",
-    label: "Published",
-    icon: <HiOutlineGlobe className="w-4 h-4" />,
-  },
-  {
-    key: "REJECTED",
-    label: "Rejected",
-    icon: <HiOutlineXCircle className="w-4 h-4" />,
-  },
-];
-
 export default function RepoPage() {
   const router = useRouter();
   const locale = useLocale();
+  const t = useTranslations("Repo");
   const [activeFilter, setActiveFilter] = useState<StatusFilter>("ALL");
+
+  const filters: { key: StatusFilter; label: string; icon: React.ReactNode }[] =
+    useMemo(
+      () => [
+        {
+          key: "ALL",
+          label: t("filters.all"),
+          icon: <HiOutlineViewGrid className="w-4 h-4" />,
+        },
+        {
+          key: "DRAFT",
+          label: t("filters.drafts"),
+          icon: <HiOutlineFolder className="w-4 h-4" />,
+        },
+        {
+          key: "PENDING_APPROVAL",
+          label: t("filters.pending"),
+          icon: <HiOutlineClipboardCheck className="w-4 h-4" />,
+        },
+        {
+          key: "PUBLISHED",
+          label: t("filters.published"),
+          icon: <HiOutlineGlobe className="w-4 h-4" />,
+        },
+        {
+          key: "REJECTED",
+          label: t("filters.rejected"),
+          icon: <HiOutlineXCircle className="w-4 h-4" />,
+        },
+      ],
+      [t],
+    );
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["myProjects"],
@@ -99,20 +108,14 @@ export default function RepoPage() {
     return (
       <div className="container py-16 flex flex-col items-center gap-4 text-center">
         <HiOutlineXCircle className="w-14 h-14 text-danger/60" />
-        <h2 className="text-xl font-semibold text-dark">
-          Something went wrong
-        </h2>
-        <p className="text-sm text-gray2 max-w-md">
-          We couldn&apos;t load your projects. Please check your connection and
-          try again.
-        </p>
-        <Button
-          color="primary"
-          variant="flat"
-          onPress={() => window.location.reload()}
+        <h2 className="text-xl font-semibold text-dark">{t("errors.title")}</h2>
+        <p className="text-sm text-gray2 max-w-md">{t("errors.description")}</p>
+        <button
+          className="bg-primary text-white px-6 py-2 rounded-lg font-semibold hover:bg-primary/90 transition-colors"
+          onClick={() => window.location.reload()}
         >
-          Retry
-        </Button>
+          {t("errors.retry")}
+        </button>
       </div>
     );
   }
@@ -123,17 +126,15 @@ export default function RepoPage() {
       <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
         <div>
           <h1 className="text-3xl font-bold text-dark leading-tight">
-            My Projects
+            {t("title")}
           </h1>
-          <p className="text-sm text-gray2 mt-1">
-            Manage, track, and iterate on all your pitches in one place.
-          </p>
+          <p className="text-sm text-gray2 mt-1">{t("subtitle")}</p>
         </div>
       </div>
 
       {/* ── filter tabs ────────────────────────────────── */}
       <div className="flex items-center gap-2 mb-6 overflow-x-auto pb-1 scrollbar-hide">
-        {FILTERS.map((f) => {
+        {filters.map((f) => {
           const isActive = activeFilter === f.key;
           return (
             <button
@@ -176,13 +177,18 @@ export default function RepoPage() {
           </div>
           <h3 className="text-lg font-semibold text-dark mb-1">
             {activeFilter === "ALL"
-              ? "No projects yet"
-              : `No ${FILTERS.find((f) => f.key === activeFilter)?.label.toLowerCase()} projects`}
+              ? t("empty.all.title")
+              : t("empty.status.title", {
+                  status:
+                    filters
+                      .find((f) => f.key === activeFilter)
+                      ?.label.toLowerCase() || "",
+                })}
           </h3>
           <p className="text-sm text-gray2 mb-6 max-w-sm text-center">
             {activeFilter === "ALL"
-              ? "Start building your portfolio by creating your first project pitch."
-              : "Projects with this status will appear here."}
+              ? t("empty.all.description")
+              : t("empty.status.description")}
           </p>
           {activeFilter === "ALL" && (
             <Button
@@ -192,7 +198,7 @@ export default function RepoPage() {
               startContent={<HiOutlineDocumentAdd className="w-5 h-5" />}
               onPress={() => router.push(`/${locale}/projects/new`)}
             >
-              Create Project
+              {t("empty.all.action")}
             </Button>
           )}
         </div>

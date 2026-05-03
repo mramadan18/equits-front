@@ -36,6 +36,8 @@
     "logoAlt": "Equits Logo",
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
+    "pitch": "Pitch",
+    "me": "Me",
     "PitchModal": {
       "title": "Create a Project",
       "description": "Choose how you want to start your pitch journey.",
@@ -217,6 +219,8 @@
     "timeAvailability": "Time Availability",
     "location": "Location",
     "allFilters": "All filters",
+    "all": "All Talents",
+    "new": "New Talents",
     "requestMeeting": "Request Meeting"
   },
   "TalentDetails": {
@@ -230,6 +234,9 @@
     "viewDetails": "View Details",
     "contactInfo": "Contact Information",
     "close": "Close",
+    "notFoundTitle": "Talent Not Found",
+    "notFoundDescription": "The requested talent profile does not exist.",
+    "retrievalError": "The requested talent profile could not be retrieved.",
       "requestMeetingModal": {
         "title": "Request Meeting",
         "preferredDate": "Preferred Date",
@@ -550,7 +557,9 @@
       "actions": "Actions",
       "demoLink": "Demo Link",
       "saveForLater": "Save For Later",
-      "requestMeeting": "Request Meeting"
+      "requestMeeting": "Request Meeting",
+      "loginRequired": "Login to take these actions",
+      "loginNow": "Login Now"
     }
   },
   "FeedProfileCard": {
@@ -725,5 +734,45 @@
     "tryAgain": "Try again",
     "goHome": "Go Home",
     "loading": "Loading..."
+  },
+  "Repo": {
+    "title": "My Projects",
+    "subtitle": "Manage, track, and iterate on all your pitches in one place.",
+    "filters": {
+      "all": "All",
+      "drafts": "Drafts",
+      "pending": "Pending",
+      "published": "Published",
+      "rejected": "Rejected"
+    },
+    "errors": {
+      "title": "Something went wrong",
+      "description": "We couldn't load your projects. Please check your connection and try again.",
+      "retry": "Retry"
+    },
+    "empty": {
+      "all": {
+        "title": "No projects yet",
+        "description": "Start building your portfolio by creating your first project pitch.",
+        "action": "Create Project"
+      },
+      "status": {
+        "title": "No {status} projects",
+        "description": "Projects with this status will appear here."
+      }
+    },
+    "card": {
+      "untitled": "Untitled Project",
+      "noDescription": "No description provided yet.",
+      "resumeEditing": "Resume editing",
+      "justNow": "Just now",
+      "ask": "ask",
+      "status": {
+        "draft": "Draft",
+        "pending": "Pending",
+        "published": "Published",
+        "rejected": "Rejected"
+      }
+    }
   }
 }

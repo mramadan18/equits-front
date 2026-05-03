@@ -36,6 +36,8 @@
     "logoAlt": "شعار إكويتس",
     "openMenu": "فتح القائمة",
     "closeMenu": "إغلاق القائمة",
+    "pitch": "اعرض",
+    "me": "أنا",
     "PitchModal": {
       "title": "إنشاء مشروع",
       "description": "اختر كيف تود البدء في رحلة عرض مشروعك.",
@@ -217,6 +219,8 @@
     "timeAvailability": "التفرغ الزمني",
     "location": "الموقع",
     "allFilters": "كل الفلاتر",
+    "all": "كل المواهب",
+    "new": "أحدث المواهب",
     "requestMeeting": "طلب اجتماع"
   },
   "TalentDetails": {
@@ -229,6 +233,9 @@
     "viewDetails": "عرض التفاصيل",
     "contactInfo": "معلومات الاتصال",
     "close": "إغلاق",
+    "notFoundTitle": "لم يتم العثور على الموهبة",
+    "notFoundDescription": "الملف الشخصي للموهبة المطلوبة غير موجود.",
+    "retrievalError": "تعذر استرداد الملف الشخصي للموهبة المطلوبة.",
     "editProfileBtn": "تعديل الملف",
       "requestMeetingModal": {
         "title": "طلب اجتماع",
@@ -550,7 +557,9 @@
       "actions": "الإجراءات",
       "demoLink": "رابط تجريبي",
       "saveForLater": "حفظ لوقت لاحق",
-      "requestMeeting": "طلب اجتماع"
+      "requestMeeting": "طلب اجتماع",
+      "loginRequired": "سجل الدخول لتتمكن من القيام بهذه الإجراءات",
+      "loginNow": "سجل الدخول الآن"
     }
   },
   "FeedProfileCard": {
@@ -725,5 +734,45 @@
     "tryAgain": "إعادة المحاولة",
     "goHome": "العودة للرئيسية",
     "loading": "جاري التحميل..."
+  },
+  "Repo": {
+    "title": "مشاريعي",
+    "subtitle": "إدارة وتتبع وتكرار جميع عروض مشاريعك في مكان واحد.",
+    "filters": {
+      "all": "الكل",
+      "drafts": "المسودات",
+      "pending": "قيد الانتظار",
+      "published": "منشور",
+      "rejected": "مرفوض"
+    },
+    "errors": {
+      "title": "حدث خطأ ما",
+      "description": "لم نتمكن من تحميل مشاريعك. يرجى التحقق من اتصالك والمحاولة مرة أخرى.",
+      "retry": "إعادة المحاولة"
+    },
+    "empty": {
+      "all": {
+        "title": "لا توجد مشاريع حتى الآن",
+        "description": "ابدأ في بناء معرض أعمالك من خلال إنشاء أول عرض لمشروعك.",
+        "action": "إنشاء مشروع"
+      },
+      "status": {
+        "title": "لا توجد مشاريع {status}",
+        "description": "ستظهر المشاريع بهذا النوع هنا."
+      }
+    },
+    "card": {
+      "untitled": "مشروع بدون عنوان",
+      "noDescription": "لا يوجد وصف متوفر حتى الآن.",
+      "resumeEditing": "استئناف التعديل",
+      "justNow": "الآن",
+      "ask": "مطلوب",
+      "status": {
+        "draft": "مسودة",
+        "pending": "قيد الانتظار",
+        "published": "منشور",
+        "rejected": "مرفوض"
+      }
+    }
   }
 }

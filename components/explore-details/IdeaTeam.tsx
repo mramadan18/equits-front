@@ -9,6 +9,8 @@ import { useTranslations } from "next-intl";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
+import { MainRoutes } from "@/types";
+import { Link } from "@/i18n/navigation";
 
 interface IdeaTeamProps {
   project: Project;
@@ -48,20 +50,23 @@ export function IdeaTeam({ project }: IdeaTeamProps) {
       >
         {allTeamMembers.map((member, index) => (
           <SwiperSlide key={index}>
-            <div className="flex items-center gap-4 p-4 bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+            <Link
+              href={`${MainRoutes.TALENTS}/${member.id}`}
+              className="flex items-center gap-4 p-4 bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow group"
+            >
               <Avatar
                 src={`${member.avatar}`}
                 className="w-14 h-14 text-large shrink-0"
               />
               <div className="flex flex-col gap-0.5 overflow-hidden">
-                <span className="font-semibold text-dark text-sm truncate">
+                <span className="font-semibold text-dark text-sm truncate group-hover:underline">
                   {member.firstName} {member.lastName}
                 </span>
                 <span className="text-xs font-medium text-gray truncate">
                   {member.jobTitle}
                 </span>
               </div>
-            </div>
+            </Link>
           </SwiperSlide>
         ))}
       </Swiper>

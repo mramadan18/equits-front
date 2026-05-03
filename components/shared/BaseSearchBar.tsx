@@ -6,6 +6,8 @@ import { IoSearchOutline, IoAddOutline } from "react-icons/io5";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useDebounce } from "@/hooks/ui/useDebounce";
+import { Link } from "@/i18n/navigation";
+import { MainRoutes } from "@/types";
 
 interface BaseSearchBarProps {
   placeholder: string;
@@ -82,6 +84,8 @@ export const BaseSearchBar = ({
 
           {/* Desktop Add Button */}
           <Button
+            as={Link}
+            href={MainRoutes.NEW_PROJECT}
             color="primary"
             variant="flat"
             radius="full"

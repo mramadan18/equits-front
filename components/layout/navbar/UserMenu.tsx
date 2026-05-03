@@ -40,7 +40,7 @@ export const UserMenu = ({
         onPress={onPitchPress}
         isLoading={isCreatingProject}
       >
-        {t("pitch") || "Pitch"}
+        {t("pitch")}
       </Button>
 
       <div className="flex items-center gap-3">
@@ -75,7 +75,7 @@ export const UserMenu = ({
               size="sm"
             />
             <div className="flex items-center gap-1">
-              <span className="font-semibold text-sm">{t("me") || "Me"}</span>
+              <span className="font-semibold text-sm">{t("me")}</span>
               <MdOutlineKeyboardArrowDown />
             </div>
           </div>

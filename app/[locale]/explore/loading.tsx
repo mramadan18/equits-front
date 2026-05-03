@@ -31,7 +31,7 @@ export default function ExploreLoading() {
           {Array.from({ length: 6 }).map((_, i) => (
             <Card
               key={i}
-              className="h-[420px] shadow-sm border border-gray-100 rounded-2xl overflow-hidden"
+              className="h-[430px] shadow-sm border border-gray-100 rounded-2xl overflow-hidden"
             >
               <Skeleton className="h-48" />
               <CardBody className="p-5 flex flex-col gap-4">

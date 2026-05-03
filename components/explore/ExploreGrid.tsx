@@ -3,7 +3,7 @@
 import { CreativeIdeaCard } from "@/components/shared/creative-idea-card";
 import { PaginationData, Project } from "@/types/api";
 import { Button } from "@heroui/button";
-import { IoChevronBack, IoChevronForward } from "react-icons/io5";
+import { Pagination } from "@heroui/pagination";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 
@@ -68,66 +68,16 @@ export const ExploreGrid = ({
       </div>
 
       {pagination.totalPages > 1 && (
-        <div className="flex items-center justify-center gap-4 pt-8 border-t border-gray-100">
-          <Button
+        <div className="flex justify-center pt-8 border-t border-gray-100">
+          <Pagination
+            total={pagination.totalPages}
+            page={pagination.page}
+            onChange={handlePageChange}
+            showControls
+            color="primary"
             variant="flat"
-            isIconOnly
             radius="full"
-            isDisabled={pagination.page <= 1}
-            onPress={() => handlePageChange(pagination.page - 1)}
-            className="bg-white border-1 border-gray-200 hover:border-primary transition-colors"
-          >
-            <IoChevronBack className="text-xl" />
-          </Button>
-
-          <div className="flex items-center gap-2">
-            {Array.from({ length: pagination.totalPages }).map((_, i) => {
-              const pageNum = i + 1;
-              // Show limited page numbers if there are too many
-              if (
-                pagination.totalPages > 7 &&
-                pageNum !== 1 &&
-                pageNum !== pagination.totalPages &&
-                Math.abs(pageNum - pagination.page) > 1
-              ) {
-                if (Math.abs(pageNum - pagination.page) === 2) {
-                  return (
-                    <span key={pageNum} className="text-gray-400">
-                      ...
-                    </span>
-                  );
-                }
-                return null;
-              }
-
-              return (
-                <Button
-                  key={pageNum}
-                  variant={pagination.page === pageNum ? "solid" : "light"}
-                  color={pagination.page === pageNum ? "primary" : "default"}
-                  radius="full"
-                  size="sm"
-                  className={`min-w-[40px] h-10 font-bold ${
-                    pagination.page === pageNum ? "shadow-md" : "text-gray-600"
-                  }`}
-                  onPress={() => handlePageChange(pageNum)}
-                >
-                  {pageNum}
-                </Button>
-              );
-            })}
-          </div>
-
-          <Button
-            variant="flat"
-            isIconOnly
-            radius="full"
-            isDisabled={pagination.page >= pagination.totalPages}
-            onPress={() => handlePageChange(pagination.page + 1)}
-            className="bg-white border-1 border-gray-200 hover:border-primary transition-colors"
-          >
-            <IoChevronForward className="text-xl" />
-          </Button>
+          />
         </div>
       )}
     </div>

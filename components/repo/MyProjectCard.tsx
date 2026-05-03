@@ -13,38 +13,11 @@ import {
 } from "react-icons/fa";
 import { HiOutlineDocumentText, HiOutlineCurrencyDollar } from "react-icons/hi";
 import { Project } from "@/types/api";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations, useFormatter } from "next-intl";
 import { useRouter } from "next/navigation";
-
-/* ── status config ─────────────────────────────────────── */
-const STATUS_CFG: Record<
-  string,
-  {
-    label: string;
-    color: "default" | "warning" | "success" | "danger";
-    dot: string;
-  }
-> = {
-  DRAFT: { label: "Draft", color: "default", dot: "bg-gray4" },
-  PENDING_APPROVAL: {
-    label: "Pending",
-    color: "warning",
-    dot: "bg-amber-400",
-  },
-  PUBLISHED: { label: "Published", color: "success", dot: "bg-emerald-500" },
-  REJECTED: { label: "Rejected", color: "danger", dot: "bg-red-500" },
-};
+import { useMemo } from "react";
 
 /* ── helpers ───────────────────────────────────────────── */
-const fmtDate = (iso: string) => {
-  const d = new Date(iso);
-  return d.toLocaleDateString("en-GB", {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-  });
-};
-
 const fmtCurrency = (v: string | number | null) => {
   if (!v) return null;
   const n = Number(v);
@@ -64,7 +37,33 @@ const humanStage = (s: string) =>
 export const MyProjectCard = ({ project }: { project: Project }) => {
   const router = useRouter();
   const locale = useLocale();
-  const cfg = STATUS_CFG[project.status] ?? STATUS_CFG.DRAFT;
+  const t = useTranslations("Repo.card");
+  const format = useFormatter();
+
+  const statusCfg = useMemo(
+    () => ({
+      DRAFT: { label: t("status.draft"), color: "default", dot: "bg-gray4" },
+      PENDING_APPROVAL: {
+        label: t("status.pending"),
+        color: "warning",
+        dot: "bg-amber-400",
+      },
+      PUBLISHED: {
+        label: t("status.published"),
+        color: "success",
+        dot: "bg-emerald-500",
+      },
+      REJECTED: {
+        label: t("status.rejected"),
+        color: "danger",
+        dot: "bg-red-500",
+      },
+    }),
+    [t],
+  );
+
+  const cfg =
+    statusCfg[project.status as keyof typeof statusCfg] ?? statusCfg.DRAFT;
 
   const handleEdit = () => {
     if (project.status === "DRAFT") {
@@ -75,15 +74,15 @@ export const MyProjectCard = ({ project }: { project: Project }) => {
   const funding = fmtCurrency(project.fundingAsk);
 
   return (
-    <div className="group relative bg-white rounded-2xl border border-gray-100 shadow-card overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5">
+    <div className="group relative bg-white rounded-2xl border border-gray-100 shadow-card overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 text-start">
       {/* ── cover strip ─────────────────────────────────── */}
       <div className="relative h-36 w-full bg-gradient-to-br from-primary/10 via-primary/5 to-secondary/10 overflow-hidden">
         {project.cover ? (
           <Image
             src={project.cover}
-            alt={project.title || "Cover"}
+            alt={project.title || t("untitled")}
             fill
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
         ) : (
           <div className="absolute inset-0 flex items-center justify-center">
@@ -98,7 +97,7 @@ export const MyProjectCard = ({ project }: { project: Project }) => {
         <div className="absolute top-3 right-3 rtl:right-auto rtl:left-3">
           <Chip
             size="sm"
-            color={cfg.color}
+            color={cfg.color as any}
             variant="flat"
             classNames={{
               base: "backdrop-blur-md bg-white/80 border border-white/40 shadow-sm",
@@ -139,7 +138,7 @@ export const MyProjectCard = ({ project }: { project: Project }) => {
         <div className="flex items-start justify-between gap-2">
           <div className="flex-1 min-w-0">
             <h3 className="text-lg font-bold text-dark truncate leading-snug">
-              {project.title || "Untitled Project"}
+              {project.title || t("untitled")}
             </h3>
             {project.tagline && (
               <p className="text-xs text-gray2 mt-0.5 truncate">
@@ -149,7 +148,7 @@ export const MyProjectCard = ({ project }: { project: Project }) => {
           </div>
 
           {project.status === "DRAFT" && (
-            <Tooltip content="Resume editing" placement="top">
+            <Tooltip content={t("resumeEditing")} placement="top">
               <Button
                 isIconOnly
                 size="sm"
@@ -167,9 +166,7 @@ export const MyProjectCard = ({ project }: { project: Project }) => {
 
         {/* description */}
         <p className="text-sm text-gray leading-relaxed line-clamp-2 min-h-[2.5rem]">
-          {project.elevatorPitch ||
-            project.problem ||
-            "No description provided yet."}
+          {project.elevatorPitch || project.problem || t("noDescription")}
         </p>
 
         {/* meta pills */}
@@ -202,7 +199,13 @@ export const MyProjectCard = ({ project }: { project: Project }) => {
           <div className="flex items-center gap-1.5 text-gray4 text-[11px]">
             <FaClock className="w-3 h-3" />
             <span>
-              {project.updatedAt ? fmtDate(project.updatedAt) : "Just now"}
+              {project.updatedAt
+                ? format.dateTime(new Date(project.updatedAt), {
+                    day: "numeric",
+                    month: "short",
+                    year: "numeric",
+                  })
+                : t("justNow")}
             </span>
           </div>
 
@@ -210,7 +213,9 @@ export const MyProjectCard = ({ project }: { project: Project }) => {
             <div className="flex items-center gap-1">
               <HiOutlineCurrencyDollar className="w-4 h-4 text-emerald-500" />
               <span className="text-sm font-bold text-dark">{funding}</span>
-              <span className="text-[10px] text-gray4 font-medium">ask</span>
+              <span className="text-[10px] text-gray4 font-medium">
+                {t("ask")}
+              </span>
             </div>
           )}
         </div>
