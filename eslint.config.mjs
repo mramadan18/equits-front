@@ -104,6 +104,7 @@ export default defineConfig([
       "react-hooks/exhaustive-deps": "off",
       "jsx-a11y/click-events-have-key-events": "off",
       "jsx-a11y/no-static-element-interactions": "off",
+      "no-console": "off",
       "jsx-a11y/interactive-supports-focus": "warn",
       "no-unused-vars": "off",
       "unused-imports/no-unused-vars": "off",

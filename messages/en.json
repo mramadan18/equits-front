@@ -718,5 +718,12 @@
     "reset": "Reset",
     "cancel": "Cancel",
     "save": "Save"
+  },
+  "Common": {
+    "errorTitle": "Something went wrong!",
+    "errorDescription": "An unexpected error occurred. Please try again later.",
+    "tryAgain": "Try again",
+    "goHome": "Go Home",
+    "loading": "Loading..."
   }
 }

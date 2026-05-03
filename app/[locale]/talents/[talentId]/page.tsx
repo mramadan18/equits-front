@@ -3,7 +3,8 @@ import {
   TalentProjectsList,
   PeopleYouMayNeedSidebar,
 } from "@/components/talent-details";
-import { ApiResponse, Project, User } from "@/types/api";
+import { fetchServer } from "@/utils/api-utils";
+import { Project, User } from "@/types/api";
 
 export default async function TalentDetailsPage({
   params,
@@ -11,42 +12,24 @@ export default async function TalentDetailsPage({
   params: Promise<{ talentId: string }>;
 }) {
   const { talentId } = await params;
-  let talent: User = {} as User;
-  let projects: Project[] = [];
-  let talents: User[] = [];
 
-  try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/v1/profile/${talentId}`,
-      {
-        cache: "no-store",
-      },
-    );
-    const data: ApiResponse<User> = await res.json();
-    talent = data.data;
-  } catch {}
+  const [talentRes, projectsRes, relatedRes] = await Promise.allSettled([
+    fetchServer<User>(`/profile/${talentId}`, { cache: "no-store" }),
+    fetchServer<Project[]>(`/profile/${talentId}/projects`, {
+      cache: "no-store",
+    }),
+    fetchServer<User[]>(`/profile/${talentId}/related`, {
+      params: { limit: 3 },
+      cache: "no-store",
+    }),
+  ]);
 
-  try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/v1/profile/${talentId}/projects`,
-      {
-        cache: "no-store",
-      },
-    );
-    const data: ApiResponse<Project[]> = await res.json();
-    projects = data.data;
-  } catch {}
-
-  try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/v1/profile/${talentId}/related?limit=3`,
-      {
-        cache: "no-store",
-      },
-    );
-    const data: ApiResponse<User[]> = await res.json();
-    talents = data.data;
-  } catch {}
+  const talent =
+    talentRes.status === "fulfilled" ? talentRes.value.data : ({} as User);
+  const projects =
+    projectsRes.status === "fulfilled" ? projectsRes.value.data : [];
+  const talents =
+    relatedRes.status === "fulfilled" ? relatedRes.value.data : [];
 
   return (
     <div className="w-full bg-slate-50 md:bg-gray-50 pb-16 md:pb-24 pt-8 md:pt-12 min-h-screen">

@@ -7,6 +7,7 @@ import {
   UpdateContactRequest,
   UpdatePicturesRequest,
   User,
+  Project,
 } from "../types/api";
 import apiClient from "./api-client";
 
@@ -58,6 +59,21 @@ export const profileService = {
     data: UpdatePicturesRequest,
   ): Promise<ApiResponse<User>> => {
     const response = await apiClient.patch("/profile/pictures", data);
+    return response.data;
+  },
+
+  getProfileProjects: async (id: string): Promise<ApiResponse<Project[]>> => {
+    const response = await apiClient.get(`/profile/${id}/projects`);
+    return response.data;
+  },
+
+  getRelatedProfiles: async (
+    id: string,
+    limit: number = 3,
+  ): Promise<ApiResponse<User[]>> => {
+    const response = await apiClient.get(`/profile/${id}/related`, {
+      params: { limit },
+    });
     return response.data;
   },
 };

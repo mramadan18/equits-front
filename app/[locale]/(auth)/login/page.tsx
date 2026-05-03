@@ -3,7 +3,6 @@
 import { useTranslations } from "next-intl";
 import { MdOutlineMailOutline } from "react-icons/md";
 import { Link, useRouter } from "@/i18n/navigation";
-import { Checkbox } from "@heroui/checkbox";
 import {
   AuthLayout,
   AuthHeader,
@@ -20,7 +19,7 @@ import { addToast } from "@heroui/toast";
 import { useGoogleLogin as useGoogleAuth } from "@react-oauth/google";
 import { ApiResponse, AuthResponse } from "@/types/api";
 import { AuthRoutes, MainRoutes } from "@/types";
-import { FormInput } from "@/components/ui/form/FormInput";
+import { FormInput, FormCheckbox } from "@/components/ui/form";
 
 export default function LoginPage() {
   const validationT = useTranslations("Auth.Validation");
@@ -30,7 +29,6 @@ export default function LoginPage() {
   const {
     handleSubmit,
     control,
-    register,
     formState: { isValid },
   } = useForm<LoginInput>({
     mode: "all",
@@ -124,14 +122,15 @@ export default function LoginPage() {
 
           <StaggerItem>
             <div className="flex items-center justify-between">
-              <Checkbox
+              <FormCheckbox
+                name="rememberMe"
+                control={control}
                 size="sm"
                 color="primary"
                 classNames={{ label: "text-default-600" }}
-                {...register("rememberMe")}
               >
                 {authT("rememberMe", { fallback: "تذكرني" })}
-              </Checkbox>
+              </FormCheckbox>
               <Link
                 href={AuthRoutes.FORGOT_PASSWORD}
                 className="text-primary text-sm hover:underline"

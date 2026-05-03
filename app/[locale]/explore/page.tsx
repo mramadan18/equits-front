@@ -1,7 +1,8 @@
 import { ExploreSearchBar } from "@/components/explore/ExploreSearchBar";
 import { ExploreFilters } from "@/components/explore/ExploreFilters";
 import { ExploreGrid } from "@/components/explore/ExploreGrid";
-import { ApiResponse, PaginationData, Project } from "@/types/api";
+import { fetchServer } from "@/utils/api-utils";
+import { PaginationData, Project } from "@/types/api";
 
 export default async function ExplorePage({
   searchParams,
@@ -23,20 +24,15 @@ export default async function ExplorePage({
   };
 
   try {
-    const queryParams = new URLSearchParams();
-    if (search) queryParams.append("search", search);
-    if (page) queryParams.append("page", page);
-    if (industryId) queryParams.append("industryId", industryId);
-    if (stage) queryParams.append("stage", stage);
-
-    const projectsResponse = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/v1/projects?${queryParams.toString()}`,
-      { cache: "no-store" },
-    );
-    const data: ApiResponse<Project[]> = await projectsResponse.json();
+    const data = await fetchServer<Project[]>("/projects", {
+      params: { search, page, industryId, stage },
+      cache: "no-store",
+    });
     projects = data.data || [];
     pagination = data.pagination || pagination;
-  } catch {}
+  } catch (error) {
+    console.error("Failed to fetch projects for explore page:", error);
+  }
 
   return (
     <div className="w-full bg-white pb-16 md:pb-24 pt-8 md:pt-12 min-h-screen">
