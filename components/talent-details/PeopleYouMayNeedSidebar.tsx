@@ -9,6 +9,7 @@ import { User } from "@/types/api";
 import { Avatar } from "@heroui/avatar";
 import { Link } from "@/i18n/navigation";
 import { MainRoutes } from "@/types";
+import { Skeleton } from "@heroui/skeleton";
 
 const AvatarWrapper = ({ talent }: { talent: User }) => {
   return (
@@ -23,8 +24,43 @@ const AvatarWrapper = ({ talent }: { talent: User }) => {
   );
 };
 
-export const PeopleYouMayNeedSidebar = ({ talents }: { talents: User[] }) => {
+export const PeopleYouMayNeedSidebar = ({
+  talents,
+  isLoading,
+}: {
+  talents: User[];
+  isLoading?: boolean;
+}) => {
   const t = useTranslations("TalentDetails");
+
+  if (isLoading) {
+    return (
+      <div className="bg-white rounded-2xl shadow-sm border border-gray2 flex flex-col h-max overflow-hidden sticky top-24">
+        <div className="p-6 pb-4">
+          <Skeleton className="h-7 w-2/3 rounded-lg" />
+        </div>
+        <div className="flex flex-col">
+          {[1, 2, 3].map((i) => (
+            <div key={i} className="flex flex-col px-6 py-4">
+              <div className="flex items-start gap-4 mb-3">
+                <Skeleton className="w-14 h-14 md:w-16 md:h-16 rounded-full flex-shrink-0" />
+                <div className="flex-1 flex flex-col justify-center gap-2">
+                  <Skeleton className="h-5 w-3/4 rounded-lg" />
+                  <Skeleton className="h-4 w-1/2 rounded-lg" />
+                </div>
+              </div>
+              <div className="flex flex-col gap-2 mb-4">
+                <Skeleton className="h-3 w-full rounded-lg" />
+                <Skeleton className="h-3 w-5/6 rounded-lg" />
+              </div>
+              <Skeleton className="h-10 w-full rounded-lg" />
+              {i < 3 && <Divider className="mt-6" />}
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-white rounded-2xl shadow-sm border border-gray2 flex flex-col h-max overflow-hidden sticky top-24">
@@ -60,8 +96,8 @@ export const PeopleYouMayNeedSidebar = ({ talents }: { talents: User[] }) => {
                 <div className="text-sm font-medium text-gray-700 leading-tight">
                   {talent?.experienceLevel && (
                     <span className="me-1">{talent?.experienceLevel}</span>
-                  )}
-                  {talent?.userType}
+                  )}{" "}
+                  {talent?.jobTitle}
                 </div>
                 {/* <div className="text-sm text-gray-500 font-medium">
                 @ {talent.company}
@@ -76,6 +112,8 @@ export const PeopleYouMayNeedSidebar = ({ talents }: { talents: User[] }) => {
 
             {/* Action Button */}
             <Button
+              as={Link}
+              href={`${MainRoutes.TALENTS}/${talent?.id}`}
               variant="bordered"
               color="primary"
               fullWidth

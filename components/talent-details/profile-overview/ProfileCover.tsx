@@ -53,7 +53,7 @@ export const ProfileCover = ({
             color="primary"
             radius="full"
             onPress={() => coverInputRef.current?.click()}
-            className="absolute top-3 right-3 bg-white/20 backdrop-blur-md hover:bg-white/40 transition-all shadow-lg z-20"
+            className="absolute top-3 end-3 bg-white/20 backdrop-blur-md hover:bg-white/40 transition-all shadow-lg z-20"
             isIconOnly
             isDisabled={isProcessing && cropType === "cover"}
           >

@@ -1,4 +1,5 @@
 import { ApiResponse } from "@/types/api";
+import { cookies } from "next/headers";
 
 const BASE_URL = `${process.env.NEXT_PUBLIC_API_URL}/api/v1`;
 
@@ -12,6 +13,8 @@ export async function fetchServer<T>(
   options: FetchOptions = {},
 ): Promise<ApiResponse<T>> {
   const { params, locale, ...fetchOptions } = options;
+  const cookieStore = await cookies();
+  const token = cookieStore.get("jwt");
 
   let url = `${BASE_URL}${endpoint.startsWith("/") ? endpoint : `/${endpoint}`}`;
 
@@ -34,6 +37,9 @@ export async function fetchServer<T>(
   }
   if (locale) {
     headers.set("Accept-Language", locale);
+  }
+  if (token) {
+    headers.set("Authorization", `Bearer ${token.value}`);
   }
 
   try {

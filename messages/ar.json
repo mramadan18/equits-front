@@ -221,7 +221,10 @@
     "allFilters": "كل الفلاتر",
     "all": "كل المواهب",
     "new": "أحدث المواهب",
-    "requestMeeting": "طلب اجتماع"
+    "requestMeeting": "طلب اجتماع",
+    "noResultsTitle": "لم يتم العثور على مواهب",
+    "noResultsDescription": "حاول تعديل الفلاتر أو كلمات البحث للعثور على ما تبحث عنه.",
+    "clearAllFilters": "مسح جميع الفلاتر"
   },
   "TalentDetails": {
     "contact": "اتصال",
@@ -236,6 +239,12 @@
     "notFoundTitle": "لم يتم العثور على الموهبة",
     "notFoundDescription": "الملف الشخصي للموهبة المطلوبة غير موجود.",
     "retrievalError": "تعذر استرداد الملف الشخصي للموهبة المطلوبة.",
+    "addCompany": "أضف شركتك",
+    "addLocation": "أضف موقعك",
+    "noLocation": "لم يتم توفير الموقع",
+    "noCompany": "لم يتم توفير الشركة",
+    "noAbout": "لم يتم توفير معلومات نبذة شخصية",
+    "educationInfo": "{degree} في {faculty}، {university}",
     "editProfileBtn": "تعديل الملف",
       "requestMeetingModal": {
         "title": "طلب اجتماع",

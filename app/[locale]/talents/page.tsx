@@ -10,7 +10,15 @@ export default async function TalentsPage({
   searchParams: Promise<{ [key: string]: string }>;
 }) {
   const params = await searchParams;
-  const { search, page = "1" } = params;
+  const {
+    search,
+    page = "1",
+    userType = "TALENT",
+    experienceLevel,
+    location,
+    universityId,
+    facultyId,
+  } = params;
 
   let allProfiles: User[] = [];
   let pagination: PaginationData = {
@@ -22,7 +30,16 @@ export default async function TalentsPage({
 
   try {
     const data = await fetchServer<User[]>("/profile", {
-      params: { search, page },
+      params: {
+        search,
+        page,
+        userType: userType === "all" ? undefined : userType,
+        experienceLevel:
+          experienceLevel === "all" ? undefined : experienceLevel,
+        serviceArea: location === "all" ? undefined : location,
+        universityId: universityId === "all" ? undefined : universityId,
+        facultyId: facultyId === "all" ? undefined : facultyId,
+      },
       cache: "no-store",
     });
     allProfiles = data.data || [];

@@ -7,6 +7,7 @@ interface FilterDropdownProps {
   items: { key: string; label: string }[];
   selectedKey?: string;
   onSelectionChange?: (key: string) => void;
+  disableInput?: boolean;
   color?:
     | "default"
     | "primary"
@@ -23,6 +24,7 @@ export const FilterDropdown = ({
   selectedKey = "all",
   onSelectionChange,
   color = "default",
+  disableInput = true,
 }: FilterDropdownProps) => {
   return (
     <Autocomplete
@@ -32,6 +34,10 @@ export const FilterDropdown = ({
       color={color}
       radius="full"
       className="w-48!"
+      isClearable={false}
+      inputProps={{
+        readOnly: disableInput,
+      }}
       selectedKey={selectedKey}
       onSelectionChange={(key) => {
         onSelectionChange?.((key as string) || "all");

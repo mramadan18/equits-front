@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { useDebounce } from "@/hooks/ui/useDebounce";
 import { Link } from "@/i18n/navigation";
 import { MainRoutes } from "@/types";
+import { useAuthStore } from "@/stores/useAuthStore";
 
 interface BaseSearchBarProps {
   placeholder: string;
@@ -30,6 +31,7 @@ export const BaseSearchBar = ({
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
+  const { user } = useAuthStore();
   const [value, setValue] = useState(searchParams.get(searchParamKey) || "");
   const debouncedValue = useDebounce(value, 500);
 
@@ -68,7 +70,7 @@ export const BaseSearchBar = ({
         }
       />
 
-      {showAddButton && (
+      {showAddButton && !user && (
         <>
           {/* Mobile Add Button */}
           <Button

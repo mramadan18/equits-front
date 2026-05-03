@@ -22,6 +22,20 @@ export enum EducationDegree {
   PHD = "PHD",
 }
 
+export enum ServiceArea {
+  CITY = "CITY",
+  GOVERNORATE = "GOVERNORATE",
+  EGYPT = "EGYPT",
+  MENA = "MENA",
+  GCC = "GCC",
+  AFRICA = "AFRICA",
+  EUROPE = "EUROPE",
+  NORTH_AMERICA = "NORTH_AMERICA",
+  LATIN_AMERICA = "LATIN_AMERICA",
+  ASIA = "ASIA",
+  GLOBAL = "GLOBAL",
+}
+
 export type MessageKey =
   | "welcome"
   | "registerSuccess"
@@ -233,6 +247,11 @@ export interface ProjectFilters {
   limit?: number;
 }
 
+export interface ProfileFilters {
+  id: string;
+  limit?: number;
+}
+
 export interface Project {
   id: number;
   title: string;
@@ -274,7 +293,7 @@ export interface Project {
   createdAt: string;
   updatedAt: string;
   deletedAt: string | null;
-  serviceArea: string | null;
+  serviceArea: ServiceArea | null;
   status: "DRAFT" | "PENDING_APPROVAL" | "PUBLISHED" | "REJECTED";
   currentStep: number;
   owner?: User;

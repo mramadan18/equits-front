@@ -1,5 +1,6 @@
 "use client";
 
+import { useCallback, useMemo } from "react";
 import { useTranslations } from "next-intl";
 import { useUniversities, useFaculties } from "@/hooks/api/useLookup";
 import { useUpdateEducation } from "@/hooks/api/useProfile";
@@ -20,11 +21,13 @@ export const useEducationController = () => {
   const { data: facultiesRes } = useFaculties();
   const faculties = facultiesRes?.data || [];
 
-  const settingsForm = useSettingsForm<UpdateEducationFormData>({
-    schema: getUpdateEducationSchema(validationT),
-    mutation: updateMutation,
-    successMessage: t("overviewForm.saveSuccess"),
-    userToForm: (user) => ({
+  const schema = useMemo(
+    () => getUpdateEducationSchema(validationT),
+    [validationT],
+  );
+
+  const userToForm = useCallback(
+    (user: any) => ({
       certificates: user?.educationCertificates?.map((cert: any) => ({
         university: cert.university,
         degree: cert.degree,
@@ -45,12 +48,25 @@ export const useEducationController = () => {
         },
       ],
     }),
-    prepareData: (data) => ({
+    [],
+  );
+
+  const prepareData = useCallback(
+    (data: UpdateEducationFormData) => ({
       certificates: data.certificates.map((cert) => ({
         ...cert,
         endDate: cert.present ? null : cert.endDate,
       })),
     }),
+    [],
+  );
+
+  const settingsForm = useSettingsForm<UpdateEducationFormData>({
+    schema,
+    mutation: updateMutation,
+    successMessage: t("overviewForm.saveSuccess"),
+    userToForm,
+    prepareData,
   });
 
   const { fields, append, remove } = useFieldArray({

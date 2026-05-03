@@ -1,5 +1,6 @@
 "use client";
 
+import { useCallback, useMemo } from "react";
 import { useTranslations } from "next-intl";
 import { useUpdateContact } from "@/hooks/api/useProfile";
 import {
@@ -13,11 +14,13 @@ export const useContactInfoController = () => {
   const validationT = useTranslations("Auth.Validation");
   const updateMutation = useUpdateContact();
 
-  const settingsForm = useSettingsForm<UpdateContactFormData>({
-    schema: getUpdateContactSchema(validationT),
-    mutation: updateMutation,
-    successMessage: t("overviewForm.saveSuccess"),
-    userToForm: (user) => ({
+  const schema = useMemo(
+    () => getUpdateContactSchema(validationT),
+    [validationT],
+  );
+
+  const userToForm = useCallback(
+    (user: any) => ({
       contactEmail: user?.contactEmail || "",
       phone: user?.phone || "",
       address: user?.address || "",
@@ -26,6 +29,14 @@ export const useContactInfoController = () => {
       instagramUrl: user?.instagramUrl || "",
       youtubeUrl: user?.youtubeUrl || "",
     }),
+    [],
+  );
+
+  const settingsForm = useSettingsForm<UpdateContactFormData>({
+    schema,
+    mutation: updateMutation,
+    successMessage: t("overviewForm.saveSuccess"),
+    userToForm,
   });
 
   return {

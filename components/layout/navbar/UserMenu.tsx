@@ -81,7 +81,12 @@ export const UserMenu = ({
           </div>
         </DropdownTrigger>
         <DropdownMenu aria-label="Profile Actions" variant="flat">
-          <DropdownItem key="profile" className="h-14 gap-2">
+          <DropdownItem
+            key="profile"
+            as={Link}
+            href={`${MainRoutes.TALENTS}/${user?.id}`}
+            className="h-14 gap-2"
+          >
             <p className="font-semibold">{t("profile")}</p>
             <p className="font-semibold text-primary">
               {user?.firstName} {user?.lastName}

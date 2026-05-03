@@ -1,7 +1,7 @@
 import { Rating, RoundedStar } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 
-const RatingStars = ({ rating }: { rating: number }) => {
+export const RatingStars = ({ rating }: { rating: number }) => {
   return (
     <div className="flex items-center">
       <Rating
@@ -17,5 +17,3 @@ const RatingStars = ({ rating }: { rating: number }) => {
     </div>
   );
 };
-
-export default RatingStars;

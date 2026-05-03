@@ -221,7 +221,10 @@
     "allFilters": "All filters",
     "all": "All Talents",
     "new": "New Talents",
-    "requestMeeting": "Request Meeting"
+    "requestMeeting": "Request Meeting",
+    "noResultsTitle": "No talents found",
+    "noResultsDescription": "Try adjusting your filters or search terms to find what you're looking for.",
+    "clearAllFilters": "Clear all filters"
   },
   "TalentDetails": {
     "editProfileBtn": "Edit Profile",
@@ -237,7 +240,13 @@
     "notFoundTitle": "Talent Not Found",
     "notFoundDescription": "The requested talent profile does not exist.",
     "retrievalError": "The requested talent profile could not be retrieved.",
-      "requestMeetingModal": {
+    "addCompany": "Add your company",
+    "addLocation": "Add your location",
+    "noLocation": "No location provided",
+    "noCompany": "No company provided",
+    "noAbout": "No about information provided",
+    "educationInfo": "{degree} of {faculty}, {university}",
+    "requestMeetingModal": {
         "title": "Request Meeting",
         "preferredDate": "Preferred Date",
         "preferredTime": "Preferred Time",

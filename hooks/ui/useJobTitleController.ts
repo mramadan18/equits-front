@@ -1,5 +1,6 @@
 "use client";
 
+import { useCallback, useMemo } from "react";
 import { useTranslations } from "next-intl";
 import { useUpdateJobTitle } from "@/hooks/api/useProfile";
 import { ExperienceLevel } from "@/types/api";
@@ -19,16 +20,26 @@ export const useJobTitleController = () => {
   const { data: universitiesRes } = useUniversities();
   const universities = universitiesRes?.data || [];
 
-  const settingsForm = useSettingsForm<UpdateJobTitleFormData>({
-    schema: getUpdateJobTitleSchema(validationT),
-    mutation: updateMutation,
-    successMessage: t("overviewForm.saveSuccess"),
-    userToForm: (user) => ({
+  const schema = useMemo(
+    () => getUpdateJobTitleSchema(validationT),
+    [validationT],
+  );
+
+  const userToForm = useCallback(
+    (user: any) => ({
       jobTitle: user?.jobTitle || "",
       experienceLevel: user?.experienceLevel as ExperienceLevel,
       company: user?.company || "",
       companyLink: user?.companyLink || "",
     }),
+    [],
+  );
+
+  const settingsForm = useSettingsForm<UpdateJobTitleFormData>({
+    schema,
+    mutation: updateMutation,
+    successMessage: t("overviewForm.saveSuccess"),
+    userToForm,
   });
 
   const experienceLevels = Object.values(ExperienceLevel);

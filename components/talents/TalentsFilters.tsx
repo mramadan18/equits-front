@@ -1,16 +1,85 @@
+"use client";
+
 import { useTranslations } from "next-intl";
 import { Button } from "@heroui/button";
-import {
-  Dropdown,
-  DropdownTrigger,
-  DropdownMenu,
-  DropdownItem,
-} from "@heroui/dropdown";
-import { IoFilterOutline, IoChevronDown } from "react-icons/io5";
-// import { FilterDropdown } from "@/components/shared/FilterDropdown";
+import { IoFilterOutline } from "react-icons/io5";
+import { FilterDropdown } from "@/components/shared/FilterDropdown";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useCallback } from "react";
+import { ExperienceLevel, UserType, ServiceArea } from "@/types/api";
+import { useFaculties, useUniversities } from "@/hooks/api/useLookup";
 
 export const TalentsFilters = () => {
   const t = useTranslations("TalentsExplore");
+  const st = useTranslations("Settings");
+  const pt = useTranslations("Pitch");
+
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const { data: universitiesData } = useUniversities();
+  const { data: facultiesData } = useFaculties();
+
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams.toString());
+      if (value === "all") {
+        params.delete(name);
+      } else {
+        params.set(name, value);
+      }
+      return params.toString();
+    },
+    [searchParams],
+  );
+
+  const handleFilterChange = (name: string, value: string) => {
+    router.push(pathname + "?" + createQueryString(name, value));
+  };
+
+  const userType = searchParams.get("userType") || UserType.TALENT;
+  const experienceLevel = searchParams.get("experienceLevel") || "all";
+  const location = searchParams.get("location") || "all";
+  const universityId = searchParams.get("universityId") || "all";
+  const facultyId = searchParams.get("facultyId") || "all";
+
+  const userTypeItems = [
+    { key: UserType.TALENT, label: st("overviewForm.talent") },
+    { key: UserType.INVESTOR, label: st("overviewForm.investor") },
+  ];
+
+  const experienceLevelItems = [
+    { key: "all", label: t("experienceLevel") },
+    ...Object.values(ExperienceLevel).map((level) => ({
+      key: level,
+      label: st(`jobTitleForm.levels.${level}`),
+    })),
+  ];
+
+  const serviceAreaItems = [
+    { key: "all", label: t("location") },
+    ...Object.values(ServiceArea).map((area) => ({
+      key: area,
+      label: pt(`Enums.ServiceArea.${area}`),
+    })),
+  ];
+
+  const universityItems = [
+    { key: "all", label: pt("Basics.university") },
+    ...(universitiesData?.data.map((u) => ({
+      key: String(u.id),
+      label: u.name,
+    })) || []),
+  ];
+
+  const facultyItems = [
+    { key: "all", label: pt("Basics.faculty") },
+    ...(facultiesData?.data.map((f) => ({
+      key: String(f.id),
+      label: f.name,
+    })) || []),
+  ];
 
   return (
     <div className="flex items-center w-full gap-2 md:gap-4 mb-6 md:mb-10 relative">
@@ -26,40 +95,50 @@ export const TalentsFilters = () => {
       </div>
 
       <div className="flex flex-1 items-center gap-2 md:gap-3 overflow-x-auto pb-2 -mb-2 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-        <Dropdown>
-          <DropdownTrigger>
-            <Button
-              color="primary"
-              radius="full"
-              className="font-semibold shadow-md px-5 md:px-6 h-10 md:h-11 flex-shrink-0 text-sm md:text-base"
-              endContent={
-                <IoChevronDown className="text-white text-base md:text-lg" />
-              }
-            >
-              {t("talents")}
-            </Button>
-          </DropdownTrigger>
-          <DropdownMenu aria-label="Talents Filter">
-            <DropdownItem key="all">{t("all")}</DropdownItem>
-            <DropdownItem key="new">{t("new")}</DropdownItem>
-          </DropdownMenu>
-        </Dropdown>
-
-        {/* <div className="flex-shrink-0">
-          <FilterDropdown label={t("jobTitle")} />
+        <div className="flex-shrink-0">
+          <FilterDropdown
+            label={st("overviewForm.userType")}
+            items={userTypeItems}
+            selectedKey={userType}
+            onSelectionChange={(key) => handleFilterChange("userType", key)}
+          />
         </div>
         <div className="flex-shrink-0">
-          <FilterDropdown label={t("skills")} />
+          <FilterDropdown
+            label={t("experienceLevel")}
+            items={experienceLevelItems}
+            selectedKey={experienceLevel}
+            onSelectionChange={(key) =>
+              handleFilterChange("experienceLevel", key)
+            }
+          />
         </div>
         <div className="flex-shrink-0">
-          <FilterDropdown label={t("experienceLevel")} />
+          <FilterDropdown
+            label={t("location")}
+            items={serviceAreaItems}
+            selectedKey={location}
+            onSelectionChange={(key) => handleFilterChange("location", key)}
+          />
         </div>
         <div className="flex-shrink-0">
-          <FilterDropdown label={t("timeAvailability")} />
+          <FilterDropdown
+            label={pt("Basics.university")}
+            items={universityItems}
+            selectedKey={universityId}
+            onSelectionChange={(key) => handleFilterChange("universityId", key)}
+            disableInput={false}
+          />
         </div>
         <div className="flex-shrink-0">
-          <FilterDropdown label={t("location")} />
-        </div> */}
+          <FilterDropdown
+            label={pt("Basics.faculty")}
+            items={facultyItems}
+            selectedKey={facultyId}
+            onSelectionChange={(key) => handleFilterChange("facultyId", key)}
+            disableInput={false}
+          />
+        </div>
       </div>
     </div>
   );

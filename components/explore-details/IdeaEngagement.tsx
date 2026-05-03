@@ -4,7 +4,7 @@
 import { Divider } from "@heroui/divider";
 import { FiHeart, FiMessageSquare } from "react-icons/fi";
 import { Project } from "@/types/api";
-import RatingStars from "../shared/RatingStars";
+import { RatingStars } from "../shared/RatingStars";
 
 import { useTranslations } from "next-intl";
 import { useLikeProject } from "@/hooks/api/useProject";

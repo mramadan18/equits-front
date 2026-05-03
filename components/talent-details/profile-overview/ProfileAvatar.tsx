@@ -28,7 +28,7 @@ export const ProfileAvatar = ({
   const avatarInputRef = useRef<HTMLInputElement>(null);
 
   return (
-    <div className="absolute -top-16 md:-top-20 left-6 md:left-8 w-32 h-32 md:w-40 md:h-40 z-10 flex-shrink-0">
+    <div className="absolute -top-16 md:-top-20 start-6 md:start-8 w-32 h-32 md:w-40 md:h-40 z-10 flex-shrink-0">
       <div className="w-full h-full rounded-full border-4 border-white bg-gray-100 overflow-hidden shadow-md">
         <Avatar
           src={`${talent?.avatar}`}
@@ -50,7 +50,7 @@ export const ProfileAvatar = ({
             onPress={() => avatarInputRef.current?.click()}
             isDisabled={isProcessing}
             isIconOnly
-            className="absolute bottom-2 right-2 w-9 h-9 rounded-full bg-primary-50 border-2 border-white flex items-center justify-center text-primary hover:bg-primary-100 transition-all shadow-md z-20"
+            className="absolute bottom-2 end-2 w-9 h-9 rounded-full bg-primary-50 border-2 border-white flex items-center justify-center text-primary hover:bg-primary-100 transition-all shadow-md z-20"
           >
             {isProcessing && cropType === "avatar" ? (
               <Spinner size="sm" color="primary" />

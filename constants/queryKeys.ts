@@ -4,6 +4,8 @@ export const queryKeys = {
     all: ["all-profiles"] as const,
     detail: (id: number | string) => ["profile", id] as const,
     status: ["profile-status"] as const,
+    related: (id: string | number, limit?: number) =>
+      ["profile", id, "related", { limit }] as const,
   },
   projects: {
     all: (filters?: any) => ["projects", filters] as const,

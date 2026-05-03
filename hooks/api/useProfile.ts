@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { profileService } from "@/services/profile.service";
-import { ApiResponse, ProfileStatus, User } from "@/types/api";
+import { ApiResponse, ProfileFilters, ProfileStatus, User } from "@/types/api";
 import { ApiError } from "@/types/error";
 import { queryKeys } from "@/constants/queryKeys";
 
@@ -38,6 +38,14 @@ export const useProfileStatus = (enabled: boolean = true) => {
     queryKey: queryKeys.profiles.status,
     queryFn: () => profileService.getStatus(),
     enabled,
+  });
+};
+
+export const useRelatedProfiles = (params: ProfileFilters) => {
+  return useQuery<ApiResponse<User[]>, ApiError>({
+    queryKey: queryKeys.profiles.related(params.id, params.limit),
+    queryFn: () => profileService.getRelatedProfiles(params.id, params.limit),
+    enabled: !!params.id,
   });
 };
 

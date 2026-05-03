@@ -49,7 +49,7 @@ export const TalentProfileOverview = ({ talent }: { talent: User }) => {
           onFileChange={onFileChange}
         />
 
-        <ProfileBio talent={talent} />
+        <ProfileBio talent={talent} isOwnProfile={isOwnProfile} />
 
         <ProfileActions
           talent={talent}

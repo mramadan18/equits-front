@@ -3,14 +3,22 @@
 import { MdVerified } from "react-icons/md";
 import { PiCertificateBold } from "react-icons/pi";
 import { GrLocation } from "react-icons/gr";
+import { BsBuildings } from "react-icons/bs";
 import Link from "next/link";
 import { User, UserType } from "@/types/api";
+import { MainRoutes } from "@/types";
+import { useTranslations } from "next-intl";
 
-interface ProfileBioProps {
+export const ProfileBio = ({
+  talent,
+  isOwnProfile,
+}: {
   talent: User;
-}
+  isOwnProfile: boolean;
+}) => {
+  const t = useTranslations("TalentDetails");
+  const ts = useTranslations("Settings");
 
-export const ProfileBio = ({ talent }: ProfileBioProps) => {
   return (
     <div className="mt-20 md:mt-24 w-full">
       <div className="flex items-center gap-2 mb-2">
@@ -33,22 +41,42 @@ export const ProfileBio = ({ talent }: ProfileBioProps) => {
       <div className="flex items-center gap-2 mb-2">
         {talent?.experienceLevel && (
           <p className="text-gray2 font-medium">
-            {talent?.experienceLevel?.charAt(0).toUpperCase() +
-              talent?.experienceLevel?.slice(1).toLowerCase()}
+            {ts(`jobTitleForm.levels.${talent.experienceLevel}`)}
           </p>
         )}
-        <p className="text-gray2 font-medium">{talent?.jobTitle}</p>
-        {talent?.companyLink ? (
-          <Link
-            href={`${talent?.companyLink}`}
-            target="_blank"
-            className="text-gray2 font-medium underline hover:text-primary"
-          >
-            @ {talent?.company}
-          </Link>
-        ) : (
-          <p className="text-gray2 font-medium">@ {talent?.company}</p>
-        )}
+        <div className="flex items-center gap-2">
+          {talent?.jobTitle && (
+            <p className="text-gray2 font-medium">{talent?.jobTitle}</p>
+          )}
+          <div className="flex items-center gap-2">
+            {talent?.companyLink ? (
+              <Link
+                href={`${talent?.companyLink}`}
+                target="_blank"
+                className="text-gray2 font-medium underline hover:text-primary"
+              >
+                {`@ ${talent?.company}`}
+              </Link>
+            ) : talent?.company ? (
+              <p className="text-gray2 font-medium">{`@ ${talent?.company}`}</p>
+            ) : isOwnProfile ? (
+              <>
+                <BsBuildings className="text-lg text-gray2" />
+                <Link
+                  href={MainRoutes.SETTINGS_JOB_TITLE}
+                  className="text-gray2 font-medium underline hover:text-primary text-sm"
+                >
+                  {t("addCompany")}
+                </Link>
+              </>
+            ) : (
+              <>
+                <BsBuildings className="text-lg text-gray2" />
+                <p className="text-gray2 font-medium">{t("noCompany")}</p>
+              </>
+            )}
+          </div>
+        </div>
       </div>
       {/* Location and Education Info */}
       <div className="flex flex-col gap-2 mb-4 text-gray2 font-medium">
@@ -59,9 +87,13 @@ export const ProfileBio = ({ talent }: ProfileBioProps) => {
                 <div key={index} className="flex items-center gap-2 text-gray2">
                   <PiCertificateBold className="text-xl text-gray2" />
                   <span>
-                    {education?.degree?.charAt(0).toUpperCase() +
-                      education?.degree?.slice(1).toLowerCase()}{" "}
-                    of {education?.faculty}, {education?.university}
+                    {t("educationInfo", {
+                      degree:
+                        education?.degree?.charAt(0).toUpperCase() +
+                        education?.degree?.slice(1).toLowerCase(),
+                      faculty: education?.faculty,
+                      university: education?.university,
+                    })}
                   </span>
                 </div>
               ))}
@@ -69,7 +101,18 @@ export const ProfileBio = ({ talent }: ProfileBioProps) => {
           )}
         <div className="flex items-center gap-2">
           <GrLocation className="text-xl text-gray2" />
-          <span>{talent?.address}</span>
+          {talent?.address ? (
+            <span>{talent?.address}</span>
+          ) : isOwnProfile ? (
+            <Link
+              href={MainRoutes.SETTINGS_CONTACT_INFO}
+              className="text-gray2 font-medium underline hover:text-primary"
+            >
+              {t("addLocation")}
+            </Link>
+          ) : (
+            <p className="text-gray2 font-medium">{t("noLocation")}</p>
+          )}
         </div>
       </div>
     </div>

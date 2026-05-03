@@ -3,12 +3,14 @@ import { useState, useEffect } from "react";
 import { ExploreFilters } from "@/components/explore/ExploreFilters";
 import { FeedGrid } from "@/components/home/FeedGrid";
 import { FeedProfileCard } from "@/components/home/FeedProfileCard";
-// import { PeopleYouMayNeedSidebar } from "@/components/talent-details";
 import { useProjectsFeed } from "@/hooks/api/useProject";
 import { ProjectFilters } from "@/types/api";
 import { Pagination } from "@heroui/pagination";
 import { useDebounce } from "@/hooks/ui/useDebounce";
 import { HomeSearchBar } from "@/components/home/HomeSearchBar";
+import { PeopleYouMayNeedSidebar } from "@/components/talent-details";
+import { useAuthStore } from "@/stores/useAuthStore";
+import { useRelatedProfiles } from "@/hooks/api/useProfile";
 
 export default function HomePage() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -19,7 +21,13 @@ export default function HomePage() {
     limit: 10,
   });
 
+  const { user } = useAuthStore();
   const { data: projects } = useProjectsFeed(filters);
+  const { data: relatedProfiles, isLoading: isRelatedLoading } =
+    useRelatedProfiles({
+      id: user?.id?.toString() || "",
+      limit: 3,
+    });
 
   // Update search filter when debounced term changes
   useEffect(() => {
@@ -55,7 +63,10 @@ export default function HomePage() {
         {/* Right Sidebar */}
         <div className="lg:col-span-4 flex flex-col gap-6">
           <FeedProfileCard />
-          {/* <PeopleYouMayNeedSidebar /> */}
+          <PeopleYouMayNeedSidebar
+            talents={relatedProfiles?.data || []}
+            isLoading={isRelatedLoading}
+          />
         </div>
       </div>
     </div>
