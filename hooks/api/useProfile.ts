@@ -1,94 +1,56 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { profileService } from "@/services/profile.service";
-import {
-  ApiResponse,
-  ProfileStatus,
-  UpdateJobTitleRequest,
-  UpdateOverviewRequest,
-  UpdateEducationRequest,
-  UpdateContactRequest,
-  UpdatePicturesRequest,
-  User,
-} from "@/types/api";
+import { ApiResponse, ProfileStatus, User } from "@/types/api";
 import { ApiError } from "@/types/error";
+import { queryKeys } from "@/constants/queryKeys";
+
+// Helper for profile mutations that invalidate common profile queries
+const useProfileMutation = <TRequest, TResponse = User>(
+  mutationFn: (data: TRequest) => Promise<ApiResponse<TResponse>>,
+) => {
+  const queryClient = useQueryClient();
+
+  return useMutation<ApiResponse<TResponse>, ApiError, TRequest>({
+    mutationFn,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: queryKeys.profiles.status });
+      queryClient.invalidateQueries({ queryKey: queryKeys.me });
+    },
+  });
+};
 
 export const useGetAllProfiles = () => {
   return useQuery<ApiResponse<User[]>, ApiError>({
-    queryKey: ["all-profiles"],
+    queryKey: queryKeys.profiles.all,
     queryFn: () => profileService.getAllProfiles(),
   });
 };
 
 export const useProfile = (id: number) => {
   return useQuery<ApiResponse<User>, ApiError>({
-    queryKey: ["profile", id],
+    queryKey: queryKeys.profiles.detail(id),
     queryFn: () => profileService.getProfileById(id),
   });
 };
 
 export const useProfileStatus = () => {
   return useQuery<ApiResponse<ProfileStatus>, ApiError>({
-    queryKey: ["profile-status"],
+    queryKey: queryKeys.profiles.status,
     queryFn: () => profileService.getStatus(),
   });
 };
 
-export const useUpdateJobTitle = () => {
-  const queryClient = useQueryClient();
+export const useUpdateJobTitle = () =>
+  useProfileMutation(profileService.updateJobTitle);
 
-  return useMutation<ApiResponse<User>, ApiError, UpdateJobTitleRequest>({
-    mutationFn: (data) => profileService.updateJobTitle(data),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["profile-status"] });
-      queryClient.invalidateQueries({ queryKey: ["me"] });
-    },
-  });
-};
+export const useUpdateOverview = () =>
+  useProfileMutation(profileService.updateOverview);
 
-export const useUpdateOverview = () => {
-  const queryClient = useQueryClient();
+export const useUpdateEducation = () =>
+  useProfileMutation(profileService.updateEducation);
 
-  return useMutation<ApiResponse<User>, ApiError, UpdateOverviewRequest>({
-    mutationFn: (data) => profileService.updateOverview(data),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["profile-status"] });
-      queryClient.invalidateQueries({ queryKey: ["me"] });
-    },
-  });
-};
+export const useUpdateContact = () =>
+  useProfileMutation(profileService.updateContact);
 
-export const useUpdateEducation = () => {
-  const queryClient = useQueryClient();
-
-  return useMutation<ApiResponse<User>, ApiError, UpdateEducationRequest>({
-    mutationFn: (data) => profileService.updateEducation(data),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["profile-status"] });
-      queryClient.invalidateQueries({ queryKey: ["me"] });
-    },
-  });
-};
-
-export const useUpdateContact = () => {
-  const queryClient = useQueryClient();
-
-  return useMutation<ApiResponse<User>, ApiError, UpdateContactRequest>({
-    mutationFn: (data) => profileService.updateContact(data),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["profile-status"] });
-      queryClient.invalidateQueries({ queryKey: ["me"] });
-    },
-  });
-};
-
-export const useUpdatePictures = () => {
-  const queryClient = useQueryClient();
-
-  return useMutation<ApiResponse<User>, ApiError, UpdatePicturesRequest>({
-    mutationFn: (data) => profileService.updatePictures(data),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["profile-status"] });
-      queryClient.invalidateQueries({ queryKey: ["me"] });
-    },
-  });
-};
+export const useUpdatePictures = () =>
+  useProfileMutation(profileService.updatePictures);

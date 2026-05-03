@@ -1,100 +1,49 @@
-"use client";
 import { useTranslations } from "next-intl";
-import { Button } from "@heroui/button";
 import {
   FaLinkedinIn,
   FaFacebookF,
   FaInstagram,
   FaYoutube,
 } from "react-icons/fa";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { useUpdateContact } from "@/hooks/api/useProfile";
 import {
   getUpdateContactSchema,
   UpdateContactFormData,
 } from "@/validations/profile.validation";
-import { useAuthStore } from "@/stores/useAuthStore";
-import { useUpdateContact } from "@/hooks/api/useProfile";
-import { addToast } from "@heroui/toast";
-import { useEffect } from "react";
-import { FormInput } from "@/components/ui/form/FormInput";
+import { useSettingsForm } from "@/hooks/ui/useSettingsForm";
+import { FormInput } from "@/components/ui/form";
+import { SettingsFormActions } from "@/components/shared/SettingsFormActions";
+import { SettingsPageHeader } from "@/components/shared/SettingsPageHeader";
 
 export default function ContactInfoSettingsPage() {
   const t = useTranslations("Settings");
   const validationT = useTranslations("Auth.Validation");
-  const { user, setUser } = useAuthStore();
-  const { mutate: updateContact, isPending } = useUpdateContact();
+  const updateMutation = useUpdateContact();
 
-  const {
-    handleSubmit,
-    reset,
-    control,
-    formState: { isDirty },
-  } = useForm<UpdateContactFormData>({
-    mode: "all",
-    defaultValues: {
-      contactEmail: user?.contactEmail || "",
-      phone: user?.phone || "",
-      address: user?.address || "",
-      facebookUrl: user?.facebookUrl || "",
-      linkedinUrl: user?.linkedinUrl || "",
-      instagramUrl: user?.instagramUrl || "",
-      youtubeUrl: user?.youtubeUrl || "",
-    },
-    resolver: zodResolver(getUpdateContactSchema(validationT)),
-  });
-
-  const onSubmit = (data: UpdateContactFormData) => {
-    updateContact(data, {
-      onSuccess: (response) => {
-        setUser(response.data);
-        addToast({
-          title:
-            t("overviewForm.saveSuccess") || "Profile updated successfully",
-          color: "success",
-        });
-      },
+  const { control, onSubmit, handleCancel, isPending, isDirty } =
+    useSettingsForm<UpdateContactFormData>({
+      schema: getUpdateContactSchema(validationT),
+      mutation: updateMutation,
+      successMessage: t("overviewForm.saveSuccess"),
+      userToForm: (user) => ({
+        contactEmail: user?.contactEmail || "",
+        phone: user?.phone || "",
+        address: user?.address || "",
+        facebookUrl: user?.facebookUrl || "",
+        linkedinUrl: user?.linkedinUrl || "",
+        instagramUrl: user?.instagramUrl || "",
+        youtubeUrl: user?.youtubeUrl || "",
+      }),
     });
-  };
-
-  const handleCancel = () => {
-    if (user) {
-      reset({
-        contactEmail: user.contactEmail || "",
-        phone: user.phone || "",
-        address: user.address || "",
-        facebookUrl: user.facebookUrl || "",
-        linkedinUrl: user.linkedinUrl || "",
-        instagramUrl: user.instagramUrl || "",
-        youtubeUrl: user.youtubeUrl || "",
-      });
-    }
-  };
-
-  useEffect(() => {
-    if (user) {
-      reset({
-        contactEmail: user.contactEmail || "",
-        phone: user.phone || "",
-        address: user.address || "",
-        facebookUrl: user.facebookUrl || "",
-        linkedinUrl: user.linkedinUrl || "",
-        instagramUrl: user.instagramUrl || "",
-        youtubeUrl: user.youtubeUrl || "",
-      });
-    }
-  }, [user, reset]);
 
   return (
     <div className="flex flex-col gap-12">
-      <div className="flex flex-col gap-6">
-        <h2 className="text-3xl font-semibold text-dark">
-          {t("contactInfoForm.title")}
-        </h2>
-        <p className="text-gray2">{t("contactInfoForm.description")}</p>
-      </div>
+      <SettingsPageHeader
+        title={t("contactInfoForm.title")}
+        description={t("contactInfoForm.description")}
+      />
 
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-10">
+      <form onSubmit={onSubmit} className="flex flex-col gap-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           <FormInput
             name="contactEmail"
@@ -189,19 +138,11 @@ export default function ContactInfoSettingsPage() {
           </div>
         </div>
 
-        <div className="flex justify-end gap-6 mt-12">
-          <Button variant="bordered" onPress={handleCancel}>
-            {t("contactInfoForm.cancel")}
-          </Button>
-          <Button
-            color="primary"
-            type="submit"
-            isLoading={isPending}
-            isDisabled={!isDirty || isPending}
-          >
-            {t("contactInfoForm.save")}
-          </Button>
-        </div>
+        <SettingsFormActions
+          isPending={isPending}
+          isDirty={isDirty}
+          onCancel={handleCancel}
+        />
       </form>
     </div>
   );

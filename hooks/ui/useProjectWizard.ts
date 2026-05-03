@@ -1,5 +1,3 @@
-"use client";
-
 import { useState, useMemo, useEffect } from "react";
 import {
   initialStep1Form,
@@ -27,6 +25,10 @@ import {
 import { useRouter } from "@/i18n/navigation";
 import { MainRoutes } from "@/types";
 import { addToast } from "@heroui/toast";
+import {
+  mapProjectToFormData,
+  prepareProjectDataForSubmit,
+} from "@/utils/projectMapper";
 
 export const useProjectWizard = (id?: string) => {
   const t = useTranslations("Pitch");
@@ -76,59 +78,7 @@ export const useProjectWizard = (id?: string) => {
   useEffect(() => {
     if (projectData?.data && !hasInitialized) {
       const project = projectData.data;
-
-      const formData: Partial<ProjectFormData> = {
-        title: project.title || "",
-        tagline: project.tagline || "",
-        logo: project.logo || "",
-        cover: project.cover || "",
-        elevatorPitch: project.elevatorPitch || "",
-        videoUrl: project.videoUrl || "",
-        projectUrl: project.projectUrl || "",
-        linkedinUrl: project.linkedinUrl || "",
-        facebookUrl: project.facebookUrl || "",
-        instagramUrl: project.instagramUrl || "",
-        youtubeUrl: project.youtubeUrl || "",
-        universityId: project.universityId,
-        facultyId: project.facultyId,
-        isAcademic: project.isAcademic,
-
-        industryId: project.industryId,
-        subIndustryIds: project.subIndustries?.map((s) => s.id) || [],
-        projectTypes: (project.projectTypes as any) || [],
-        stage: (project.stage as any) || "",
-        revenueModel: (project.revenueModel as any) || "",
-        marketFocus: (project.marketFocus as any) || "",
-        problem: project.problem || "",
-        solution: project.solution || "",
-        valueProp: project.valueProp || "",
-
-        currentTraction: (project.currentTraction as any) || "",
-        growthRate: (project.growthRate as any) || "",
-        totalUsers: project.totalUsers ? Number(project.totalUsers) : null,
-        dailyActiveUsers: project.dailyActiveUsers
-          ? Number(project.dailyActiveUsers)
-          : null,
-        monthlyRevenue: project.monthlyRevenue
-          ? Number(project.monthlyRevenue)
-          : null,
-        growthRatePct: project.growthRatePct
-          ? Number(project.growthRatePct)
-          : null,
-        retentionRate: project.retentionRate
-          ? Number(project.retentionRate)
-          : null,
-        conversionRate: project.conversionRate
-          ? Number(project.conversionRate)
-          : null,
-
-        fundingStage: (project.fundingStage as any) || "",
-        serviceArea: (project.serviceArea as any) || "",
-        fundingAsk: project.fundingAsk ? Number(project.fundingAsk) : null,
-        equityStake: project.equityStake ? Number(project.equityStake) : null,
-        useOfFunds: project.useOfFunds || "",
-        businessPlanUrl: project.businessPlanUrl || "",
-      };
+      const formData = mapProjectToFormData(project);
 
       Object.entries(formData).forEach(([key, value]) => {
         if (value !== undefined && value !== null) {
@@ -158,25 +108,12 @@ export const useProjectWizard = (id?: string) => {
 
     if (projectId) {
       try {
-        const values = getValues();
-
-        const filteredValues = Object.fromEntries(
-          Object.entries(values).filter(
-            ([_, value]) =>
-              value !== null && value !== "" && value?.length !== 0,
-          ),
-        );
-        const trimmedValues = Object.fromEntries(
-          Object.entries(filteredValues).map(([key, value]) => [
-            key,
-            typeof value === "string" ? value.trim() : value,
-          ]),
-        );
+        const data = prepareProjectDataForSubmit(getValues());
 
         await updateStep({
           id: projectId,
           step,
-          data: trimmedValues,
+          data,
         });
 
         const nextStep = (step + 1) as ProjectStep;
@@ -200,27 +137,13 @@ export const useProjectWizard = (id?: string) => {
 
     if (projectId) {
       try {
-        const values = getValues();
-
-        const filteredValues = Object.fromEntries(
-          Object.entries(values).filter(
-            ([_, value]) =>
-              value !== null && value !== "" && value?.length !== 0,
-          ),
-        );
-
-        const trimmedValues = Object.fromEntries(
-          Object.entries(filteredValues).map(([key, value]) => [
-            key,
-            typeof value === "string" ? value.trim() : value,
-          ]),
-        );
+        const data = prepareProjectDataForSubmit(getValues());
 
         // Save the last step first
         await updateStep({
           id: projectId,
           step: 4,
-          data: trimmedValues,
+          data,
         });
 
         // Then submit

@@ -3,6 +3,7 @@ import {
   LoginInput,
   RegisterInput,
 } from "../validations/auth.validation";
+import { ProjectStage } from "./project";
 
 export enum ExperienceLevel {
   STUDENT = "STUDENT",
@@ -224,13 +225,6 @@ export interface ProjectDraft {
   currentStep: number;
 }
 
-export type ProjectStage =
-  | "IDEA"
-  | "VALIDATION"
-  | "PROTOTYPE"
-  | "MVP"
-  | "BUSINESS";
-
 export interface ProjectFilters {
   industryId?: number;
   stage?: ProjectStage | string;
@@ -325,11 +319,6 @@ export interface ProjectComment {
 }
 
 export interface ProjectRating {
-  average: number;
-  total: number;
-}
-
-export interface ProjectRatingResponse {
   average: number;
   total: number;
 }
