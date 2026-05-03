@@ -1,43 +1,29 @@
 "use client";
 import { useTranslations } from "next-intl";
-import Image from "next/image";
 import { MdVerified } from "react-icons/md";
 import { TbListDetails } from "react-icons/tb";
 import { Button } from "@heroui/button";
 import { Divider } from "@heroui/divider";
-import { useState } from "react";
 
-import { MOCK_PEOPLE_YOU_MAY_NEED } from "./mockData";
+import { User } from "@/types/api";
+import { Avatar } from "@heroui/avatar";
+import { Link } from "@/i18n/navigation";
+import { MainRoutes } from "@/types";
 
-const AvatarWrapper = ({ person }: { person: any }) => {
-  const [error, setError] = useState(false);
-  const initials = person.name
-    .split(" ")
-    .map((n: string) => n[0])
-    .join("")
-    .toUpperCase()
-    .substring(0, 2);
-
+const AvatarWrapper = ({ talent }: { talent: User }) => {
   return (
     <div className="w-14 h-14 md:w-16 md:h-16 rounded-full border border-gray-200 bg-gray-100 overflow-hidden relative flex-shrink-0 shadow-sm">
-      {person.avatar && !error ? (
-        <Image
-          src={person.avatar}
-          alt={person.name}
-          fill
-          className="object-cover"
-          onError={() => setError(true)}
-        />
-      ) : (
-        <div className="w-full h-full bg-gradient-to-br from-gray-500 to-gray-700 flex items-center justify-center text-white text-xl font-bold">
-          {initials}
-        </div>
-      )}
+      <Avatar
+        src={`${talent.avatar}`}
+        alt={`${talent.firstName} ${talent.lastName}`}
+        showFallback
+        classNames={{ base: "w-full h-full", img: "object-cover" }}
+      />
     </div>
   );
 };
 
-export const PeopleYouMayNeedSidebar = () => {
+export const PeopleYouMayNeedSidebar = ({ talents }: { talents: User[] }) => {
   const t = useTranslations("TalentDetails");
 
   return (
@@ -51,37 +37,41 @@ export const PeopleYouMayNeedSidebar = () => {
 
       {/* List */}
       <div className="flex flex-col">
-        {MOCK_PEOPLE_YOU_MAY_NEED.map((person, index) => (
+        {talents.map((talent, index) => (
           <div
-            key={person.id}
+            key={talent.id}
             className="flex flex-col px-6 py-4 hover:bg-gray-50 transition-colors"
           >
             {/* Person Header Info */}
             <div className="flex items-start gap-4 mb-3">
-              <AvatarWrapper person={person} />
+              <AvatarWrapper talent={talent} />
 
               <div className="flex-1 flex flex-col justify-center">
                 <div className="flex items-center gap-1 mb-0.5">
                   <h3 className="font-medium text-dark text-lg whitespace-nowrap overflow-hidden text-ellipsis max-w-[150px]">
-                    {person.name}
+                    {talent.firstName} {talent.lastName}
                   </h3>
-                  {person.verified && (
+                  {talent.isTrusted ? (
                     <MdVerified className="text-primary text-xl flex-shrink-0" />
+                  ) : (
+                    <MdVerified className="text-gray-400 text-xl flex-shrink-0" />
                   )}
                 </div>
                 <div className="text-sm font-medium text-gray-700 leading-tight">
-                  {person.level && <span className="me-1">{person.level}</span>}
-                  {person.role}
+                  {talent.experienceLevel && (
+                    <span className="me-1">{talent.experienceLevel}</span>
+                  )}
+                  {talent.userType}
                 </div>
-                <div className="text-sm text-gray-500 font-medium">
-                  @ {person.organization}
-                </div>
+                {/* <div className="text-sm text-gray-500 font-medium">
+                @ {talent.company}
+              </div> */}
               </div>
             </div>
 
             {/* Description */}
             <p className="text-sm text-gray2 font-medium line-clamp-3 leading-relaxed mb-4">
-              {person.description}
+              {talent.overview}
             </p>
 
             {/* Action Button */}
@@ -98,9 +88,7 @@ export const PeopleYouMayNeedSidebar = () => {
             </Button>
 
             {/* Divider if not the last item */}
-            {index < MOCK_PEOPLE_YOU_MAY_NEED.length - 1 && (
-              <Divider className="mt-6" />
-            )}
+            {index < talents.length - 1 && <Divider className="mt-6" />}
           </div>
         ))}
       </div>
@@ -108,10 +96,11 @@ export const PeopleYouMayNeedSidebar = () => {
       {/* Footer Show All Button */}
       <div className="p-6 pt-2 pb-6 w-full flex justify-center">
         <Button
+          as={Link}
+          href={MainRoutes.TALENTS}
           variant="light"
-          className="font-bold text-gray-600 hover:text-dark text-lg"
-          size="md"
-          disableAnimation
+          radius="sm"
+          fullWidth
         >
           {t("showAll")}
         </Button>

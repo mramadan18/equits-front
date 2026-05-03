@@ -220,13 +220,32 @@
     "requestMeeting": "Request Meeting"
   },
   "TalentDetails": {
+    "editProfileBtn": "Edit Profile",
     "contact": "Contact",
     "requestMeeting": "Request Meeting",
     "about": "About",
     "peopleYouMayNeed": "People You May Need",
     "moreDetails": "More Details",
     "showAll": "Show All",
-    "viewDetails": "View Details"
+    "viewDetails": "View Details",
+    "contactInfo": "Contact Information",
+    "close": "Close",
+      "requestMeetingModal": {
+        "title": "Request Meeting",
+        "preferredDate": "Preferred Date",
+        "preferredTime": "Preferred Time",
+        "preferredContactMethod": "Preferred Contact Method",
+        "selectMethodPlaceholder": "Select method",
+        "noteLabel": "Note",
+        "note": "Note: This request will be sent to the student. Further communication will happen off-platform using your preferred contact method.",
+        "cancel": "Cancel",
+        "sendRequest": "Send Request",
+        "contactMethods": {
+          "phone": "Phone",
+          "email": "Email",
+          "whatsapp": "WhatsApp"
+        }
+      }
   },
   "Pitch": {
     "title": "Pitch Your Project",

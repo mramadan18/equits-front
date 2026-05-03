@@ -57,7 +57,11 @@ export const TalentCard = ({ item }: { item: User }) => {
             >
               {item.firstName} {item.lastName}
             </Link>
-            {item.isTrusted && <MdVerified className="text-primary text-xl" />}
+            {item.isTrusted ? (
+              <MdVerified className="text-primary text-xl" />
+            ) : (
+              <MdVerified className="text-gray-400 text-xl flex-shrink-0" />
+            )}
           </div>
 
           <p className="text-sm text-gray2 mb-1 line-clamp-1">

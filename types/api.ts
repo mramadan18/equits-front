@@ -289,11 +289,11 @@ export interface Project {
   faculty?: Faculty | null;
   industry?: Industry | null;
   subIndustries: SubIndustry[];
-  likesCount?: number;
-  commentsCount?: number;
-  reviewsCount?: number;
-  rating?: number;
-  isLiked?: boolean;
+  likesCount: number;
+  commentsCount: number;
+  reviewsCount: number;
+  rating: number;
+  isLiked: boolean;
   likes: ProjectLike[];
   comments: ProjectComment[];
 }

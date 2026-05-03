@@ -226,7 +226,26 @@
     "peopleYouMayNeed": "أشخاص قد تحتاجهم",
     "moreDetails": "مزيد من التفاصيل",
     "showAll": "إظهار الكل",
-    "viewDetails": "عرض التفاصيل"
+    "viewDetails": "عرض التفاصيل",
+    "contactInfo": "معلومات الاتصال",
+    "close": "إغلاق",
+    "editProfileBtn": "تعديل الملف",
+      "requestMeetingModal": {
+        "title": "طلب اجتماع",
+        "preferredDate": "التاريخ المفضل",
+        "preferredTime": "الوقت المفضل",
+        "preferredContactMethod": "وسيلة التواصل المفضلة",
+        "selectMethodPlaceholder": "اختر الوسيلة",
+        "noteLabel": "ملاحظة",
+        "note": "ملاحظة: سيتم إرسال هذا الطلب إلى الطالب. ستتم المراسلات اللاحقة خارج المنصة باستخدام وسيلة التواصل المفضلة لديك.",
+        "cancel": "إلغاء",
+        "sendRequest": "إرسال الطلب",
+        "contactMethods": {
+          "phone": "الهاتف",
+          "email": "البريد الإلكتروني",
+          "whatsapp": "واتساب"
+        }
+      }
   },
   "Pitch": {
     "title": "اعرض مشروعك",

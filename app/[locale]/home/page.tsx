@@ -55,7 +55,7 @@ export default function HomePage() {
         {/* Right Sidebar */}
         <div className="lg:col-span-4 flex flex-col gap-6">
           <FeedProfileCard />
-          <PeopleYouMayNeedSidebar />
+          {/* <PeopleYouMayNeedSidebar /> */}
         </div>
       </div>
     </div>

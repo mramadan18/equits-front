@@ -252,9 +252,9 @@ export default function AccountSettingsPage() {
         {/* Danger Zone */}
         <div className="flex flex-col gap-6 p-6 border-2 border-danger/20 rounded-xl bg-danger/5">
           <div className="flex flex-col gap-2">
-            <h3 className="text-xl font-semibold text-danger">
+            {/* <h3 className="text-xl font-semibold text-danger">
               {t("accountForm.dangerZone")}
-            </h3>
+            </h3> */}
             <p className="text-gray2 text-sm">
               {t("accountForm.deleteAccountDescription")}
             </p>
