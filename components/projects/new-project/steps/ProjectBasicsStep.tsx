@@ -1,7 +1,5 @@
 "use client";
 
-import { Input, Textarea } from "@heroui/input";
-import { Autocomplete, AutocompleteItem } from "@heroui/autocomplete";
 import { Switch } from "@heroui/switch";
 import {
   FaLinkedinIn,
@@ -11,9 +9,13 @@ import {
 } from "react-icons/fa";
 import { useTranslations } from "next-intl";
 import { useFaculties, useUniversities } from "@/hooks/api/useLookup";
-import { Controller, Control } from "react-hook-form";
+import { Control, useWatch } from "react-hook-form";
 import { ProjectFormData } from "@/types/project";
-import { FileUploader } from "@/components/ui/FileUploader";
+import { FormInput } from "@/components/ui/form/FormInput";
+import { FormTextarea } from "@/components/ui/form/FormTextarea";
+import { FormAutocomplete } from "@/components/ui/form/FormAutocomplete";
+import { FormFileUploader } from "@/components/ui/form/FormFileUploader";
+import { AutocompleteItem } from "@heroui/autocomplete";
 
 interface ProjectBasicsStepProps {
   control: Control<ProjectFormData>;
@@ -32,161 +34,102 @@ export const ProjectBasicsStep = ({
   const { data: facultiesRes } = useFaculties();
   const faculties = facultiesRes?.data || [];
 
-  const safeTranslate = (key: string | undefined) => {
-    if (!key) return "";
-    return key.startsWith("Validation.") ? t(key) : key;
-  };
+  const elevatorPitch = useWatch({ control, name: "elevatorPitch" }) as string;
 
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <Controller
+        <FormInput
           name="title"
           control={control}
-          render={({ field, fieldState }) => (
-            <Input
-              label={t("Basics.projectName")}
-              placeholder={t("Basics.projectNamePlaceholder")}
-              labelPlacement="outside"
-              variant="bordered"
-              radius="sm"
-              value={field.value as string}
-              isInvalid={!!fieldState.error}
-              errorMessage={safeTranslate(fieldState.error?.message)}
-              maxLength={60}
-              classNames={{
-                description:
-                  "absolute bottom-1 right-2 text-tiny text-default-400",
-                inputWrapper: "relative",
-              }}
-              onChange={field.onChange}
-              onBlur={field.onBlur}
-            />
-          )}
+          t={t}
+          label={t("Basics.projectName")}
+          placeholder={t("Basics.projectNamePlaceholder")}
+          labelPlacement="outside"
+          variant="bordered"
+          radius="sm"
+          maxLength={60}
+          classNames={{
+            description: "absolute bottom-1 right-2 text-tiny text-default-400",
+            inputWrapper: "relative",
+          }}
         />
-        <Controller
+        <FormInput
           name="tagline"
           control={control}
-          render={({ field, fieldState }) => (
-            <Input
-              label={t("Basics.tagline")}
-              placeholder={t("Basics.taglinePlaceholder")}
-              labelPlacement="outside"
-              variant="bordered"
-              radius="sm"
-              value={field.value as string}
-              isInvalid={!!fieldState.error}
-              errorMessage={safeTranslate(fieldState.error?.message)}
-              maxLength={160}
-              classNames={{
-                description:
-                  "absolute bottom-1 right-2 text-tiny text-default-400",
-                inputWrapper: "relative",
-              }}
-              onChange={field.onChange}
-              onBlur={field.onBlur}
-            />
-          )}
+          t={t}
+          label={t("Basics.tagline")}
+          placeholder={t("Basics.taglinePlaceholder")}
+          labelPlacement="outside"
+          variant="bordered"
+          radius="sm"
+          maxLength={160}
+          classNames={{
+            description: "absolute bottom-1 right-2 text-tiny text-default-400",
+            inputWrapper: "relative",
+          }}
         />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <Controller
+        <FormFileUploader
           name="logo"
           control={control}
-          render={({ field, fieldState }) => (
-            <FileUploader
-              label={t("Basics.logo")}
-              subLabel={t("Basics.logoSubLabel")}
-              placeholder={t("Basics.browse")}
-              value={field.value as string}
-              onChange={field.onChange}
-              isInvalid={!!fieldState.error}
-              errorMessage={safeTranslate(fieldState.error?.message)}
-            />
-          )}
+          t={t}
+          label={t("Basics.logo")}
+          subLabel={t("Basics.logoSubLabel")}
+          placeholder={t("Basics.browse")}
         />
-        <Controller
+        <FormFileUploader
           name="cover"
           control={control}
-          render={({ field, fieldState }) => (
-            <FileUploader
-              label={t("Basics.cover")}
-              placeholder={t("Basics.browse")}
-              value={field.value as string}
-              onChange={field.onChange}
-              isInvalid={!!fieldState.error}
-              errorMessage={safeTranslate(fieldState.error?.message)}
-            />
-          )}
+          t={t}
+          label={t("Basics.cover")}
+          placeholder={t("Basics.browse")}
         />
       </div>
 
       <div className="flex flex-col gap-4">
-        <Controller
+        <FormTextarea
           name="elevatorPitch"
           control={control}
-          render={({ field, fieldState }) => (
-            <Textarea
-              label={t("Basics.elevatorPitch")}
-              placeholder={t("Basics.elevatorPitchPlaceholder")}
-              labelPlacement="outside"
-              minRows={4}
-              variant="bordered"
-              radius="sm"
-              value={field.value as string}
-              isInvalid={!!fieldState.error}
-              errorMessage={safeTranslate(fieldState.error?.message)}
-              maxLength={500}
-              description={
-                <div className="flex justify-end w-full">
-                  <span>{(field.value as string)?.length ?? 0}/500</span>
-                </div>
-              }
-              classNames={{
-                description: "absolute bottom-4 end-4 text-tiny text-gray2",
-                inputWrapper: "relative",
-              }}
-              onChange={field.onChange}
-              onBlur={field.onBlur}
-            />
-          )}
+          t={t}
+          label={t("Basics.elevatorPitch")}
+          placeholder={t("Basics.elevatorPitchPlaceholder")}
+          labelPlacement="outside"
+          minRows={4}
+          variant="bordered"
+          radius="sm"
+          maxLength={500}
+          description={
+            <div className="flex justify-end w-full">
+              <span>{elevatorPitch?.length ?? 0}/500</span>
+            </div>
+          }
+          classNames={{
+            description: "absolute bottom-4 end-4 text-tiny text-gray2",
+            inputWrapper: "relative",
+          }}
         />
-        <Controller
+        <FormInput
           name="videoUrl"
           control={control}
-          render={({ field, fieldState }) => (
-            <Input
-              label={`${t("Basics.youtubeVideo")} ${t("Basics.optional")}`}
-              placeholder={t("Basics.youtubeVideoPlaceholder")}
-              labelPlacement="outside"
-              variant="bordered"
-              radius="sm"
-              value={field.value as string}
-              isInvalid={!!fieldState.error}
-              errorMessage={safeTranslate(fieldState.error?.message)}
-              onChange={field.onChange}
-              onBlur={field.onBlur}
-            />
-          )}
+          t={t}
+          label={`${t("Basics.youtubeVideo")} ${t("Basics.optional")}`}
+          placeholder={t("Basics.youtubeVideoPlaceholder")}
+          labelPlacement="outside"
+          variant="bordered"
+          radius="sm"
         />
-        <Controller
+        <FormInput
           name="projectUrl"
           control={control}
-          render={({ field, fieldState }) => (
-            <Input
-              label={`${t("Basics.liveLink")} ${t("Basics.optional")}`}
-              placeholder={t("Basics.liveLinkPlaceholder")}
-              labelPlacement="outside"
-              variant="bordered"
-              radius="sm"
-              value={field.value as string}
-              isInvalid={!!fieldState.error}
-              errorMessage={safeTranslate(fieldState.error?.message)}
-              onChange={field.onChange}
-              onBlur={field.onBlur}
-            />
-          )}
+          t={t}
+          label={`${t("Basics.liveLink")} ${t("Basics.optional")}`}
+          placeholder={t("Basics.liveLinkPlaceholder")}
+          labelPlacement="outside"
+          variant="bordered"
+          radius="sm"
         />
       </div>
 
@@ -196,86 +139,54 @@ export const ProjectBasicsStep = ({
         </span>
         <div className="flex items-center gap-4">
           <FaLinkedinIn className="text-blue-600 text-2xl flex-shrink-0" />
-          <Controller
+          <FormInput
             name="linkedinUrl"
             control={control}
-            render={({ field, fieldState }) => (
-              <Input
-                aria-label={t("Basics.linkedinLabel")}
-                placeholder={t("Basics.linkedinPlaceholder")}
-                className="flex-1"
-                variant="bordered"
-                radius="sm"
-                value={field.value as string}
-                isInvalid={!!fieldState.error}
-                errorMessage={safeTranslate(fieldState.error?.message)}
-                onChange={field.onChange}
-                onBlur={field.onBlur}
-              />
-            )}
+            t={t}
+            aria-label={t("Basics.linkedinLabel")}
+            placeholder={t("Basics.linkedinPlaceholder")}
+            className="flex-1"
+            variant="bordered"
+            radius="sm"
           />
         </div>
         <div className="flex items-center gap-4">
           <FaFacebookF className="text-blue-600 text-2xl flex-shrink-0" />
-          <Controller
+          <FormInput
             name="facebookUrl"
             control={control}
-            render={({ field, fieldState }) => (
-              <Input
-                aria-label={t("Basics.facebookLabel")}
-                placeholder={t("Basics.facebookPlaceholder")}
-                className="flex-1"
-                variant="bordered"
-                radius="sm"
-                value={field.value as string}
-                isInvalid={!!fieldState.error}
-                errorMessage={safeTranslate(fieldState.error?.message)}
-                onChange={field.onChange}
-                onBlur={field.onBlur}
-              />
-            )}
+            t={t}
+            aria-label={t("Basics.facebookLabel")}
+            placeholder={t("Basics.facebookPlaceholder")}
+            className="flex-1"
+            variant="bordered"
+            radius="sm"
           />
         </div>
         <div className="flex items-center gap-4">
           <FaInstagram className="text-pink-600 text-2xl flex-shrink-0" />
-          <Controller
+          <FormInput
             name="instagramUrl"
             control={control}
-            render={({ field, fieldState }) => (
-              <Input
-                aria-label={t("Basics.instagramLabel")}
-                placeholder={t("Basics.instagramPlaceholder")}
-                className="flex-1"
-                variant="bordered"
-                radius="sm"
-                value={field.value as string}
-                isInvalid={!!fieldState.error}
-                errorMessage={safeTranslate(fieldState.error?.message)}
-                onChange={field.onChange}
-                onBlur={field.onBlur}
-              />
-            )}
+            t={t}
+            aria-label={t("Basics.instagramLabel")}
+            placeholder={t("Basics.instagramPlaceholder")}
+            className="flex-1"
+            variant="bordered"
+            radius="sm"
           />
         </div>
         <div className="flex items-center gap-4">
           <FaYoutube className="text-red-600 text-2xl flex-shrink-0" />
-          <Controller
+          <FormInput
             name="youtubeUrl"
             control={control}
-            render={({ field, fieldState }) => (
-              <Input
-                aria-label={t("Basics.youtubeLabel")}
-                placeholder={t("Basics.youtubePlaceholder")}
-                className="flex-1"
-                variant="bordered"
-                radius="sm"
-                value={field.value as string}
-                isInvalid={!!fieldState.error}
-                errorMessage={safeTranslate(fieldState.error?.message)}
-                onChange={field.onChange}
-                onBlur={field.onBlur}
-              />
-            )}
+            t={t}
+            aria-label={t("Basics.youtubeLabel")}
+            placeholder={t("Basics.youtubePlaceholder")}
+            className="flex-1"
+            variant="bordered"
+            radius="sm"
           />
         </div>
       </div>
@@ -289,56 +200,36 @@ export const ProjectBasicsStep = ({
 
       {isAcademic && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <Controller
+          <FormAutocomplete
             name="universityId"
             control={control}
-            render={({ field, fieldState }) => (
-              <Autocomplete
-                label={t("Basics.university")}
-                placeholder={t("Basics.selectPlaceholder")}
-                variant="bordered"
-                radius="sm"
-                selectedKey={field.value?.toString()}
-                isInvalid={!!fieldState.error}
-                errorMessage={safeTranslate(fieldState.error?.message)}
-                onSelectionChange={(key) =>
-                  field.onChange(key ? Number(key) : null)
-                }
-                onBlur={field.onBlur}
-              >
-                {universities.map((uni) => (
-                  <AutocompleteItem key={uni.id.toString()}>
-                    {uni.name}
-                  </AutocompleteItem>
-                ))}
-              </Autocomplete>
-            )}
-          />
-          <Controller
+            t={t}
+            label={t("Basics.university")}
+            placeholder={t("Basics.selectPlaceholder")}
+            variant="bordered"
+            radius="sm"
+          >
+            {universities.map((uni) => (
+              <AutocompleteItem key={uni.id.toString()}>
+                {uni.name}
+              </AutocompleteItem>
+            ))}
+          </FormAutocomplete>
+          <FormAutocomplete
             name="facultyId"
             control={control}
-            render={({ field, fieldState }) => (
-              <Autocomplete
-                label={t("Basics.faculty")}
-                placeholder={t("Basics.selectPlaceholder")}
-                variant="bordered"
-                radius="sm"
-                selectedKey={field.value?.toString()}
-                isInvalid={!!fieldState.error}
-                errorMessage={safeTranslate(fieldState.error?.message)}
-                onSelectionChange={(key) =>
-                  field.onChange(key ? Number(key) : null)
-                }
-                onBlur={field.onBlur}
-              >
-                {faculties.map((fac) => (
-                  <AutocompleteItem key={fac.id.toString()}>
-                    {fac.name}
-                  </AutocompleteItem>
-                ))}
-              </Autocomplete>
-            )}
-          />
+            t={t}
+            label={t("Basics.faculty")}
+            placeholder={t("Basics.selectPlaceholder")}
+            variant="bordered"
+            radius="sm"
+          >
+            {faculties.map((fac) => (
+              <AutocompleteItem key={fac.id.toString()}>
+                {fac.name}
+              </AutocompleteItem>
+            ))}
+          </FormAutocomplete>
         </div>
       )}
     </div>

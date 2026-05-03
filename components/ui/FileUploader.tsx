@@ -9,7 +9,7 @@ import { Spinner } from "@heroui/spinner";
 import { FiFile } from "react-icons/fi";
 import { useTranslations } from "next-intl";
 
-interface FileUploaderProps {
+export interface FileUploaderProps {
   label: string;
   subLabel?: string;
   placeholder?: string;
