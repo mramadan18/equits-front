@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@heroui/button";
-import { Link } from "@/i18n/navigation";
+import Link from "next/link";
 import { AuthRoutes } from "@/types";
 
 interface AuthButtonsProps {

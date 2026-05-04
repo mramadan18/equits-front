@@ -1,5 +1,5 @@
 "use client";
-import { Link } from "@/i18n/navigation";
+import Link from "next/link";
 import { Button } from "@heroui/button";
 import { useTranslations } from "next-intl";
 import { MainRoutes } from "@/types";

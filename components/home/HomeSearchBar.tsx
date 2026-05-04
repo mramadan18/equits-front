@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 import { Input } from "@heroui/input";
 import { Button } from "@heroui/button";
 import { IoSearchOutline, IoAddOutline } from "react-icons/io5";
-import { Link } from "@/i18n/navigation";
+import Link from "next/link";
 import { MainRoutes } from "@/types";
 import { useAuthStore } from "@/stores/useAuthStore";
 

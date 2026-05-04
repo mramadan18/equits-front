@@ -1,11 +1,11 @@
 "use client";
 
 import { useActiveDraft, useCreateProject } from "@/hooks/api/useProject";
-import { useRouter } from "@/i18n/navigation";
-import { DraftHeader } from "../../../../components/projects/draft-project/DraftHeader";
-import { DraftCard } from "../../../../components/projects/draft-project/DraftCard";
-import { DraftLoading } from "../../../../components/projects/draft-project/DraftLoading";
-import { EmptyDrafts } from "../../../../components/projects/draft-project/EmptyDrafts";
+import { useRouter } from "next/navigation";
+import { DraftHeader } from "@/components/projects/draft-project/DraftHeader";
+import { DraftCard } from "@/components/projects/draft-project/DraftCard";
+import { DraftLoading } from "@/components/projects/draft-project/DraftLoading";
+import { EmptyDrafts } from "@/components/projects/draft-project/EmptyDrafts";
 import { MainRoutes } from "@/types";
 
 export default function ExistingPitchPage() {

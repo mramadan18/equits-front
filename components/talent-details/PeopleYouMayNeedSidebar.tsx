@@ -7,7 +7,7 @@ import { Divider } from "@heroui/divider";
 
 import { User } from "@/types/api";
 import { Avatar } from "@heroui/avatar";
-import { Link } from "@/i18n/navigation";
+import Link from "next/link";
 import { MainRoutes } from "@/types";
 import { Skeleton } from "@heroui/skeleton";
 

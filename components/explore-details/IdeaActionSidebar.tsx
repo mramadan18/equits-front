@@ -20,7 +20,7 @@ import {
 } from "react-icons/fa6";
 import { Project } from "@/types/api";
 import { useMe } from "@/hooks/api/useAuth";
-import { Link } from "@/i18n/navigation";
+import Link from "next/link";
 
 interface IdeaActionSidebarProps {
   project: Project;

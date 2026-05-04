@@ -2,7 +2,6 @@
 
 import { Input } from "@heroui/input";
 import { Button } from "@heroui/button";
-import { Select, SelectItem } from "@heroui/select";
 import { Divider } from "@heroui/divider";
 import { ConfirmModal } from "@/components/shared/ConfirmModal";
 import { FormInput } from "@/components/ui/form/FormInput";
@@ -11,7 +10,7 @@ import { useAccountSettingsController } from "@/hooks/ui/useAccountSettingsContr
 export default function AccountSettingsPage() {
   const {
     t,
-    locale,
+    // locale,
     user,
     isOpen,
     onOpen,
@@ -19,7 +18,6 @@ export default function AccountSettingsPage() {
     isDeletePending,
     isChangePending,
     form,
-    handleLanguageChange,
     handlePasswordSubmit,
     handleDeleteAccount,
   } = useAccountSettingsController();
@@ -123,7 +121,7 @@ export default function AccountSettingsPage() {
         <Divider />
 
         {/* Language Section */}
-        <div className="flex flex-col gap-6">
+        {/* <div className="flex flex-col gap-6">
           <h3 className="text-xl font-semibold text-dark">
             {t("accountForm.languageSection")}
           </h3>
@@ -134,10 +132,6 @@ export default function AccountSettingsPage() {
               variant="bordered"
               radius="sm"
               selectedKeys={[locale]}
-              onSelectionChange={(keys) => {
-                const val = Array.from(keys)[0] as string;
-                handleLanguageChange(val);
-              }}
             >
               <SelectItem key="en" textValue="English">
                 English
@@ -149,7 +143,7 @@ export default function AccountSettingsPage() {
           </div>
         </div>
 
-        <Divider />
+        <Divider /> */}
 
         {/* Danger Zone */}
         <div className="flex flex-col gap-6 p-6 border-2 border-danger/20 rounded-xl bg-danger/5">

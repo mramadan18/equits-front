@@ -1,4 +1,3 @@
-import { useTranslations } from "next-intl";
 import { CreativeIdeaCard } from "@/components/shared/creative-idea-card";
 import { SectionHeader } from "@/components/shared/SectionHeader";
 import {
@@ -8,9 +7,22 @@ import {
 } from "@/components/shared/animations";
 import { Project } from "@/types/api";
 import SeeMoreButton from "./SeeMoreButton";
+import { fetchServer } from "@/utils/api-utils";
+import { getTranslations } from "next-intl/server";
 
-export default function CreativeIdeas({ projects }: { projects: Project[] }) {
-  const t = useTranslations("CreativeIdeas");
+export default async function CreativeIdeas() {
+  const t = await getTranslations("CreativeIdeas");
+  let projects: Project[] = [];
+
+  try {
+    const data = await fetchServer<Project[]>("/projects", {
+      params: { limit: 3 },
+      cache: "no-store",
+    });
+    projects = data.data || [];
+  } catch (error) {
+    console.error("Failed to fetch projects for landing page:", error);
+  }
 
   return (
     <section className="w-full bg-white py-16 md:py-24 overflow-hidden">

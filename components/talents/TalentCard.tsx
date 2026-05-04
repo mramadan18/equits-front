@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { MdVerified } from "react-icons/md";
 import { FaVideo } from "react-icons/fa";
-import { Link } from "@/i18n/navigation";
+import Link from "next/link";
 import { MainRoutes } from "@/types";
 import { User } from "@/types/api";
 import { Avatar } from "@heroui/avatar";

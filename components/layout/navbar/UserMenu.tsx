@@ -13,7 +13,7 @@ import { IoMdNotificationsOutline } from "react-icons/io";
 import { PiOpenAiLogoThin } from "react-icons/pi";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { FiPlus } from "react-icons/fi";
-import { Link } from "@/i18n/navigation";
+import Link from "next/link";
 import { MainRoutes } from "@/types";
 import { User } from "@/types/api";
 

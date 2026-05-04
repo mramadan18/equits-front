@@ -2,7 +2,7 @@
 
 import { Modal, ModalBody, ModalContent, ModalHeader } from "@heroui/modal";
 import { Button } from "@heroui/button";
-import { useRouter } from "@/i18n/navigation";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import clsx from "clsx";

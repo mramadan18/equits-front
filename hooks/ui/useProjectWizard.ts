@@ -22,7 +22,7 @@ import {
   useSubmitProject,
   useProject,
 } from "@/hooks/api/useProject";
-import { useRouter } from "@/i18n/navigation";
+import { useRouter } from "next/navigation";
 import { MainRoutes } from "@/types";
 import { addToast } from "@heroui/toast";
 import {

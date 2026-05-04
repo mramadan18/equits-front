@@ -2,13 +2,10 @@ import "@/styles/globals.css";
 import { Metadata, Viewport } from "next";
 import { Providers } from "./providers";
 import { fontAlexandria } from "@/config/fonts";
-import { hasLocale } from "next-intl";
-import { routing } from "@/i18n/routing";
-import { notFound } from "next/navigation";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
+import { getLocale, getMessages } from "next-intl/server";
 import { ToastProvider } from "@heroui/toast";
 import { cookies } from "next/headers";
 
@@ -33,18 +30,13 @@ export const viewport: Viewport = {
 
 type Props = {
   children: React.ReactNode;
-  params: Promise<{ locale: string }>;
 };
 
-export default async function RootLayout({ children, params }: Props) {
-  const { locale } = await params;
+export default async function RootLayout({ children }: Props) {
+  const locale = await getLocale();
   const storeCookies = await cookies();
   const session = storeCookies.get("jwt")?.value;
   const isVerified = storeCookies.get("isVerified")?.value === "true";
-
-  if (!hasLocale(routing.locales, locale)) {
-    notFound();
-  }
 
   const messages = await getMessages();
 

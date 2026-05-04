@@ -1,7 +1,6 @@
 "use client";
 
 import { useTranslations, useLocale } from "next-intl";
-import { useRouter, usePathname } from "@/i18n/navigation";
 import { useDeleteMe, useChangePassword } from "@/hooks/api/useAuth";
 import { useDisclosure } from "@heroui/modal";
 import { addToast } from "@heroui/toast";
@@ -18,8 +17,6 @@ export const useAccountSettingsController = () => {
   const t = useTranslations("Settings");
   const validationT = useTranslations("Auth.Validation");
   const locale = useLocale();
-  const router = useRouter();
-  const pathname = usePathname();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const { user } = useAuthStore();
   const { mutate: deleteAccount, isPending: isDeletePending } = useDeleteMe();
@@ -30,10 +27,6 @@ export const useAccountSettingsController = () => {
     resolver: zodResolver(getChangePasswordSchema(validationT)),
     mode: "all",
   });
-
-  const handleLanguageChange = (newLocale: string) => {
-    router.replace(pathname, { locale: newLocale as "en" | "ar" });
-  };
 
   const handlePasswordSubmit = (data: ChangePasswordInput) => {
     changePassword(data, {
@@ -61,7 +54,6 @@ export const useAccountSettingsController = () => {
     isDeletePending,
     isChangePending,
     form,
-    handleLanguageChange,
     handlePasswordSubmit,
     handleDeleteAccount,
   };

@@ -8,7 +8,7 @@ import { CardHeader } from "./components/CardHeader";
 import { AttributeRow } from "./components/AttributeRow";
 import { CardInfo } from "./components/CardInfo";
 import { Stat } from "./components/Stat";
-import { Link } from "@/i18n/navigation";
+import Link from "next/link";
 import { MainRoutes } from "@/types";
 import { Project } from "@/types/api";
 

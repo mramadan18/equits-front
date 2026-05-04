@@ -11,7 +11,7 @@ import { useProfileStatus } from "@/hooks/api/useProfile";
 import { Spinner } from "@heroui/spinner";
 import { useAuthStore } from "@/stores/useAuthStore";
 import { User } from "@/types/api";
-import { Link } from "@/i18n/navigation";
+import Link from "next/link";
 
 // --- Sub-components ---
 

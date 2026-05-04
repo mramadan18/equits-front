@@ -10,7 +10,7 @@ import { useTranslations } from "next-intl";
 import "swiper/css";
 import "swiper/css/pagination";
 import { MainRoutes } from "@/types";
-import { Link } from "@/i18n/navigation";
+import Link from "next/link";
 
 interface IdeaTeamProps {
   project: Project;

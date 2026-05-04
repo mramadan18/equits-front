@@ -1,7 +1,7 @@
 "use client";
 
 import { NavbarItem } from "@heroui/navbar";
-import { Link } from "@/i18n/navigation";
+import Link from "next/link";
 import { ReactNode } from "react";
 
 interface NavItem {

@@ -1,9 +1,5 @@
-import createMiddleware from "next-intl/middleware";
-import { routing } from "./i18n/routing";
 import { NextRequest, NextResponse } from "next/server";
 import { AuthRoutes, MainRoutes } from "./types";
-
-const intlMiddleware = createMiddleware(routing);
 
 const authPages = [
   AuthRoutes.LOGIN,
@@ -23,11 +19,8 @@ const protectedPages = [
 ];
 
 export default function middleware(request: NextRequest) {
-  // 1. السطر السحري لحل مشكلة Railway:
-  // بنمسح البورت تماماً في بيئة الإنتاج عشان next-intl ميعملش Redirect بالغلط
   if (process.env.NODE_ENV === "production") {
     request.nextUrl.port = "";
-    // تأكيد إضافي لـ Railway عشان يتعامل كأنه HTTPS بدون بورتات داخلية
     request.headers.set("x-forwarded-port", "443");
     request.headers.set("x-forwarded-proto", "https");
   }
@@ -41,7 +34,6 @@ export default function middleware(request: NextRequest) {
     pathname.includes(page),
   );
 
-  // 2. استخدام clone() وتغيير الـ pathname بدل استخدام origin
   if (session && isVerified && isAuthPage) {
     const homeUrl = request.nextUrl.clone();
     homeUrl.pathname = MainRoutes.HOME;
@@ -61,10 +53,10 @@ export default function middleware(request: NextRequest) {
     return NextResponse.redirect(loginUrl);
   }
 
-  // بعد ما نظفنا الـ request فوق، next-intl هيحولك لـ /ar بدون 8080
-  return intlMiddleware(request);
+  // Return next response since we are no longer using intlMiddleware
+  return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/", "/(ar|en)/:path*", "/((?!api|_next|.*\\..*).*)"],
+  matcher: ["/((?!api|_next|.*\\..*).*)"],
 };

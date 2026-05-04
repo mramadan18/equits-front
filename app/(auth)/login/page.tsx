@@ -1,7 +1,7 @@
 "use client";
 
 import { MdOutlineMailOutline } from "react-icons/md";
-import { Link } from "@/i18n/navigation";
+import Link from "next/link";
 import {
   AuthLayout,
   AuthHeader,

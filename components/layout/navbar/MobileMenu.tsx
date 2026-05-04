@@ -2,7 +2,7 @@
 
 import { NavbarMenu, NavbarMenuItem } from "@heroui/navbar";
 import { Button } from "@heroui/button";
-import { Link } from "@/i18n/navigation";
+import Link from "next/link";
 import { AuthRoutes } from "@/types";
 import { ReactNode } from "react";
 

@@ -6,7 +6,7 @@ import { IoSearchOutline, IoAddOutline } from "react-icons/io5";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useDebounce } from "@/hooks/ui/useDebounce";
-import { Link } from "@/i18n/navigation";
+import Link from "next/link";
 import { MainRoutes } from "@/types";
 import { useAuthStore } from "@/stores/useAuthStore";
 

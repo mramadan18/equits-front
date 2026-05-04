@@ -5,7 +5,7 @@ import Image from "next/image";
 import { FaRegBookmark } from "react-icons/fa";
 import moment from "moment";
 import { Avatar, AvatarGroup } from "@heroui/avatar";
-import { Link } from "@/i18n/navigation";
+import Link from "next/link";
 import { MainRoutes } from "@/types";
 
 export const FeedIdeaCard = ({ idea }: { idea: Project }) => {
