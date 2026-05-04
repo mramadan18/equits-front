@@ -7,7 +7,7 @@ import { PaginationData, User } from "@/types/api";
 export default async function TalentsPage({
   searchParams,
 }: {
-  searchParams: Promise<{ [key: string]: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
   const params = await searchParams;
   const {
@@ -20,6 +20,13 @@ export default async function TalentsPage({
     facultyId,
   } = params;
 
+  // Helper to normalize params to string array or undefined
+  const normalizeParam = (val: string | string[] | undefined) => {
+    if (!val || val === "all") return undefined;
+    if (Array.isArray(val)) return val;
+    return val.split(",");
+  };
+
   let allProfiles: User[] = [];
   let pagination: PaginationData = {
     total: 0,
@@ -31,14 +38,13 @@ export default async function TalentsPage({
   try {
     const data = await fetchServer<User[]>("/profile", {
       params: {
-        search,
-        page,
+        search: Array.isArray(search) ? search[0] : search,
+        page: Array.isArray(page) ? page[0] : page,
         userType: userType === "all" ? undefined : userType,
-        experienceLevel:
-          experienceLevel === "all" ? undefined : experienceLevel,
-        serviceArea: location === "all" ? undefined : location,
-        universityId: universityId === "all" ? undefined : universityId,
-        facultyId: facultyId === "all" ? undefined : facultyId,
+        experienceLevel: normalizeParam(experienceLevel),
+        serviceArea: normalizeParam(location),
+        universityId: normalizeParam(universityId),
+        facultyId: normalizeParam(facultyId),
       },
       cache: "no-store",
     });

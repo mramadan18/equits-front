@@ -4,7 +4,10 @@ import { cookies } from "next/headers";
 const BASE_URL = `${process.env.NEXT_PUBLIC_API_URL}/api/v1`;
 
 interface FetchOptions extends RequestInit {
-  params?: Record<string, string | number | boolean | undefined>;
+  params?: Record<
+    string,
+    string | number | boolean | undefined | null | string[]
+  >;
   locale?: string;
 }
 
@@ -22,7 +25,16 @@ export async function fetchServer<T>(
     const searchParams = new URLSearchParams();
     Object.entries(params).forEach(([key, value]) => {
       if (value !== undefined && value !== null && value !== "") {
-        searchParams.append(key, String(value));
+        if (Array.isArray(value)) {
+          const filteredValue = value.filter(
+            (v) => v !== undefined && v !== null && v !== "",
+          );
+          if (filteredValue.length > 0) {
+            searchParams.append(key, filteredValue.join(","));
+          }
+        } else {
+          searchParams.append(key, String(value));
+        }
       }
     });
     const queryString = searchParams.toString();

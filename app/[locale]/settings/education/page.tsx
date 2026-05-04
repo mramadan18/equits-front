@@ -23,6 +23,7 @@ export default function EducationSettingsPage() {
     fields,
     remove,
     handleAddMore,
+    setValue,
     control,
     onSubmit,
     handleCancel,
@@ -68,9 +69,32 @@ export default function EducationSettingsPage() {
                   variant="bordered"
                   radius="sm"
                   allowsCustomValue
+                  onSelectionChange={(key) => {
+                    if (key) {
+                      const uni = universities.find(
+                        (u) => u.id === Number(key),
+                      );
+                      if (uni) {
+                        // @ts-ignore
+                        setValue(`certificates.${index}.universityId`, uni.id, {
+                          shouldDirty: true,
+                          shouldValidate: true,
+                        });
+                        setValue(`certificates.${index}.university`, uni.name, {
+                          shouldDirty: true,
+                          shouldValidate: true,
+                        });
+                      }
+                    } else {
+                      setValue(`certificates.${index}.universityId`, null, {
+                        shouldDirty: true,
+                        shouldValidate: true,
+                      });
+                    }
+                  }}
                 >
                   {universities.map((uni) => (
-                    <AutocompleteItem key={uni.name} textValue={uni.name}>
+                    <AutocompleteItem key={uni.id} textValue={uni.name}>
                       {uni.name}
                     </AutocompleteItem>
                   ))}
@@ -104,12 +128,40 @@ export default function EducationSettingsPage() {
                   variant="bordered"
                   radius="sm"
                   allowsCustomValue
+                  onSelectionChange={(key) => {
+                    if (key) {
+                      const faculty = faculties.find(
+                        (f) => f.id === Number(key),
+                      );
+                      if (faculty) {
+                        // @ts-ignore
+                        setValue(
+                          `certificates.${index}.facultyId`,
+                          faculty.id,
+                          {
+                            shouldDirty: true,
+                            shouldValidate: true,
+                          },
+                        );
+                        setValue(
+                          `certificates.${index}.faculty`,
+                          faculty.name,
+                          {
+                            shouldDirty: true,
+                            shouldValidate: true,
+                          },
+                        );
+                      }
+                    } else {
+                      setValue(`certificates.${index}.facultyId`, null, {
+                        shouldDirty: true,
+                        shouldValidate: true,
+                      });
+                    }
+                  }}
                 >
                   {faculties.map((faculty) => (
-                    <AutocompleteItem
-                      key={faculty.name}
-                      textValue={faculty.name}
-                    >
+                    <AutocompleteItem key={faculty.id} textValue={faculty.name}>
                       {faculty.name}
                     </AutocompleteItem>
                   ))}
@@ -164,7 +216,7 @@ export default function EducationSettingsPage() {
 
         <div className="flex justify-start">
           <Button variant="flat" color="primary" onPress={handleAddMore}>
-            + {t("educationForm.addMore")}
+            + {t("educationForm.addMoreBtn")}
           </Button>
         </div>
 

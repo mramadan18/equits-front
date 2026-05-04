@@ -1,6 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import { lookupService } from "@/services/lookup.service";
-import { ApiResponse, Faculty, Industry, University } from "@/types/api";
+import {
+  ApiResponse,
+  City,
+  Country,
+  Faculty,
+  Industry,
+  University,
+} from "@/types/api";
 import { ApiError } from "@/types/error";
 
 export const useUniversities = () => {
@@ -21,5 +28,20 @@ export const useIndustries = () => {
   return useQuery<ApiResponse<Industry[]>, ApiError>({
     queryKey: ["industries"],
     queryFn: () => lookupService.getIndustries(),
+  });
+};
+
+export const useCountries = () => {
+  return useQuery<ApiResponse<Country[]>, ApiError>({
+    queryKey: ["countries"],
+    queryFn: () => lookupService.getCountries(),
+  });
+};
+
+export const useCities = (countryId?: number) => {
+  return useQuery<ApiResponse<City[]>, ApiError>({
+    queryKey: ["cities", countryId],
+    queryFn: () => lookupService.getCities(countryId),
+    enabled: !!countryId,
   });
 };

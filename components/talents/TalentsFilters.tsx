@@ -108,6 +108,7 @@ export const TalentsFilters = () => {
             label={t("experienceLevel")}
             items={experienceLevelItems}
             selectedKey={experienceLevel}
+            selectionMode="multiple"
             onSelectionChange={(key) =>
               handleFilterChange("experienceLevel", key)
             }
@@ -118,6 +119,7 @@ export const TalentsFilters = () => {
             label={t("location")}
             items={serviceAreaItems}
             selectedKey={location}
+            selectionMode="multiple"
             onSelectionChange={(key) => handleFilterChange("location", key)}
           />
         </div>
@@ -126,6 +128,7 @@ export const TalentsFilters = () => {
             label={pt("Basics.university")}
             items={universityItems}
             selectedKey={universityId}
+            selectionMode="multiple"
             onSelectionChange={(key) => handleFilterChange("universityId", key)}
             disableInput={false}
           />
@@ -135,6 +138,7 @@ export const TalentsFilters = () => {
             label={pt("Basics.faculty")}
             items={facultyItems}
             selectedKey={facultyId}
+            selectionMode="multiple"
             onSelectionChange={(key) => handleFilterChange("facultyId", key)}
             disableInput={false}
           />

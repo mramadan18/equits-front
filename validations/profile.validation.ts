@@ -32,11 +32,13 @@ export type UpdateJobTitleFormData = z.infer<
 
 export const getEducationCertificateSchema = (t: any) =>
   z.object({
-    university: z.string().min(1, t("universityRequired")),
+    university: z.string().optional().or(z.literal("")),
+    universityId: z.number().optional().nullable(),
     degree: z.nativeEnum(EducationDegree, {
       message: t("degreeRequired"),
     }),
-    faculty: z.string().min(1, t("facultyRequired")),
+    faculty: z.string().optional().or(z.literal("")),
+    facultyId: z.number().optional().nullable(),
     programLink: z.string().url(t("invalidUrl")).optional().or(z.literal("")),
     startDate: z.string().min(1, t("startDateRequired")),
     endDate: z.string().optional().nullable(),
@@ -60,7 +62,8 @@ export const getUpdateContactSchema = (t: any) =>
       .optional()
       .or(z.literal("")),
     phone: z.string().optional().or(z.literal("")),
-    address: z.string().optional().or(z.literal("")),
+    countryId: z.number().optional().nullable(),
+    cityId: z.number().optional().nullable(),
     facebookUrl: z.string().url(t("invalidUrl")).optional().or(z.literal("")),
     linkedinUrl: z.string().url(t("invalidUrl")).optional().or(z.literal("")),
     instagramUrl: z.string().url(t("invalidUrl")).optional().or(z.literal("")),

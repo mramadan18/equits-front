@@ -31,11 +31,7 @@ export const useSettingsForm = <T extends FieldValues>({
     defaultValues: user ? userToForm(user) : undefined,
   });
 
-  const {
-    reset,
-    handleSubmit,
-    formState: { isDirty },
-  } = form;
+  const { reset, handleSubmit } = form;
 
   useEffect(() => {
     if (user) {
@@ -67,7 +63,8 @@ export const useSettingsForm = <T extends FieldValues>({
     onSubmit: handleSubmit(onSubmit),
     handleCancel,
     isPending,
-    isDirty,
+    isDirty: form.formState.isDirty,
+    isValid: form.formState.isValid,
     user,
   };
 };

@@ -5,14 +5,24 @@ import {
   FaInstagram,
   FaYoutube,
 } from "react-icons/fa";
-import { FormInput } from "@/components/ui/form";
+import { AutocompleteItem } from "@heroui/autocomplete";
+import { FormInput, FormAutocomplete } from "@/components/ui/form";
 import { SettingsFormActions } from "@/components/shared/SettingsFormActions";
 import { SettingsPageHeader } from "@/components/shared/SettingsPageHeader";
 import { useContactInfoController } from "@/hooks/ui/useContactInfoController";
 
 export default function ContactInfoSettingsPage() {
-  const { t, control, onSubmit, handleCancel, isPending, isDirty } =
-    useContactInfoController();
+  const {
+    t,
+    control,
+    onSubmit,
+    handleCancel,
+    isPending,
+    isDirty,
+    countries,
+    cities,
+    setValue,
+  } = useContactInfoController();
 
   return (
     <div className="flex flex-col gap-12">
@@ -41,15 +51,41 @@ export default function ContactInfoSettingsPage() {
             variant="bordered"
             radius="sm"
           />
-          <FormInput
-            name="address"
+          <FormAutocomplete
+            name="countryId"
             control={control}
-            label={t("contactInfoForm.address")}
-            placeholder={t("contactInfoForm.addressPlaceholder")}
+            label={t("contactInfoForm.country")}
+            placeholder={t("contactInfoForm.countryPlaceholder")}
             labelPlacement="outside"
             variant="bordered"
             radius="sm"
-          />
+            onSelectionChange={() => {
+              setValue("cityId", null);
+            }}
+          >
+            {countries.map((country) => (
+              <AutocompleteItem key={country.id} textValue={country.name}>
+                {country.name}
+              </AutocompleteItem>
+            ))}
+          </FormAutocomplete>
+
+          <FormAutocomplete
+            name="cityId"
+            control={control}
+            label={t("contactInfoForm.city")}
+            placeholder={t("contactInfoForm.cityPlaceholder")}
+            labelPlacement="outside"
+            variant="bordered"
+            radius="sm"
+            isDisabled={!cities.length}
+          >
+            {cities.map((city) => (
+              <AutocompleteItem key={city.id} textValue={city.name}>
+                {city.name}
+              </AutocompleteItem>
+            ))}
+          </FormAutocomplete>
         </div>
 
         <div className="flex flex-col gap-6 mt-4">

@@ -29,9 +29,11 @@ export const useEducationController = () => {
   const userToForm = useCallback(
     (user: any) => ({
       certificates: user?.educationCertificates?.map((cert: any) => ({
-        university: cert.university,
+        university: cert.university || "",
+        universityId: cert.universityId || null,
         degree: cert.degree,
-        faculty: cert.faculty,
+        faculty: cert.faculty || "",
+        facultyId: cert.facultyId || null,
         programLink: cert.programLink || "",
         startDate: cert.startDate ? cert.startDate.split("-")[0] : "",
         endDate: cert.endDate ? cert.endDate.split("-")[0] : "",
@@ -39,8 +41,10 @@ export const useEducationController = () => {
       })) || [
         {
           university: "",
+          universityId: null,
           degree: undefined as any,
           faculty: "",
+          facultyId: null,
           programLink: "",
           startDate: "",
           endDate: "",
@@ -77,8 +81,10 @@ export const useEducationController = () => {
   const handleAddMore = () => {
     append({
       university: "",
+      universityId: null,
       degree: undefined as any,
       faculty: "",
+      facultyId: null,
       programLink: "",
       startDate: "",
       endDate: "",
