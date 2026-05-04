@@ -20,21 +20,17 @@ export default function Opinions() {
   const baseOpinions = [
     {
       id: "ahmed",
-      avatar: "https://i.pravatar.cc/150?u=ahmed",
+      avatar: "",
     },
     {
       id: "jena",
-      avatar: "https://i.pravatar.cc/150?u=jena",
+      avatar: "",
     },
     {
       id: "alaa",
-      avatar: "https://i.pravatar.cc/150?u=alaa",
+      avatar: "",
     },
   ];
-
-  // Duplicate items to ensure Swiper has enough elements to loop flawlessly
-  // Swiper requires at least slidesPerView * 2 slides in loop mode.
-  const opinions = [...baseOpinions, ...baseOpinions, ...baseOpinions];
 
   return (
     <section className="py-20 w-full overflow-hidden bg-white">
@@ -72,12 +68,7 @@ export default function Opinions() {
             }}
             className="pb-24 h-[300px] md:h-[340px] !flex transition-all duration-300 [&>.swiper-wrapper]:items-center [&_.swiper-pagination]:!bottom-0 [&_.swiper-pagination-bullet]:!w-2 [&_.swiper-pagination-bullet]:!h-[3px] [&_.swiper-pagination-bullet]:!rounded-none [&_.swiper-pagination-bullet]:!bg-primary/30 [&_.swiper-pagination-bullet]:!opacity-100 [&_.swiper-pagination-bullet-active]:!bg-primary"
           >
-            {opinions.map((opinion, idx) => {
-              // We check if the translation has the key before rendering
-              // For arrays/objects we can just try/catch or assume it exists since
-              // we created it.
-              const hasOrg = opinion.id === "jena" || opinion.id === "alaa";
-
+            {baseOpinions.map((opinion, idx) => {
               return (
                 <SwiperSlide
                   key={idx}
@@ -85,26 +76,35 @@ export default function Opinions() {
                 >
                   <Card className="w-full border border-primary/50 shadow-none rounded-2xl p-2 md:p-4 hover:shadow-lg transition-shadow bg-white flex flex-col">
                     <CardBody className="flex flex-col gap-6">
-                      <div className="flex items-center gap-4">
-                        <Avatar
-                          src={opinion.avatar}
-                          size="lg"
-                          className="shrink-0 w-16 h-16 text-large"
-                        />
-                        <div className="flex flex-col">
-                          <h4 className="font-bold text-dark2 text-lg">
-                            {t(`cards.${opinion.id}.name`)}
-                          </h4>
-                          <p className="text-secondary font-medium text-sm">
-                            {t(`cards.${opinion.id}.role`)}
-                          </p>
-                          {hasOrg && (
-                            <p className="text-default-500 text-xs font-semibold">
-                              {t(`cards.${opinion.id}.org`)}
-                            </p>
-                          )}
-                        </div>
-                      </div>
+                      {/* Check if translation has the key before rendering */}
+                      {(() => {
+                        const hasOrg =
+                          opinion.id === "jena" || opinion.id === "alaa";
+                        return (
+                          <div className="flex items-center gap-4">
+                            <Avatar
+                              src={opinion.avatar}
+                              name={t(`cards.${opinion.id}.name`)}
+                              showFallback
+                              size="lg"
+                              className="shrink-0 w-16 h-16 text-large"
+                            />
+                            <div className="flex flex-col">
+                              <h4 className="font-bold text-dark2 text-lg">
+                                {t(`cards.${opinion.id}.name`)}
+                              </h4>
+                              <p className="font-medium text-sm">
+                                {t(`cards.${opinion.id}.role`)}
+                              </p>
+                              {hasOrg && (
+                                <p className="text-default-500 text-xs font-semibold">
+                                  {t(`cards.${opinion.id}.org`)}
+                                </p>
+                              )}
+                            </div>
+                          </div>
+                        );
+                      })()}
                       <p className="text-dark2 font-medium text-sm md:text-base leading-relaxed flex-1">
                         {t(`cards.${opinion.id}.quote`)}
                       </p>

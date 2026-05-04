@@ -28,6 +28,10 @@ export default function middleware(request: NextRequest) {
     pathname.startsWith(page),
   );
 
+  if (pathname === "/" && session && isVerified) {
+    return NextResponse.redirect(new URL(MainRoutes.HOME, request.url));
+  }
+
   // 1. إذا كان مسجل دخول وموثق وحاول يدخل صفحات اللوجن -> وديه الهوم
   if (session && isVerified && isAuthPage) {
     return NextResponse.redirect(new URL(MainRoutes.HOME, request.url));

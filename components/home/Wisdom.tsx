@@ -2,6 +2,8 @@ import { useTranslations } from "next-intl";
 import { Button } from "@heroui/button";
 import { SectionHeader } from "@/components/shared/SectionHeader";
 import { FadeIn } from "@/components/shared/animations";
+import Link from "next/link";
+import { AuthRoutes } from "@/types";
 
 export default function Wisdom() {
   const t = useTranslations("Wisdom");
@@ -26,6 +28,8 @@ export default function Wisdom() {
 
         <FadeIn y={20} duration={0.6} delay={0.4}>
           <Button
+            as={Link}
+            href={AuthRoutes.REGISTER}
             className="bg-white text-primary font-bold min-w-60"
             radius="full"
           >

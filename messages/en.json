@@ -158,21 +158,21 @@
       "alaa": {
         "name": "Alaa Saber",
         "role": "Senior Product Manager",
-        "org": "@ Equits",
+        "org": "@ TDM",
         "quote": "\"Equits felt refreshingly different. It connects you with the right people, but more importantly, it helps you present your startup in a way that truly stands out.\""
       }
     }
   },
   "Faq": {
     "title": "Frequently Asked Questions",
-    "q1": "What is Bitstart",
-    "a1": "Bitstart is a platform that empowers entrepreneurs by giving them the right resources to present their startups.",
+    "q1": "What is Equits",
+    "a1": "Equits is a platform that connects entrepreneurs with investors and guides them step by step from idea to funding rounds. It’s designed to help startups go smarter and faster.",
     "q2": "Who can join Equits?",
-    "a2": "Anyone with an innovative idea and a passion for entrepreneurship can join our platform.",
+    "a2": "Anyone with a business idea or a startup — whether you’re a student, first-time founder, or experienced entrepreneur — can join and find the right investors or partners.",
     "q3": "How do investors benefit from Equits?",
-    "a3": "Investors get access to a curated pipeline of promising startups and talented teams.",
+    "a3": "Investors get access to a curated pool of promising startups, with detailed insights and smart matching tools that make discovering opportunities easier than ever.",
     "q4": "How does Equits help entrepreneurs?",
-    "a4": "Equits doesn't just connect you with investors - it supports you through mentorship, resources, and tools to help you present your startup effectively and attract funding."
+    "a4": "Equits doesn’t just connect you with investors — it supports you through mentorship, resources, and tools to help you present your startup effectively and attract funding."
   },
   "Footer": {
     "copyright": "© Equits 2025 All Rights Reserved."

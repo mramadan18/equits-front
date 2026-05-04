@@ -2,6 +2,8 @@ import { useTranslations } from "next-intl";
 import { Button } from "@heroui/button";
 import { SectionHeader } from "@/components/shared/SectionHeader";
 import { FadeIn } from "@/components/shared/animations";
+import Link from "next/link";
+import { AuthRoutes } from "@/types";
 
 export default function WhatWeDo() {
   const t = useTranslations("WhatWeDo");
@@ -31,6 +33,9 @@ export default function WhatWeDo() {
             </p>
 
             <Button
+              as={Link}
+              href={AuthRoutes.REGISTER}
+              color="primary"
               className="bg-primary text-white font-bold h-12 px-10 rounded-lg text-lg"
               fullWidth
             >

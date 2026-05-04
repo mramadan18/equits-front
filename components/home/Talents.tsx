@@ -3,6 +3,8 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { BiRightArrowAlt } from "react-icons/bi";
 import { FadeIn } from "@/components/shared/animations";
+import { MainRoutes } from "@/types";
+import Link from "next/link";
 
 export default function Talents() {
   const t = useTranslations("Talents");
@@ -74,6 +76,8 @@ export default function Talents() {
 
             <FadeIn y={20} duration={0.6} delay={0.4} className="px-10">
               <Button
+                as={Link}
+                href={MainRoutes.TALENTS}
                 fullWidth
                 size="lg"
                 radius="full"
