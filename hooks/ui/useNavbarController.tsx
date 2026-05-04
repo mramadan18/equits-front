@@ -39,6 +39,11 @@ export const useNavbarController = (
     onOpen: onPitchOpen,
     onOpenChange: onPitchOpenChange,
   } = useDisclosure();
+  const {
+    isOpen: isAuthRequiredOpen,
+    onOpen: onAuthRequiredOpen,
+    onOpenChange: onAuthRequiredOpenChange,
+  } = useDisclosure();
   const { mutate: createProject, isPending: isCreatingProject } =
     useCreateProject();
 
@@ -48,6 +53,11 @@ export const useNavbarController = (
   const isRegisterPage = pathname === AuthRoutes.REGISTER;
 
   const handlePitchPress = () => {
+    if (!isLoggedIn) {
+      onAuthRequiredOpen();
+      return;
+    }
+
     if (user?.hasDraftProjects) {
       onPitchOpen();
     } else {
@@ -101,5 +111,7 @@ export const useNavbarController = (
     isRegisterPage,
     handlePitchPress,
     navItems,
+    isAuthRequiredOpen,
+    onAuthRequiredOpenChange,
   };
 };

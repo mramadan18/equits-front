@@ -26,6 +26,8 @@ export enum MainRoutes {
   SETTINGS_OVERVIEW = "/settings/overview",
   SETTINGS_EDUCATION = "/settings/education",
   SETTINGS_CONTACT_INFO = "/settings/contactinfo",
+  SAVED = "/saved",
+  HELP = "/help",
 }
 
 export type IconSvgProps = SVGProps<SVGSVGElement> & {

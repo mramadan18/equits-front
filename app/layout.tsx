@@ -58,7 +58,7 @@ export default async function RootLayout({ children }: Props) {
             session={session}
             locale={locale}
           >
-            <div className="relative flex flex-col min-h-screen">
+            <div className="relative flex flex-col min-h-screen pb-16 lg:pb-0">
               <Navbar session={session} isVerified={isVerified} />
               <main className="flex-grow w-full flex flex-col items-center">
                 {children}

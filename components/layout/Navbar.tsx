@@ -1,17 +1,20 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import {
   Navbar as HeroUINavbar,
   NavbarBrand,
   NavbarContent,
   NavbarItem,
-  NavbarMenuToggle,
 } from "@heroui/navbar";
 import Link from "next/link";
 import Image from "next/image";
-import { LuMenu } from "react-icons/lu";
+import { Badge } from "@heroui/badge";
+import { IoMdNotificationsOutline } from "react-icons/io";
+import { PiOpenAiLogoThin } from "react-icons/pi";
 import { MainRoutes } from "@/types";
 import { PitchModal } from "./PitchModal";
+import { AuthRequiredModal } from "./AuthRequiredModal";
 import { useNavbarController } from "@/hooks/ui/useNavbarController";
 
 // Sub-components
@@ -19,6 +22,7 @@ import { NavItems } from "./navbar/NavItems";
 import { UserMenu } from "./navbar/UserMenu";
 import { AuthButtons } from "./navbar/AuthButtons";
 import { MobileMenu } from "./navbar/MobileMenu";
+import { BottomNav } from "./navbar/BottomNav";
 
 export const Navbar = ({
   session,
@@ -44,7 +48,18 @@ export const Navbar = ({
     isUnverified,
     handlePitchPress,
     navItems,
+    isAuthRequiredOpen,
+    onAuthRequiredOpenChange,
   } = useNavbarController(session, isVerified);
+
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   return (
     <>
@@ -53,11 +68,14 @@ export const Navbar = ({
         onOpenChange={onPitchOpenChange}
         user={user || null}
       />
+      <AuthRequiredModal
+        isOpen={isAuthRequiredOpen}
+        onOpenChange={onAuthRequiredOpenChange}
+      />
       <HeroUINavbar
-        onMenuOpenChange={setIsMenuOpen}
-        isMenuOpen={isMenuOpen}
         maxWidth="full"
-        className="bg-white shadow-sm h-20"
+        shouldHideOnScroll={isMobile}
+        className="bg-white shadow-sm h-16 lg:h-20"
         classNames={{
           item: "flex relative h-full items-center px-2 data-[active=true]:after:content-[''] data-[active=true]:after:absolute data-[active=true]:after:bottom-0 data-[active=true]:after:left-0 data-[active=true]:after:right-0 data-[active=true]:after:h-0.5 data-[active=true]:after:bg-primary",
           wrapper: "h-full container max-w-auto",
@@ -71,7 +89,7 @@ export const Navbar = ({
                 alt={t("logoAlt")}
                 width={120}
                 height={30}
-                style={{ width: "auto", height: "auto" }}
+                className="w-24 lg:w-[120px] h-auto"
                 priority
               />
             </Link>
@@ -83,6 +101,32 @@ export const Navbar = ({
         </NavbarContent>
 
         <NavbarContent justify="end">
+          <div className="flex lg:hidden items-center gap-3">
+            <Badge
+              content="Soon"
+              color="primary"
+              className="px-1 text-[8px]"
+              size="sm"
+            >
+              <div className="w-8 h-8 bg-[#E9EAEB] rounded-full flex items-center justify-center">
+                <PiOpenAiLogoThin size={18} className="text-black" />
+              </div>
+            </Badge>
+
+            {isLoggedIn && (
+              <Badge
+                content="2"
+                color="danger"
+                className="w-4 h-4 text-[8px]"
+                size="sm"
+              >
+                <div className="w-8 h-8 bg-[#E9EAEB] rounded-full flex items-center justify-center">
+                  <IoMdNotificationsOutline size={18} className="text-black" />
+                </div>
+              </Badge>
+            )}
+          </div>
+
           <NavbarItem className="hidden lg:flex items-center gap-6">
             {isLoggedIn ? (
               <UserMenu
@@ -103,25 +147,30 @@ export const Navbar = ({
               />
             )}
           </NavbarItem>
-          <NavbarMenuToggle
-            aria-label={isMenuOpen ? t("closeMenu") : t("openMenu")}
-            className="lg:hidden text-gray w-14 h-10"
-            icon={<LuMenu size={36} />}
-          />
         </NavbarContent>
-
-        <MobileMenu
-          items={navItems}
-          pathname={pathname}
-          t={t}
-          onClose={() => setIsMenuOpen(false)}
-          isAuthPage={isAuthPage}
-          isLoginPage={isLoginPage}
-          isRegisterPage={isRegisterPage}
-          isUnverified={isUnverified}
-          onLogout={logout}
-        />
       </HeroUINavbar>
+      <MobileMenu
+        isOpen={isMenuOpen}
+        t={t}
+        onClose={() => setIsMenuOpen(false)}
+        isAuthPage={isAuthPage}
+        isLoginPage={isLoginPage}
+        isRegisterPage={isRegisterPage}
+        isUnverified={isUnverified}
+        isLoggedIn={isLoggedIn}
+        user={user}
+        onLogout={logout}
+      />
+      <BottomNav
+        items={navItems}
+        pathname={pathname}
+        isAuthPage={isAuthPage}
+        isLoggedIn={isLoggedIn}
+        onPitchPress={handlePitchPress}
+        isMenuOpen={isMenuOpen}
+        setIsMenuOpen={setIsMenuOpen}
+        t={t}
+      />
     </>
   );
 };

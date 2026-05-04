@@ -16,6 +16,7 @@ import { FiPlus } from "react-icons/fi";
 import Link from "next/link";
 import { MainRoutes } from "@/types";
 import { User } from "@/types/api";
+import { FaRegBookmark } from "react-icons/fa";
 
 interface UserMenuProps {
   user: User | null;
@@ -47,6 +48,12 @@ export const UserMenu = ({
         <Badge content="2" color="danger" className="w-5 h-5 text-[10px]">
           <div className="w-10 h-10 bg-[#E9EAEB] rounded-full flex items-center justify-center">
             <IoMdNotificationsOutline size={24} className="text-black" />
+          </div>
+        </Badge>
+
+        <Badge content="2" color="danger" className="w-5 h-5 text-[10px]">
+          <div className="w-10 h-10 bg-[#E9EAEB] rounded-full flex items-center justify-center">
+            <FaRegBookmark size={24} className="text-black" />
           </div>
         </Badge>
 
