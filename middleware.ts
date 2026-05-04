@@ -19,12 +19,6 @@ const protectedPages = [
 ];
 
 export default function middleware(request: NextRequest) {
-  if (process.env.NODE_ENV === "production") {
-    request.nextUrl.port = "";
-    request.headers.set("x-forwarded-port", "443");
-    request.headers.set("x-forwarded-proto", "https");
-  }
-
   const { pathname } = request.nextUrl;
   const session = request.cookies.get("jwt")?.value;
   const isVerified = request.cookies.get("isVerified")?.value === "true";
