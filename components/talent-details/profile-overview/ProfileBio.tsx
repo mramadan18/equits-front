@@ -2,12 +2,12 @@
 
 import { MdVerified } from "react-icons/md";
 import { PiCertificateBold } from "react-icons/pi";
-import { GrLocation } from "react-icons/gr";
 import { BsBuildings } from "react-icons/bs";
 import Link from "next/link";
 import { User, UserType } from "@/types/api";
 import { MainRoutes } from "@/types";
 import { useTranslations } from "next-intl";
+import { IoLocationOutline } from "react-icons/io5";
 
 export const ProfileBio = ({
   talent,
@@ -99,21 +99,24 @@ export const ProfileBio = ({
               ))}
             </>
           )}
-        <div className="flex items-center gap-2">
-          <GrLocation className="text-xl text-gray2" />
-          {talent?.address ? (
-            <span>{talent?.address}</span>
-          ) : isOwnProfile ? (
+        {talent?.country && talent?.city ? (
+          <div className="flex items-center gap-2">
+            <IoLocationOutline className="w-5 h-5 text-gray2" />
+            <span>{talent?.country?.name},</span>
+            <span>{talent?.city?.name}</span>
+          </div>
+        ) : isOwnProfile ? (
+          <div className="flex items-center gap-2">
             <Link
               href={MainRoutes.SETTINGS_CONTACT_INFO}
               className="text-gray2 font-medium underline hover:text-primary"
             >
               {t("addLocation")}
             </Link>
-          ) : (
-            <p className="text-gray2 font-medium">{t("noLocation")}</p>
-          )}
-        </div>
+          </div>
+        ) : (
+          <p className="text-gray2 font-medium">{t("noLocation")}</p>
+        )}
       </div>
     </div>
   );

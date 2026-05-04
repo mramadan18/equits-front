@@ -1,149 +1,127 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import { useState } from "react";
 import { Button } from "@heroui/button";
+import { Badge } from "@heroui/badge";
 import { IoFilterOutline } from "react-icons/io5";
-import { FilterDropdown } from "@/components/shared/FilterDropdown";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useCallback } from "react";
-import { ExperienceLevel, UserType, ServiceArea } from "@/types/api";
-import { useFaculties, useUniversities } from "@/hooks/api/useLookup";
+import { FilterDropdown } from "@/components/shared";
+import { useTalentsFiltersController } from "@/hooks/ui/useTalentsFiltersController";
+import { TalentsFiltersDrawer } from "./TalentsFiltersDrawer";
 
 export const TalentsFilters = () => {
-  const t = useTranslations("TalentsExplore");
-  const st = useTranslations("Settings");
-  const pt = useTranslations("Pitch");
+  const {
+    t,
+    userType,
+    experienceLevel,
+    cityId,
+    universityId,
+    facultyId,
+    userTypeItems,
+    experienceLevelItems,
+    universityItems,
+    facultyItems,
+    updateParam,
+  } = useTalentsFiltersController();
 
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
-  const { data: universitiesData } = useUniversities();
-  const { data: facultiesData } = useFaculties();
-
-  const createQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams.toString());
-      if (value === "all") {
-        params.delete(name);
-      } else {
-        params.set(name, value);
-      }
-      return params.toString();
-    },
-    [searchParams],
-  );
-
-  const handleFilterChange = (name: string, value: string) => {
-    router.push(pathname + "?" + createQueryString(name, value));
-  };
-
-  const userType = searchParams.get("userType") || UserType.TALENT;
-  const experienceLevel = searchParams.get("experienceLevel") || "all";
-  const location = searchParams.get("location") || "all";
-  const universityId = searchParams.get("universityId") || "all";
-  const facultyId = searchParams.get("facultyId") || "all";
-
-  const userTypeItems = [
-    { key: UserType.TALENT, label: st("overviewForm.talent") },
-    { key: UserType.INVESTOR, label: st("overviewForm.investor") },
-  ];
-
-  const experienceLevelItems = [
-    { key: "all", label: t("experienceLevel") },
-    ...Object.values(ExperienceLevel).map((level) => ({
-      key: level,
-      label: st(`jobTitleForm.levels.${level}`),
-    })),
-  ];
-
-  const serviceAreaItems = [
-    { key: "all", label: t("location") },
-    ...Object.values(ServiceArea).map((area) => ({
-      key: area,
-      label: pt(`Enums.ServiceArea.${area}`),
-    })),
-  ];
-
-  const universityItems = [
-    { key: "all", label: pt("Basics.university") },
-    ...(universitiesData?.data.map((u) => ({
-      key: String(u.id),
-      label: u.name,
-    })) || []),
-  ];
-
-  const facultyItems = [
-    { key: "all", label: pt("Basics.faculty") },
-    ...(facultiesData?.data.map((f) => ({
-      key: String(f.id),
-      label: f.name,
-    })) || []),
-  ];
+  const activeFiltersCount = [
+    experienceLevel !== "all"
+      ? experienceLevel.split(",").filter(Boolean).length
+      : 0,
+    cityId !== "all" ? cityId.split(",").filter(Boolean).length : 0,
+    universityId !== "all" ? universityId.split(",").filter(Boolean).length : 0,
+    facultyId !== "all" ? facultyId.split(",").filter(Boolean).length : 0,
+  ].reduce((acc, val) => acc + val, 0);
 
   return (
-    <div className="flex items-center w-full gap-2 md:gap-4 mb-6 md:mb-10 relative">
-      <div className="flex-shrink-0 flex items-center pe-2 md:pe-4 border-e-2 border-gray-200">
-        <Button
-          variant="light"
-          radius="full"
-          className="font-bold text-dark2 min-w-max h-10 md:h-11 px-2 md:px-4 hover:bg-gray-100 transition-colors"
-          startContent={<IoFilterOutline className="text-xl text-dark2" />}
+    <div className="flex flex-col w-full mb-8 md:mb-10 gap-4">
+      {/* Mobile Actions Row */}
+      <div className="flex md:hidden items-center justify-between w-full px-1">
+        <Badge
+          content={activeFiltersCount}
+          color="primary"
+          isInvisible={activeFiltersCount === 0}
+          shape="circle"
+          size="sm"
+          classNames={{
+            badge: "min-w-5 h-5",
+          }}
         >
-          <span className="hidden sm:inline-block">{t("allFilters")}</span>
-        </Button>
+          <Button
+            variant="bordered"
+            radius="full"
+            className="font-bold text-black gap-2 h-10 px-4 border-gray-300"
+            startContent={<IoFilterOutline className="text-xl" />}
+            onPress={() => setIsDrawerOpen(true)}
+          >
+            {t("allFilters")}
+          </Button>
+        </Badge>
       </div>
 
-      <div className="flex flex-1 items-center gap-2 md:gap-3 overflow-x-auto pb-2 -mb-2 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-        <div className="flex-shrink-0">
+      <div className="flex items-center w-full gap-4 overflow-hidden">
+        {/* Filters Scrollable Area */}
+        <div className="flex flex-1 items-center gap-3 overflow-x-auto no-scrollbar py-1">
           <FilterDropdown
-            label={st("overviewForm.userType")}
+            label={t("userType") || "User Type"}
             items={userTypeItems}
             selectedKey={userType}
-            onSelectionChange={(key) => handleFilterChange("userType", key)}
+            onSelectionChange={(key) => updateParam("userType", key)}
           />
-        </div>
-        <div className="flex-shrink-0">
+
           <FilterDropdown
             label={t("experienceLevel")}
             items={experienceLevelItems}
             selectedKey={experienceLevel}
             selectionMode="multiple"
-            onSelectionChange={(key) =>
-              handleFilterChange("experienceLevel", key)
-            }
+            onSelectionChange={(key) => updateParam("experienceLevel", key)}
           />
-        </div>
-        <div className="flex-shrink-0">
+
           <FilterDropdown
-            label={t("location")}
-            items={serviceAreaItems}
-            selectedKey={location}
-            selectionMode="multiple"
-            onSelectionChange={(key) => handleFilterChange("location", key)}
-          />
-        </div>
-        <div className="flex-shrink-0">
-          <FilterDropdown
-            label={pt("Basics.university")}
+            label={t("university") || "University"}
             items={universityItems}
             selectedKey={universityId}
             selectionMode="multiple"
-            onSelectionChange={(key) => handleFilterChange("universityId", key)}
+            onSelectionChange={(key) => updateParam("universityId", key)}
             disableInput={false}
           />
-        </div>
-        <div className="flex-shrink-0">
+
           <FilterDropdown
-            label={pt("Basics.faculty")}
+            label={t("faculty") || "Faculty"}
             items={facultyItems}
             selectedKey={facultyId}
             selectionMode="multiple"
-            onSelectionChange={(key) => handleFilterChange("facultyId", key)}
+            onSelectionChange={(key) => updateParam("facultyId", key)}
             disableInput={false}
           />
         </div>
+
+        {/* All Filters Button - Desktop */}
+        <div className="shrink-0 hidden md:block">
+          <Badge
+            content={activeFiltersCount}
+            color="primary"
+            isInvisible={activeFiltersCount === 0}
+            shape="circle"
+          >
+            <Button
+              variant="light"
+              radius="full"
+              className="font-bold text-black gap-2 h-10 px-4 hover:bg-gray-50"
+              startContent={<IoFilterOutline className="text-2xl" />}
+              onPress={() => setIsDrawerOpen(true)}
+            >
+              {t("allFilters")}
+            </Button>
+          </Badge>
+        </div>
       </div>
+
+      <TalentsFiltersDrawer
+        isOpen={isDrawerOpen}
+        onClose={() => setIsDrawerOpen(false)}
+      />
     </div>
   );
 };

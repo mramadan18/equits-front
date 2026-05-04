@@ -27,7 +27,7 @@ apiClient.interceptors.response.use(
       const status = error.response.status;
 
       // Only toast if it's a client/server error and not 401 (usually handled by auth)
-      if (status >= 400 && status !== 401) {
+      if (status >= 400) {
         addToast({
           title: message,
           color: "danger",

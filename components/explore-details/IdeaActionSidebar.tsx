@@ -19,19 +19,19 @@ import {
   FaYoutube,
 } from "react-icons/fa6";
 import { Project } from "@/types/api";
-import { useMe } from "@/hooks/api/useAuth";
 import Link from "next/link";
+import { useAuthStore } from "@/stores/useAuthStore";
 
 interface IdeaActionSidebarProps {
   project: Project;
 }
 
 export function IdeaActionSidebar({ project }: IdeaActionSidebarProps) {
-  const { data: user } = useMe();
+  const { user } = useAuthStore();
   const t = useTranslations("Engagement");
   const ts = useTranslations("ProjectDetails.sidebar");
 
-  const isOwner = user?.id === project.ownerId;
+  const isOwner = user?.id === project?.ownerId;
   const {
     isOpen: isRatingOpen,
     onOpen: onRatingOpen,

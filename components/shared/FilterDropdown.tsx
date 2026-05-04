@@ -2,7 +2,6 @@
 
 import { Autocomplete, AutocompleteItem } from "@heroui/autocomplete";
 import { Select, SelectItem } from "@heroui/select";
-import { Chip } from "@heroui/chip";
 
 interface FilterDropdownProps {
   label: string;
@@ -43,29 +42,13 @@ export const FilterDropdown = ({
         variant={"bordered"}
         color={color}
         radius="full"
-        className="min-w-[12rem]!"
+        className="min-w-32 md:min-w-40"
         selectionMode="multiple"
         selectedKeys={selectedKeys}
         onSelectionChange={(keys) => {
           const keysArray = Array.from(keys) as string[];
           onSelectionChange?.(
             keysArray.length > 0 ? keysArray.join(",") : "all",
-          );
-        }}
-        renderValue={(items) => {
-          return (
-            <div className="flex flex-wrap gap-1">
-              {items.map((item) => (
-                <Chip
-                  key={item.key}
-                  size="sm"
-                  variant="flat"
-                  className="bg-primary/10 text-primary text-[10px] h-5"
-                >
-                  {item.textValue}
-                </Chip>
-              ))}
-            </div>
           );
         }}
       >
@@ -87,7 +70,7 @@ export const FilterDropdown = ({
       variant={"bordered"}
       color={color}
       radius="full"
-      className="w-48!"
+      className="min-w-32 md:min-w-40"
       isClearable={false}
       inputProps={{
         readOnly: disableInput,

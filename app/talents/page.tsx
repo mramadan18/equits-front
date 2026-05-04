@@ -15,7 +15,7 @@ export default async function TalentsPage({
     page = "1",
     userType = "TALENT",
     experienceLevel,
-    location,
+    cityId,
     universityId,
     facultyId,
   } = params;
@@ -42,9 +42,9 @@ export default async function TalentsPage({
         page: Array.isArray(page) ? page[0] : page,
         userType: userType === "all" ? undefined : userType,
         experienceLevel: normalizeParam(experienceLevel),
-        serviceArea: normalizeParam(location),
         universityId: normalizeParam(universityId),
         facultyId: normalizeParam(facultyId),
+        cityId: normalizeParam(cityId),
       },
       cache: "no-store",
     });

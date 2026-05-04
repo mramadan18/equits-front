@@ -41,6 +41,7 @@ export const Navbar = ({
     isAuthPage,
     isLoginPage,
     isRegisterPage,
+    isUnverified,
     handlePitchPress,
     navItems,
   } = useNavbarController(session, isVerified);
@@ -58,20 +59,7 @@ export const Navbar = ({
         maxWidth="full"
         className="bg-white shadow-sm h-20"
         classNames={{
-          item: [
-            "flex",
-            "relative",
-            "h-full",
-            "items-center",
-            "px-2",
-            "data-[active=true]:after:content-['']",
-            "data-[active=true]:after:absolute",
-            "data-[active=true]:after:bottom-0",
-            "data-[active=true]:after:left-0",
-            "data-[active=true]:after:right-0",
-            "data-[active=true]:after:h-0.5",
-            "data-[active=true]:after:bg-primary",
-          ],
+          item: "flex relative h-full items-center px-2 data-[active=true]:after:content-[''] data-[active=true]:after:absolute data-[active=true]:after:bottom-0 data-[active=true]:after:left-0 data-[active=true]:after:right-0 data-[active=true]:after:h-0.5 data-[active=true]:after:bg-primary",
           wrapper: "h-full container max-w-auto",
         }}
       >
@@ -110,6 +98,8 @@ export const Navbar = ({
                 isAuthPage={isAuthPage}
                 isLoginPage={isLoginPage}
                 isRegisterPage={isRegisterPage}
+                isUnverified={isUnverified}
+                onLogout={logout}
               />
             )}
           </NavbarItem>
@@ -128,6 +118,8 @@ export const Navbar = ({
           isAuthPage={isAuthPage}
           isLoginPage={isLoginPage}
           isRegisterPage={isRegisterPage}
+          isUnverified={isUnverified}
+          onLogout={logout}
         />
       </HeroUINavbar>
     </>

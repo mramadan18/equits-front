@@ -20,6 +20,8 @@ interface MobileMenuProps {
   isAuthPage: boolean;
   isLoginPage: boolean;
   isRegisterPage: boolean;
+  isUnverified?: boolean;
+  onLogout?: () => void;
 }
 
 export const MobileMenu = ({
@@ -30,6 +32,8 @@ export const MobileMenu = ({
   isAuthPage,
   isLoginPage,
   isRegisterPage,
+  isUnverified,
+  onLogout,
 }: MobileMenuProps) => {
   return (
     <NavbarMenu className="pt-6">
@@ -62,7 +66,23 @@ export const MobileMenu = ({
         >
           English
         </Link> */}
-        {(!isAuthPage || !isRegisterPage) && (
+        {isUnverified && (
+          <Button
+            onPress={() => {
+              onLogout?.();
+              onClose();
+            }}
+            fullWidth
+            color="danger"
+            variant="flat"
+            radius="none"
+            size="lg"
+            className="font-bold text-lg"
+          >
+            {t("logout")}
+          </Button>
+        )}
+        {!isUnverified && (!isAuthPage || !isRegisterPage) && (
           <Button
             as={Link}
             href={AuthRoutes.REGISTER}
@@ -77,7 +97,7 @@ export const MobileMenu = ({
             {t("register")}
           </Button>
         )}
-        {(!isAuthPage || !isLoginPage) && (
+        {!isUnverified && (!isAuthPage || !isLoginPage) && (
           <Button
             as={Link}
             href={AuthRoutes.LOGIN}

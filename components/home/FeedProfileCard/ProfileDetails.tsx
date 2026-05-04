@@ -4,7 +4,7 @@ import { User } from "@/types/api";
 
 export const ProfileDetails = ({ user }: { user: User | null }) => {
   return (
-    <div className="flex flex-col gap-3.5 mb-8 text-sm text-gray2">
+    <div className="flex flex-col gap-3.5 mb-4 text-sm text-gray2">
       {user?.educationCertificates &&
         user?.educationCertificates?.length > 0 && (
           <div className="flex items-center gap-3">
@@ -21,10 +21,11 @@ export const ProfileDetails = ({ user }: { user: User | null }) => {
             </div>
           </div>
         )}
-      {user?.address && (
-        <div className="flex items-center gap-3">
+      {user?.country && user?.city && (
+        <div className="flex items-center gap-2">
           <IoLocationOutline className="w-5 h-5 text-gray2" />
-          <span>{user?.address}</span>
+          <span>{user?.country?.name},</span>
+          <span>{user?.city?.name}</span>
         </div>
       )}
     </div>

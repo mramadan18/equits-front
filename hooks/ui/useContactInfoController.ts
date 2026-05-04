@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useCallback } from "react";
 import { useTranslations } from "next-intl";
 import { useUpdateContact } from "@/hooks/api/useProfile";
 import {
@@ -21,14 +21,11 @@ export const useContactInfoController = () => {
     [validationT],
   );
 
-  const { data: countriesRes } = useCountries();
+  const { data: countriesRes, isLoading: isCountriesLoading } = useCountries();
   const countries = countriesRes?.data || [];
 
-  const settingsForm = useSettingsForm<UpdateContactFormData>({
-    schema,
-    mutation: updateMutation,
-    successMessage: t("overviewForm.saveSuccess"),
-    userToForm: (user: any) => ({
+  const userToForm = useCallback(
+    (user: any) => ({
       contactEmail: user?.contactEmail || "",
       phone: user?.phone || "",
       countryId: user?.countryId || null,
@@ -38,6 +35,14 @@ export const useContactInfoController = () => {
       instagramUrl: user?.instagramUrl || "",
       youtubeUrl: user?.youtubeUrl || "",
     }),
+    [],
+  );
+
+  const settingsForm = useSettingsForm<UpdateContactFormData>({
+    schema,
+    mutation: updateMutation,
+    successMessage: t("overviewForm.saveSuccess"),
+    userToForm,
   });
 
   const countryId = useWatch({
@@ -45,13 +50,17 @@ export const useContactInfoController = () => {
     name: "countryId",
   });
 
-  const { data: citiesRes } = useCities(countryId || undefined);
+  const { data: citiesRes, isLoading: isCitiesLoading } = useCities(
+    countryId || undefined,
+  );
   const cities = citiesRes?.data || [];
 
   return {
     t,
     countries,
     cities,
+    isCountriesLoading,
+    isCitiesLoading,
     ...settingsForm,
   };
 };

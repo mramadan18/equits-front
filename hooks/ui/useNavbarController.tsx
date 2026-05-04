@@ -95,6 +95,7 @@ export const useNavbarController = (
     onPitchOpenChange,
     isCreatingProject,
     isLoggedIn,
+    isUnverified: !!session && !isVerified,
     isAuthPage,
     isLoginPage,
     isRegisterPage,

@@ -9,6 +9,8 @@ interface AuthButtonsProps {
   isAuthPage: boolean;
   isLoginPage: boolean;
   isRegisterPage: boolean;
+  isUnverified?: boolean;
+  onLogout?: () => void;
 }
 
 export const AuthButtons = ({
@@ -16,10 +18,23 @@ export const AuthButtons = ({
   isAuthPage,
   isLoginPage,
   isRegisterPage,
+  isUnverified,
+  onLogout,
 }: AuthButtonsProps) => {
   return (
     <>
-      {(!isAuthPage || !isRegisterPage) && (
+      {isUnverified && (
+        <Button
+          onPress={onLogout}
+          variant="light"
+          radius="sm"
+          color="danger"
+          className="font-bold px-8"
+        >
+          {t("logout")}
+        </Button>
+      )}
+      {!isUnverified && (!isAuthPage || !isRegisterPage) && (
         <Button
           as={Link}
           href={AuthRoutes.REGISTER}
@@ -31,7 +46,7 @@ export const AuthButtons = ({
           {t("register")}
         </Button>
       )}
-      {(!isAuthPage || !isLoginPage) && (
+      {!isUnverified && (!isAuthPage || !isLoginPage) && (
         <Button
           as={Link}
           href={AuthRoutes.LOGIN}

@@ -1,5 +1,5 @@
 import { ExploreSearchBar } from "@/components/explore/ExploreSearchBar";
-import { ExploreFilters } from "@/components/explore/ExploreFilters";
+import ExploreFilters from "@/components/explore/ExploreFilters";
 import { ExploreGrid } from "@/components/explore/ExploreGrid";
 import { fetchServer } from "@/utils/api-utils";
 import { PaginationData, Project } from "@/types/api";

@@ -21,6 +21,7 @@ import { InputOtp } from "@heroui/input-otp";
 import { ApiResponse, SuccessResponse } from "@/types/api";
 import { ApiError } from "@/types/error";
 import { AuthRoutes } from "@/types";
+import { Spinner } from "@heroui/spinner";
 
 export default function VerifyResetOtpPage() {
   const authT = useTranslations("Auth.VerifyResetOtp");
@@ -155,6 +156,9 @@ export default function VerifyResetOtpPage() {
                 disabled={timeLeft > 0 || isResending}
                 className={`text-primary hover:underline bg-transparent border-none cursor-pointer disabled:text-default-400 disabled:no-underline disabled:cursor-not-allowed`}
               >
+                {isResending && (
+                  <Spinner size="sm" className="me-2" color="default" />
+                )}
                 {timeLeft > 0
                   ? `${authT("resendCode")} (${timeLeft}s)`
                   : authT("resendCode")}

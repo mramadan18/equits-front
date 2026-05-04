@@ -10,6 +10,7 @@ import { FormInput, FormAutocomplete } from "@/components/ui/form";
 import { SettingsFormActions } from "@/components/shared/SettingsFormActions";
 import { SettingsPageHeader } from "@/components/shared/SettingsPageHeader";
 import { useContactInfoController } from "@/hooks/ui/useContactInfoController";
+import { Country, City } from "@/types/api";
 
 export default function ContactInfoSettingsPage() {
   const {
@@ -21,6 +22,8 @@ export default function ContactInfoSettingsPage() {
     isDirty,
     countries,
     cities,
+    isCountriesLoading,
+    isCitiesLoading,
     setValue,
   } = useContactInfoController();
 
@@ -59,11 +62,12 @@ export default function ContactInfoSettingsPage() {
             labelPlacement="outside"
             variant="bordered"
             radius="sm"
+            isLoading={isCountriesLoading}
             onSelectionChange={() => {
               setValue("cityId", null);
             }}
           >
-            {countries.map((country) => (
+            {countries.map((country: Country) => (
               <AutocompleteItem key={country.id} textValue={country.name}>
                 {country.name}
               </AutocompleteItem>
@@ -78,9 +82,10 @@ export default function ContactInfoSettingsPage() {
             labelPlacement="outside"
             variant="bordered"
             radius="sm"
-            isDisabled={!cities.length}
+            isLoading={isCitiesLoading}
+            isDisabled={!cities.length && !isCitiesLoading}
           >
-            {cities.map((city) => (
+            {cities.map((city: City) => (
               <AutocompleteItem key={city.id} textValue={city.name}>
                 {city.name}
               </AutocompleteItem>

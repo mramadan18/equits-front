@@ -23,34 +23,48 @@ export default function middleware(request: NextRequest) {
   const session = request.cookies.get("jwt")?.value;
   const isVerified = request.cookies.get("isVerified")?.value === "true";
 
-  const isAuthPage = authPages.some((page) => pathname.includes(page));
+  const isAuthPage = authPages.some((page) => pathname.startsWith(page));
   const isProtectedPage = protectedPages.some((page) =>
-    pathname.includes(page),
+    pathname.startsWith(page),
   );
 
+  // 1. إذا كان مسجل دخول وموثق وحاول يدخل صفحات اللوجن -> وديه الهوم
   if (session && isVerified && isAuthPage) {
-    const homeUrl = request.nextUrl.clone();
-    homeUrl.pathname = MainRoutes.HOME;
-    return NextResponse.redirect(homeUrl);
+    return NextResponse.redirect(new URL(MainRoutes.HOME, request.url));
   }
 
-  // JWT exists but email not verified → force to verify-email page
-  if (session && !isVerified && !isAuthPage) {
-    const verifyUrl = request.nextUrl.clone();
-    verifyUrl.pathname = AuthRoutes.VERIFY_EMAIL;
-    return NextResponse.redirect(verifyUrl);
+  // 2. إذا كان مسجل دخول وغير موثق -> اجباري يروح صفحة الـ Verify
+  // استثني صفحة الـ Verify نفسها وصفحة الـ Logout (إن وجدت) عشان ميعملش Infinite Loop
+  if (session && !isVerified) {
+    if (pathname !== AuthRoutes.VERIFY_EMAIL) {
+      return NextResponse.redirect(
+        new URL(AuthRoutes.VERIFY_EMAIL, request.url),
+      );
+    }
+    return NextResponse.next();
   }
 
-  if (!session && !isVerified && isProtectedPage) {
-    const loginUrl = request.nextUrl.clone();
-    loginUrl.pathname = AuthRoutes.LOGIN;
+  // 3. إذا مش مسجل دخول وبيحاول يدخل صفحة محمية -> وديه اللوجن
+  if (!session && isProtectedPage) {
+    const loginUrl = new URL(AuthRoutes.LOGIN, request.url);
+    // اختياري: حفظ المسار اللي كان رايحه عشان نرجعه ليه بعد اللوجن
+    loginUrl.searchParams.set("callbackUrl", pathname);
     return NextResponse.redirect(loginUrl);
   }
 
-  // Return next response since we are no longer using intlMiddleware
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/((?!api|_next|.*\\..*).*)"],
+  matcher: [
+    /*
+     * Match all request paths except for the ones starting with:
+     * - api (API routes)
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file)
+     * - public folder files (svg, png, etc)
+     */
+    "/((?!api|_next/static|_next/image|favicon.ico|.*\\..*).*)",
+  ],
 };

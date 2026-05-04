@@ -3,7 +3,14 @@ import {
   LoginInput,
   RegisterInput,
 } from "../validations/auth.validation";
-import { ProjectStage } from "./project";
+import {
+  FundingStage,
+  MarketFocus,
+  ProjectStage,
+  ProjectType,
+  RevenueModel,
+  TractionType,
+} from "./project";
 
 export enum ExperienceLevel {
   STUDENT = "STUDENT",
@@ -86,7 +93,6 @@ export interface User {
   jobTitle?: string | null;
   company?: string | null;
   overview?: string | null;
-  address?: string | null;
   experienceLevel?: ExperienceLevel | null;
   companyLink?: string | null;
   videoLink?: string | null;
@@ -100,6 +106,8 @@ export interface User {
   hasDraftProjects: boolean;
   draftProjectsCount: number;
   educationCertificates?: EducationCertificate[];
+  country?: Country;
+  city?: City;
 }
 
 export enum UserType {
@@ -251,9 +259,21 @@ export interface ProjectDraft {
 }
 
 export interface ProjectFilters {
-  industryId?: number;
+  industryId?: number | string;
   stage?: ProjectStage | string;
   search?: string;
+  fundingAsk?: string;
+  isAcademic?: boolean | string;
+  projectType?: ProjectType | string;
+  revenueModel?: RevenueModel | string;
+  marketFocus?: MarketFocus | string;
+  currentTraction?: TractionType | string;
+  fundingStage?: FundingStage | string;
+  serviceArea?: ServiceArea | string;
+  equityStake?: string;
+  rating?: number | string;
+  universityId?: number | string;
+  facultyId?: number | string;
   page?: number;
   limit?: number;
 }
