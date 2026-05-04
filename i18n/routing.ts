@@ -7,6 +7,7 @@ export const routing = defineRouting({
   // Used when no locale matches
   defaultLocale: "en",
 
-  // Disable automatic locale detection
-  // localeDetection: false,
+  // Disable automatic locale detection to prevent next-intl from issuing
+  // redirects using request.url (which can expose the internal port on Railway).
+  localeDetection: false,
 });

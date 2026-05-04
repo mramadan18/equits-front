@@ -33,11 +33,15 @@ export default function middleware(request: NextRequest) {
   );
 
   if (session && isVerified && isAuthPage) {
-    return NextResponse.redirect(new URL(MainRoutes.HOME, request.url));
+    // Use request.nextUrl.origin to avoid leaking internal ports (e.g., :8080)
+    // in production when behind a reverse proxy like Railway.
+    const homeUrl = new URL(MainRoutes.HOME, request.nextUrl.origin);
+    return NextResponse.redirect(homeUrl);
   }
 
   if (!session && !isVerified && isProtectedPage) {
-    return NextResponse.redirect(new URL(AuthRoutes.LOGIN, request.url));
+    const loginUrl = new URL(AuthRoutes.LOGIN, request.nextUrl.origin);
+    return NextResponse.redirect(loginUrl);
   }
 
   return intlMiddleware(request);
