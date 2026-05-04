@@ -39,6 +39,12 @@ export default function middleware(request: NextRequest) {
     return NextResponse.redirect(homeUrl);
   }
 
+  // JWT exists but email not verified → force to verify-email page
+  if (session && !isVerified && !isAuthPage) {
+    const verifyUrl = new URL(AuthRoutes.VERIFY_EMAIL, request.nextUrl.origin);
+    return NextResponse.redirect(verifyUrl);
+  }
+
   if (!session && !isVerified && isProtectedPage) {
     const loginUrl = new URL(AuthRoutes.LOGIN, request.nextUrl.origin);
     return NextResponse.redirect(loginUrl);
