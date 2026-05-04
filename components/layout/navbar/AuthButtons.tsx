@@ -6,8 +6,6 @@ import { AuthRoutes } from "@/types";
 
 interface AuthButtonsProps {
   t: (key: string) => string;
-  locale: string;
-  pathname: string;
   isAuthPage: boolean;
   isLoginPage: boolean;
   isRegisterPage: boolean;
@@ -15,22 +13,12 @@ interface AuthButtonsProps {
 
 export const AuthButtons = ({
   t,
-  locale,
-  pathname,
   isAuthPage,
   isLoginPage,
   isRegisterPage,
 }: AuthButtonsProps) => {
   return (
     <>
-      <Link
-        href={pathname}
-        locale={locale === "en" ? "ar" : "en"}
-        className="text-primary font-bold text-sm hover:opacity-80 transition-opacity uppercase mr-4"
-      >
-        {locale === "en" ? "عربي" : "EN"}
-      </Link>
-
       {(!isAuthPage || !isRegisterPage) && (
         <Button
           as={Link}

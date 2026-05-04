@@ -31,7 +31,6 @@ export const Navbar = ({
     isMenuOpen,
     setIsMenuOpen,
     pathname,
-    locale,
     t,
     user,
     logout,
@@ -108,8 +107,6 @@ export const Navbar = ({
             ) : (
               <AuthButtons
                 t={t}
-                locale={locale}
-                pathname={pathname}
                 isAuthPage={isAuthPage}
                 isLoginPage={isLoginPage}
                 isRegisterPage={isRegisterPage}
@@ -128,7 +125,6 @@ export const Navbar = ({
           pathname={pathname}
           t={t}
           onClose={() => setIsMenuOpen(false)}
-          locale={locale}
           isAuthPage={isAuthPage}
           isLoginPage={isLoginPage}
           isRegisterPage={isRegisterPage}

@@ -17,7 +17,6 @@ interface MobileMenuProps {
   pathname: string;
   t: (key: string) => string;
   onClose: () => void;
-  locale: string;
   isAuthPage: boolean;
   isLoginPage: boolean;
   isRegisterPage: boolean;
@@ -28,7 +27,6 @@ export const MobileMenu = ({
   pathname,
   t,
   onClose,
-  locale,
   isAuthPage,
   isLoginPage,
   isRegisterPage,
@@ -57,14 +55,13 @@ export const MobileMenu = ({
           );
         })}
       <div className="mt-8 flex flex-col gap-4">
-        <Link
+        {/* <Link
           href={pathname}
-          locale={locale === "en" ? "ar" : "en"}
           className="text-primary font-bold text-center w-full py-3 border border-primary rounded uppercase"
           onClick={onClose}
         >
-          {locale === "en" ? "عربي" : "English"}
-        </Link>
+          English
+        </Link> */}
         {(!isAuthPage || !isRegisterPage) && (
           <Button
             as={Link}

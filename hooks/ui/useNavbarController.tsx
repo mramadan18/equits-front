@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { useAuthStore } from "@/stores/useAuthStore";
 import { useLogout } from "@/hooks/api/useAuth";
 import { useDisclosure } from "@heroui/modal";
@@ -29,7 +29,6 @@ export const useNavbarController = (
 ) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
-  const locale = useLocale();
   const t = useTranslations("Navbar");
   const { user } = useAuthStore();
   const router = useRouter();
@@ -89,7 +88,6 @@ export const useNavbarController = (
     isMenuOpen,
     setIsMenuOpen,
     pathname,
-    locale,
     t,
     user,
     logout,
