@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl";
-import { Button } from "@heroui/button";
+import { Button } from "@heroui/react";
 import { SectionHeader } from "@/components/shared/SectionHeader";
 import { FadeIn } from "@/components/shared/animations";
 import Link from "next/link";

@@ -1,14 +1,10 @@
 "use client";
 import { useState } from "react";
-// import { Switch } from "@heroui/switch";
-import { Button } from "@heroui/button";
-import { Badge } from "@heroui/badge";
+import { Badge, Button, Skeleton, Switch } from "@heroui/react";
 import { IoFilterOutline } from "react-icons/io5";
 import { FilterDropdown } from "@/components/shared";
 import { useExploreFiltersController } from "@/hooks/ui/useExploreFiltersController";
 import { ExploreFiltersDrawer } from "./ExploreFiltersDrawer";
-import { Switch } from "@heroui/switch";
-import { Skeleton } from "@heroui/skeleton";
 
 const ExploreFilters = ({ loading }: { loading: boolean }) => {
   const {

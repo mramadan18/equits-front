@@ -14,14 +14,13 @@ import { ProjectFormData } from "@/types/project";
 import { FormSelect } from "@/components/ui/form/FormSelect";
 import { FormAutocomplete } from "@/components/ui/form/FormAutocomplete";
 import { FormTextarea } from "@/components/ui/form/FormTextarea";
-import { SelectItem } from "@heroui/select";
-import { AutocompleteItem } from "@heroui/autocomplete";
+import { AutocompleteItem, SelectItem } from "@heroui/react";
 
-interface ProjectMarketStepProps {
+export const ProjectMarketStep = ({
+  control,
+}: {
   control: Control<ProjectFormData>;
-}
-
-export const ProjectMarketStep = ({ control }: ProjectMarketStepProps) => {
+}) => {
   const t = useTranslations("Pitch");
   const { data: industriesRes } = useIndustries();
   const industries = industriesRes?.data || [];

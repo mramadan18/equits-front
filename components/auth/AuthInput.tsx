@@ -1,7 +1,7 @@
-import React from "react";
-import { Input, InputProps } from "@heroui/input";
+import { Input, InputProps } from "@heroui/react";
+import { forwardRef } from "react";
 
-export const AuthInput = React.forwardRef<HTMLInputElement, InputProps>(
+export const AuthInput = forwardRef<HTMLInputElement, InputProps>(
   (props, ref) => {
     return (
       <Input

@@ -1,6 +1,6 @@
 "use client";
 
-import { Input, InputProps } from "@heroui/input";
+import { Input, InputProps } from "@heroui/react";
 import { Controller, Control, FieldValues, Path } from "react-hook-form";
 import { useState } from "react";
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";

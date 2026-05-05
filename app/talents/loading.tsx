@@ -1,5 +1,4 @@
-import { Skeleton } from "@heroui/skeleton";
-import { Card, CardBody } from "@heroui/card";
+import { Skeleton, Card, CardBody } from "@heroui/react";
 
 const TalentCardSkeleton = () => (
   <Card className="border-1 border-gray-200 shadow-sm rounded-xl overflow-hidden bg-white flex flex-col pt-0 p-0 h-full">

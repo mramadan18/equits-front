@@ -2,21 +2,17 @@
 
 import { useWishlist } from "@/hooks/api/useWishlist";
 import { useTranslations } from "next-intl";
-import { Spinner } from "@heroui/spinner";
-import { Button } from "@heroui/button";
-import { Input } from "@heroui/input";
-import { Badge } from "@heroui/badge";
-import Link from "next/link";
-import { MainRoutes } from "@/types";
-import {
-  IoBookmarkOutline,
-  IoSearchOutline,
-  IoFilterOutline,
-} from "react-icons/io5";
-import { SavedProjectsGrid } from "@/components/saved/SavedProjectsGrid";
-import { Pagination } from "@heroui/pagination";
+import { Spinner, Button, Input, Badge, Pagination } from "@heroui/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
+import {
+  IoBookmarkOutline,
+  IoFilterOutline,
+  IoSearchOutline,
+} from "react-icons/io5";
+import { SavedProjectsGrid } from "@/components/saved/SavedProjectsGrid";
+import { MainRoutes } from "@/types";
+import Link from "next/link";
 
 export default function SavedPage() {
   const router = useRouter();

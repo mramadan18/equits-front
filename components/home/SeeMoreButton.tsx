@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { Button } from "@heroui/button";
+import { Button } from "@heroui/react";
 import { useTranslations } from "next-intl";
 import { MainRoutes } from "@/types";
 import { FaArrowRight } from "react-icons/fa6";

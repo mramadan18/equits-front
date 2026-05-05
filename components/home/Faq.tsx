@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { SectionHeader } from "@/components/shared/SectionHeader";
-import { Accordion, AccordionItem } from "@heroui/accordion";
+import { Accordion, AccordionItem } from "@heroui/react";
 import Image from "next/image";
 import { FiPlus, FiMinus } from "react-icons/fi";
 import { FadeIn } from "@/components/shared/animations";

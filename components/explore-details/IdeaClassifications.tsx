@@ -1,4 +1,4 @@
-import { Chip } from "@heroui/chip";
+import { Chip } from "@heroui/react";
 import { Project } from "@/types/api";
 import { useTranslations } from "next-intl";
 import { formatCurrency } from "@/utils";

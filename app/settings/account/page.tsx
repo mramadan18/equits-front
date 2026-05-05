@@ -1,8 +1,6 @@
 "use client";
 
-import { Input } from "@heroui/input";
-import { Button } from "@heroui/button";
-import { Divider } from "@heroui/divider";
+import { Input, Button, Divider } from "@heroui/react";
 import { ConfirmModal } from "@/components/shared/ConfirmModal";
 import { FormInput } from "@/components/ui/form/FormInput";
 import { useAccountSettingsController } from "@/hooks/ui/useAccountSettingsController";

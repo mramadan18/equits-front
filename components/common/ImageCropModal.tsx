@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useCallback } from "react";
+import { useState, useCallback } from "react";
 import Cropper, { Area, Point } from "react-easy-crop";
 import {
   Modal,
@@ -8,9 +8,9 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
-} from "@heroui/modal";
-import { Button } from "@heroui/button";
-import { Slider } from "@heroui/slider";
+  Button,
+  Slider,
+} from "@heroui/react";
 import { useTranslations } from "next-intl";
 import {
   LuZoomIn,

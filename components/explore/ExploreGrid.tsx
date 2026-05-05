@@ -2,7 +2,7 @@
 
 import { CreativeIdeaCard } from "@/components/shared/creative-idea-card";
 import { PaginationData, Project } from "@/types/api";
-import { Pagination } from "@heroui/pagination";
+import { Pagination } from "@heroui/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { NoResults } from "@/components/shared";

@@ -1,8 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { Button } from "@heroui/button";
-import { Spinner } from "@heroui/spinner";
+import { Button, Spinner } from "@heroui/react";
 import { FiCamera } from "react-icons/fi";
 import { User } from "@/types/api";
 import { useRef } from "react";

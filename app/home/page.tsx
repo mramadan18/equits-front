@@ -5,7 +5,7 @@ import { FeedGrid } from "@/components/home/FeedGrid";
 import { FeedProfileCard } from "@/components/home/FeedProfileCard";
 import { useProjectsFeed } from "@/hooks/api/useProject";
 import { ProjectFilters } from "@/types/api";
-import { Pagination } from "@heroui/pagination";
+import { Pagination } from "@heroui/react";
 import { useDebounce } from "@/hooks/ui/useDebounce";
 import { HomeSearchBar } from "@/components/home/HomeSearchBar";
 import { PeopleYouMayNeedSidebar } from "@/components/talent-details";

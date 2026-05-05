@@ -6,10 +6,10 @@ import {
   NavbarBrand,
   NavbarContent,
   NavbarItem,
-} from "@heroui/navbar";
+  Badge,
+} from "@heroui/react";
 import Link from "next/link";
 import Image from "next/image";
-import { Badge } from "@heroui/badge";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { PiOpenAiLogoThin } from "react-icons/pi";
 import { MainRoutes } from "@/types";

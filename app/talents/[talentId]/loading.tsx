@@ -1,6 +1,4 @@
-import { Skeleton } from "@heroui/skeleton";
-import { Card } from "@heroui/card";
-import { Divider } from "@heroui/divider";
+import { Skeleton, Card, Divider } from "@heroui/react";
 
 export default function TalentLoading() {
   return (

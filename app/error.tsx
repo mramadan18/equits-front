@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { Button } from "@heroui/button";
+import { Button } from "@heroui/react";
 import { useTranslations } from "next-intl";
 
 export default function Error({

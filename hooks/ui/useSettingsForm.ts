@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useForm, DefaultValues, FieldValues } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAuthStore } from "@/stores/useAuthStore";
-import { addToast } from "@heroui/toast";
+import { addToast } from "@heroui/react";
 import { ApiResponse } from "@/types/api";
 
 interface UseSettingsFormOptions<T extends FieldValues> {

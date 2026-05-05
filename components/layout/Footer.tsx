@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import Image from "next/image";
-import { Divider } from "@heroui/divider";
+import { Divider } from "@heroui/react";
 import { MainRoutes } from "@/types";
 import {
   FaLinkedinIn,

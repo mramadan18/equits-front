@@ -9,7 +9,7 @@ import {
   RegisterInput,
 } from "@/validations/auth.validation";
 import { useRegister, useGoogleLogin } from "@/hooks/api/useAuth";
-import { addToast } from "@heroui/toast";
+import { addToast } from "@heroui/react";
 import { useGoogleLogin as useGoogleAuth } from "@react-oauth/google";
 import { ApiResponse, AuthResponse } from "@/types/api";
 import { AuthRoutes, MainRoutes } from "@/types";

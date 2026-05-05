@@ -1,15 +1,13 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
-import { Button } from "@heroui/button";
-import { FiCamera } from "react-icons/fi";
-import { User } from "@/types/api";
-import { useDisclosure } from "@heroui/modal";
-import { Area } from "react-easy-crop";
-import { ImageCropModal } from "@/components/common/ImageCropModal";
-import { Spinner } from "@heroui/spinner";
+import { Button, useDisclosure, Spinner } from "@heroui/react";
 import { useImageUpload } from "@/hooks/ui/useImageUpload";
+import { User } from "@/types/api";
+import { Area } from "react-easy-crop";
+import { FiCamera } from "react-icons/fi";
+import { ImageCropModal } from "@/components/common/ImageCropModal";
 
 export const ProfileCover = ({ user }: { user: User | null }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();

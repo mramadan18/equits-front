@@ -1,7 +1,11 @@
 "use client";
 
-import { Autocomplete, AutocompleteItem } from "@heroui/autocomplete";
-import { Select, SelectItem } from "@heroui/select";
+import {
+  Autocomplete,
+  AutocompleteItem,
+  Select,
+  SelectItem,
+} from "@heroui/react";
 
 interface FilterDropdownProps {
   label: string;

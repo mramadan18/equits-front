@@ -24,7 +24,7 @@ import {
 } from "@/hooks/api/useProject";
 import { useRouter } from "next/navigation";
 import { MainRoutes } from "@/types";
-import { addToast } from "@heroui/toast";
+import { addToast } from "@heroui/react";
 import {
   mapProjectToFormData,
   prepareProjectDataForSubmit,

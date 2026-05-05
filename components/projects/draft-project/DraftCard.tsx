@@ -1,11 +1,16 @@
 "use client";
 
-import { Card, CardBody, CardHeader, CardFooter } from "@heroui/card";
-import { Chip } from "@heroui/chip";
-import { Button } from "@heroui/button";
+import {
+  Card,
+  CardBody,
+  CardHeader,
+  CardFooter,
+  useDisclosure,
+  Chip,
+} from "@heroui/react";
+import { Button } from "@heroui/react";
 import { useTranslations } from "next-intl";
 import { useDeleteProject } from "@/hooks/api/useProject";
-import { useDisclosure } from "@heroui/modal";
 import { HiOutlineTrash } from "react-icons/hi";
 import { ConfirmModal } from "@/components/shared/ConfirmModal";
 

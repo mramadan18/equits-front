@@ -6,9 +6,10 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
-} from "@heroui/modal";
-import { Button } from "@heroui/button";
-import { Textarea } from "@heroui/input";
+  Textarea,
+  Button,
+  addToast,
+} from "@heroui/react";
 import { useTranslations } from "next-intl";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -17,7 +18,6 @@ import {
   CommentInput,
 } from "@/validations/engagement.validation";
 import { useCommentOnProject } from "@/hooks/api/useProject";
-import { addToast } from "@heroui/toast";
 
 interface CommentModalProps {
   isOpen: boolean;

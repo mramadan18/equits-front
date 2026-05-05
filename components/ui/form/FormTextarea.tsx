@@ -1,6 +1,6 @@
 "use client";
 
-import { Textarea, TextAreaProps } from "@heroui/input";
+import { Textarea, TextAreaProps } from "@heroui/react";
 import { Controller, Control, FieldValues, Path } from "react-hook-form";
 
 interface FormTextareaProps<T extends FieldValues>

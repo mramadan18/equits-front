@@ -1,4 +1,4 @@
-import { Button } from "@heroui/button";
+import { Button } from "@heroui/react";
 import { useTranslations } from "next-intl";
 
 export const ProfileCompletion = ({

@@ -1,6 +1,6 @@
 "use client";
 
-import { NavbarItem } from "@heroui/navbar";
+import { NavbarItem } from "@heroui/react";
 import Link from "next/link";
 import { ReactNode } from "react";
 

@@ -7,7 +7,6 @@ import { HeroUIProvider } from "@heroui/system";
 import { useRouter } from "next/navigation";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 
 import { AuthInitializer } from "@/components/auth/AuthInitializer";
@@ -54,7 +53,6 @@ export function Providers({ children, themeProps, session }: ProvidersProps) {
           </NextThemesProvider>
         </HeroUIProvider>
       </GoogleOAuthProvider>
-      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
 }

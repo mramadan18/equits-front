@@ -5,10 +5,11 @@ import {
   DrawerHeader,
   DrawerBody,
   DrawerFooter,
-} from "@heroui/drawer";
-import { Button } from "@heroui/button";
+  RadioGroup,
+  Radio,
+} from "@heroui/react";
+import { Button } from "@heroui/react";
 import { CheckboxGroup, Checkbox } from "@heroui/checkbox";
-import { RadioGroup, Radio } from "@heroui/radio";
 import { useExploreFiltersController } from "@/hooks/ui/useExploreFiltersController";
 import { IoStar } from "react-icons/io5";
 

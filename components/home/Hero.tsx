@@ -1,4 +1,4 @@
-import { Button } from "@heroui/button";
+import { Button } from "@heroui/react";
 import { useTranslations } from "next-intl";
 import { BiRightArrowAlt } from "react-icons/bi";
 import { IoTelescopeOutline } from "react-icons/io5";

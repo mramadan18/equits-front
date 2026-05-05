@@ -1,7 +1,6 @@
 "use client";
 
-import { Button } from "@heroui/button";
-import { useDisclosure } from "@heroui/modal";
+import { Button, useDisclosure, addToast } from "@heroui/react";
 import { useTranslations } from "next-intl";
 import {
   FiMessageSquare,
@@ -23,7 +22,6 @@ import { Project } from "@/types/api";
 import Link from "next/link";
 import { useAuthStore } from "@/stores/useAuthStore";
 import { useToggleWishlist } from "@/hooks/api/useWishlist";
-import { addToast } from "@heroui/toast";
 import { RequestMeetingModal } from "../talent-details/RequestMeetingModal";
 
 export function IdeaActionSidebar({ project }: { project: Project }) {

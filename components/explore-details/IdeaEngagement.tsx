@@ -1,16 +1,13 @@
 "use client";
 
-// import { Avatar, AvatarGroup } from "@heroui/avatar";
-import { Divider } from "@heroui/divider";
+import { addToast, Divider, Modal, useDisclosure } from "@heroui/react";
 import { FiHeart, FiMessageSquare } from "react-icons/fi";
 import { Project } from "@/types/api";
 import { RatingStars } from "../shared/RatingStars";
 
 import { useTranslations } from "next-intl";
 import { useLikeProject } from "@/hooks/api/useProject";
-import { addToast } from "@heroui/toast";
 import { useState, useEffect } from "react";
-import { Modal, useDisclosure } from "@heroui/modal";
 import { VideoCommentsModal } from "./VideoCommentsModal";
 
 interface IdeaEngagementProps {

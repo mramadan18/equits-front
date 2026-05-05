@@ -1,17 +1,14 @@
 "use client";
 
-import { ModalContent } from "@heroui/modal";
-import { Button } from "@heroui/button";
+import { ModalContent, Button, Divider, Spinner } from "@heroui/react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { IoCheckmarkCircle } from "react-icons/io5";
 import { MdRadioButtonUnchecked } from "react-icons/md";
-import { Divider } from "@heroui/divider";
-import { useProfileStatus } from "@/hooks/api/useProfile";
-import { Spinner } from "@heroui/spinner";
 import { useAuthStore } from "@/stores/useAuthStore";
 import { User } from "@/types/api";
 import Link from "next/link";
+import { useProfileStatus } from "@/hooks/api/useProfile";
 
 // --- Sub-components ---
 

@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { MainRoutes } from "@/types";
 import { FaBookmark, FaStar, FaRegHeart, FaRegComment } from "react-icons/fa";
-import { Button } from "@heroui/button";
+import { Button } from "@heroui/react";
 import { useToggleWishlist } from "@/hooks/api/useWishlist";
 
 const SavedProjectCard = ({ project }: { project: Project }) => {

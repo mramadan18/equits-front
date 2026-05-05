@@ -1,6 +1,5 @@
 "use client";
-import { Card, CardBody } from "@heroui/card";
-import { Button } from "@heroui/button";
+import { Card, CardBody, Button } from "@heroui/react";
 import { useTranslations } from "next-intl";
 import { FaHeart, FaStar, FaCommentDots } from "react-icons/fa";
 import { CardImage } from "./components/CardImage";

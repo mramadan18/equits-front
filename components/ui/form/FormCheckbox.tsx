@@ -1,6 +1,6 @@
 "use client";
 
-import { Checkbox, CheckboxProps } from "@heroui/checkbox";
+import { Checkbox, CheckboxProps } from "@heroui/react";
 import { Controller, Control, FieldValues, Path } from "react-hook-form";
 
 interface FormCheckboxProps<T extends FieldValues>

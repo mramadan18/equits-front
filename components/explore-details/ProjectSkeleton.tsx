@@ -1,6 +1,4 @@
-import { Skeleton } from "@heroui/skeleton";
-import { Card, CardBody } from "@heroui/card";
-import { Divider } from "@heroui/divider";
+import { Skeleton, Card, CardBody, Divider } from "@heroui/react";
 
 export const ProjectSkeleton = () => {
   return (

@@ -1,6 +1,6 @@
 "use client";
 
-import { Radio } from "@heroui/radio";
+import { Radio } from "@heroui/react";
 import { UserType } from "@/types/api";
 import { FormInput, FormTextarea, FormRadioGroup } from "@/components/ui/form";
 import { SettingsFormActions } from "@/components/shared/SettingsFormActions";

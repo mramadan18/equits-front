@@ -1,4 +1,4 @@
-import { Button, ButtonProps } from "@heroui/button";
+import { Button, ButtonProps } from "@heroui/react";
 
 export const AuthSubmitButton = (props: ButtonProps) => {
   const { className, ...rest } = props;

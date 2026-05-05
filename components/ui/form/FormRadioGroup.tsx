@@ -1,6 +1,6 @@
 "use client";
 
-import { RadioGroup, RadioGroupProps } from "@heroui/radio";
+import { RadioGroup, RadioGroupProps } from "@heroui/react";
 import { Controller, Control, FieldValues, Path } from "react-hook-form";
 
 interface FormRadioGroupProps<T extends FieldValues>

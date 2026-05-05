@@ -1,6 +1,6 @@
 "use client";
 
-import { Autocomplete, AutocompleteProps } from "@heroui/autocomplete";
+import { Autocomplete, AutocompleteProps } from "@heroui/react";
 import { Controller, Control, FieldValues, Path } from "react-hook-form";
 
 interface FormAutocompleteProps<T extends FieldValues>

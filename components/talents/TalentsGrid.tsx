@@ -2,7 +2,7 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { TalentCard } from "./TalentCard";
 import { PaginationData, User } from "@/types/api";
-import { Pagination } from "@heroui/pagination";
+import { Pagination } from "@heroui/react";
 import { NoResults } from "@/components/shared";
 import { useTranslations } from "next-intl";
 

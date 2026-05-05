@@ -1,7 +1,6 @@
 "use client";
 
-import { Input } from "@heroui/input";
-import { Button } from "@heroui/button";
+import { Input, Button } from "@heroui/react";
 import { IoSearchOutline, IoAddOutline } from "react-icons/io5";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";

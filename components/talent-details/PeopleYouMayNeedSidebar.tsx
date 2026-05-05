@@ -2,14 +2,11 @@
 import { useTranslations } from "next-intl";
 import { MdVerified } from "react-icons/md";
 import { TbListDetails } from "react-icons/tb";
-import { Button } from "@heroui/button";
-import { Divider } from "@heroui/divider";
-
-import { User } from "@/types/api";
-import { Avatar } from "@heroui/avatar";
+import { Button, Divider, Avatar } from "@heroui/react";
 import Link from "next/link";
 import { MainRoutes } from "@/types";
 import { Skeleton } from "@heroui/skeleton";
+import { User } from "@/types/api";
 
 const AvatarWrapper = ({ talent }: { talent: User }) => {
   return (

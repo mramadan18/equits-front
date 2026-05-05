@@ -6,7 +6,7 @@ import { Control } from "react-hook-form";
 import { ProjectFormData } from "@/types/project";
 import { FormSelect } from "@/components/ui/form/FormSelect";
 import { FormInput } from "@/components/ui/form/FormInput";
-import { SelectItem } from "@heroui/select";
+import { SelectItem } from "@heroui/react";
 
 export const ProjectTractionStep = ({
   control,

@@ -5,14 +5,13 @@ import { usePathname, useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useAuthStore } from "@/stores/useAuthStore";
 import { useLogout } from "@/hooks/api/useAuth";
-import { useDisclosure } from "@heroui/modal";
+import { useDisclosure } from "@heroui/react";
 import { useCreateProject } from "@/hooks/api/useProject";
 import { AuthRoutes, MainRoutes } from "@/types";
 import { BiHomeAlt2 } from "react-icons/bi";
 import { IoTelescopeOutline } from "react-icons/io5";
 import { TiGroupOutline } from "react-icons/ti";
 import { SiHubspot } from "react-icons/si";
-import React from "react";
 
 const authRoutes = [
   AuthRoutes.REGISTER,

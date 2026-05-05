@@ -1,7 +1,12 @@
 "use client";
 
-import { Modal, ModalBody, ModalContent, ModalHeader } from "@heroui/modal";
-import { Button } from "@heroui/button";
+import {
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalHeader,
+  Button,
+} from "@heroui/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useTranslations } from "next-intl";

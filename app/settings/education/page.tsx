@@ -1,7 +1,5 @@
 "use client";
 
-import { SelectItem } from "@heroui/select";
-import { AutocompleteItem } from "@heroui/autocomplete";
 import { EducationDegree } from "@/types/api";
 import { IoTrashOutline } from "react-icons/io5";
 import {
@@ -12,7 +10,7 @@ import {
 } from "@/components/ui/form";
 import { SettingsFormActions } from "@/components/shared/SettingsFormActions";
 import { SettingsPageHeader } from "@/components/shared/SettingsPageHeader";
-import { Button } from "@heroui/button";
+import { AutocompleteItem, Button, SelectItem } from "@heroui/react";
 import { useEducationController } from "@/hooks/ui/useEducationController";
 
 export default function EducationSettingsPage() {

@@ -5,7 +5,7 @@ import { Area } from "react-easy-crop";
 import { getCroppedImg } from "@/utils/cropImage";
 import { useUploadSingle } from "@/hooks/api/useUpload";
 import { useUpdatePictures } from "@/hooks/api/useProfile";
-import { addToast } from "@heroui/toast";
+import { addToast } from "@heroui/react";
 
 interface UseImageUploadOptions {
   onSuccess?: () => void;

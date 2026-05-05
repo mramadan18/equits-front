@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@heroui/button";
+import { Button } from "@heroui/react";
 import { ProjectStepper } from "@/components/projects/new-project/ProjectStepper";
 import { ProjectBasicsStep } from "@/components/projects/new-project/steps/ProjectBasicsStep";
 import { ProjectMarketStep } from "@/components/projects/new-project/steps/ProjectMarketStep";

@@ -7,9 +7,9 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
-} from "@heroui/modal";
-import { Avatar } from "@heroui/avatar";
-import { Button } from "@heroui/button";
+  Avatar,
+  Button,
+} from "@heroui/react";
 import Link from "next/link";
 import {
   FaFacebook,

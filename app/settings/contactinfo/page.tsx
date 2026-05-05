@@ -5,7 +5,7 @@ import {
   FaInstagram,
   FaYoutube,
 } from "react-icons/fa";
-import { AutocompleteItem } from "@heroui/autocomplete";
+import { AutocompleteItem } from "@heroui/react";
 import { FormInput, FormAutocomplete } from "@/components/ui/form";
 import { SettingsFormActions } from "@/components/shared/SettingsFormActions";
 import { SettingsPageHeader } from "@/components/shared/SettingsPageHeader";

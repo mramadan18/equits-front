@@ -7,9 +7,10 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
-} from "@heroui/modal";
-import { Button } from "@heroui/button";
-import { Select, SelectItem } from "@heroui/select";
+  Select,
+  SelectItem,
+  Button,
+} from "@heroui/react";
 import { DatePicker, TimeInput } from "@heroui/react";
 import { today, getLocalTimeZone } from "@internationalized/date";
 import { User } from "@/types/api";

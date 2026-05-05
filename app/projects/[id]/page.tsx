@@ -12,7 +12,7 @@ import {
   IdeaVideoHero,
   ProjectSkeleton,
 } from "@/components/explore-details";
-import { Divider } from "@heroui/divider";
+import { Divider } from "@heroui/react";
 import { useTranslations } from "next-intl";
 import { useParams } from "next/navigation";
 import { useProject } from "@/hooks/api/useProject";

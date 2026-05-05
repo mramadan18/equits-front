@@ -1,6 +1,6 @@
 "use client";
 
-import { Divider } from "@heroui/divider";
+import { Divider } from "@heroui/react";
 import { User } from "@/types/api";
 
 interface ProfileAboutProps {

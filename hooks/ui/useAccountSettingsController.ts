@@ -2,8 +2,7 @@
 
 import { useTranslations, useLocale } from "next-intl";
 import { useDeleteMe, useChangePassword } from "@/hooks/api/useAuth";
-import { useDisclosure } from "@heroui/modal";
-import { addToast } from "@heroui/toast";
+import { useDisclosure, addToast } from "@heroui/react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {

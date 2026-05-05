@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { addToast } from "@heroui/toast";
+import { addToast } from "@heroui/react";
 import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
 import {

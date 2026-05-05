@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { addToast } from "@heroui/toast";
+import { addToast, Spinner, InputOtp } from "@heroui/react";
 import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
@@ -17,11 +17,9 @@ import {
 } from "@/hooks/api/useAuth";
 import { AuthLayout, AuthHeader, AuthSubmitButton } from "@/components/auth";
 import { StaggerContainer, StaggerItem } from "@/components/shared/animations";
-import { InputOtp } from "@heroui/input-otp";
 import { ApiResponse, SuccessResponse } from "@/types/api";
 import { ApiError } from "@/types/error";
 import { AuthRoutes } from "@/types";
-import { Spinner } from "@heroui/spinner";
 
 export default function VerifyResetOtpPage() {
   const authT = useTranslations("Auth.VerifyResetOtp");

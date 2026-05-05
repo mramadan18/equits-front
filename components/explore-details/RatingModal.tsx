@@ -6,9 +6,10 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
-} from "@heroui/modal";
-import { Button } from "@heroui/button";
-import { Textarea } from "@heroui/input";
+  Textarea,
+  Button,
+  addToast,
+} from "@heroui/react";
 import { Rating, RoundedStar } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import { useTranslations } from "next-intl";
@@ -19,7 +20,6 @@ import {
   RatingInput,
 } from "@/validations/engagement.validation";
 import { useRateProject } from "@/hooks/api/useProject";
-import { addToast } from "@heroui/toast";
 
 interface RatingModalProps {
   isOpen: boolean;

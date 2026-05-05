@@ -1,6 +1,6 @@
 "use client";
 
-import { Select, SelectProps } from "@heroui/select";
+import { Select, SelectProps } from "@heroui/react";
 import { Controller, Control, FieldValues, Path } from "react-hook-form";
 
 interface FormSelectProps<T extends FieldValues>

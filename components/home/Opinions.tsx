@@ -10,8 +10,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-import { Avatar } from "@heroui/avatar";
-import { Card, CardBody } from "@heroui/card";
+import { Avatar, Card, CardBody } from "@heroui/react";
 import { FadeIn } from "@/components/shared/animations";
 
 export default function Opinions() {

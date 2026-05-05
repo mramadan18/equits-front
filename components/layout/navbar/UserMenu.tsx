@@ -5,10 +5,10 @@ import {
   DropdownTrigger,
   DropdownMenu,
   DropdownItem,
-} from "@heroui/dropdown";
-import { Avatar } from "@heroui/avatar";
-import { Button } from "@heroui/button";
-import { Badge } from "@heroui/badge";
+  Avatar,
+  Button,
+  Badge,
+} from "@heroui/react";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { PiOpenAiLogoThin } from "react-icons/pi";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";

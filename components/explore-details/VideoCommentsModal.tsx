@@ -1,27 +1,27 @@
 "use client";
 
-import { ModalContent, ModalHeader, ModalBody } from "@heroui/modal";
-import { Project } from "@/types/api";
-import { useTranslations } from "next-intl";
-import { IdeaVideoHero } from "./IdeaVideoHero";
 import {
-  useProjectCommentsInfinite,
   useCommentOnProject,
+  useProjectCommentsInfinite,
 } from "@/hooks/api/useProject";
-import { Avatar } from "@heroui/avatar";
-import { Spinner } from "@heroui/spinner";
+import { Project } from "@/types/api";
+import {
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  Avatar,
+  Spinner,
+  Textarea,
+  Button,
+  addToast,
+} from "@heroui/react";
 import moment from "moment";
-import { Textarea } from "@heroui/input";
-import { Button } from "@heroui/button";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
-import { addToast } from "@heroui/toast";
 import { LuSendHorizontal } from "react-icons/lu";
+import { IdeaVideoHero } from "./IdeaVideoHero";
 
-interface VideoCommentsModalProps {
-  project: Project;
-}
-
-export function VideoCommentsModal({ project }: VideoCommentsModalProps) {
+export function VideoCommentsModal({ project }: { project: Project }) {
   const t = useTranslations("ProjectDetails.engagement");
   const tEngage = useTranslations("Engagement");
   const {

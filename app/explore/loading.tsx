@@ -1,5 +1,4 @@
-import { Skeleton } from "@heroui/skeleton";
-import { Card, CardBody } from "@heroui/card";
+import { Skeleton, Card, CardBody } from "@heroui/react";
 
 export default function ExploreLoading() {
   return (

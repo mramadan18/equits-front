@@ -1,12 +1,11 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import { FiCamera } from "react-icons/fi";
 import { useTranslations } from "next-intl";
 import { User } from "@/types/api";
-import { useDisclosure } from "@heroui/modal";
-import { Spinner } from "@heroui/spinner";
+import { useDisclosure, Spinner } from "@heroui/react";
 import { Area } from "react-easy-crop";
 import { ImageCropModal } from "@/components/common/ImageCropModal";
 import { useImageUpload } from "@/hooks/ui/useImageUpload";

@@ -1,7 +1,6 @@
 "use client";
 
-import React from "react";
-import { Button } from "@heroui/button";
+import { Button } from "@heroui/react";
 import { LuSearchX } from "react-icons/lu";
 import { motion } from "framer-motion";
 

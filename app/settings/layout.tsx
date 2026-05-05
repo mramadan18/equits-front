@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { Tabs, Tab } from "@heroui/tabs";
+import { Tabs, Tab } from "@heroui/react";
 import { usePathname, useRouter } from "next/navigation";
 import { ReactNode } from "react";
 

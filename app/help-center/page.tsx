@@ -1,10 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
-import { Input } from "@heroui/input";
-import { Accordion, AccordionItem } from "@heroui/accordion";
-import { Button } from "@heroui/button";
+import { Accordion, AccordionItem, Input, Button } from "@heroui/react";
 import {
   MdSearch,
   MdAccountCircle,

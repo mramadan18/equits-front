@@ -4,8 +4,7 @@ import { useRef } from "react";
 import Image from "next/image";
 import { HiOutlineCloudArrowUp } from "react-icons/hi2";
 import { useUploadSingle } from "@/hooks/api/useUpload";
-import { addToast } from "@heroui/toast";
-import { Spinner } from "@heroui/spinner";
+import { addToast, Spinner } from "@heroui/react";
 import { FiFile } from "react-icons/fi";
 import { useTranslations } from "next-intl";
 

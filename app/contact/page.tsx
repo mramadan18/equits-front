@@ -1,8 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
-import { Button } from "@heroui/button";
-import { Input, Textarea } from "@heroui/input";
+import { useState } from "react";
+import { Button, Input, Textarea } from "@heroui/react";
 import { MdEmail, MdPhone, MdLocationOn, MdAccessTime } from "react-icons/md";
 import { FaTwitter, FaLinkedin, FaGithub } from "react-icons/fa";
 

@@ -5,8 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { projectService } from "@/services/project.service";
 import { MyProjectCard } from "@/components/repo/MyProjectCard";
 import { Skeleton } from "@heroui/skeleton";
-import { Button } from "@heroui/button";
-import { Chip } from "@heroui/chip";
+import { Button, Chip } from "@heroui/react";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import {

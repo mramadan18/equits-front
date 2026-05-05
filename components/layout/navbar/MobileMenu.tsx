@@ -5,9 +5,9 @@ import {
   DrawerContent,
   DrawerHeader,
   DrawerBody,
-} from "@heroui/drawer";
-import { Button } from "@heroui/button";
-import { Avatar } from "@heroui/avatar";
+  Avatar,
+  Button,
+} from "@heroui/react";
 import Link from "next/link";
 import {
   LuUser,

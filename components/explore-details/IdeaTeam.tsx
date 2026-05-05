@@ -1,6 +1,6 @@
 "use client";
 
-import { Avatar } from "@heroui/avatar";
+import { Avatar } from "@heroui/react";
 import { Project } from "@/types/api";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";

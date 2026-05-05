@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { useDisclosure } from "@heroui/modal";
+import { useDisclosure } from "@heroui/react";
 import { User } from "@/types/api";
 import { useAuthStore } from "@/stores/useAuthStore";
 import { useProfileStatus } from "@/hooks/api/useProfile";

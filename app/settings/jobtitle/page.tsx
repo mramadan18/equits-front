@@ -1,11 +1,10 @@
 "use client";
 
-import { SelectItem } from "@heroui/select";
-import { AutocompleteItem } from "@heroui/autocomplete";
 import { FormInput, FormSelect, FormAutocomplete } from "@/components/ui/form";
 import { SettingsFormActions } from "@/components/shared/SettingsFormActions";
 import { SettingsPageHeader } from "@/components/shared/SettingsPageHeader";
 import { useJobTitleController } from "@/hooks/ui/useJobTitleController";
+import { AutocompleteItem, SelectItem } from "@heroui/react";
 
 export default function JobTitleSettingsPage() {
   const {

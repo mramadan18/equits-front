@@ -1,6 +1,6 @@
 import { Project } from "@/types/api";
 import { formatCurrency } from "@/utils";
-import { Button } from "@heroui/button";
+import { Button, addToast } from "@heroui/react";
 import Image from "next/image";
 import { FaRegBookmark, FaBookmark } from "react-icons/fa";
 import moment from "moment";
@@ -8,7 +8,6 @@ import Link from "next/link";
 import { MainRoutes } from "@/types";
 import { useToggleWishlist } from "@/hooks/api/useWishlist";
 import { useAuthStore } from "@/stores/useAuthStore";
-import { addToast } from "@heroui/toast";
 
 export const FeedIdeaCard = ({ idea }: { idea: Project }) => {
   const { mutate: toggleWishlist, isPending } = useToggleWishlist();

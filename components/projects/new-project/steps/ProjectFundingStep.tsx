@@ -8,7 +8,7 @@ import { FormSelect } from "@/components/ui/form/FormSelect";
 import { FormInput } from "@/components/ui/form/FormInput";
 import { FormTextarea } from "@/components/ui/form/FormTextarea";
 import { FormFileUploader } from "@/components/ui/form/FormFileUploader";
-import { SelectItem } from "@heroui/select";
+import { SelectItem } from "@heroui/react";
 
 export const ProjectFundingStep = ({
   control,

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { addToast } from "@heroui/toast";
+import { addToast } from "@heroui/react";
 
 const apiClient = axios.create({
   baseURL: `${process.env.NEXT_PUBLIC_API_URL}/api/v1`,

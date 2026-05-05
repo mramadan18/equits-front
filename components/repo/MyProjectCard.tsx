@@ -1,8 +1,6 @@
 "use client";
 
-import { Button } from "@heroui/button";
-import { Chip } from "@heroui/chip";
-import { Tooltip } from "@heroui/tooltip";
+import { Button, Chip, Tooltip } from "@heroui/react";
 import Image from "next/image";
 import {
   FaEdit,

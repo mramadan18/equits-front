@@ -1,6 +1,5 @@
 "use client";
 
-import { Switch } from "@heroui/switch";
 import {
   FaLinkedinIn,
   FaFacebookF,
@@ -15,7 +14,7 @@ import { FormInput } from "@/components/ui/form/FormInput";
 import { FormTextarea } from "@/components/ui/form/FormTextarea";
 import { FormAutocomplete } from "@/components/ui/form/FormAutocomplete";
 import { FormFileUploader } from "@/components/ui/form/FormFileUploader";
-import { AutocompleteItem } from "@heroui/autocomplete";
+import { AutocompleteItem, Switch } from "@heroui/react";
 
 interface ProjectBasicsStepProps {
   control: Control<ProjectFormData>;

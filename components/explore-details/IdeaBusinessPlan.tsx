@@ -1,5 +1,5 @@
 import { Project } from "@/types/api";
-import { Button } from "@heroui/button";
+import { Button } from "@heroui/react";
 import { FiEye } from "react-icons/fi";
 import { useTranslations } from "next-intl";
 

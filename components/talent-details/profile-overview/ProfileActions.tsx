@@ -1,12 +1,10 @@
 "use client";
-
-import { Button } from "@heroui/button";
 import { HiPencil } from "react-icons/hi";
 import { FaVideo } from "react-icons/fa";
 import { IoPersonOutline } from "react-icons/io5";
 import Link from "next/link";
 import { ProfileCompletion } from "../../home/FeedProfileCard/ProfileCompletion";
-import { Modal } from "@heroui/modal";
+import { Modal, Button } from "@heroui/react";
 import { CompleteProfileModal } from "../../home/CompleteProfileModal";
 import { ContactModal } from "../ContactModal";
 import { RequestMeetingModal } from "../RequestMeetingModal";

@@ -1,7 +1,6 @@
 "use client";
 
-import { Skeleton } from "@heroui/skeleton";
-import { Modal, useDisclosure } from "@heroui/modal";
+import { Modal, useDisclosure, Skeleton } from "@heroui/react";
 import { useAuthStore } from "@/stores/useAuthStore";
 import { useProfileStatus } from "@/hooks/api/useProfile";
 import { CompleteProfileModal } from "./CompleteProfileModal";

@@ -1,4 +1,4 @@
-import { Button, ButtonProps } from "@heroui/button";
+import { Button, ButtonProps } from "@heroui/react";
 import { FcGoogle } from "react-icons/fc";
 
 interface SocialButtonProps extends ButtonProps {
