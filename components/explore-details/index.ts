@@ -5,6 +5,7 @@ export * from "./IdeaEngagement";
 export * from "./IdeaElevatorPitch";
 export * from "./IdeaClassifications";
 export * from "./IdeaTeam";
+export * from "./IdeaMarketStrategy";
 export * from "./IdeaBusinessPlan";
 export * from "./RatingModal";
 export * from "./CommentModal";

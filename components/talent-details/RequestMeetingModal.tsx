@@ -10,8 +10,7 @@ import {
 } from "@heroui/modal";
 import { Button } from "@heroui/button";
 import { Select, SelectItem } from "@heroui/select";
-import { DatePicker } from "@heroui/date-picker";
-import { TimeInput } from "@heroui/date-input";
+import { DatePicker, TimeInput } from "@heroui/react";
 import { today, getLocalTimeZone } from "@internationalized/date";
 import { User } from "@/types/api";
 
@@ -54,13 +53,13 @@ export const RequestMeetingModal = ({
       <ModalContent>
         {(onClose) => (
           <>
-            <ModalHeader className="text-2xl font-bold text-dark pt-8 px-8">
+            <ModalHeader className="text-2xl font-semibold text-dark pt-8 px-8">
               {t("requestMeetingModal.title")}
             </ModalHeader>
             <ModalBody className="px-8 pt-4 pb-2">
               <div className="grid grid-cols-2 gap-6 mb-6">
                 <div className="flex flex-col gap-2">
-                  <label className="text-sm font-bold text-gray2 tracking-tight">
+                  <label className="text-sm font-semibold text-gray2 tracking-tight">
                     {t("requestMeetingModal.preferredDate")}
                   </label>
                   <DatePicker
@@ -71,7 +70,7 @@ export const RequestMeetingModal = ({
                   />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <label className="text-sm font-bold text-gray2">
+                  <label className="text-sm font-semibold text-gray2">
                     {t("requestMeetingModal.preferredTime")}
                   </label>
                   <TimeInput variant="bordered" radius="sm" />
@@ -79,7 +78,7 @@ export const RequestMeetingModal = ({
               </div>
 
               <div className="flex flex-col gap-2 mb-6">
-                <label className="text-sm font-bold text-gray2">
+                <label className="text-sm font-semibold text-gray2">
                   {t("requestMeetingModal.preferredContactMethod")}
                 </label>
                 <Select

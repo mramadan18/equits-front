@@ -7,6 +7,7 @@ import {
   IdeaElevatorPitch,
   IdeaEngagement,
   IdeaHeader,
+  IdeaMarketStrategy,
   IdeaTeam,
   IdeaVideoHero,
   ProjectSkeleton,
@@ -53,6 +54,9 @@ export default function ProjectPage() {
 
           <Divider className="my-1 sm:my-3 bg-gray-200" />
           <IdeaTeam project={project} />
+
+          <Divider className="my-1 sm:my-3 bg-gray-200" />
+          <IdeaMarketStrategy project={project} />
 
           <Divider className="my-1 sm:my-3 bg-gray-200" />
           <IdeaBusinessPlan project={project} />

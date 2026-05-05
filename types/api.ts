@@ -108,6 +108,7 @@ export interface User {
   educationCertificates?: EducationCertificate[];
   country?: Country;
   city?: City;
+  wishlistIds?: number[];
 }
 
 export enum UserType {

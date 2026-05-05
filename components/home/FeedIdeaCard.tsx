@@ -2,12 +2,32 @@ import { Project } from "@/types/api";
 import { formatCurrency } from "@/utils";
 import { Button } from "@heroui/button";
 import Image from "next/image";
-import { FaRegBookmark } from "react-icons/fa";
+import { FaRegBookmark, FaBookmark } from "react-icons/fa";
 import moment from "moment";
 import Link from "next/link";
 import { MainRoutes } from "@/types";
+import { useToggleWishlist } from "@/hooks/api/useWishlist";
+import { useAuthStore } from "@/stores/useAuthStore";
+import { addToast } from "@heroui/toast";
 
 export const FeedIdeaCard = ({ idea }: { idea: Project }) => {
+  const { mutate: toggleWishlist, isPending } = useToggleWishlist();
+  const { user } = useAuthStore();
+  const isSaved = user?.wishlistIds?.includes(idea.id) ?? false;
+
+  const handleToggleWishlist = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (!user) {
+      addToast({
+        title: "Please log in to save projects",
+        color: "warning",
+      });
+      return;
+    }
+
+    toggleWishlist(idea.id);
+  };
+
   return (
     <div className="group bg-white rounded-2xl p-4 sm:p-5 flex flex-col gap-5 border border-default-100 hover:border-default-200 shadow-sm hover:shadow-md transition-all duration-300">
       <div className="flex flex-col sm:flex-row gap-5">
@@ -45,9 +65,11 @@ export const FeedIdeaCard = ({ idea }: { idea: Project }) => {
               radius="full"
               variant="light"
               size="sm"
-              className="text-default-400 hover:text-dark hover:bg-default-100 -mt-1 -mr-1"
+              className={`${isSaved ? "text-primary" : "text-default-400"} hover:text-dark hover:bg-default-100 -mt-1 -mr-1`}
+              onClick={handleToggleWishlist}
+              isLoading={isPending}
             >
-              <FaRegBookmark size={18} />
+              {isSaved ? <FaBookmark size={18} /> : <FaRegBookmark size={18} />}
             </Button>
           </div>
 

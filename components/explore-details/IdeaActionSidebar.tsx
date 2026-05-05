@@ -9,6 +9,7 @@ import {
   FiExternalLink,
   FiVideo,
 } from "react-icons/fi";
+import { FaBookmark } from "react-icons/fa";
 import { FaStar } from "react-icons/fa";
 import { RatingModal } from "./RatingModal";
 import { CommentModal } from "./CommentModal";
@@ -21,12 +22,11 @@ import {
 import { Project } from "@/types/api";
 import Link from "next/link";
 import { useAuthStore } from "@/stores/useAuthStore";
+import { useToggleWishlist } from "@/hooks/api/useWishlist";
+import { addToast } from "@heroui/toast";
+import { RequestMeetingModal } from "../talent-details/RequestMeetingModal";
 
-interface IdeaActionSidebarProps {
-  project: Project;
-}
-
-export function IdeaActionSidebar({ project }: IdeaActionSidebarProps) {
+export function IdeaActionSidebar({ project }: { project: Project }) {
   const { user } = useAuthStore();
   const t = useTranslations("Engagement");
   const ts = useTranslations("ProjectDetails.sidebar");
@@ -42,6 +42,32 @@ export function IdeaActionSidebar({ project }: IdeaActionSidebarProps) {
     onOpen: onCommentOpen,
     onOpenChange: onCommentOpenChange,
   } = useDisclosure();
+  const {
+    isOpen: isMeetingOpen,
+    onOpen: onMeetingOpen,
+    onOpenChange: onMeetingOpenChange,
+  } = useDisclosure();
+
+  const { mutate: toggleWishlist, isPending: isToggling } = useToggleWishlist();
+  const isSaved = user?.wishlistIds?.includes(project.id);
+
+  const handleToggleWishlist = () => {
+    if (!user) return;
+    toggleWishlist(project.id, {
+      onSuccess: (response: any) => {
+        addToast({
+          title: response.message || "Updated wishlist",
+          color: "success",
+        });
+      },
+      onError: (error: any) => {
+        addToast({
+          title: error.message || "Failed to update wishlist",
+          color: "danger",
+        });
+      },
+    });
+  };
 
   return (
     <div className="w-full lg:w-[340px] xl:w-[380px] flex-shrink-0 mt-8 lg:mt-0">
@@ -106,11 +132,23 @@ export function IdeaActionSidebar({ project }: IdeaActionSidebarProps) {
 
           <Button
             variant="bordered"
-            className="w-full justify-start py-6 border-gray-200 text-dark2 font-semibold hover:bg-gray-50 transition-colors text-base"
-            startContent={<FiBookmark className="w-5 h-5 text-gray-400 mr-2" />}
-            isDisabled={!user}
+            className={`w-full justify-start py-6 border-gray-200 font-semibold hover:bg-gray-50 transition-all text-base ${
+              isSaved
+                ? "text-primary border-primary bg-primary/5"
+                : "text-dark2"
+            }`}
+            startContent={
+              isSaved ? (
+                <FaBookmark className="w-5 h-5 text-primary mr-2" />
+              ) : (
+                <FiBookmark className="w-5 h-5 text-gray-400 mr-2" />
+              )
+            }
+            isDisabled={!user || isToggling}
+            isLoading={isToggling}
+            onClick={handleToggleWishlist}
           >
-            {ts("saveForLater")}
+            {isSaved ? ts("saved") || "Saved" : ts("saveForLater")}
           </Button>
 
           <Button
@@ -118,6 +156,7 @@ export function IdeaActionSidebar({ project }: IdeaActionSidebarProps) {
             className="w-full justify-start py-6 mt-1 font-semibold text-base shadow-md"
             startContent={<FiVideo className="w-5 h-5 mr-2" />}
             isDisabled={!user}
+            onPress={onMeetingOpen}
           >
             {ts("requestMeeting")}
           </Button>
@@ -178,6 +217,14 @@ export function IdeaActionSidebar({ project }: IdeaActionSidebarProps) {
         onOpenChange={onCommentOpenChange}
         projectId={project.id}
       />
+
+      {project.owner && (
+        <RequestMeetingModal
+          isOpen={isMeetingOpen}
+          onOpenChange={onMeetingOpenChange}
+          talent={project.owner}
+        />
+      )}
     </div>
   );
 }

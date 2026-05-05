@@ -51,10 +51,22 @@ export const UserMenu = ({
           </div>
         </Badge>
 
-        <Badge content="2" color="danger" className="w-5 h-5 text-[10px]">
-          <div className="w-10 h-10 bg-[#E9EAEB] rounded-full flex items-center justify-center">
+        <Badge
+          as={Link}
+          href={MainRoutes.SAVED}
+          content={user?.wishlistIds?.length || 0}
+          color="danger"
+          className="w-5 h-5 text-[10px]"
+        >
+          <Button
+            as={Link}
+            href={MainRoutes.SAVED}
+            isIconOnly
+            radius="full"
+            className="w-10 h-10 bg-[#E9EAEB]"
+          >
             <FaRegBookmark size={18} className="text-black" />
-          </div>
+          </Button>
         </Badge>
 
         <Badge content="Soon" color="primary" className="px-1 text-[10px]">

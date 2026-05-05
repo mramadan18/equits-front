@@ -27,12 +27,7 @@ declare module "@react-types/shared" {
   }
 }
 
-export function Providers({
-  children,
-  themeProps,
-  session,
-  locale,
-}: ProvidersProps) {
+export function Providers({ children, themeProps, session }: ProvidersProps) {
   const router = useRouter();
   const [queryClient] = React.useState(
     () =>
@@ -52,7 +47,7 @@ export function Providers({
       <GoogleOAuthProvider
         clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || ""}
       >
-        <HeroUIProvider navigate={router.push} locale={locale}>
+        <HeroUIProvider navigate={router.push}>
           <NextThemesProvider {...themeProps}>
             <AuthInitializer session={session} />
             {children}

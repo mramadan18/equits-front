@@ -635,6 +635,11 @@
     "pitch": {
       "title": "عرض الفكرة"
     },
+    "market": {
+      "problem": "المشكلة",
+      "solution": "الحل",
+      "valueProp": "القيمة المقترحة"
+    },
     "classifications": {
       "title": "التصنيفات",
       "industry": "المجال",
@@ -642,7 +647,9 @@
       "revenueModel": "نموذج الإيرادات",
       "stage": "المرحلة",
       "marketFocus": "التركيز السوقي",
-      "serviceArea": "منطقة الخدمة"
+      "serviceArea": "منطقة الخدمة",
+      "fundingAsk": "طلب التمويل",
+      "equityStake": "نسبة الملكية"
     },
     "team": {
       "title": "تواصل مع الفريق"
@@ -655,6 +662,7 @@
       "actions": "الإجراءات",
       "demoLink": "رابط تجريبي",
       "saveForLater": "حفظ لوقت لاحق",
+      "saved": "تم الحفظ",
       "requestMeeting": "طلب اجتماع",
       "loginRequired": "سجل الدخول لتتمكن من القيام بهذه الإجراءات",
       "loginNow": "سجل الدخول الآن"
@@ -877,5 +885,11 @@
         "rejected": "مرفوض"
       }
     }
+  },
+  "Saved": {
+    "title": "المشاريع المحفوظة",
+    "emptyTitle": "لا توجد مشاريع محفوظة بعد",
+    "emptyDesc": "المشاريع التي تقوم بحفظها ستظهر هنا.",
+    "exploreBtn": "استكشف المشاريع"
   }
 }

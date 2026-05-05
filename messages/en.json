@@ -563,7 +563,6 @@
       "success": "Success"
     }
   },
-
   "FileUploader": {
     "errorTitle": "Error",
     "errorDescription": "Failed to upload file",
@@ -635,6 +634,11 @@
     "pitch": {
       "title": "Elevator Pitch"
     },
+    "market": {
+      "problem": "Problem",
+      "solution": "Solution",
+      "valueProp": "Value Proposition"
+    },
     "classifications": {
       "title": "Classifications",
       "industry": "Industry",
@@ -642,7 +646,9 @@
       "revenueModel": "Revenue Model",
       "stage": "Stage",
       "marketFocus": "Market Focus",
-      "serviceArea": "Service Area"
+      "serviceArea": "Service Area",
+      "fundingAsk": "Funding Ask",
+      "equityStake": "Equity"
     },
     "team": {
       "title": "Reach out to the team"
@@ -655,6 +661,7 @@
       "actions": "Actions",
       "demoLink": "Demo Link",
       "saveForLater": "Save For Later",
+      "saved": "Saved",
       "requestMeeting": "Request Meeting",
       "loginRequired": "Login to take these actions",
       "loginNow": "Login Now"
@@ -877,5 +884,11 @@
         "rejected": "Rejected"
       }
     }
+  },
+  "Saved": {
+    "title": "Saved Projects",
+    "emptyTitle": "No saved projects yet",
+    "emptyDesc": "Projects you save will appear here.",
+    "exploreBtn": "Explore Projects"
   }
 }
