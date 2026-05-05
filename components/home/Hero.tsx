@@ -53,7 +53,7 @@ export default function Hero() {
           duration={0.8}
           delay={0.4}
           y={20}
-          className="flex flex-col w-full md:flex-row items-center gap-4 px-2"
+          className="flex flex-col w-full md:flex-row justify-center items-center gap-4 px-2"
         >
           <Button
             as={Link}

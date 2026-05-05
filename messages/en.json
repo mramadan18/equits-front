@@ -175,7 +175,35 @@
     "a4": "Equits doesn’t just connect you with investors — it supports you through mentorship, resources, and tools to help you present your startup effectively and attract funding."
   },
   "Footer": {
-    "copyright": "© Equits 2025 All Rights Reserved."
+    "copyright": "© 2025 Equits. All Rights Reserved.",
+    "ctaTitle": "Ready to Turn Your Idea Into Reality?",
+    "ctaSubtitle": "Join thousands of entrepreneurs and investors building the future together.",
+    "ctaExplore": "Explore Projects",
+    "ctaJoin": "Get Started",
+    "brandDescription": "Connecting visionary entrepreneurs with the right investors, mentors, and talent to turn bold ideas into thriving startups.",
+    "location": "Cairo, Egypt",
+    "platformTitle": "Platform",
+    "platform": {
+      "explore": "Explore Projects",
+      "talents": "Find Talents",
+      "services": "Services",
+      "boost": "Boost"
+    },
+    "companyTitle": "Company",
+    "company": {
+      "about": "About Us",
+      "careers": "Careers",
+      "blog": "Blog",
+      "contact": "Contact"
+    },
+    "resourcesTitle": "Resources",
+    "resources": {
+      "helpCenter": "Help Center",
+      "guides": "Startup Guides",
+      "api": "API Docs",
+      "terms": "Terms of Service",
+      "privacy": "Privacy Policy"
+    }
   },
   "Auth": {
     "Login": {
