@@ -342,7 +342,7 @@
       "preferredContactMethod": "Preferred Contact Method",
       "selectMethodPlaceholder": "Select method",
       "noteLabel": "Note",
-      "note": "Note: This request will be sent to the student. Further communication will happen off-platform using your preferred contact method.",
+      "note": "Note: This request will be sent to the owner. Further communication will happen off-platform using your preferred contact method.",
       "cancel": "Cancel",
       "sendRequest": "Send Request",
       "contactMethods": {

@@ -1,3 +1,4 @@
+"use client";
 import { Skeleton, Card, CardBody } from "@heroui/react";
 
 const TalentCardSkeleton = () => (

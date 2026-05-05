@@ -1,22 +1,12 @@
 "use client";
 
-import type { ThemeProviderProps } from "next-themes";
-
 import * as React from "react";
 import { HeroUIProvider } from "@heroui/system";
 import { useRouter } from "next/navigation";
-import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { GoogleOAuthProvider } from "@react-oauth/google";
-
+import { ToastProvider } from "@heroui/react";
 import { AuthInitializer } from "@/components/auth/AuthInitializer";
-
-export interface ProvidersProps {
-  children: React.ReactNode;
-  themeProps?: ThemeProviderProps;
-  session?: string;
-  locale?: string;
-}
 
 declare module "@react-types/shared" {
   interface RouterConfig {
@@ -26,7 +16,13 @@ declare module "@react-types/shared" {
   }
 }
 
-export function Providers({ children, themeProps, session }: ProvidersProps) {
+export function Providers({
+  children,
+  session,
+}: {
+  children: React.ReactNode;
+  session?: string;
+}) {
   const router = useRouter();
   const [queryClient] = React.useState(
     () =>
@@ -47,10 +43,9 @@ export function Providers({ children, themeProps, session }: ProvidersProps) {
         clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || ""}
       >
         <HeroUIProvider navigate={router.push}>
-          <NextThemesProvider {...themeProps}>
-            <AuthInitializer session={session} />
-            {children}
-          </NextThemesProvider>
+          <AuthInitializer session={session} />
+          {children}
+          <ToastProvider placement="top-center" />
         </HeroUIProvider>
       </GoogleOAuthProvider>
     </QueryClientProvider>

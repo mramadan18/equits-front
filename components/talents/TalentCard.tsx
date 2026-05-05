@@ -1,3 +1,4 @@
+"use client";
 import { Card, CardBody, Avatar } from "@heroui/react";
 import { Button } from "@heroui/react";
 import { useTranslations } from "next-intl";
@@ -7,9 +8,12 @@ import { FaVideo } from "react-icons/fa";
 import Link from "next/link";
 import { MainRoutes } from "@/types";
 import { User } from "@/types/api";
+import { useDisclosure } from "@heroui/react";
+import { RequestMeetingModal } from "../talent-details/RequestMeetingModal";
 
 export const TalentCard = ({ item }: { item: User }) => {
   const t = useTranslations("TalentsExplore");
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   return (
     <Card className="border-1 border-gray-200 shadow-sm hover:shadow-lg transition-all duration-300 rounded-xl overflow-hidden bg-white group flex flex-col pt-0 p-0 h-full">
@@ -85,11 +89,17 @@ export const TalentCard = ({ item }: { item: User }) => {
             radius="sm"
             size="md"
             startContent={<FaVideo className="text-lg" />}
+            onPress={onOpen}
           >
             {t("requestMeeting")}
           </Button>
         </div>
       </CardBody>
+      <RequestMeetingModal
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+        talent={item}
+      />
     </Card>
   );
 };

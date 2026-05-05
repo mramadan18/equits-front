@@ -44,6 +44,7 @@ export const RequestMeetingModal = ({
       size="lg"
       backdrop="blur"
       radius="lg"
+      isDismissable={false}
       classNames={{
         backdrop: "bg-black/30 backdrop-blur-md",
         base: "border border-gray-100 shadow-2xl p-2",

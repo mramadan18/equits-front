@@ -1,3 +1,4 @@
+"use client";
 import { Skeleton, Card, Divider } from "@heroui/react";
 
 export default function TalentLoading() {
