@@ -7,6 +7,7 @@ import { IoSearchOutline, IoAddOutline } from "react-icons/io5";
 import Link from "next/link";
 import { MainRoutes } from "@/types";
 import { useAuthStore } from "@/stores/useAuthStore";
+import { Skeleton } from "@heroui/skeleton";
 
 export const HomeSearchBar = ({
   value,
@@ -15,31 +16,40 @@ export const HomeSearchBar = ({
   value: string;
   onValueChange: (value: string) => void;
 }) => {
+  const { isHydrated } = useAuthStore();
   const t = useTranslations("Explore");
   const { user } = useAuthStore();
 
   return (
     <div className="flex flex-row items-center gap-3 md:gap-4 mb-6 md:mb-8 w-full">
-      <Input
-        value={value}
-        onValueChange={onValueChange}
-        placeholder={t("searchPlaceholder")}
-        radius="full"
-        variant="bordered"
-        className="flex-1"
-        classNames={{
-          inputWrapper:
-            "h-12 md:h-14 bg-white border-2 border-gray-200 hover:border-primary focus-within:border-primary shadow-sm transition-colors",
-          input: "text-base px-2",
-        }}
-        endContent={
-          <div className="flex items-center h-full px-3 md:px-4 border-s-1 border-gray-300">
-            <IoSearchOutline className="text-gray-500 text-xl md:text-2xl cursor-pointer hover:text-primary transition-colors" />
-          </div>
-        }
-      />
+      {isHydrated ? (
+        <Input
+          value={value}
+          onValueChange={onValueChange}
+          placeholder={t("searchPlaceholder")}
+          radius="full"
+          variant="bordered"
+          className="flex-1"
+          classNames={{
+            inputWrapper:
+              "h-12 md:h-14 bg-white border-2 border-gray-200 hover:border-primary focus-within:border-primary shadow-sm transition-colors",
+            input: "text-base px-2",
+          }}
+          endContent={
+            <div className="flex items-center h-full px-3 md:px-4 border-s-1 border-gray-300">
+              <IoSearchOutline className="text-gray-500 text-xl md:text-2xl cursor-pointer hover:text-primary transition-colors" />
+            </div>
+          }
+        />
+      ) : (
+        <div className="flex flex-row items-center gap-3 md:gap-4 mb-6 md:mb-8 w-full">
+          <Skeleton className="flex-1 h-12 md:h-14 rounded-full" />
+          <Skeleton className="h-12 w-12 md:hidden rounded-full flex-shrink-0" />
+          <Skeleton className="hidden md:flex h-14 w-40 rounded-full flex-shrink-0" />
+        </div>
+      )}
 
-      {!user && (
+      {!user && isHydrated && (
         <>
           {/* Mobile Add Button: Icon Only */}
           <Button

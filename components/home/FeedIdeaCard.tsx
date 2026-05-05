@@ -4,92 +4,91 @@ import { Button } from "@heroui/button";
 import Image from "next/image";
 import { FaRegBookmark } from "react-icons/fa";
 import moment from "moment";
-import { Avatar, AvatarGroup } from "@heroui/avatar";
 import Link from "next/link";
 import { MainRoutes } from "@/types";
 
 export const FeedIdeaCard = ({ idea }: { idea: Project }) => {
   return (
-    <div className="bg-white rounded-xl border border-gray2 p-5 flex flex-col gap-4 shadow-sm hover:shadow-md transition-shadow">
-      {/* Header Info */}
-      <div className="flex justify-between items-center">
-        <span className="text-xs font-semibold text-gray2">
-          Updated {moment(idea.updatedAt).fromNow()}
-        </span>
-        <Button
-          isIconOnly
-          radius="full"
-          variant="light"
-          className="text-gray2 transition-colors"
-        >
-          <FaRegBookmark size={24} />
-        </Button>
-      </div>
-
-      {/* Main Body */}
-      <div className="flex flex-col md:flex-row gap-6">
-        {/* Thumbnail */}
-        <Link
-          href={`${MainRoutes.PROJECTS}/${idea.id}`}
-          className="relative w-full md:w-56 h-48 md:h-28 flex-shrink-0 rounded-xl overflow-hidden border"
-        >
-          <Image
-            src={`${idea?.cover}`}
-            alt={`${idea?.title}`}
-            fill
-            className="object-cover"
-          />
-        </Link>
-
-        {/* Content */}
-        <div className="flex flex-col flex-1">
-          {/* Title & Stage */}
-          <Link
-            href={`${MainRoutes.PROJECTS}/${idea.id}`}
-            className="flex items-center gap-3 mb-3"
-          >
-            <h3 className="text-xl font-semibold text-dark leading-tight">
-              {idea.title}
-            </h3>
-            <span className="px-3 py-1 bg-gray3 text-dark text-xs font-medium rounded-full">
-              {idea.stage}
-            </span>
+    <div className="group bg-white rounded-2xl p-4 sm:p-5 flex flex-col gap-5 border border-default-100 hover:border-default-200 shadow-sm hover:shadow-md transition-all duration-300">
+      <div className="flex flex-col sm:flex-row gap-5">
+        {/* Thumbnail area */}
+        <div className="relative w-full sm:w-64 h-48 sm:h-36 flex-shrink-0 cursor-pointer overflow-hidden rounded-xl bg-default-100">
+          <Link href={`${MainRoutes.PROJECTS}/${idea.id}`}>
+            <Image
+              src={`${idea?.cover}`}
+              alt={`${idea?.title}`}
+              fill
+              className="object-cover transition-transform duration-300 group-hover:scale-105"
+            />
           </Link>
+          <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-md px-2.5 py-1 rounded-full text-[10px] font-bold text-dark shadow-sm">
+            {idea.stage}
+          </div>
+        </div>
+
+        {/* Content area */}
+        <div className="flex flex-col flex-1 min-w-0">
+          {/* Header */}
+          <div className="flex justify-between items-start gap-4 mb-2">
+            <div>
+              <Link href={`${MainRoutes.PROJECTS}/${idea.id}`}>
+                <h3 className="text-lg sm:text-xl font-bold text-dark leading-tight group-hover:text-primary transition-colors line-clamp-1">
+                  {idea.title}
+                </h3>
+              </Link>
+              <div className="text-xs text-default-500 mt-1.5 flex items-center gap-1.5">
+                <span>Updated {moment(idea.updatedAt).fromNow()}</span>
+              </div>
+            </div>
+            <Button
+              isIconOnly
+              radius="full"
+              variant="light"
+              size="sm"
+              className="text-default-400 hover:text-dark hover:bg-default-100 -mt-1 -mr-1"
+            >
+              <FaRegBookmark size={18} />
+            </Button>
+          </div>
 
           {/* Description */}
-          <p className="text-sm font-medium text-gray2 leading-relaxed text-wrap break-all mb-6">
+          <p className="text-sm text-default-600 leading-relaxed line-clamp-2 mb-4">
             {idea.elevatorPitch}
           </p>
 
-          {/* Bottom Bar (Stats & Ask) */}
-          <div className="flex justify-between items-end mt-auto pt-2 border-t border-transparent">
+          {/* Footer Info */}
+          <div className="flex flex-wrap items-center justify-between gap-4 mt-auto pt-4 border-t border-default-100">
             {/* Social Stats */}
-            <div className="flex items-center gap-2">
-              <AvatarGroup isBordered max={3}>
-                {idea?.likes?.map((like) => (
-                  <Avatar
-                    key={like.user.id}
-                    src={`${like.user?.avatar}`}
-                    name={`${like.user?.firstName} ${like.user?.lastName}`}
-                    alt={`${like.user?.firstName} ${like.user?.lastName}`}
-                    fallback={`${like.user?.firstName} ${like.user?.lastName}`}
-                  />
-                ))}
-              </AvatarGroup>
-              <div className="text-xs text-gray2 font-medium ml-2">
-                {idea?.likesCount} Likes{" "}
-                <span className="mx-1.5 font-bold">·</span>{" "}
-                {idea?.commentsCount} Comments
+            <div className="flex items-center gap-3">
+              {/* {idea?.likes && idea.likes.length > 0 && (
+                <AvatarGroup isBordered max={3} size="sm">
+                  {idea.likes.map((like) => (
+                    <Avatar
+                      key={like.user.id}
+                      src={`${like.user?.avatar}`}
+                      name={`${like.user?.firstName} ${like.user?.lastName}`}
+                      fallback={`${like.user?.firstName?.charAt(0)}`}
+                      className={{
+                        base: "size-4!",
+                      }}
+                    />
+                  ))}
+                </AvatarGroup>
+              )} */}
+              <div className="flex items-center gap-1.5 text-xs text-default-500 font-medium tracking-wide">
+                <span>{idea?.likesCount || 0} Likes</span>
+                <span className="w-1 h-1 rounded-full bg-default-300" />
+                <span>{idea?.commentsCount || 0} Comments</span>
               </div>
             </div>
 
             {/* Funding Ask */}
-            <div className="flex items-baseline gap-1.5">
-              <span className="text-2xl font-semibold text-dark">
-                {formatCurrency(idea?.fundingAsk || 0)}
-              </span>
-              <span className="text-sm text-gray2 font-medium mb-1">
+            <div className="flex flex-col items-end ml-auto">
+              <span className="text-xs text-default-500 font-medium uppercase tracking-wider mb-0.5">
                 Funding Ask
+              </span>
+              <span className="text-lg sm:text-xl font-bold text-dark leading-none">
+                {formatCurrency(idea?.fundingAsk || 0)}
               </span>
             </div>
           </div>

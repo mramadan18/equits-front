@@ -4,7 +4,7 @@ import { useState, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { projectService } from "@/services/project.service";
 import { MyProjectCard } from "@/components/repo/MyProjectCard";
-import { Spinner } from "@heroui/spinner";
+import { Skeleton } from "@heroui/skeleton";
 import { Button } from "@heroui/button";
 import { Chip } from "@heroui/chip";
 import { useLocale, useTranslations } from "next-intl";
@@ -97,8 +97,28 @@ export default function RepoPage() {
   /* ── loading ─────────────────────────────────────────── */
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center min-h-[60vh]">
-        <Spinner size="lg" color="primary" />
+      <div className="container py-8">
+        {/* ── page header skeleton ────────────────────────────────── */}
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
+          <div>
+            <Skeleton className="h-9 w-48 rounded-lg mb-2" />
+            <Skeleton className="h-5 w-72 rounded-lg" />
+          </div>
+        </div>
+
+        {/* ── filter tabs skeleton ────────────────────────────────── */}
+        <div className="flex items-center gap-2 mb-6 overflow-x-auto pb-1 scrollbar-hide">
+          {[1, 2, 3, 4, 5].map((i) => (
+            <Skeleton key={i} className="h-9 w-28 rounded-xl" />
+          ))}
+        </div>
+
+        {/* ── grid skeleton ─────────────────────────── */}
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+          {[1, 2, 3, 4, 5, 6].map((i) => (
+            <Skeleton key={i} className="h-[300px] w-full rounded-[20px]" />
+          ))}
+        </div>
       </div>
     );
   }

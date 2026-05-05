@@ -35,7 +35,7 @@ export default async function ExplorePage({
     <div className="w-full bg-white pb-16 md:pb-24 pt-8 md:pt-12 min-h-screen">
       <div className="container">
         <ExploreSearchBar />
-        <ExploreFilters />
+        <ExploreFilters loading={false} />
         <ExploreGrid projects={projects} pagination={pagination} />
       </div>
     </div>

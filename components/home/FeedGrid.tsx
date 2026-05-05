@@ -26,7 +26,7 @@ export const FeedGrid = ({
         {[1, 2, 3].map((i) => (
           <div
             key={i}
-            className="bg-white rounded-xl border border-gray2 p-5 flex flex-col gap-4 shadow-sm"
+            className="bg-white rounded-xl p-5 flex flex-col gap-4 shadow-sm"
           >
             <div className="flex justify-between items-center">
               <Skeleton className="w-24 h-4 rounded-lg" />

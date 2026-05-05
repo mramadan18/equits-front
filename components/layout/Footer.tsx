@@ -81,16 +81,16 @@ export function Footer() {
                 {t("ctaSubtitle")}
               </p>
             </div>
-            <div className="flex gap-3 shrink-0">
+            <div className="flex flex-col sm:flex-row w-full md:w-auto gap-3 shrink-0">
               <Link
                 href={MainRoutes.EXPLORE}
-                className="bg-white text-primary font-semibold px-6 py-3 rounded-lg text-sm hover:bg-white/90 transition-colors"
+                className="bg-white text-primary font-semibold w-full sm:w-auto text-center px-6 py-3 rounded-lg text-sm hover:bg-white/90 transition-colors"
               >
                 {t("ctaExplore")}
               </Link>
               <Link
                 href="/register"
-                className="bg-secondary text-dark2 font-semibold px-6 py-3 rounded-lg text-sm hover:bg-secondary/90 transition-colors"
+                className="bg-secondary text-dark2 font-semibold w-full sm:w-auto text-center px-6 py-3 rounded-lg text-sm hover:bg-secondary/90 transition-colors"
               >
                 {t("ctaJoin")}
               </Link>

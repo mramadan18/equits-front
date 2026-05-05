@@ -42,7 +42,7 @@ export default function HomePage() {
     facultyId: searchParams.get("facultyId") || undefined,
   };
 
-  const { user } = useAuthStore();
+  const { user, isHydrated } = useAuthStore();
   const { data: projects, isLoading } = useProjectsFeed(filters);
   const { data: relatedProfiles, isLoading: isRelatedLoading } =
     useRelatedProfiles({
@@ -86,7 +86,9 @@ export default function HomePage() {
         {/* Main Feed */}
         <div className="lg:col-span-8 flex flex-col gap-6">
           <HomeSearchBar value={searchTerm} onValueChange={setSearchTerm} />
-          <ExploreFilters />
+          <ExploreFilters
+            loading={isLoading || isRelatedLoading || !isHydrated}
+          />
           <FeedGrid projects={projects?.data || []} isLoading={isLoading} />
 
           {projects?.pagination && projects.pagination.totalPages > 1 && (
@@ -107,7 +109,7 @@ export default function HomePage() {
           <FeedProfileCard />
           <PeopleYouMayNeedSidebar
             talents={relatedProfiles?.data || []}
-            isLoading={isRelatedLoading}
+            isLoading={isRelatedLoading || isLoading || !isHydrated}
           />
         </div>
       </div>

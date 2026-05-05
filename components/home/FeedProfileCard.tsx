@@ -13,7 +13,7 @@ import { ProfileCompletion } from "./FeedProfileCard/ProfileCompletion";
 
 export const FeedProfileCardSkeleton = () => {
   return (
-    <div className="bg-white rounded-2xl border border-gray2 overflow-hidden shadow-sm">
+    <div className="bg-white rounded-xl overflow-hidden shadow-md">
       <Skeleton className="h-32 w-full" />
       <div className="px-5 py-2 pb-4 relative">
         <div className="flex items-end gap-4 mb-5">
@@ -56,7 +56,7 @@ export const FeedProfileCard = () => {
   }
 
   return (
-    <div className="bg-white rounded-2xl border border-gray2 overflow-hidden shadow-sm">
+    <div className="bg-white rounded-xl overflow-hidden shadow-md">
       <ProfileCover user={user} />
 
       <div className="px-5 py-2 pb-4 relative">

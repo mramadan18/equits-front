@@ -8,8 +8,9 @@ import { FilterDropdown } from "@/components/shared";
 import { useExploreFiltersController } from "@/hooks/ui/useExploreFiltersController";
 import { ExploreFiltersDrawer } from "./ExploreFiltersDrawer";
 import { Switch } from "@heroui/switch";
+import { Skeleton } from "@heroui/skeleton";
 
-const ExploreFilters = () => {
+const ExploreFilters = ({ loading }: { loading: boolean }) => {
   const {
     t,
     currentStage,
@@ -58,6 +59,21 @@ const ExploreFilters = () => {
       : 0,
     currentEquityStake !== "all" ? 1 : 0,
   ].reduce((acc, val) => acc + val, 0);
+
+  if (loading) {
+    return (
+      <div className="flex items-center w-full gap-2 md:gap-4 mb-6 md:mb-10">
+        <div className="flex-shrink-0 pe-2 md:pe-4 border-e-2 border-gray-200">
+          <Skeleton className="h-10 md:h-11 w-24 md:w-32 rounded-full" />
+        </div>
+        <div className="flex flex-1 items-center gap-2 md:gap-3">
+          <Skeleton className="h-10 md:h-11 w-24 md:w-32 rounded-full" />
+          <Skeleton className="h-10 md:h-11 w-24 md:w-32 rounded-full" />
+          <Skeleton className="h-10 md:h-11 w-24 md:w-32 rounded-full" />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col w-full mb-8 md:mb-10 gap-4">
