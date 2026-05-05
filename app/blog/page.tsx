@@ -25,6 +25,8 @@ export default function BlogPage() {
             <Image
               src={post.imageUrl}
               alt={post.title}
+              width={500}
+              height={300}
               className="w-full h-48 object-cover border-b border-divider"
             />
             <div className="p-6 flex flex-col flex-grow">

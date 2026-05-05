@@ -29,7 +29,7 @@ const footerLinks = {
   ],
   resources: [
     { key: "helpCenter", href: MainRoutes.HELP },
-    { key: "guides", href: MainRoutes.GUIDES },
+    // { key: "guides", href: MainRoutes.GUIDES },
     // { key: "api", href: "#" },
     { key: "terms", href: MainRoutes.TERMS },
     { key: "privacy", href: MainRoutes.PRIVACY },

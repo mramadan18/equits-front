@@ -31,6 +31,8 @@ export default async function BlogPostPage({
         <Image
           src={post.imageUrl}
           alt={post.title}
+          width={1200}
+          height={600}
           className="w-full h-64 md:h-96 object-cover"
         />
       </div>

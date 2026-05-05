@@ -27,7 +27,7 @@ export enum MainRoutes {
   SETTINGS_EDUCATION = "/settings/education",
   SETTINGS_CONTACT_INFO = "/settings/contactinfo",
   SAVED = "/saved",
-  HELP = "/help",
+  HELP = "/help-center",
   BLOG = "/blog",
   GUIDES = "/guides",
   ABOUT = "/about",
