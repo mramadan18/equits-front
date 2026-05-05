@@ -1,18 +1,17 @@
 import Image from "next/image";
 import { FiCalendar } from "react-icons/fi";
 import { Project } from "@/types/api";
-import moment from "moment";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
 import { useTranslations } from "next-intl";
 
-interface IdeaHeaderProps {
-  project: Project;
-}
+dayjs.extend(relativeTime);
 
-export function IdeaHeader({ project }: IdeaHeaderProps) {
+export function IdeaHeader({ project }: { project: Project }) {
   const t = useTranslations("ProjectDetails.header");
 
   const formattedDate = project.createdAt
-    ? moment(project.createdAt).format("DD / MM / YYYY")
+    ? dayjs(project.createdAt).format("DD / MM / YYYY")
     : t("na");
 
   return (
@@ -41,7 +40,7 @@ export function IdeaHeader({ project }: IdeaHeaderProps) {
         <span className="text-xs">
           {t("updated")}:{" "}
           {project.updatedAt
-            ? moment(project.updatedAt).fromNow()
+            ? dayjs(project.updatedAt).fromNow()
             : t("recently")}
         </span>
       </div>

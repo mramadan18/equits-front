@@ -3,7 +3,10 @@ import { formatCurrency } from "@/utils";
 import { Button, addToast } from "@heroui/react";
 import Image from "next/image";
 import { FaRegBookmark, FaBookmark } from "react-icons/fa";
-import moment from "moment";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+
+dayjs.extend(relativeTime);
 import Link from "next/link";
 import { MainRoutes } from "@/types";
 import { useToggleWishlist } from "@/hooks/api/useWishlist";
@@ -56,7 +59,7 @@ export const FeedIdeaCard = ({ idea }: { idea: Project }) => {
                 </h3>
               </Link>
               <div className="text-xs text-default-500 mt-1.5 flex items-center gap-1.5">
-                <span>Updated {moment(idea.updatedAt).fromNow()}</span>
+                <span>Updated {dayjs(idea.updatedAt).fromNow()}</span>
               </div>
             </div>
             <Button

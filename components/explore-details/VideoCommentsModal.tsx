@@ -15,7 +15,10 @@ import {
   Button,
   addToast,
 } from "@heroui/react";
-import moment from "moment";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+
+dayjs.extend(relativeTime);
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { LuSendHorizontal } from "react-icons/lu";
@@ -113,7 +116,7 @@ export function VideoCommentsModal({ project }: { project: Project }) {
                         {comment.user.firstName} {comment.user.lastName}
                       </span>
                       <span className="text-xs text-gray-500">
-                        {moment(comment.createdAt).fromNow()}
+                        {dayjs(comment.createdAt).fromNow()}
                       </span>
                     </div>
                     <p className="text-sm text-gray-700 whitespace-pre-wrap">
