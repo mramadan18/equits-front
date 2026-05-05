@@ -11,9 +11,7 @@ const apiClient = axios.create({
 
 apiClient.interceptors.request.use((config) => {
   if (typeof window !== "undefined") {
-    const locale = window.location.pathname.split("/")[1] || "en";
-
-    config.headers["Accept-Language"] = locale;
+    config.headers["Accept-Language"] = "en";
   }
 
   return config;
