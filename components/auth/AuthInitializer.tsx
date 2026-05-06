@@ -11,10 +11,10 @@ export const AuthInitializer = ({ session }: { session?: string }) => {
   useEffect(() => {
     if (isSuccess && user) {
       setUser(user);
-    } else if (isError || !session) {
+    } else if (isError) {
       setUser(null);
     }
-  }, [isSuccess, user, isError, session, setUser]);
+  }, [isSuccess, user, isError, setUser]);
 
   return null;
 };

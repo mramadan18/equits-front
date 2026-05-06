@@ -16,38 +16,41 @@ import { useAuthStore } from "@/stores/useAuthStore";
 
 export const useLogin = () => {
   const queryClient = useQueryClient();
+  const { setUser } = useAuthStore();
 
   return useMutation<ApiResponse<AuthResponse>, ApiError, LoginRequest>({
     mutationFn: (data: LoginRequest) => authService.login(data),
-    onSuccess: () => {
+    onSuccess: (response) => {
+      setUser(response.data.user);
+      queryClient.setQueryData(["me"], response.data.user);
       queryClient.invalidateQueries({ queryKey: ["me"] });
-      if (typeof window !== "undefined") {
-        window.location.reload();
-      }
     },
   });
 };
 
 export const useGoogleLogin = () => {
   const queryClient = useQueryClient();
+  const { setUser } = useAuthStore();
 
   return useMutation<ApiResponse<AuthResponse>, ApiError, string>({
     mutationFn: (code: string) => authService.googleLogin(code),
-    onSuccess: () => {
+    onSuccess: (response) => {
+      setUser(response.data.user);
+      queryClient.setQueryData(["me"], response.data.user);
       queryClient.invalidateQueries({ queryKey: ["me"] });
-      if (typeof window !== "undefined") {
-        window.location.reload();
-      }
     },
   });
 };
 
 export const useRegister = () => {
   const queryClient = useQueryClient();
+  const { setUser } = useAuthStore();
 
   return useMutation<ApiResponse<AuthResponse>, ApiError, RegisterRequest>({
     mutationFn: (data: RegisterRequest) => authService.register(data),
-    onSuccess: () => {
+    onSuccess: (response) => {
+      setUser(response.data.user);
+      queryClient.setQueryData(["me"], response.data.user);
       queryClient.invalidateQueries({ queryKey: ["me"] });
     },
   });
@@ -63,12 +66,11 @@ export const useMe = (options?: { enabled?: boolean }) => {
 };
 
 export const useVerifyEmail = () => {
+  const queryClient = useQueryClient();
   return useMutation<ApiResponse<SuccessResponse>, ApiError, string>({
     mutationFn: (otp: string) => authService.verifyEmail(otp),
     onSuccess: () => {
-      if (typeof window !== "undefined") {
-        window.location.reload();
-      }
+      queryClient.invalidateQueries({ queryKey: ["me"] });
     },
   });
 };
@@ -123,33 +125,23 @@ export const useChangePassword = () => {
 };
 
 export const useLogout = () => {
-  const queryClient = useQueryClient();
   const logoutStore = useAuthStore((state) => state.logout);
 
   return useMutation<ApiResponse<SuccessResponse>, ApiError, void>({
     mutationFn: () => authService.logout(),
     onSuccess: () => {
-      queryClient.clear();
       logoutStore();
-      if (typeof window !== "undefined") {
-        window.location.reload();
-      }
     },
   });
 };
 
 export const useDeleteMe = () => {
-  const queryClient = useQueryClient();
   const logoutStore = useAuthStore((state) => state.logout);
 
   return useMutation<ApiResponse<SuccessResponse>, ApiError, void>({
     mutationFn: () => authService.deleteMe(),
     onSuccess: () => {
-      queryClient.clear();
       logoutStore();
-      if (typeof window !== "undefined") {
-        window.location.reload();
-      }
     },
   });
 };

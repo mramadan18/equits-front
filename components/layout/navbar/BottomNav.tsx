@@ -13,7 +13,6 @@ interface BottomNavProps {
   }[];
   pathname: string;
   isAuthPage: boolean;
-  isLoggedIn: boolean;
   onPitchPress: () => void;
   isMenuOpen: boolean;
   setIsMenuOpen: (isOpen: boolean) => void;

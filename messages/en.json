@@ -635,6 +635,7 @@
       "title": "Elevator Pitch"
     },
     "market": {
+      "title": "Market Strategy",
       "problem": "Problem",
       "solution": "Solution",
       "valueProp": "Value Proposition"
@@ -663,8 +664,27 @@
       "saveForLater": "Save For Later",
       "saved": "Saved",
       "requestMeeting": "Request Meeting",
+      "shareProject": "Share Project",
+      "editProject": "Edit Project",
+      "ownerActions": "Owner Actions",
+      "linkCopied": "Link copied to clipboard",
       "loginRequired": "Login to take these actions",
       "loginNow": "Login Now"
+    },
+    "metrics": {
+      "title": "Project Metrics",
+      "currentTraction": "Current Traction",
+      "growthRate": "Growth Rate",
+      "totalUsers": "Total Users",
+      "dailyActiveUsers": "Daily Active Users",
+      "monthlyRevenue": "Monthly Revenue",
+      "growthRatePct": "Growth Rate %",
+      "retentionRate": "Retention Rate %",
+      "conversionRate": "Conversion Rate %",
+      "fundingStage": "Funding Stage",
+      "fundingAsk": "Funding Ask",
+      "equityStake": "Equity Stake",
+      "useOfFunds": "Use of Funds"
     }
   },
   "FeedProfileCard": {
@@ -674,7 +694,10 @@
     "completePct": "{pct}% Complete",
     "defaultUniversity": "Computer Science, Beni Suif University",
     "waitingCover": "Waiting for your unique cover",
-    "addAvatar": "Add Photo"
+    "addAvatar": "Add Photo",
+    "addJobTitle": "Add your job title",
+    "addEducation": "Add education",
+    "addContactInfo": "Add contact info"
   },
   "CompleteProfileModal": {
     "progressText": "{progress}% Complete",

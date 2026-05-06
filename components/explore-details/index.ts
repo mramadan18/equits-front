@@ -7,6 +7,8 @@ export * from "./IdeaClassifications";
 export * from "./IdeaTeam";
 export * from "./IdeaMarketStrategy";
 export * from "./IdeaBusinessPlan";
+export * from "./ProjectMetrics";
+export * from "./ProjectFinancials";
 export * from "./RatingModal";
 export * from "./CommentModal";
 export * from "./VideoCommentsModal";

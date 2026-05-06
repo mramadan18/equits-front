@@ -1,6 +1,8 @@
-import { MdVerified } from "react-icons/md";
+import { MdVerified, MdAddCircleOutline } from "react-icons/md";
 import { useTranslations } from "next-intl";
 import { User } from "@/types/api";
+import Link from "next/link";
+import { MainRoutes } from "@/types";
 
 export const ProfileInfo = ({ user }: { user: User | null }) => {
   const t = useTranslations("FeedProfileCard");
@@ -14,10 +16,27 @@ export const ProfileInfo = ({ user }: { user: User | null }) => {
           {t("soon")}
         </span>
       </div>
-      <p className="text-sm text-gray2 mt-1">
-        {user?.jobTitle} <span className="text-gray-400 font-normal">@</span>{" "}
-        {user?.company}
-      </p>
+      <div className="text-sm text-gray2 mt-1">
+        {user?.jobTitle ? (
+          <>
+            {user?.jobTitle}{" "}
+            {user?.company && (
+              <>
+                <span className="text-gray-400 font-normal">@</span>{" "}
+                {user?.company}
+              </>
+            )}
+          </>
+        ) : (
+          <Link
+            href={MainRoutes.SETTINGS_JOB_TITLE}
+            className="text-primary text-xs hover:underline font-medium flex items-center gap-1"
+          >
+            <MdAddCircleOutline className="text-lg shrink-0" />
+            {t("addJobTitle")}
+          </Link>
+        )}
+      </div>
     </div>
   );
 };

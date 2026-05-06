@@ -10,7 +10,24 @@ export default async function ExplorePage({
   searchParams: Promise<{ [key: string]: string }>;
 }) {
   const params = await searchParams;
-  const { search, page = "1", industryId, stage } = params;
+  const {
+    search,
+    page = "1",
+    industryId,
+    stage,
+    fundingAsk,
+    isAcademic,
+    rating,
+    projectType,
+    revenueModel,
+    marketFocus,
+    currentTraction,
+    fundingStage,
+    serviceArea,
+    equityStake,
+    universityId,
+    facultyId,
+  } = params;
 
   let projects: Project[] = [];
   let pagination: PaginationData = {
@@ -22,7 +39,24 @@ export default async function ExplorePage({
 
   try {
     const data = await fetchServer<Project[]>("/projects", {
-      params: { search, page, industryId, stage },
+      params: {
+        search,
+        page,
+        industryId,
+        stage,
+        fundingAsk,
+        isAcademic,
+        rating,
+        projectType,
+        revenueModel,
+        marketFocus,
+        currentTraction,
+        fundingStage,
+        serviceArea,
+        equityStake,
+        universityId,
+        facultyId,
+      },
       cache: "no-store",
     });
     projects = data.data || [];

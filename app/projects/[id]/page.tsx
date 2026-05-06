@@ -10,6 +10,7 @@ import {
   IdeaMarketStrategy,
   IdeaTeam,
   IdeaVideoHero,
+  ProjectMetrics,
   ProjectSkeleton,
 } from "@/components/explore-details";
 import { Divider } from "@heroui/react";
@@ -40,26 +41,37 @@ export default function ProjectPage() {
   }
 
   return (
-    <div className="w-full bg-white pb-16 md:pb-24 pt-8 md:pt-12 min-h-screen">
+    <div className="w-full bg-white pb-16 md:pb-24 pt-4 md:pt-8 min-h-screen">
       <div className="container flex flex-col lg:flex-row gap-8 lg:gap-12">
         {/* Left Content Column */}
-        <div className="flex-1 flex flex-col gap-4">
+        <div className="flex-1 flex flex-col gap-2 sm:gap-4">
           <IdeaHeader project={project} />
           <IdeaVideoHero project={project} />
           <IdeaEngagement project={project} />
           <IdeaElevatorPitch project={project} />
 
           <Divider className="my-1 sm:my-3 bg-gray-200" />
-          <IdeaClassifications project={project} />
+          <section className="bg-white p-2 sm:p-4 md:p-6 rounded-xl sm:rounded-2xl border border-gray-100 shadow-sm">
+            <IdeaClassifications project={project} />
+          </section>
+
+          <Divider className="my-1 sm:my-3 bg-gray-200" />
+          <section className="bg-white p-2 sm:p-4 md:p-6 rounded-xl sm:rounded-2xl border border-gray-100 shadow-sm">
+            <ProjectMetrics project={project} />
+          </section>
 
           <Divider className="my-1 sm:my-3 bg-gray-200" />
           <IdeaTeam project={project} />
 
           <Divider className="my-1 sm:my-3 bg-gray-200" />
-          <IdeaMarketStrategy project={project} />
+          <section className="bg-white p-4 sm:p-4 md:p-6 rounded-xl sm:rounded-2xl border border-gray-100 shadow-sm">
+            <IdeaMarketStrategy project={project} />
+          </section>
 
           <Divider className="my-1 sm:my-3 bg-gray-200" />
-          <IdeaBusinessPlan project={project} />
+          <section className="bg-white p-4 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl border border-gray-100 shadow-sm">
+            <IdeaBusinessPlan project={project} />
+          </section>
         </div>
 
         {/* Right Sidebar */}

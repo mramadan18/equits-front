@@ -29,10 +29,18 @@ export const useNavbarController = (
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
   const t = useTranslations("Navbar");
-  const { user } = useAuthStore();
+  const { user, isAuthenticated, isHydrated } = useAuthStore();
   const router = useRouter();
 
-  const { mutate: logout } = useLogout();
+  const { mutate: logoutMutation } = useLogout();
+  const logout = () => {
+    logoutMutation(undefined, {
+      onSuccess: () => {
+        router.push(MainRoutes.LANDING);
+        router.refresh();
+      },
+    });
+  };
   const {
     isOpen: isPitchOpen,
     onOpen: onPitchOpen,
@@ -46,7 +54,9 @@ export const useNavbarController = (
   const { mutate: createProject, isPending: isCreatingProject } =
     useCreateProject();
 
-  const isLoggedIn = !!session && isVerified;
+  const isLoggedIn = isHydrated
+    ? isAuthenticated && user?.isEmailVerified
+    : !!session && isVerified;
   const isAuthPage = authRoutes.includes(pathname as AuthRoutes);
   const isLoginPage = pathname === AuthRoutes.LOGIN;
   const isRegisterPage = pathname === AuthRoutes.REGISTER;
@@ -104,7 +114,9 @@ export const useNavbarController = (
     onPitchOpenChange,
     isCreatingProject,
     isLoggedIn,
-    isUnverified: !!session && !isVerified,
+    isUnverified: isHydrated
+      ? isAuthenticated && !user?.isEmailVerified
+      : !!session && !isVerified,
     isAuthPage,
     isLoginPage,
     isRegisterPage,

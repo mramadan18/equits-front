@@ -636,6 +636,7 @@
       "title": "عرض الفكرة"
     },
     "market": {
+      "title": "استراتيجية السوق",
       "problem": "المشكلة",
       "solution": "الحل",
       "valueProp": "القيمة المقترحة"
@@ -664,8 +665,27 @@
       "saveForLater": "حفظ لوقت لاحق",
       "saved": "تم الحفظ",
       "requestMeeting": "طلب اجتماع",
+      "shareProject": "مشاركة المشروع",
+      "editProject": "تعديل المشروع",
+      "ownerActions": "إجراءات المالك",
+      "linkCopied": "تم نسخ الرابط إلى الحافظة",
       "loginRequired": "سجل الدخول لتتمكن من القيام بهذه الإجراءات",
       "loginNow": "سجل الدخول الآن"
+    },
+    "metrics": {
+      "title": "مقاييس المشروع",
+      "currentTraction": "الجذب الحالي",
+      "growthRate": "معدل النمو",
+      "totalUsers": "إجمالي المستخدمين",
+      "dailyActiveUsers": "المستخدمين النشطين يومياً",
+      "monthlyRevenue": "الإيرادات الشهرية",
+      "growthRatePct": "معدل النمو %",
+      "retentionRate": "معدل الاستبقاء %",
+      "conversionRate": "معدل التحويل %",
+      "fundingStage": "مرحلة التمويل",
+      "fundingAsk": "طلب التمويل",
+      "equityStake": "نسبة الملكية",
+      "useOfFunds": "استخدام الأموال"
     }
   },
   "FeedProfileCard": {
@@ -675,7 +695,10 @@
     "completePct": "{pct}% مكتمل",
     "defaultUniversity": "علوم الحاسب، جامعة بني سويف",
     "waitingCover": "في انتظار غلافك الفريد",
-    "addAvatar": "أضف صورة"
+    "addAvatar": "أضف صورة",
+    "addJobTitle": "أضف مسماك الوظيفي",
+    "addEducation": "أضف بيانات التعليم",
+    "addContactInfo": "أضف معلومات الاتصال"
   },
   "CompleteProfileModal": {
     "progressText": "{progress}% مكتمل",

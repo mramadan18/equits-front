@@ -2,21 +2,12 @@
 
 import { Avatar } from "@heroui/react";
 import { Project } from "@/types/api";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination } from "swiper/modules";
 import { useTranslations } from "next-intl";
-
-// Import Swiper styles
-import "swiper/css";
-import "swiper/css/pagination";
 import { MainRoutes } from "@/types";
 import Link from "next/link";
+import { FiUsers, FiArrowRight } from "react-icons/fi";
 
-interface IdeaTeamProps {
-  project: Project;
-}
-
-export function IdeaTeam({ project }: IdeaTeamProps) {
+export function IdeaTeam({ project }: { project: Project }) {
   const t = useTranslations("ProjectDetails.team");
   const allTeamMembers = [
     ...(project.owner ? [project.owner] : []),
@@ -26,50 +17,46 @@ export function IdeaTeam({ project }: IdeaTeamProps) {
   if (allTeamMembers.length === 0) return null;
 
   return (
-    <div className="flex flex-col gap-5 mt-1 w-full overflow-hidden">
-      <h3 className="text-lg font-medium text-gray2">{t("title")}:</h3>
+    <div className="flex flex-col gap-6 w-full">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <div className="p-2 rounded-xl bg-primary/10 text-primary">
+            <FiUsers className="text-xl" />
+          </div>
+          <h3 className="text-base sm:text-xl font-semibold text-dark">
+            {t("title")}
+          </h3>
+        </div>
+        <span className="text-xs font-semibold text-gray2 bg-gray-50 px-2 py-1 rounded-lg">
+          {allTeamMembers.length}
+        </span>
+      </div>
 
-      <Swiper
-        modules={[Autoplay, Pagination]}
-        spaceBetween={24}
-        slidesPerView={1}
-        autoplay={{
-          delay: 3000,
-          disableOnInteraction: false,
-        }}
-        pagination={{ clickable: true }}
-        breakpoints={{
-          640: {
-            slidesPerView: 2,
-          },
-          1024: {
-            slidesPerView: 3,
-          },
-        }}
-        className="w-full pb-10 team-swiper [&_.swiper-pagination-bullet-active]:!bg-primary [&_.swiper-pagination]:!bottom-0"
-      >
+      <div className="flex flex-col gap-3">
         {allTeamMembers.map((member, index) => (
-          <SwiperSlide key={index}>
-            <Link
-              href={`${MainRoutes.TALENTS}/${member.id}`}
-              className="flex items-center gap-4 p-4 bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow group"
-            >
-              <Avatar
-                src={`${member.avatar}`}
-                className="w-14 h-14 text-large shrink-0"
-              />
-              <div className="flex flex-col gap-0.5 overflow-hidden">
-                <span className="font-semibold text-dark text-sm truncate group-hover:underline">
-                  {member.firstName} {member.lastName}
-                </span>
-                <span className="text-xs font-medium text-gray truncate">
-                  {member.jobTitle}
-                </span>
-              </div>
-            </Link>
-          </SwiperSlide>
+          <Link
+            key={index}
+            href={`${MainRoutes.TALENTS}/${member.id}`}
+            className="flex items-center gap-4 p-3 bg-gray-50/50 hover:bg-white rounded-2xl border border-transparent hover:border-gray-100 hover:shadow-md transition-all duration-300 group"
+          >
+            <Avatar
+              src={`${member.avatar}`}
+              className="w-12 h-12 text-large shrink-0 border-2 border-white shadow-sm"
+            />
+            <div className="flex-grow flex flex-col gap-0.5 overflow-hidden">
+              <span className="font-semibold text-dark text-sm truncate group-hover:text-primary transition-colors">
+                {member.firstName} {member.lastName}
+              </span>
+              <span className="text-xs font-semibold text-gray2 truncate uppercase tracking-wider">
+                {member.jobTitle}
+              </span>
+            </div>
+            <div className="opacity-0 group-hover:opacity-100 transition-opacity translate-x-2 group-hover:translate-x-0">
+              <FiArrowRight className="text-primary" />
+            </div>
+          </Link>
         ))}
-      </Swiper>
+      </div>
     </div>
   );
 }

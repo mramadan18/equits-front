@@ -74,12 +74,7 @@ export default function VerifyEmailPage() {
           color: "success",
         });
         router.push(AuthRoutes.LOGIN);
-      },
-      onError: (error: ApiError) => {
-        addToast({
-          title: error.response?.data?.message || "Verification failed",
-          color: "danger",
-        });
+        router.refresh();
       },
     });
   };

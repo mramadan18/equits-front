@@ -20,8 +20,9 @@ import relativeTime from "dayjs/plugin/relativeTime";
 
 dayjs.extend(relativeTime);
 import { useTranslations } from "next-intl";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { LuSendHorizontal } from "react-icons/lu";
+import { useInView } from "react-intersection-observer";
 import { IdeaVideoHero } from "./IdeaVideoHero";
 
 export function VideoCommentsModal({ project }: { project: Project }) {
@@ -42,6 +43,17 @@ export function VideoCommentsModal({ project }: { project: Project }) {
   const { mutate: postComment, isPending } = useCommentOnProject();
   const [newComment, setNewComment] = useState("");
 
+  const { ref, inView } = useInView({
+    threshold: 0,
+    rootMargin: "100px",
+  });
+
+  useEffect(() => {
+    if (inView && hasNextPage && !isFetchingNextPage) {
+      fetchNextPage();
+    }
+  }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
+
   const handlePostComment = () => {
     if (!newComment.trim()) return;
     postComment(
@@ -52,13 +64,6 @@ export function VideoCommentsModal({ project }: { project: Project }) {
           addToast({
             title: tEngage("commentModal.success"),
             color: "success",
-          });
-        },
-        onError: (error) => {
-          addToast({
-            title:
-              error.response?.data?.message || tEngage("commentModal.error"),
-            color: "danger",
           });
         },
       },
@@ -133,14 +138,8 @@ export function VideoCommentsModal({ project }: { project: Project }) {
           )}
 
           {hasNextPage && (
-            <div className="flex justify-center mt-2">
-              <Button
-                variant="flat"
-                onPress={() => fetchNextPage()}
-                isLoading={isFetchingNextPage}
-              >
-                {t("showMore")}
-              </Button>
+            <div ref={ref} className="flex justify-center mt-4 min-h-[40px]">
+              {isFetchingNextPage && <Spinner size="sm" />}
             </div>
           )}
         </div>

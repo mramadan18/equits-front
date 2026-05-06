@@ -165,7 +165,6 @@ export const Navbar = ({
         items={navItems}
         pathname={pathname}
         isAuthPage={isAuthPage}
-        isLoggedIn={isLoggedIn}
         onPitchPress={handlePitchPress}
         isMenuOpen={isMenuOpen}
         setIsMenuOpen={setIsMenuOpen}

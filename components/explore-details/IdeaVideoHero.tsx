@@ -7,7 +7,7 @@ interface IdeaVideoHeroProps {
 
 export function IdeaVideoHero({ project }: IdeaVideoHeroProps) {
   return (
-    <div className="relative w-full aspect-video bg-dark rounded-xl sm:rounded-2xl overflow-hidden group shadow-md">
+    <div className="relative w-full sm:h-[450px] aspect-video bg-dark rounded-xl sm:rounded-2xl overflow-hidden group shadow-md">
       {project?.videoUrl ? (
         <iframe
           src={`${project?.videoUrl}`}

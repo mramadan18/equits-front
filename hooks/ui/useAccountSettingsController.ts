@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations, useLocale } from "next-intl";
+import { useRouter } from "next/navigation";
 import { useDeleteMe, useChangePassword } from "@/hooks/api/useAuth";
 import { useDisclosure, addToast } from "@heroui/react";
 import { useForm } from "react-hook-form";
@@ -16,6 +17,7 @@ export const useAccountSettingsController = () => {
   const t = useTranslations("Settings");
   const validationT = useTranslations("Auth.Validation");
   const locale = useLocale();
+  const router = useRouter();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const { user } = useAuthStore();
   const { mutate: deleteAccount, isPending: isDeletePending } = useDeleteMe();
@@ -34,7 +36,8 @@ export const useAccountSettingsController = () => {
           title: response.message,
           color: "success",
         });
-        window.location.reload();
+        form.reset();
+        router.refresh();
       },
     });
   };

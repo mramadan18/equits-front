@@ -2,14 +2,9 @@
 
 import { useWishlist } from "@/hooks/api/useWishlist";
 import { useTranslations } from "next-intl";
-import { Spinner, Button, Input, Badge, Pagination } from "@heroui/react";
+import { Spinner, Button, Badge, Pagination } from "@heroui/react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
-import {
-  IoBookmarkOutline,
-  IoFilterOutline,
-  IoSearchOutline,
-} from "react-icons/io5";
+import { IoBookmarkOutline, IoSearchOutline } from "react-icons/io5";
 import { SavedProjectsGrid } from "@/components/saved/SavedProjectsGrid";
 import { MainRoutes } from "@/types";
 import Link from "next/link";
@@ -20,7 +15,6 @@ export default function SavedPage() {
   const page = Number(searchParams.get("page")) || 1;
   const { data, isLoading } = useWishlist();
   const t = useTranslations("Saved");
-  const [searchQuery, setSearchQuery] = useState("");
 
   if (isLoading) {
     return (
@@ -44,10 +38,6 @@ export default function SavedPage() {
     router.push(`?${params.toString()}`, { scroll: false });
   };
 
-  const filteredProjects = projects.filter((p) =>
-    p.title.toLowerCase().includes(searchQuery.toLowerCase()),
-  );
-
   return (
     <div className="w-full bg-white pb-16 md:pb-24 pt-8 md:pt-12 min-h-screen">
       <div className="container">
@@ -67,32 +57,7 @@ export default function SavedPage() {
 
         {projects.length > 0 ? (
           <>
-            <div className="flex flex-col sm:flex-row gap-4 mb-8 pb-6 border-b border-gray-100">
-              <Input
-                classNames={{
-                  base: "max-w-md",
-                  inputWrapper:
-                    "bg-gray-50 border border-gray-200 hover:border-primary transition-colors",
-                }}
-                placeholder="Search in saved projects..."
-                value={searchQuery}
-                onValueChange={setSearchQuery}
-                startContent={<IoSearchOutline className="text-gray-400" />}
-              />
-              <div className="flex gap-2">
-                <Button variant="flat" startContent={<IoFilterOutline />}>
-                  Filter
-                </Button>
-              </div>
-            </div>
-
-            {filteredProjects.length > 0 ? (
-              <SavedProjectsGrid projects={filteredProjects} />
-            ) : (
-              <div className="text-center py-10 text-gray-500">
-                No saved projects match your search
-              </div>
-            )}
+            <SavedProjectsGrid projects={projects} />
           </>
         ) : (
           <div className="flex flex-col items-center justify-center py-20 px-4 text-center rounded-2xl bg-gray-50/50 border border-gray-100 shadow-sm mt-8">

@@ -28,7 +28,7 @@ export function IdeaBusinessPlan({ project }: IdeaBusinessPlanProps) {
           {t("viewPdf")}
         </Button>
       </div>
-      <div className="w-full h-[500px] rounded-xl border border-gray-200 bg-gray-50 overflow-hidden">
+      <div className="w-full h-[400px] sm:h-[500px] rounded-xl border border-gray-200 bg-gray-50 overflow-hidden">
         <iframe
           src={`${project.businessPlanUrl}#toolbar=0&navpanes=0&scrollbar=0`}
           title={t("title")}

@@ -23,6 +23,11 @@ export const useLoginController = () => {
   } = useForm<LoginInput>({
     mode: "all",
     resolver: zodResolver(getLoginSchema(validationT)),
+    defaultValues: {
+      email: "",
+      password: "",
+      rememberMe: false,
+    },
   });
 
   const { mutate: login, isPending } = useLogin();
@@ -38,6 +43,7 @@ export const useLoginController = () => {
             color: "success",
           });
           router.push(MainRoutes.HOME);
+          router.refresh();
         },
       });
     },
@@ -51,6 +57,7 @@ export const useLoginController = () => {
           color: "success",
         });
         router.push(MainRoutes.HOME);
+        router.refresh();
       },
     });
   };

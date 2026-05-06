@@ -26,6 +26,12 @@ export const useRegisterController = () => {
   } = useForm<RegisterInput>({
     mode: "all",
     resolver: zodResolver(getRegisterSchema(validationT)),
+    defaultValues: {
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+    },
   });
 
   const { mutate: signUp, isPending } = useRegister();
@@ -41,6 +47,7 @@ export const useRegisterController = () => {
             color: "success",
           });
           router.push(MainRoutes.HOME);
+          router.refresh();
         },
       });
     },
@@ -54,6 +61,7 @@ export const useRegisterController = () => {
           color: "success",
         });
         router.push(AuthRoutes.VERIFY_EMAIL);
+        router.refresh();
       },
     });
   };

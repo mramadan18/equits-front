@@ -15,29 +15,33 @@ export function IdeaHeader({ project }: { project: Project }) {
     : t("na");
 
   return (
-    <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
-      <div className="flex flex-col gap-1">
-        <div className="flex items-center gap-3">
-          {project?.logo && (
-            <Image
-              src={`${project.logo}`}
-              alt={`${project.title}`}
-              width={32}
-              height={32}
-              className="w-10 h-10 object-contain"
-            />
-          )}
-          <h1 className="text-2xl font-semibold text-dark">{project?.title}</h1>
+    <div className="flex items-start justify-between gap-4">
+      <div className="flex items-start gap-3">
+        {project?.logo && (
+          <Image
+            src={`${project.logo}`}
+            alt={`${project.title}`}
+            width={40}
+            height={40}
+            className="w-10 h-10 sm:w-12 sm:h-12 object-contain shrink-0 mt-1"
+          />
+        )}
+        <div className="flex flex-col">
+          <h1 className="text-xl sm:text-2xl font-semibold text-dark">
+            {project?.title}
+          </h1>
+          <p className="text-xs sm:text-base text-gray2 font-medium">
+            {project?.tagline}
+          </p>
         </div>
-        <p className="text-sm text-gray font-medium">{project?.tagline}</p>
       </div>
 
-      <div className="flex flex-col items-start sm:items-end gap-1.5 text-gray mt-1 sm:mt-0">
-        <div className="flex items-center gap-2 font-medium">
-          <FiCalendar className="w-5 h-5" />
-          <span className="text-sm">{formattedDate}</span>
+      <div className="flex flex-col items-start sm:items-end gap-1 text-gray-400 mt-1 sm:mt-0 shrink-0">
+        <div className="flex items-center gap-2 font-bold">
+          <FiCalendar className="text-sm sm:text-base" />
+          <span className="text-[10px] sm:text-xs">{formattedDate}</span>
         </div>
-        <span className="text-xs">
+        <span className="text-[8px] sm:text-xs">
           {t("updated")}:{" "}
           {project.updatedAt
             ? dayjs(project.updatedAt).fromNow()

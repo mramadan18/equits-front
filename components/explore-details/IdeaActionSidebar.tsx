@@ -7,9 +7,9 @@ import {
   FiBookmark,
   FiExternalLink,
   FiVideo,
+  FiShare2,
 } from "react-icons/fi";
-import { FaBookmark } from "react-icons/fa";
-import { FaStar } from "react-icons/fa";
+import { FaBookmark, FaStar, FaEdit } from "react-icons/fa";
 import { RatingModal } from "./RatingModal";
 import { CommentModal } from "./CommentModal";
 import {
@@ -19,15 +19,18 @@ import {
   FaYoutube,
 } from "react-icons/fa6";
 import { Project } from "@/types/api";
-import Link from "next/link";
 import { useAuthStore } from "@/stores/useAuthStore";
 import { useToggleWishlist } from "@/hooks/api/useWishlist";
 import { RequestMeetingModal } from "../talent-details/RequestMeetingModal";
+import { AuthRequiredModal } from "../layout/AuthRequiredModal";
+import { useRouter } from "next/navigation";
+import { MainRoutes } from "@/types";
 
 export function IdeaActionSidebar({ project }: { project: Project }) {
   const { user } = useAuthStore();
   const t = useTranslations("Engagement");
   const ts = useTranslations("ProjectDetails.sidebar");
+  const router = useRouter();
 
   const isOwner = user?.id === project?.ownerId;
   const {
@@ -45,12 +48,20 @@ export function IdeaActionSidebar({ project }: { project: Project }) {
     onOpen: onMeetingOpen,
     onOpenChange: onMeetingOpenChange,
   } = useDisclosure();
+  const {
+    isOpen: isAuthOpen,
+    onOpen: onAuthOpen,
+    onOpenChange: onAuthOpenChange,
+  } = useDisclosure();
 
   const { mutate: toggleWishlist, isPending: isToggling } = useToggleWishlist();
   const isSaved = user?.wishlistIds?.includes(project.id);
 
   const handleToggleWishlist = () => {
-    if (!user) return;
+    if (!user) {
+      onAuthOpen();
+      return;
+    }
     toggleWishlist(project.id, {
       onSuccess: (response: any) => {
         addToast({
@@ -67,98 +78,155 @@ export function IdeaActionSidebar({ project }: { project: Project }) {
     });
   };
 
+  const handleShare = async () => {
+    const shareData = {
+      title: project.title,
+      text: project.tagline,
+      url: window.location.href,
+    };
+
+    try {
+      if (
+        navigator.share &&
+        navigator.canShare &&
+        navigator.canShare(shareData)
+      ) {
+        await navigator.share(shareData);
+      } else {
+        await navigator.clipboard.writeText(window.location.href);
+        addToast({
+          title: ts("linkCopied") || "Link copied to clipboard",
+          color: "success",
+        });
+      }
+    } catch (err) {
+      console.error("Error sharing:", err);
+    }
+  };
+
   return (
     <div className="w-full lg:w-[340px] xl:w-[380px] flex-shrink-0 mt-8 lg:mt-0">
       <div className="lg:sticky lg:top-28 flex flex-col gap-5">
-        <h3 className="text-sm font-semibold text-gray px-1">
-          {ts("actions")}:
-        </h3>
+        {isOwner && (
+          <>
+            <h3 className="text-sm font-semibold text-gray px-1">
+              {ts("ownerActions") || "Owner Actions"}:
+            </h3>
 
-        <div className="bg-white border border-gray-200 rounded-2xl p-5 shadow-card flex flex-col gap-3.5">
-          {!user && (
-            <div className="bg-primary/5 border border-primary/20 rounded-xl p-4 mb-2">
-              <p className="text-sm text-dark2 font-medium mb-3">
-                {ts("loginRequired")}
-              </p>
+            <div className="bg-white border border-gray-200 rounded-2xl p-5 shadow-card flex flex-col gap-3.5">
               <Button
-                as={Link}
-                href="/login"
-                color="primary"
-                size="sm"
-                className="w-full font-semibold"
+                variant="bordered"
+                className="w-full justify-start py-6 border-gray-200 text-dark2 font-semibold hover:bg-gray-50 transition-colors text-base"
+                startContent={
+                  <FiShare2 className="w-5 h-5 text-primary mr-2" />
+                }
+                onPress={handleShare}
               >
-                {ts("loginNow")}
+                {ts("shareProject") || "Share Project"}
+              </Button>
+              <Button
+                variant="bordered"
+                className="w-full justify-start py-6 border-gray-200 text-dark2 font-semibold hover:bg-gray-50 transition-colors text-base"
+                startContent={
+                  <FaEdit className="w-5 h-5 text-secondary mr-2" />
+                }
+                onPress={() =>
+                  router.push(`${MainRoutes.NEW_PROJECT}?id=${project.id}`)
+                }
+              >
+                {ts("editProject") || "Edit Project"}
               </Button>
             </div>
-          )}
-          <Button
-            variant="bordered"
-            className="w-full justify-start py-6 border-gray-200 text-dark2 font-semibold hover:bg-gray-50 transition-colors text-base"
-            startContent={<FaStar className="w-5 h-5 text-secondary mr-2" />}
-            onPress={onRatingOpen}
-            isDisabled={isOwner || !user}
-          >
-            {t("ratingTitle")}
-          </Button>
+          </>
+        )}
 
-          <Button
-            variant="bordered"
-            className="w-full justify-start py-6 border-gray-200 text-dark2 font-semibold hover:bg-gray-50 transition-colors text-base"
-            startContent={
-              <FiMessageSquare className="w-5 h-5 text-[#8ac760] mr-2" />
-            }
-            onPress={onCommentOpen}
-            isDisabled={!user}
-          >
-            {t("commentTitle")}
-          </Button>
+        {!isOwner && (
+          <>
+            <h3 className="text-sm font-semibold text-gray px-1">
+              {ts("actions")}:
+            </h3>
 
-          {project.projectUrl && (
-            <Button
-              variant="bordered"
-              as="a"
-              href={project.projectUrl}
-              target="_blank"
-              className="w-full justify-start py-6 border-gray-200 text-dark2 font-semibold hover:bg-gray-50 transition-colors text-base"
-              startContent={
-                <FiExternalLink className="w-5 h-5 text-gray-400 mr-2" />
-              }
-            >
-              {ts("demoLink")}
-            </Button>
-          )}
+            <div className="bg-white border border-gray-200 rounded-2xl p-5 shadow-card flex flex-col gap-3.5">
+              <Button
+                variant="bordered"
+                className="w-full justify-start py-6 border-gray-200 text-dark2 font-semibold hover:bg-gray-50 transition-colors text-base"
+                startContent={
+                  <FiShare2 className="w-5 h-5 text-primary mr-2" />
+                }
+                onPress={handleShare}
+              >
+                {ts("shareProject") || "Share Project"}
+              </Button>
 
-          <Button
-            variant="bordered"
-            className={`w-full justify-start py-6 border-gray-200 font-semibold hover:bg-gray-50 transition-all text-base ${
-              isSaved
-                ? "text-primary border-primary bg-primary/5"
-                : "text-dark2"
-            }`}
-            startContent={
-              isSaved ? (
-                <FaBookmark className="w-5 h-5 text-primary mr-2" />
-              ) : (
-                <FiBookmark className="w-5 h-5 text-gray-400 mr-2" />
-              )
-            }
-            isDisabled={!user || isToggling}
-            isLoading={isToggling}
-            onClick={handleToggleWishlist}
-          >
-            {isSaved ? ts("saved") || "Saved" : ts("saveForLater")}
-          </Button>
+              <Button
+                variant="bordered"
+                className="w-full justify-start py-6 border-gray-200 text-dark2 font-semibold hover:bg-gray-50 transition-colors text-base"
+                startContent={
+                  <FaStar className="w-5 h-5 text-secondary mr-2" />
+                }
+                onPress={() => (user ? onRatingOpen() : onAuthOpen())}
+              >
+                {t("ratingTitle")}
+              </Button>
 
-          <Button
-            color="primary"
-            className="w-full justify-start py-6 mt-1 font-semibold text-base shadow-md"
-            startContent={<FiVideo className="w-5 h-5 mr-2" />}
-            isDisabled={!user}
-            onPress={onMeetingOpen}
-          >
-            {ts("requestMeeting")}
-          </Button>
-        </div>
+              <Button
+                variant="bordered"
+                className="w-full justify-start py-6 border-gray-200 text-dark2 font-semibold hover:bg-gray-50 transition-colors text-base"
+                startContent={
+                  <FiMessageSquare className="w-5 h-5 text-[#8ac760] mr-2" />
+                }
+                onPress={() => (user ? onCommentOpen() : onAuthOpen())}
+              >
+                {t("commentTitle")}
+              </Button>
+
+              {project.projectUrl && (
+                <Button
+                  variant="bordered"
+                  as="a"
+                  href={project.projectUrl}
+                  target="_blank"
+                  className="w-full justify-start py-6 border-gray-200 text-dark2 font-semibold hover:bg-gray-50 transition-colors text-base"
+                  startContent={
+                    <FiExternalLink className="w-5 h-5 text-gray-400 mr-2" />
+                  }
+                >
+                  {ts("demoLink")}
+                </Button>
+              )}
+
+              <Button
+                variant="bordered"
+                className={`w-full justify-start py-6 border-gray-200 font-semibold hover:bg-gray-50 transition-all text-base ${
+                  isSaved
+                    ? "text-primary border-primary bg-primary/5"
+                    : "text-dark2"
+                }`}
+                startContent={
+                  isSaved ? (
+                    <FaBookmark className="w-5 h-5 text-primary mr-2" />
+                  ) : (
+                    <FiBookmark className="w-5 h-5 text-gray-400 mr-2" />
+                  )
+                }
+                isDisabled={isToggling}
+                isLoading={isToggling}
+                onClick={handleToggleWishlist}
+              >
+                {isSaved ? ts("saved") || "Saved" : ts("saveForLater")}
+              </Button>
+
+              <Button
+                color="primary"
+                className="w-full justify-start py-6 mt-1 font-semibold text-base shadow-md"
+                startContent={<FiVideo className="w-5 h-5 mr-2" />}
+                onPress={() => (user ? onMeetingOpen() : onAuthOpen())}
+              >
+                {ts("requestMeeting")}
+              </Button>
+            </div>
+          </>
+        )}
 
         <div className="flex items-center gap-3.5 px-1 mt-2">
           {project.facebookUrl && (
@@ -223,6 +291,8 @@ export function IdeaActionSidebar({ project }: { project: Project }) {
           talent={project.owner}
         />
       )}
+
+      <AuthRequiredModal isOpen={isAuthOpen} onOpenChange={onAuthOpenChange} />
     </div>
   );
 }
