@@ -59,7 +59,8 @@ export const useEducationController = () => {
     (data: UpdateEducationFormData) => ({
       certificates: data.certificates.map((cert) => ({
         ...cert,
-        endDate: cert.present ? null : cert.endDate,
+        startDate: cert.startDate?.toString(),
+        endDate: cert.present ? null : cert.endDate?.toString(),
       })),
     }),
     [],

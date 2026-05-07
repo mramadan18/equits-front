@@ -326,7 +326,7 @@ export interface Project {
   updatedAt: string;
   deletedAt: string | null;
   serviceArea: ServiceArea | null;
-  status: "DRAFT" | "PENDING_APPROVAL" | "PUBLISHED" | "REJECTED";
+  status: ProjectStatus;
   currentStep: number;
   owner?: User;
   teamMembers?: User[];
@@ -341,6 +341,13 @@ export interface Project {
   isLiked: boolean;
   likes: ProjectLike[];
   comments: ProjectComment[];
+}
+
+export enum ProjectStatus {
+  DRAFT = "DRAFT",
+  PENDING_APPROVAL = "PENDING_APPROVAL",
+  PUBLISHED = "PUBLISHED",
+  REJECTED = "REJECTED",
 }
 
 export interface ProjectLike {

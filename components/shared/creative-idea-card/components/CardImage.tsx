@@ -14,7 +14,7 @@ export const CardImage = ({ image, title, projectId }: CardImageProps) => (
     className="relative w-full h-[220px]"
   >
     <Image
-      src={`${image}`}
+      src={`${image ?? "/images/hero_bg.png"}`}
       alt={title}
       fill
       className="object-cover"

@@ -31,7 +31,7 @@ export default function Hero() {
 
       <div className="container z-10 flex flex-col items-center justify-center text-center px-8 pt-20 pb-24">
         <FadeIn useInView={false} duration={0.8} y={30}>
-          <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white leading-[1.5] mb-12">
+          <h1 className="text-2xl md:text-3xl lg:text-7xl font-bold text-white leading-[1.5] mb-12">
             {t.rich("title", {
               yellow: (chunks) => (
                 <span className="text-secondary">{chunks}</span>
@@ -42,7 +42,7 @@ export default function Hero() {
         </FadeIn>
 
         <FadeIn useInView={false} duration={0.8} delay={0.2} y={20}>
-          <p className="text-white/90 text-xs md:text-sm mb-40 leading-[1.7]">
+          <p className="text-white/90 text-xs md:text-2xl mb-40 leading-[1.7]">
             {t.rich("subtitle", {
               br: () => <br className="hidden md:block" />,
             })}
@@ -54,7 +54,7 @@ export default function Hero() {
           duration={0.8}
           delay={0.4}
           y={20}
-          className="flex flex-col w-full md:flex-row justify-center items-center gap-4 px-2"
+          className="flex flex-col w-full md:flex-row justify-center items-center gap-4 md:gap-10 px-2"
         >
           <Button
             as={Link}
@@ -62,7 +62,7 @@ export default function Hero() {
             variant="bordered"
             size="lg"
             radius="sm"
-            className="text-white border-white font-bold w-full md:w-[220px]"
+            className="text-white border-white font-bold w-full md:w-[450px] md:h-16"
             endContent={<IoTelescopeOutline size={24} />}
           >
             {t("exploreProjects")}
@@ -73,7 +73,7 @@ export default function Hero() {
             color="primary"
             size="lg"
             radius="sm"
-            className="bg-secondary text-primary font-bold w-full md:w-[220px]"
+            className="bg-secondary text-primary font-bold w-full md:w-[450px] md:h-16"
             endContent={
               <BiRightArrowAlt className="rtl:rotate-180" size={24} />
             }

@@ -72,6 +72,7 @@ export const useNavbarController = (
     } else {
       createProject(undefined, {
         onSuccess: (response) => {
+          console.log("response", response);
           router.push(`${MainRoutes.NEW_PROJECT}?id=${response.data.id}`);
         },
       });

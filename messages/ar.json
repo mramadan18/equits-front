@@ -906,7 +906,10 @@
         "pending": "قيد الانتظار",
         "published": "منشور",
         "rejected": "مرفوض"
-      }
+      },
+      "delete": "حذف",
+      "deleteProjectTitle": "حذف المشروع",
+      "deleteProjectDescription": "هل أنت متأكد أنك تريد حذف هذا المشروع؟ لا يمكن التراجع عن هذا الإجراء."
     }
   },
   "Saved": {

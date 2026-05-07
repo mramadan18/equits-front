@@ -6,11 +6,16 @@ interface IdeaVideoHeroProps {
 }
 
 export function IdeaVideoHero({ project }: IdeaVideoHeroProps) {
+  const videoUrl = project?.videoUrl || null;
+  const youtubeId = videoUrl?.includes("watch?v=")
+    ? videoUrl.split("watch?v=")[1]
+    : null;
+  const youtubeUrl = `https://www.youtube.com/embed/${youtubeId}`;
   return (
     <div className="relative w-full sm:h-[450px] aspect-video bg-dark rounded-xl sm:rounded-2xl overflow-hidden group shadow-md">
-      {project?.videoUrl ? (
+      {videoUrl ? (
         <iframe
-          src={`${project?.videoUrl}`}
+          src={`${youtubeUrl}`}
           title={`${project?.title}`}
           loading="lazy"
           className="w-full h-full object-cover"

@@ -12,6 +12,7 @@ import { SettingsFormActions } from "@/components/shared/SettingsFormActions";
 import { SettingsPageHeader } from "@/components/shared/SettingsPageHeader";
 import { AutocompleteItem, Button, SelectItem } from "@heroui/react";
 import { useEducationController } from "@/hooks/ui/useEducationController";
+import { useWatch } from "react-hook-form";
 
 export default function EducationSettingsPage() {
   const {
@@ -28,6 +29,16 @@ export default function EducationSettingsPage() {
     isPending,
     isDirty,
   } = useEducationController();
+
+  const currentYear = new Date().getFullYear();
+  const years = Array.from({ length: currentYear - 1970 + 11 }, (_, i) =>
+    (currentYear + 10 - i).toString(),
+  );
+
+  const watchCertificates = useWatch({
+    control,
+    name: "certificates",
+  });
 
   return (
     <div className="flex flex-col gap-12">
@@ -177,7 +188,7 @@ export default function EducationSettingsPage() {
 
                 <div className="flex flex-col gap-4">
                   <div className="grid grid-cols-2 gap-4">
-                    <FormInput
+                    <FormSelect
                       name={`certificates.${index}.startDate`}
                       control={control}
                       label={t("educationForm.startDate")}
@@ -185,8 +196,14 @@ export default function EducationSettingsPage() {
                       labelPlacement="outside"
                       variant="bordered"
                       radius="sm"
-                    />
-                    <FormInput
+                    >
+                      {years.map((year) => (
+                        <SelectItem key={year} textValue={year}>
+                          {year}
+                        </SelectItem>
+                      ))}
+                    </FormSelect>
+                    <FormSelect
                       name={`certificates.${index}.endDate`}
                       control={control}
                       label={t("educationForm.endDate")}
@@ -194,8 +211,14 @@ export default function EducationSettingsPage() {
                       labelPlacement="outside"
                       variant="bordered"
                       radius="sm"
-                      isDisabled={fields[index].present}
-                    />
+                      isDisabled={watchCertificates?.[index]?.present}
+                    >
+                      {years.map((year) => (
+                        <SelectItem key={year} textValue={year}>
+                          {year}
+                        </SelectItem>
+                      ))}
+                    </FormSelect>
                   </div>
                   <FormCheckbox
                     name={`certificates.${index}.present`}

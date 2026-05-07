@@ -40,8 +40,10 @@ export const getEducationCertificateSchema = (t: any) =>
     faculty: z.string().optional().or(z.literal("")),
     facultyId: z.number().optional().nullable(),
     programLink: z.string().url(t("invalidUrl")).optional().or(z.literal("")),
-    startDate: z.string().min(1, t("startDateRequired")),
-    endDate: z.string().optional().nullable(),
+    startDate: z
+      .union([z.string(), z.number()])
+      .refine((val) => !!val, t("startDateRequired")),
+    endDate: z.union([z.string(), z.number()]).optional().nullable(),
     present: z.boolean(),
   });
 
