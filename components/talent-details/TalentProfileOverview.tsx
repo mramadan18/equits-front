@@ -31,7 +31,7 @@ export const TalentProfileOverview = ({ talent }: { talent: User }) => {
   } = useTalentProfileController(talent);
 
   return (
-    <div className="bg-white rounded-2xl shadow-sm border border-gray2 overflow-hidden mb-6 flex flex-col">
+    <div className="bg-white rounded-xl shadow-md overflow-hidden mb-6 flex flex-col">
       <ProfileCover
         talent={talent}
         isOwnProfile={isOwnProfile}

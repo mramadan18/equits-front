@@ -621,7 +621,9 @@
     "header": {
       "updated": "Updated",
       "recently": "Recently",
-      "na": "N/A"
+      "na": "N/A",
+      "statusPending": "Pending Approval (Preview)",
+      "statusPreview": "Draft (Preview)"
     },
     "engagement": {
       "likes": "Likes",
@@ -901,8 +903,8 @@
       "justNow": "Just now",
       "ask": "ask",
       "status": {
-        "draft": "Draft",
-        "pending": "Pending",
+        "draft": "Draft (Preview)",
+        "pending": "Pending (Preview)",
         "published": "Published",
         "rejected": "Rejected"
       },

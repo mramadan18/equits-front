@@ -11,7 +11,7 @@ import {
   FaTrash,
 } from "react-icons/fa";
 import { HiOutlineDocumentText, HiOutlineCurrencyDollar } from "react-icons/hi";
-import { Project, ProjectStatus } from "@/types/api";
+import { Project } from "@/types/api";
 import { useTranslations, useFormatter } from "next-intl";
 import { useMemo } from "react";
 import { MainRoutes } from "@/types";
@@ -83,11 +83,7 @@ export const MyProjectCard = ({ project }: { project: Project }) => {
       <div className="group relative bg-white rounded-2xl border border-gray-100 shadow-card overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 text-start">
         {/* ── cover strip ─────────────────────────────────── */}
         <Link
-          href={
-            project.status === ProjectStatus.PUBLISHED
-              ? `${MainRoutes.PROJECTS}/${project.id}`
-              : `${MainRoutes.DRAFT_PROJECTS}/${project.id}`
-          }
+          href={`/${MainRoutes.PROJECTS}/${project.id}`}
           className="block relative h-36 w-full bg-gradient-to-br from-primary/10 via-primary/5 to-secondary/10 overflow-hidden"
         >
           {project.cover ? (
@@ -176,7 +172,7 @@ export const MyProjectCard = ({ project }: { project: Project }) => {
               <Tooltip content={t("resumeEditing")} placement="top">
                 <Button
                   as={Link}
-                  href={`${MainRoutes.DRAFT_PROJECTS}/${project.id}`}
+                  href={`${MainRoutes.NEW_PROJECT}?id=${project.id}`}
                   isIconOnly
                   size="sm"
                   radius="full"

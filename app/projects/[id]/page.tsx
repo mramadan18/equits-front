@@ -1,5 +1,6 @@
 "use client";
 
+import { ReactNode } from "react";
 import {
   IdeaActionSidebar,
   IdeaBusinessPlan,
@@ -13,10 +14,15 @@ import {
   ProjectMetrics,
   ProjectSkeleton,
 } from "@/components/explore-details";
-import { Divider } from "@heroui/react";
 import { useTranslations } from "next-intl";
 import { useParams } from "next/navigation";
 import { useProject } from "@/hooks/api/useProject";
+
+const SectionWrapper = ({ children }: { children: ReactNode }) => (
+  <section className="bg-white p-4 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl border border-gray-100 shadow-sm">
+    {children}
+  </section>
+);
 
 export default function ProjectPage() {
   const params = useParams();
@@ -41,41 +47,40 @@ export default function ProjectPage() {
   }
 
   return (
-    <div className="w-full bg-white pb-16 md:pb-24 pt-4 md:pt-8 min-h-screen">
+    <div className="w-full bg-gray-50/50 pb-16 md:pb-24 pt-4 md:pt-8 min-h-screen">
       <div className="container flex flex-col lg:flex-row gap-8 lg:gap-12">
         {/* Left Content Column */}
-        <div className="flex-1 flex flex-col gap-2 sm:gap-4">
-          <IdeaHeader project={project} />
-          <IdeaVideoHero project={project} />
-          <IdeaEngagement project={project} />
-          <IdeaElevatorPitch project={project} />
+        <div className="flex-1 flex flex-col gap-6 sm:gap-8">
+          <div className="flex flex-col gap-4">
+            <IdeaHeader project={project} />
+            <IdeaVideoHero project={project} />
+            <IdeaEngagement project={project} />
+            <IdeaElevatorPitch project={project} />
+          </div>
 
-          <Divider className="my-1 sm:my-3 bg-gray-200" />
-          <section className="bg-white p-2 sm:p-4 md:p-6 rounded-xl sm:rounded-2xl border border-gray-100 shadow-sm">
+          <SectionWrapper>
             <IdeaClassifications project={project} />
-          </section>
+          </SectionWrapper>
 
-          <Divider className="my-1 sm:my-3 bg-gray-200" />
-          <section className="bg-white p-2 sm:p-4 md:p-6 rounded-xl sm:rounded-2xl border border-gray-100 shadow-sm">
+          <SectionWrapper>
             <ProjectMetrics project={project} />
-          </section>
+          </SectionWrapper>
 
-          <Divider className="my-1 sm:my-3 bg-gray-200" />
           <IdeaTeam project={project} />
 
-          <Divider className="my-1 sm:my-3 bg-gray-200" />
-          <section className="bg-white p-4 sm:p-4 md:p-6 rounded-xl sm:rounded-2xl border border-gray-100 shadow-sm">
+          <SectionWrapper>
             <IdeaMarketStrategy project={project} />
-          </section>
+          </SectionWrapper>
 
-          <Divider className="my-1 sm:my-3 bg-gray-200" />
-          <section className="bg-white p-4 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl border border-gray-100 shadow-sm">
+          <SectionWrapper>
             <IdeaBusinessPlan project={project} />
-          </section>
+          </SectionWrapper>
         </div>
 
         {/* Right Sidebar */}
-        <IdeaActionSidebar project={project} />
+        <div className="lg:w-1/3">
+          <IdeaActionSidebar project={project} />
+        </div>
       </div>
     </div>
   );

@@ -622,7 +622,9 @@
     "header": {
       "updated": "آخر تحديث",
       "recently": "مؤخراً",
-      "na": "غير متوفر"
+      "na": "غير متوفر",
+      "statusPending": "قيد المراجعة (معاينة)",
+      "statusPreview": "مسودة (معاينة)"
     },
     "engagement": {
       "likes": "إعجابات",
@@ -902,8 +904,8 @@
       "justNow": "الآن",
       "ask": "مطلوب",
       "status": {
-        "draft": "مسودة",
-        "pending": "قيد الانتظار",
+        "draft": "مسودة (معاينة)",
+        "pending": "قيد الانتظار (معاينة)",
         "published": "منشور",
         "rejected": "مرفوض"
       },

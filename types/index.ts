@@ -19,7 +19,6 @@ export enum MainRoutes {
   BOOST = "/boost",
   PROJECTS = "/projects",
   NEW_PROJECT = "/projects/new",
-  DRAFT_PROJECTS = "/projects/draft",
   SETTINGS = "/settings",
   SETTINGS_ACCOUNT = "/settings/account",
   SETTINGS_JOB_TITLE = "/settings/jobtitle",

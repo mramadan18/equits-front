@@ -27,6 +27,7 @@ export default function VerifyResetOtpPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const email = searchParams.get("email");
+  const callbackUrl = searchParams.get("callbackUrl");
 
   const [timeLeft, setTimeLeft] = useState(0);
 
@@ -90,6 +91,7 @@ export default function VerifyResetOtpPage() {
           email: email,
           otp: data.otp,
         });
+        if (callbackUrl) queryParams.set("callbackUrl", callbackUrl);
         router.push(`${AuthRoutes.RESET_PASSWORD}?${queryParams.toString()}`);
       },
       onError: (error: ApiError) => {

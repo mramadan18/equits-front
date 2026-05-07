@@ -13,7 +13,7 @@ export const TalentProjectCard = ({ project }: { project: Project }) => {
   const t = useTranslations("TalentDetails");
 
   return (
-    <div className="bg-white rounded-2xl shadow-sm border border-gray2 p-5 flex flex-col md:flex-row gap-6">
+    <div className="bg-white rounded-xl shadow-md p-5 flex flex-col md:flex-row gap-6">
       {/* Image */}
       <div className="w-full md:w-56 h-36 md:h-auto relative flex-shrink-0">
         <Image

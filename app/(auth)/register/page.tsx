@@ -24,6 +24,7 @@ export default function RegisterPage() {
     handleSubmit,
     onSubmit,
     handleGoogleLogin,
+    searchParamsStr,
   } = useRegisterController();
 
   return (
@@ -130,7 +131,7 @@ export default function RegisterPage() {
           <p className="text-center mt-2 text-dark">
             {authT("hasAccount")}{" "}
             <Link
-              href={AuthRoutes.LOGIN}
+              href={`${AuthRoutes.LOGIN}${searchParamsStr ? `?${searchParamsStr}` : ""}`}
               className="text-primary hover:underline"
             >
               {authT("loginLink")}

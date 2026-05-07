@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { getLoginSchema, LoginInput } from "@/validations/auth.validation";
@@ -15,6 +15,8 @@ export const useLoginController = () => {
   const validationT = useTranslations("Auth.Validation");
   const authT = useTranslations("Auth.Login");
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get("callbackUrl") || MainRoutes.HOME;
 
   const {
     handleSubmit,
@@ -42,7 +44,7 @@ export const useLoginController = () => {
             title: response.message || "Logged in with Google successfully",
             color: "success",
           });
-          router.push(MainRoutes.HOME);
+          router.push(callbackUrl);
           router.refresh();
         },
       });
@@ -56,7 +58,7 @@ export const useLoginController = () => {
           title: response.message || authT("loginSuccess"),
           color: "success",
         });
-        router.push(MainRoutes.HOME);
+        router.push(callbackUrl);
         router.refresh();
       },
     });
@@ -71,5 +73,6 @@ export const useLoginController = () => {
     handleSubmit,
     onSubmit,
     handleGoogleLogin,
+    searchParamsStr: searchParams.toString(),
   };
 };

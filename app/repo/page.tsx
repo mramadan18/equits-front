@@ -1,13 +1,13 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { projectService } from "@/services/project.service";
 import { MyProjectCard } from "@/components/repo/MyProjectCard";
 import { Skeleton } from "@heroui/skeleton";
 import { Button, Chip } from "@heroui/react";
-import { useLocale, useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
+import { useRouter, useSearchParams } from "next/navigation";
 import {
   HiOutlineDocumentAdd,
   HiOutlineFolder,
@@ -26,9 +26,20 @@ type StatusFilter =
 
 export default function RepoPage() {
   const router = useRouter();
-  const locale = useLocale();
+  const searchParams = useSearchParams();
   const t = useTranslations("Repo");
-  const [activeFilter, setActiveFilter] = useState<StatusFilter>("ALL");
+
+  const activeFilter = (searchParams.get("filter") as StatusFilter) || "ALL";
+
+  const handleFilterChange = (filter: StatusFilter) => {
+    const params = new URLSearchParams(searchParams.toString());
+    if (filter === "ALL") {
+      params.delete("filter");
+    } else {
+      params.set("filter", filter);
+    }
+    router.replace(`?${params.toString()}`, { scroll: false });
+  };
 
   const filters: { key: StatusFilter; label: string; icon: React.ReactNode }[] =
     useMemo(
@@ -158,7 +169,7 @@ export default function RepoPage() {
           return (
             <button
               key={f.key}
-              onClick={() => setActiveFilter(f.key)}
+              onClick={() => handleFilterChange(f.key)}
               className={`
                 inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-medium
                 whitespace-nowrap transition-all duration-200 cursor-pointer
@@ -215,7 +226,7 @@ export default function RepoPage() {
               radius="lg"
               className="font-semibold"
               startContent={<HiOutlineDocumentAdd className="w-5 h-5" />}
-              onPress={() => router.push(`/${locale}/projects/new`)}
+              onPress={() => router.push(`/projects/new`)}
             >
               {t("empty.all.action")}
             </Button>

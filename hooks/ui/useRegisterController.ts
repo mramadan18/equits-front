@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -18,6 +18,8 @@ export const useRegisterController = () => {
   const validationT = useTranslations("Auth.Validation");
   const authT = useTranslations("Auth.Register");
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get("callbackUrl");
 
   const {
     handleSubmit,
@@ -46,7 +48,7 @@ export const useRegisterController = () => {
             title: response.message || "Logged in with Google successfully",
             color: "success",
           });
-          router.push(MainRoutes.HOME);
+          router.push(callbackUrl || MainRoutes.HOME);
           router.refresh();
         },
       });
@@ -60,7 +62,13 @@ export const useRegisterController = () => {
           title: response.message || authT("registerSuccess"),
           color: "success",
         });
-        router.push(AuthRoutes.VERIFY_EMAIL);
+        if (callbackUrl) {
+          router.push(
+            `${AuthRoutes.VERIFY_EMAIL}?callbackUrl=${encodeURIComponent(callbackUrl)}`,
+          );
+        } else {
+          router.push(AuthRoutes.VERIFY_EMAIL);
+        }
         router.refresh();
       },
     });
@@ -75,5 +83,6 @@ export const useRegisterController = () => {
     handleSubmit,
     onSubmit,
     handleGoogleLogin,
+    searchParamsStr: searchParams.toString(),
   };
 };

@@ -39,7 +39,7 @@ export const PitchModal = ({ isOpen, onOpenChange, user }: PitchModalProps) => {
       });
     } else {
       onClose();
-      router.push(MainRoutes.DRAFT_PROJECTS);
+      router.push(MainRoutes.REPO + "?filter=DRAFT");
     }
   };
 

@@ -4,6 +4,7 @@ import { Project } from "@/types/api";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { useTranslations } from "next-intl";
+import { Chip } from "@heroui/react";
 
 dayjs.extend(relativeTime);
 
@@ -27,9 +28,25 @@ export function IdeaHeader({ project }: { project: Project }) {
           />
         )}
         <div className="flex flex-col">
-          <h1 className="text-xl sm:text-2xl font-semibold text-dark">
-            {project?.title}
-          </h1>
+          <div className="flex items-center gap-2">
+            <h1 className="text-xl sm:text-2xl font-semibold text-dark">
+              {project?.title}
+            </h1>
+            {project.status !== "PUBLISHED" && (
+              <Chip
+                size="sm"
+                variant="flat"
+                color={
+                  project.status === "PENDING_APPROVAL" ? "warning" : "default"
+                }
+                className="text-[10px] font-bold h-5 px-2"
+              >
+                {project.status === "PENDING_APPROVAL"
+                  ? t("statusPending")
+                  : t("statusPreview")}
+              </Chip>
+            )}
+          </div>
           <p className="text-xs sm:text-base text-gray2 font-medium">
             {project?.tagline}
           </p>

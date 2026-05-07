@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { addToast, Spinner, InputOtp } from "@heroui/react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import {
   getVerifyEmailSchema,
@@ -21,6 +21,8 @@ export default function VerifyEmailPage() {
   const authT = useTranslations("Auth.VerifyEmail");
   const validationT = useTranslations("Auth.Validation");
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get("callbackUrl");
 
   const [timeLeft, setTimeLeft] = useState(0);
 
@@ -73,7 +75,13 @@ export default function VerifyEmailPage() {
           title: response.message || authT("verifySuccess"),
           color: "success",
         });
-        router.push(AuthRoutes.LOGIN);
+        if (callbackUrl) {
+          router.push(
+            `${AuthRoutes.LOGIN}?callbackUrl=${encodeURIComponent(callbackUrl)}`,
+          );
+        } else {
+          router.push(AuthRoutes.LOGIN);
+        }
         router.refresh();
       },
     });

@@ -1,7 +1,6 @@
 import {
   ApiResponse,
   Project,
-  ProjectDraft,
   ProjectFilters,
   ProjectComment,
   ProjectRating,
@@ -9,9 +8,6 @@ import {
 import apiClient, { unwrap } from "./api-client";
 
 export const projectService = {
-  getActiveDraft: (): Promise<ApiResponse<ProjectDraft[]>> =>
-    unwrap(apiClient.get("/projects/active-draft")),
-
   getMyProjects: (): Promise<ApiResponse<Project[]>> =>
     unwrap(apiClient.get("/projects/my-projects")),
 

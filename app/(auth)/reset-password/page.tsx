@@ -23,6 +23,7 @@ export default function ResetPasswordPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const urlOtp = searchParams.get("otp");
+  const callbackUrl = searchParams.get("callbackUrl");
 
   const { mutate: resetPassword, isPending } = useResetPassword();
 
@@ -55,7 +56,13 @@ export default function ResetPasswordPage() {
             title: response.message || authT("resetSuccess"),
             color: "success",
           });
-          router.push(AuthRoutes.LOGIN);
+          if (callbackUrl) {
+            router.push(
+              `${AuthRoutes.LOGIN}?callbackUrl=${encodeURIComponent(callbackUrl)}`,
+            );
+          } else {
+            router.push(AuthRoutes.LOGIN);
+          }
         },
       },
     );

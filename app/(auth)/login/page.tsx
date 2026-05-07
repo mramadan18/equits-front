@@ -24,6 +24,7 @@ export default function LoginPage() {
     handleSubmit,
     onSubmit,
     handleGoogleLogin,
+    searchParamsStr,
   } = useLoginController();
 
   return (
@@ -93,7 +94,7 @@ export default function LoginPage() {
                 {authT("rememberMe", { fallback: "تذكرني" })}
               </FormCheckbox>
               <Link
-                href={AuthRoutes.FORGOT_PASSWORD}
+                href={`${AuthRoutes.FORGOT_PASSWORD}${searchParamsStr ? `?${searchParamsStr}` : ""}`}
                 className="text-primary text-sm hover:underline"
               >
                 {authT("forgotPassword")}
@@ -116,7 +117,7 @@ export default function LoginPage() {
           <p className="text-center mt-2 text-dark">
             {authT("noAccount")}{" "}
             <Link
-              href={AuthRoutes.REGISTER}
+              href={`${AuthRoutes.REGISTER}${searchParamsStr ? `?${searchParamsStr}` : ""}`}
               className="text-primary hover:underline"
             >
               {authT("registerLink")}

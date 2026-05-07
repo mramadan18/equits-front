@@ -14,12 +14,14 @@ import { useForgotPassword } from "@/hooks/api/useAuth";
 import { AuthLayout, AuthHeader, AuthSubmitButton } from "@/components/auth";
 import { StaggerContainer, StaggerItem } from "@/components/shared/animations";
 import { ApiResponse, SuccessResponse } from "@/types/api";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { AuthRoutes } from "@/types";
 import { FormInput } from "@/components/ui/form/FormInput";
 
 export default function ForgotPasswordPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get("callbackUrl");
   const authT = useTranslations("Auth.ForgotPassword");
   const validationT = useTranslations("Auth.Validation");
 
@@ -37,6 +39,7 @@ export default function ForgotPasswordPage() {
           color: "success",
         });
         const queryParams = new URLSearchParams({ email: data.email });
+        if (callbackUrl) queryParams.set("callbackUrl", callbackUrl);
         router.push(`${AuthRoutes.VERIFY_RESET_OTP}?${queryParams.toString()}`);
       },
     });
@@ -82,7 +85,7 @@ export default function ForgotPasswordPage() {
         <StaggerItem>
           <p className="text-center mt-2 text-dark">
             <Link
-              href={AuthRoutes.LOGIN}
+              href={`${AuthRoutes.LOGIN}${searchParams.toString() ? `?${searchParams.toString()}` : ""}`}
               className="text-primary hover:underline"
             >
               {authT("backToLogin")}
