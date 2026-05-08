@@ -26,8 +26,11 @@ export const ProfileAvatar = ({
   const avatarInputRef = useRef<HTMLInputElement>(null);
 
   return (
-    <div className="absolute -top-16 md:-top-20 start-6 md:start-8 w-32 h-32 md:w-40 md:h-40 z-10 flex-shrink-0">
-      <div className="w-full h-full rounded-full border-4 border-white bg-gray-100 overflow-hidden shadow-md">
+    <div className="absolute -top-16 md:-top-20 start-6 md:start-8 w-32 h-32 md:w-40 md:h-40 z-10 flex-shrink-0 group/avatar">
+      {/* Glow ring */}
+      <div className="absolute -inset-1 rounded-full bg-gradient-to-br from-primary via-primary/60 to-secondary opacity-60 blur-sm group-hover/avatar:opacity-80 transition-opacity duration-500" />
+      {/* Avatar container */}
+      <div className="relative w-full h-full rounded-full border-4 border-white bg-gray-100 overflow-hidden shadow-xl ring-2 ring-primary/20">
         <Avatar
           src={`${talent?.avatar}`}
           alt={`${talent?.firstName} ${talent?.lastName}`}
@@ -48,12 +51,12 @@ export const ProfileAvatar = ({
             onPress={() => avatarInputRef.current?.click()}
             isDisabled={isProcessing}
             isIconOnly
-            className="absolute bottom-2 end-2 w-9 h-9 rounded-full bg-primary-50 border-2 border-white flex items-center justify-center text-primary hover:bg-primary-100 transition-all shadow-md z-20"
+            className="absolute bottom-1 end-1 w-10 h-10 min-w-10 rounded-full bg-primary text-white border-3 border-white flex items-center justify-center hover:bg-primary/90 hover:scale-110 transition-all duration-300 shadow-lg z-20"
           >
             {isProcessing && cropType === "avatar" ? (
-              <Spinner size="sm" color="primary" />
+              <Spinner size="sm" color="white" />
             ) : (
-              <FiCamera className="text-lg" />
+              <FiCamera className="text-base" />
             )}
           </Button>
         </>

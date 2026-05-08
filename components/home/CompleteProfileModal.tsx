@@ -9,6 +9,7 @@ import { useAuthStore } from "@/stores/useAuthStore";
 import { User } from "@/types/api";
 import Link from "next/link";
 import { useProfileStatus } from "@/hooks/api/useProfile";
+import { MainRoutes } from "@/types";
 
 // --- Sub-components ---
 
@@ -53,12 +54,14 @@ const ProgressSection = ({
           />
         </svg>
         <div className="relative w-[82%] h-[82%] rounded-full border-[6px] border-white bg-gray-100 overflow-hidden shadow-sm">
-          <Image
-            src={`${user?.avatar}`}
-            alt={`${user?.firstName} ${user?.lastName}`}
-            fill
-            className="object-cover"
-          />
+          {user?.avatar && (
+            <Image
+              src={`${user?.avatar}`}
+              alt={`${user?.firstName} ${user?.lastName}`}
+              fill
+              className="object-cover"
+            />
+          )}
         </div>
       </div>
       <p className="text-gray2 font-medium mb-2 text-base">
@@ -118,27 +121,27 @@ export const CompleteProfileModal = () => {
   const tasks = [
     {
       key: "profilePictures",
-      href: "/settings/overview",
+      href: `${MainRoutes.TALENTS}/${user.id}`,
       isCompleted: status?.checklist.profilePictures || false,
     },
     {
       key: "overview",
-      href: "/settings/overview",
+      href: `${MainRoutes.SETTINGS_OVERVIEW}`,
       isCompleted: status?.checklist.overview || false,
     },
     {
       key: "jobTitle",
-      href: "/settings/jobtitle",
+      href: `${MainRoutes.SETTINGS_JOB_TITLE}`,
       isCompleted: status?.checklist.jobTitle || false,
     },
     {
       key: "education",
-      href: "/settings/education",
+      href: `${MainRoutes.SETTINGS_EDUCATION}`,
       isCompleted: status?.checklist.education || false,
     },
     {
       key: "contactInfo",
-      href: "/settings/contactinfo",
+      href: `${MainRoutes.SETTINGS_CONTACT_INFO}`,
       isCompleted: status?.checklist.contactInfo || false,
     },
   ];

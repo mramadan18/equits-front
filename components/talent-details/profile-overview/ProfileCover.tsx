@@ -27,16 +27,20 @@ export const ProfileCover = ({
   const coverInputRef = useRef<HTMLInputElement>(null);
 
   return (
-    <div className="h-48 md:h-64 w-full relative">
-      {talent?.cover && (
+    <div className="h-52 md:h-72 w-full relative group/cover">
+      {talent?.cover ? (
         <Image
           src={`${talent.cover}`}
           alt={`${talent.firstName} ${talent.lastName}`}
           fill
-          className="object-cover"
+          className="object-cover transition-transform duration-700 group-hover/cover:scale-[1.02]"
         />
+      ) : (
+        <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/80 to-primary/60" />
       )}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+      {/* Multi-layer gradient for depth */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/30 to-transparent" />
 
       {isOwnProfile && (
         <>
@@ -52,14 +56,14 @@ export const ProfileCover = ({
             color="primary"
             radius="full"
             onPress={() => coverInputRef.current?.click()}
-            className="absolute top-3 end-3 bg-white/20 backdrop-blur-md hover:bg-white/40 transition-all shadow-lg z-20"
+            className="absolute top-4 end-4 bg-white/15 backdrop-blur-xl hover:bg-white/30 transition-all duration-300 shadow-lg z-20 border border-white/20 text-white opacity-0 group-hover/cover:opacity-100"
             isIconOnly
             isDisabled={isProcessing && cropType === "cover"}
           >
             {isProcessing && cropType === "cover" ? (
               <Spinner size="sm" color="white" />
             ) : (
-              <FiCamera size={24} />
+              <FiCamera size={20} />
             )}
           </Button>
         </>

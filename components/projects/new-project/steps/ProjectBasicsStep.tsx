@@ -99,10 +99,10 @@ export const ProjectBasicsStep = ({
           minRows={4}
           variant="bordered"
           radius="sm"
-          maxLength={500}
+          maxLength={1000}
           description={
             <div className="flex justify-end w-full">
-              <span>{elevatorPitch?.length ?? 0}/500</span>
+              <span>{elevatorPitch?.length ?? 0}/1000</span>
             </div>
           }
           classNames={{

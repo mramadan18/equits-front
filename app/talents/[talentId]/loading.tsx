@@ -8,7 +8,7 @@ export default function TalentLoading() {
         {/* Left Content Column */}
         <div className="flex-1 flex flex-col gap-6 w-full">
           {/* Profile Overview Skeleton */}
-          <div className="bg-white rounded-2xl shadow-sm border border-gray2 overflow-hidden flex flex-col">
+          <div className="bg-white rounded-2xl shadow-md overflow-hidden flex flex-col">
             {/* Cover Skeleton */}
             <Skeleton className="w-full h-48 md:h-64" />
 
@@ -71,10 +71,7 @@ export default function TalentLoading() {
           <div className="flex flex-col gap-6 w-full">
             <Skeleton className="h-8 w-48 rounded-lg mb-2" />
             {[1, 2].map((i) => (
-              <Card
-                key={i}
-                className="shadow-sm border border-gray2 overflow-hidden p-5"
-              >
+              <Card key={i} className="shadow-md overflow-hidden p-5">
                 <div className="flex flex-col md:flex-row gap-6">
                   <Skeleton className="w-full md:w-56 h-36 md:h-40 rounded-xl flex-shrink-0" />
                   <div className="flex-1 flex flex-col gap-4">
@@ -104,7 +101,7 @@ export default function TalentLoading() {
         {/* Right Sidebar Skeleton */}
         <div className="w-full lg:w-[320px] xl:w-[380px] flex-shrink-0 relative">
           <div className="sticky top-24">
-            <Card className="shadow-sm border border-gray2 flex flex-col overflow-hidden">
+            <Card className="shadow-md flex flex-col overflow-hidden">
               <div className="p-6 pb-4">
                 <Skeleton className="h-7 w-2/3 rounded-lg" />
               </div>

@@ -13,7 +13,6 @@ import { User } from "@/types/api";
 interface ProfileActionsProps {
   talent: User;
   isOwnProfile: boolean;
-  locale: string;
   t: (key: string) => string;
   isContactOpen: boolean;
   onContactOpenChange: () => void;
@@ -30,7 +29,6 @@ interface ProfileActionsProps {
 export const ProfileActions = ({
   talent,
   isOwnProfile,
-  locale,
   t,
   isContactOpen,
   onContactOpenChange,
@@ -57,14 +55,14 @@ export const ProfileActions = ({
         <CompleteProfileModal />
       </Modal>
 
-      <div className="flex flex-row flex-wrap items-center gap-4 mb-4">
+      <div className="flex flex-row flex-wrap items-center gap-3 mb-4">
         {isOwnProfile ? (
           <Button
             as={Link}
-            href={`/${locale}/settings/overview`}
+            href={`/settings/overview`}
             color="primary"
             variant="bordered"
-            className="border-2 absolute top-4 end-4"
+            className="border-2 absolute top-4 end-4 hover:bg-primary hover:text-white transition-all duration-300"
             radius="full"
             size="md"
             startContent={<HiPencil className="text-lg" />}
@@ -72,14 +70,14 @@ export const ProfileActions = ({
             {t("editProfileBtn")}
           </Button>
         ) : (
-          <>
+          <div className="flex flex-wrap flex-row gap-3 w-full">
             <Button
               color="primary"
               variant="solid"
-              className="font-bold px-8 shadow-md"
+              className="font-semibold shadow-md hover:shadow-lg hover:scale-[1.02] transition-all duration-300 w-full sm:w-auto"
               radius="sm"
               size="md"
-              startContent={<FaVideo className="text-lg" />}
+              startContent={<FaVideo className="text-base" />}
               onPress={onMeetingOpen}
             >
               {t("requestMeeting")}
@@ -87,15 +85,15 @@ export const ProfileActions = ({
             <Button
               color="primary"
               variant="bordered"
-              className="font-bold px-8 border-2"
+              className="font-semibold border-2 hover:bg-primary hover:text-white transition-all duration-300 w-full sm:w-auto"
               radius="sm"
               size="md"
-              startContent={<IoPersonOutline className="text-lg" />}
+              startContent={<IoPersonOutline className="text-base" />}
               onPress={onContactOpen}
             >
               {t("contact")}
             </Button>
-          </>
+          </div>
         )}
       </div>
 

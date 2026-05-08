@@ -1,6 +1,6 @@
 "use client";
 
-import { useTranslations, useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
 import { User } from "@/types/api";
 import { ImageCropModal } from "@/components/common/ImageCropModal";
 import { useTalentProfileController } from "@/hooks/ui/useTalentProfileController";
@@ -14,7 +14,6 @@ import { ProfileAbout } from "./profile-overview/ProfileAbout";
 
 export const TalentProfileOverview = ({ talent }: { talent: User }) => {
   const t = useTranslations("TalentDetails");
-  const locale = useLocale();
   const {
     isOwnProfile,
     progress,
@@ -31,7 +30,7 @@ export const TalentProfileOverview = ({ talent }: { talent: User }) => {
   } = useTalentProfileController(talent);
 
   return (
-    <div className="bg-white rounded-xl shadow-md overflow-hidden mb-6 flex flex-col">
+    <div className="bg-white rounded-2xl shadow-card overflow-hidden mb-6 flex flex-col border border-gray3/60 hover:shadow-lg transition-shadow duration-500">
       <ProfileCover
         talent={talent}
         isOwnProfile={isOwnProfile}
@@ -54,7 +53,6 @@ export const TalentProfileOverview = ({ talent }: { talent: User }) => {
         <ProfileActions
           talent={talent}
           isOwnProfile={isOwnProfile}
-          locale={locale}
           t={t}
           isContactOpen={contactDisclosure.isOpen}
           onContactOpenChange={contactDisclosure.onOpenChange}
@@ -68,7 +66,7 @@ export const TalentProfileOverview = ({ talent }: { talent: User }) => {
           progress={progress}
         />
 
-        <ProfileAbout talent={talent} t={t} />
+        <ProfileAbout talent={talent} t={t} isOwnProfile={isOwnProfile} />
       </div>
 
       {selectedImage && (

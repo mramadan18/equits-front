@@ -12,6 +12,7 @@ import { PeopleYouMayNeedSidebar } from "@/components/talent-details";
 import { useAuthStore } from "@/stores/useAuthStore";
 import { useRelatedProfiles } from "@/hooks/api/useProfile";
 import ExploreFilters from "@/components/explore/ExploreFilters";
+import { useMediaQuery } from "@/hooks/ui/useMediaQuery";
 
 export default function HomePage() {
   const searchParams = useSearchParams();
@@ -43,12 +44,16 @@ export default function HomePage() {
   };
 
   const { user, isHydrated } = useAuthStore();
+  const isLargeScreen = useMediaQuery("(min-width: 1024px)");
   const { data: projects, isLoading } = useProjectsFeed(filters);
   const { data: relatedProfiles, isLoading: isRelatedLoading } =
-    useRelatedProfiles({
-      id: user?.id?.toString() || "",
-      limit: 3,
-    });
+    useRelatedProfiles(
+      {
+        id: user?.id?.toString() || "",
+        limit: 3,
+      },
+      isLargeScreen,
+    );
 
   // Sync searchTerm state with URL param
   useEffect(() => {
@@ -105,13 +110,15 @@ export default function HomePage() {
         </div>
 
         {/* Right Sidebar */}
-        <div className="lg:col-span-4 flex flex-col gap-6">
-          <FeedProfileCard />
-          <PeopleYouMayNeedSidebar
-            talents={relatedProfiles?.data || []}
-            isLoading={isRelatedLoading || isLoading || !isHydrated}
-          />
-        </div>
+        {isLargeScreen && (
+          <div className="lg:col-span-4 flex flex-col gap-6">
+            <FeedProfileCard />
+            <PeopleYouMayNeedSidebar
+              talents={relatedProfiles?.data || []}
+              isLoading={isRelatedLoading || isLoading || !isHydrated}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

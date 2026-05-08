@@ -19,7 +19,7 @@ export const ProfileCompletion = ({
         color="primary"
         size="sm"
         onPress={onOpen}
-        className="text-sm w-fit underline bg-transparent hover:bg-transparent!"
+        className="text-sm w-fit underline bg-transparent hover:bg-transparent! px-0"
       >
         {t("completeProfile")}
       </Button>

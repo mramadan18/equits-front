@@ -41,11 +41,14 @@ export const useProfileStatus = (enabled: boolean = true) => {
   });
 };
 
-export const useRelatedProfiles = (params: ProfileFilters) => {
+export const useRelatedProfiles = (
+  params: ProfileFilters,
+  enabled: boolean = true,
+) => {
   return useQuery<ApiResponse<User[]>, ApiError>({
     queryKey: queryKeys.profiles.related(params.id, params.limit),
     queryFn: () => profileService.getRelatedProfiles(params.id, params.limit),
-    enabled: !!params.id,
+    enabled: enabled && !!params.id,
   });
 };
 
