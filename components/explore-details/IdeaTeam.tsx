@@ -41,6 +41,8 @@ export function IdeaTeam({ project }: { project: Project }) {
           >
             <Avatar
               src={`${member.avatar}`}
+              color="primary"
+              showFallback
               className="w-12 h-12 text-large shrink-0 border-2 border-white shadow-sm"
             />
             <div className="flex-grow flex flex-col gap-0.5 overflow-hidden">

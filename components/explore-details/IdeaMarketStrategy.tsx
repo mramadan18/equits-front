@@ -5,11 +5,7 @@ import { useTranslations } from "next-intl";
 import { FiAlertCircle, FiCheckCircle, FiStar } from "react-icons/fi";
 import { motion } from "framer-motion";
 
-interface IdeaMarketStrategyProps {
-  project: Project;
-}
-
-export function IdeaMarketStrategy({ project }: IdeaMarketStrategyProps) {
+export function IdeaMarketStrategy({ project }: { project: Project }) {
   const t = useTranslations("ProjectDetails.market");
 
   const strategies = [
@@ -67,7 +63,7 @@ export function IdeaMarketStrategy({ project }: IdeaMarketStrategyProps) {
                   {strategy.title}
                 </h4>
               </div>
-              <p className="text-gray leading-relaxed font-medium relative z-10 text-[10px] sm:text-base md:text-lg">
+              <p className="text-gray leading-relaxed font-medium relative z-10 text-xxs sm:text-base md:text-lg">
                 {strategy.content}
               </p>
 

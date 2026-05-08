@@ -76,17 +76,13 @@ export function IdeaEngagement({ project }: IdeaEngagementProps) {
                 >
                   <Avatar
                     src={like.user?.avatar || undefined}
-                    name={`${like.user?.firstName} ${like.user?.lastName}`}
+                    color="primary"
+                    showFallback
                     size="sm"
                     className="ring-2 ring-white w-5 h-5 sm:w-8 sm:h-8"
                   />
                 </div>
               ))}
-              {project.likesCount > 3 && (
-                <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-gray-100 flex items-center justify-center text-[10px] sm:text-xs font-semibold text-gray border border-white ml-1">
-                  +{project.likesCount - 3}
-                </div>
-              )}
             </div>
           )}
         </div>
@@ -125,7 +121,7 @@ export function IdeaEngagement({ project }: IdeaEngagementProps) {
           </span>
           <div className="flex flex-col gap-0">
             <RatingStars rating={Number(project?.rating || 0)} />
-            <span className="text-[10px] sm:text-sm font-bold text-gray-400">
+            <span className="text-xxs sm:text-sm font-bold text-gray-400">
               {project?.reviewsCount || 0} {t("reviews")}
             </span>
           </div>

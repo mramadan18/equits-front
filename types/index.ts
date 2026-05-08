@@ -1,3 +1,13 @@
+export * from "./project";
+export * from "./api";
+export * from "./error";
+export * from "./filters";
+export * from "./engagement";
+export * from "./profile";
+
+// Explicitly re-export ServiceArea from api to resolve conflict
+export { ServiceArea } from "./api";
+
 import { SVGProps } from "react";
 
 export enum AuthRoutes {

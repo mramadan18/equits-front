@@ -1,4 +1,3 @@
-export * from "./types";
 export * from "./TalentProfileOverview";
 export * from "./TalentProjectCard";
 export * from "./TalentProjectsList";

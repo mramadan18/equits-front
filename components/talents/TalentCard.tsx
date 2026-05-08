@@ -44,10 +44,8 @@ export const TalentCard = ({ item }: { item: User }) => {
             src={`${item?.avatar}`}
             alt={`${item.firstName} ${item.lastName}`}
             showFallback
-            classNames={{
-              base: "w-full h-full",
-              img: "object-cover",
-            }}
+            color="primary"
+            className="w-full h-full"
           />
         </Link>
 

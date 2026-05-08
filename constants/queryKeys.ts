@@ -21,5 +21,7 @@ export const queryKeys = {
     industries: ["industries"] as const,
     subIndustries: (industryId?: number) =>
       ["sub-industries", industryId] as const,
+    countries: ["countries"] as const,
+    cities: (countryId?: number) => ["cities", countryId] as const,
   },
 } as const;

@@ -1,4 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { queryKeys } from "@/constants/queryKeys";
 import { authService } from "@/services/auth.service";
 import {
   ChangePasswordRequest,
@@ -22,8 +23,8 @@ export const useLogin = () => {
     mutationFn: (data: LoginRequest) => authService.login(data),
     onSuccess: (response) => {
       setUser(response.data.user);
-      queryClient.setQueryData(["me"], response.data.user);
-      queryClient.invalidateQueries({ queryKey: ["me"] });
+      queryClient.setQueryData(queryKeys.me, response.data.user);
+      queryClient.invalidateQueries({ queryKey: queryKeys.profiles.status });
     },
   });
 };
@@ -36,8 +37,8 @@ export const useGoogleLogin = () => {
     mutationFn: (code: string) => authService.googleLogin(code),
     onSuccess: (response) => {
       setUser(response.data.user);
-      queryClient.setQueryData(["me"], response.data.user);
-      queryClient.invalidateQueries({ queryKey: ["me"] });
+      queryClient.setQueryData(queryKeys.me, response.data.user);
+      queryClient.invalidateQueries({ queryKey: queryKeys.profiles.status });
     },
   });
 };
@@ -50,15 +51,15 @@ export const useRegister = () => {
     mutationFn: (data: RegisterRequest) => authService.register(data),
     onSuccess: (response) => {
       setUser(response.data.user);
-      queryClient.setQueryData(["me"], response.data.user);
-      queryClient.invalidateQueries({ queryKey: ["me"] });
+      queryClient.setQueryData(queryKeys.me, response.data.user);
+      queryClient.invalidateQueries({ queryKey: queryKeys.profiles.status });
     },
   });
 };
 
 export const useMe = (options?: { enabled?: boolean }) => {
   return useQuery<User, ApiError>({
-    queryKey: ["me"],
+    queryKey: queryKeys.me,
     queryFn: () => authService.getMe(),
     retry: false,
     ...options,
@@ -70,7 +71,7 @@ export const useVerifyEmail = () => {
   return useMutation<ApiResponse<SuccessResponse>, ApiError, string>({
     mutationFn: (otp: string) => authService.verifyEmail(otp),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["me"] });
+      queryClient.invalidateQueries({ queryKey: queryKeys.profiles.status });
     },
   });
 };
@@ -108,7 +109,7 @@ export const useUpdateMe = () => {
   return useMutation<ApiResponse<User>, ApiError, UpdateMeRequest>({
     mutationFn: (data: UpdateMeRequest) => authService.updateMe(data),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["me"] });
+      queryClient.invalidateQueries({ queryKey: queryKeys.me });
     },
   });
 };
@@ -145,3 +146,4 @@ export const useDeleteMe = () => {
     },
   });
 };
+

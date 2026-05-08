@@ -1,10 +1,10 @@
 import {
   ApiResponse,
   Project,
-  ProjectFilters,
   ProjectComment,
   ProjectRating,
 } from "../types/api";
+import { ProjectFilters } from "../types/filters";
 import apiClient, { unwrap } from "./api-client";
 
 export const projectService = {

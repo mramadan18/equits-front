@@ -1,4 +1,4 @@
-import { TalentDetailsData, PersonYouMayNeed } from "./types";
+import { TalentDetailsData, PersonYouMayNeed } from "@/types/profile";
 
 export const MOCK_TALENT_DETAILS: TalentDetailsData = {
   id: 1,

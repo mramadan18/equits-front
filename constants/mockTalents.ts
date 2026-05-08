@@ -1,4 +1,4 @@
-import { Talent } from "@/components/talents/types";
+import { Talent } from "@/types/profile";
 
 export const MOCK_TALENTS: Talent[] = [
   {
@@ -90,3 +90,4 @@ export const MOCK_TALENTS: Talent[] = [
       "Cloud Engineer with 1+ years' experience designing, deploying, and optimizing cloud infrastructures, ensuring scalability, reliability, and efficient system performance.",
   },
 ];
+

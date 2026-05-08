@@ -1,7 +1,6 @@
 "use client";
 
-import { ModalContent, Button, Divider, Spinner } from "@heroui/react";
-import Image from "next/image";
+import { ModalContent, Button, Divider, Spinner, Avatar } from "@heroui/react";
 import { useTranslations } from "next-intl";
 import { IoCheckmarkCircle } from "react-icons/io5";
 import { MdRadioButtonUnchecked } from "react-icons/md";
@@ -54,14 +53,14 @@ const ProgressSection = ({
           />
         </svg>
         <div className="relative w-[82%] h-[82%] rounded-full border-[6px] border-white bg-gray-100 overflow-hidden shadow-sm">
-          {user?.avatar && (
-            <Image
-              src={`${user?.avatar}`}
-              alt={`${user?.firstName} ${user?.lastName}`}
-              fill
-              className="object-cover"
-            />
-          )}
+          <Avatar
+            src={`${user?.avatar}`}
+            isBordered
+            color="primary"
+            size="lg"
+            showFallback
+            className="w-full h-full"
+          />
         </div>
       </div>
       <p className="text-gray2 font-medium mb-2 text-base">

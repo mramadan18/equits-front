@@ -120,8 +120,8 @@ const ExploreFilters = ({ loading }: { loading: boolean }) => {
               wrapper:
                 "h-7 w-14! bg-gray2 group-data-[selected=true]:bg-primary",
               thumb: "w-5 h-5 bg-white",
-              startContent: "text-[10px] font-bold text-white",
-              endContent: "text-[10px] font-bold text-white",
+              startContent: "text-xxs font-bold text-white",
+              endContent: "text-xxs font-bold text-white",
             }}
             onValueChange={(val) =>
               updateParam("isAcademic", val ? "true" : "all")

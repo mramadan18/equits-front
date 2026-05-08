@@ -105,7 +105,7 @@ export const Navbar = ({
             <Badge
               content="Soon"
               color="primary"
-              className="px-1 text-[8px]"
+              className="px-1 text-tiny"
               size="sm"
             >
               <div className="w-8 h-8 bg-[#E9EAEB] rounded-full flex items-center justify-center">
@@ -117,7 +117,7 @@ export const Navbar = ({
               <Badge
                 content="2"
                 color="danger"
-                className="w-4 h-4 text-[8px]"
+                className="w-4 h-4 text-tiny"
                 size="sm"
               >
                 <div className="w-8 h-8 bg-[#E9EAEB] rounded-full flex items-center justify-center">

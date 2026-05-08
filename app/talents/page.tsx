@@ -2,7 +2,8 @@ import { TalentsSearchBar } from "@/components/talents/TalentsSearchBar";
 import { TalentsGrid } from "@/components/talents/TalentsGrid";
 import { TalentsFilters } from "@/components/talents/TalentsFilters";
 import { fetchServer } from "@/utils/api-utils";
-import { PaginationData, User } from "@/types/api";
+import { User } from "@/types/api";
+import { PaginationData } from "@/types/filters";
 
 export default async function TalentsPage({
   searchParams,

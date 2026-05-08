@@ -39,7 +39,7 @@ export function IdeaHeader({ project }: { project: Project }) {
                 color={
                   project.status === "PENDING_APPROVAL" ? "warning" : "default"
                 }
-                className="text-[10px] font-bold h-5 px-2"
+                className="text-xxs font-bold h-5 px-2"
               >
                 {project.status === "PENDING_APPROVAL"
                   ? t("statusPending")
@@ -56,9 +56,9 @@ export function IdeaHeader({ project }: { project: Project }) {
       <div className="flex flex-col items-start sm:items-end gap-1 text-gray-400 mt-1 sm:mt-0 shrink-0">
         <div className="flex items-center gap-2 font-bold">
           <FiCalendar className="text-sm sm:text-base" />
-          <span className="text-[10px] sm:text-xs">{formattedDate}</span>
+          <span className="text-xxs sm:text-xs">{formattedDate}</span>
         </div>
-        <span className="text-[8px] sm:text-xs">
+        <span className="text-tiny sm:text-xs">
           {t("updated")}:{" "}
           {project.updatedAt
             ? dayjs(project.updatedAt).fromNow()

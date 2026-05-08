@@ -28,7 +28,7 @@ const SavedProjectCard = ({ project }: { project: Project }) => {
           fill
           className="object-cover transition-transform duration-300 group-hover:scale-105"
         />
-        <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-md px-2.5 py-1 rounded-full text-[10px] font-bold text-dark shadow-sm">
+        <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-md px-2.5 py-1 rounded-full text-xxs font-bold text-dark shadow-sm">
           {project.stage}
         </div>
       </Link>
@@ -79,7 +79,7 @@ const SavedProjectCard = ({ project }: { project: Project }) => {
 
         <div className="flex items-center pt-3 border-t border-default-100">
           <div className="text-xs text-default-500">
-            <span className="block mb-0.5 uppercase tracking-wider text-[10px]">
+            <span className="block mb-0.5 uppercase tracking-wider text-xxs">
               Funding Ask
             </span>
             <span className="font-bold text-dark text-sm">

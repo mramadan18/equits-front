@@ -34,8 +34,9 @@ export const ProfileAvatar = ({
         <Avatar
           src={`${talent?.avatar}`}
           alt={`${talent?.firstName} ${talent?.lastName}`}
-          classNames={{ base: "object-cover w-full h-full" }}
+          className="w-full h-full"
           showFallback
+          color="primary"
         />
       </div>
       {isOwnProfile && (

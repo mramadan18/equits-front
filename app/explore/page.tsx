@@ -2,7 +2,8 @@ import { ExploreSearchBar } from "@/components/explore/ExploreSearchBar";
 import ExploreFilters from "@/components/explore/ExploreFilters";
 import { ExploreGrid } from "@/components/explore/ExploreGrid";
 import { fetchServer } from "@/utils/api-utils";
-import { PaginationData, Project } from "@/types/api";
+import { Project } from "@/types/api";
+import { PaginationData } from "@/types/filters";
 
 export default async function ExplorePage({
   searchParams,

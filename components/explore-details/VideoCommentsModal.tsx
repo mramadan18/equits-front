@@ -113,7 +113,8 @@ export function VideoCommentsModal({ project }: { project: Project }) {
                 <div key={comment.id} className="flex gap-3">
                   <Avatar
                     src={comment.user.avatar || undefined}
-                    name={comment.user.firstName}
+                    color="primary"
+                    showFallback
                   />
                   <div className="flex flex-col bg-gray-50 p-3 rounded-xl flex-1 border border-gray-100">
                     <div className="flex justify-between items-center mb-1">

@@ -15,6 +15,8 @@
   --color-gray4: #b1b1b1;
   --color-dark: #1e1e1e;
   --color-dark2: #252525;
+  --text-xxs: 0.625rem;
+  --text-tiny: 0.5rem;
   --shadow-card:
     0px 3.6px 5.99px 0px rgba(177, 177, 177, 0.08),
     0px 0.6px 1.8px 0px rgba(0, 0, 0, 0.05);
@@ -34,3 +36,4 @@
     padding-inline: 2rem;
   }
 }
+

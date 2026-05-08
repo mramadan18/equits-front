@@ -8,19 +8,6 @@ import { MainRoutes } from "@/types";
 import { Skeleton } from "@heroui/skeleton";
 import { User } from "@/types/api";
 
-const AvatarWrapper = ({ talent }: { talent: User }) => {
-  return (
-    <div className="w-14 h-14 md:w-16 md:h-16 rounded-full border border-gray-200 bg-gray-100 overflow-hidden relative flex-shrink-0 shadow-sm">
-      <Avatar
-        src={`${talent.avatar}`}
-        alt={`${talent.firstName} ${talent.lastName}`}
-        showFallback
-        classNames={{ base: "w-full h-full", img: "object-cover" }}
-      />
-    </div>
-  );
-};
-
 export const PeopleYouMayNeedSidebar = ({
   talents,
   isLoading,
@@ -77,7 +64,15 @@ export const PeopleYouMayNeedSidebar = ({
           >
             {/* Person Header Info */}
             <div className="flex items-start gap-4 mb-3">
-              <AvatarWrapper talent={talent} />
+              <div className="w-14 h-14 md:w-16 md:h-16">
+                <Avatar
+                  src={`${talent.avatar}`}
+                  alt={`${talent.firstName} ${talent.lastName}`}
+                  color="primary"
+                  showFallback
+                  className="w-full h-full"
+                />
+              </div>
 
               <div className="flex-1 flex flex-col justify-center">
                 <div className="flex items-center gap-1 mb-0.5">

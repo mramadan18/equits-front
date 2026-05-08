@@ -4,7 +4,7 @@ import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { FeedGrid } from "@/components/home/FeedGrid";
 import { FeedProfileCard } from "@/components/home/FeedProfileCard";
 import { useProjectsFeed } from "@/hooks/api/useProject";
-import { ProjectFilters } from "@/types/api";
+import { ProjectFilters } from "@/types/filters";
 import { Pagination } from "@heroui/react";
 import { useDebounce } from "@/hooks/ui/useDebounce";
 import { HomeSearchBar } from "@/components/home/HomeSearchBar";
@@ -96,17 +96,19 @@ export default function HomePage() {
           />
           <FeedGrid projects={projects?.data || []} isLoading={isLoading} />
 
-          {projects?.pagination && projects.pagination.totalPages > 1 && (
-            <div className="flex justify-center mt-8">
-              <Pagination
-                total={projects.pagination.totalPages}
-                page={filters.page || 1}
-                onChange={handlePageChange}
-                color="primary"
-                variant="flat"
-              />
-            </div>
-          )}
+          {projects?.pagination &&
+            projects.pagination.totalPages &&
+            projects.pagination.totalPages > 1 && (
+              <div className="flex justify-center mt-8">
+                <Pagination
+                  total={projects.pagination.totalPages}
+                  page={filters.page || 1}
+                  onChange={handlePageChange}
+                  color="primary"
+                  variant="flat"
+                />
+              </div>
+            )}
         </div>
 
         {/* Right Sidebar */}

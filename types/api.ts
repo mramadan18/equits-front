@@ -11,6 +11,7 @@ import {
   RevenueModel,
   TractionType,
 } from "./project";
+import { PaginationData } from "./filters";
 
 export enum ExperienceLevel {
   STUDENT = "STUDENT",
@@ -42,6 +43,12 @@ export enum ServiceArea {
   ASIA = "ASIA",
   GLOBAL = "GLOBAL",
 }
+
+
+
+
+
+
 
 export type MessageKey =
   | "welcome"
@@ -116,12 +123,7 @@ export enum UserType {
   INVESTOR = "INVESTOR",
 }
 
-export interface PaginationData {
-  total: number;
-  page: number;
-  limit: number;
-  totalPages: number;
-}
+
 
 export interface ApiResponse<T> {
   status: "success" | "error";
@@ -259,30 +261,9 @@ export interface ProjectDraft {
   currentStep: number;
 }
 
-export interface ProjectFilters {
-  industryId?: number | string;
-  stage?: ProjectStage | string;
-  search?: string;
-  fundingAsk?: string;
-  isAcademic?: boolean | string;
-  projectType?: ProjectType | string;
-  revenueModel?: RevenueModel | string;
-  marketFocus?: MarketFocus | string;
-  currentTraction?: TractionType | string;
-  fundingStage?: FundingStage | string;
-  serviceArea?: ServiceArea | string;
-  equityStake?: string;
-  rating?: number | string;
-  universityId?: number | string;
-  facultyId?: number | string;
-  page?: number;
-  limit?: number;
-}
 
-export interface ProfileFilters {
-  id: string;
-  limit?: number;
-}
+
+
 
 export interface Project {
   id: number;

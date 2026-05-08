@@ -1,7 +1,8 @@
 "use client";
 
 import { CreativeIdeaCard } from "@/components/shared/creative-idea-card";
-import { PaginationData, Project } from "@/types/api";
+import { Project } from "@/types/api";
+import { PaginationData } from "@/types/filters";
 import { Pagination } from "@heroui/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
@@ -50,7 +51,7 @@ export const ExploreGrid = ({
         ))}
       </div>
 
-      {pagination.totalPages > 1 && (
+      {pagination.totalPages && pagination.totalPages > 1 && (
         <div className="flex justify-center pt-8 border-t border-gray-100">
           <Pagination
             total={pagination.totalPages}

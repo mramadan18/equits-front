@@ -33,7 +33,7 @@ export function IdeaClassifications({ project }: IdeaClassificationsProps) {
             variant="flat"
             color="primary"
             size="sm"
-            className="font-semibold text-[10px] sm:text-sm"
+            className="font-semibold text-xxs sm:text-sm"
           >
             {project?.university?.name}
           </Chip>
@@ -42,7 +42,7 @@ export function IdeaClassifications({ project }: IdeaClassificationsProps) {
             variant="flat"
             color="primary"
             size="sm"
-            className="font-semibold text-[10px] sm:text-sm"
+            className="font-semibold text-xxs sm:text-sm"
           >
             {project?.faculty?.name}
           </Chip>
@@ -59,7 +59,7 @@ export function IdeaClassifications({ project }: IdeaClassificationsProps) {
             radius="sm"
             variant="bordered"
             size="sm"
-            className="border-gray-200 font-bold text-dark h-7 text-[10px] sm:text-sm"
+            className="border-gray-200 font-bold text-dark h-7 text-xxs sm:text-sm"
           >
             {project?.industry?.name}
           </Chip>
@@ -69,7 +69,7 @@ export function IdeaClassifications({ project }: IdeaClassificationsProps) {
               radius="sm"
               variant="bordered"
               size="sm"
-              className="border-gray-100 font-medium text-gray2 h-7 text-[10px] sm:text-sm"
+              className="border-gray-100 font-medium text-gray2 h-7 text-xxs sm:text-sm"
             >
               {sub.name}
             </Chip>
@@ -89,7 +89,7 @@ export function IdeaClassifications({ project }: IdeaClassificationsProps) {
               radius="sm"
               variant="bordered"
               size="sm"
-              className="border-gray-200 font-bold text-dark h-7 text-[10px] sm:text-sm"
+              className="border-gray-200 font-bold text-dark h-7 text-xxs sm:text-sm"
             >
               {te(`ProjectType.${type}` as any) || type}
             </Chip>
@@ -106,7 +106,7 @@ export function IdeaClassifications({ project }: IdeaClassificationsProps) {
           radius="sm"
           variant="bordered"
           size="sm"
-          className="border-gray-200 font-bold text-dark h-7  text-[10px] sm:text-sm"
+          className="border-gray-200 font-bold text-dark h-7  text-xxs sm:text-sm"
         >
           {te(`RevenueModel.${project.revenueModel}` as any) ||
             project.revenueModel}
@@ -122,7 +122,7 @@ export function IdeaClassifications({ project }: IdeaClassificationsProps) {
           radius="sm"
           variant="bordered"
           size="sm"
-          className="border-gray-200 font-bold text-dark h-7 text-[10px] sm:text-sm"
+          className="border-gray-200 font-bold text-dark h-7 text-xxs sm:text-sm"
         >
           {te(`ProjectStage.${project?.stage}` as any) || project?.stage}
         </Chip>
@@ -137,7 +137,7 @@ export function IdeaClassifications({ project }: IdeaClassificationsProps) {
           radius="sm"
           variant="bordered"
           size="sm"
-          className="border-gray-200 font-bold text-dark h-7 text-[10px] sm:text-sm"
+          className="border-gray-200 font-bold text-dark h-7 text-xxs sm:text-sm"
         >
           {te(`MarketFocus.${project?.marketFocus}` as any) ||
             project?.marketFocus}
@@ -153,7 +153,7 @@ export function IdeaClassifications({ project }: IdeaClassificationsProps) {
           radius="sm"
           variant="bordered"
           size="sm"
-          className="border-gray-200 font-bold text-dark h-7 text-[10px] sm:text-sm"
+          className="border-gray-200 font-bold text-dark h-7 text-xxs sm:text-sm"
         >
           {te(`ServiceArea.${project?.serviceArea}` as any) ||
             project?.serviceArea}
@@ -188,7 +188,7 @@ export function IdeaClassifications({ project }: IdeaClassificationsProps) {
               <div className="p-1 sm:p-2 rounded-lg sm:rounded-xl bg-gray-50 group-hover:bg-white transition-colors">
                 {item.icon}
               </div>
-              <span className="text-[10px] font-bold text-gray2 uppercase">
+              <span className="text-xxs font-bold text-gray2 uppercase">
                 {item.label}
               </span>
             </div>

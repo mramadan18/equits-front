@@ -46,7 +46,7 @@ export const BottomNav = ({
             <div className={isActive ? "text-primary" : "text-gray-400"}>
               {item.icon}
             </div>
-            <span className="text-[10px] font-medium">{item.label}</span>
+            <span className="text-xxs font-medium">{item.label}</span>
           </Link>
         );
       })}
@@ -58,7 +58,7 @@ export const BottomNav = ({
         <div className="bg-primary text-white p-3 rounded-full shadow-lg shadow-primary/30 flex items-center justify-center">
           <FiPlus size={24} />
         </div>
-        <span className="text-[10px] font-medium text-gray-500 mt-1">
+        <span className="text-xxs font-medium text-gray-500 mt-1">
           {t("pitch")}
         </span>
       </button>
@@ -77,7 +77,7 @@ export const BottomNav = ({
             <div className={isActive ? "text-primary" : "text-gray-400"}>
               {item.icon}
             </div>
-            <span className="text-[10px] font-medium">{item.label}</span>
+            <span className="text-xxs font-medium">{item.label}</span>
           </Link>
         );
       })}
@@ -92,7 +92,7 @@ export const BottomNav = ({
         <div className={isMenuOpen ? "text-primary" : "text-gray-400"}>
           <LuMenu size={24} />
         </div>
-        <span className="text-[10px] font-medium">{t("openMenu")}</span>
+        <span className="text-xxs font-medium">{t("openMenu")}</span>
       </button>
     </div>
   );

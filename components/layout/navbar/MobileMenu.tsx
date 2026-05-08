@@ -86,9 +86,9 @@ export const MobileMenu = ({
                       >
                         <Avatar
                           src={`${user?.avatar}`}
-                          name={`${user?.firstName} ${user?.lastName}`}
                           size="md"
                           className="w-10 h-10"
+                          color="primary"
                           showFallback
                         />
                         <div className="flex flex-col">

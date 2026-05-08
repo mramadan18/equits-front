@@ -81,17 +81,20 @@ export default function SavedPage() {
           </div>
         )}
 
-        {pagination && pagination.totalPages > 1 && projects.length > 0 && (
-          <div className="flex justify-center mt-12 pt-8 border-t border-gray-100">
-            <Pagination
-              total={pagination.totalPages}
-              page={page || 1}
-              onChange={handlePageChange}
-              color="primary"
-              variant="flat"
-            />
-          </div>
-        )}
+        {pagination &&
+          pagination.totalPages &&
+          pagination.totalPages > 1 &&
+          projects.length > 0 && (
+            <div className="flex justify-center mt-12 pt-8 border-t border-gray-100">
+              <Pagination
+                total={pagination.totalPages}
+                page={page || 1}
+                onChange={handlePageChange}
+                color="primary"
+                variant="flat"
+              />
+            </div>
+          )}
       </div>
     </div>
   );

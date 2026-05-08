@@ -1,7 +1,8 @@
 "use client";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { TalentCard } from "./TalentCard";
-import { PaginationData, User } from "@/types/api";
+import { User } from "@/types/api";
+import { PaginationData } from "@/types/filters";
 import { Pagination } from "@heroui/react";
 import { NoResults } from "@/components/shared";
 import { useTranslations } from "next-intl";
@@ -46,7 +47,7 @@ export const TalentsGrid = ({
       {profiles.map((item) => (
         <TalentCard key={item.id} item={item} />
       ))}{" "}
-      {pagination.totalPages > 1 && (
+      {pagination.totalPages && pagination.totalPages > 1 && (
         <div className="col-span-full flex items-center justify-center pt-8 border-t border-gray-100">
           <Pagination
             showControls

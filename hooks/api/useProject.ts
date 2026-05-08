@@ -4,19 +4,20 @@ import {
   useQueryClient,
   useInfiniteQuery,
 } from "@tanstack/react-query";
+import { queryKeys } from "@/constants/queryKeys";
 import { projectService } from "@/services/project.service";
 import {
   ApiResponse,
   Project,
-  ProjectFilters,
   ProjectComment,
   ProjectRating,
 } from "@/types/api";
+import { ProjectFilters } from "@/types/filters";
 import { ApiError } from "@/types/error";
 
 export const useProject = (id: number | string) => {
   return useQuery<ApiResponse<Project>, ApiError>({
-    queryKey: ["project", id],
+    queryKey: queryKeys.projects.detail(id),
     queryFn: () => projectService.getProjectById(id),
     enabled: !!id,
   });
@@ -28,7 +29,7 @@ export const useCreateProject = () => {
   return useMutation<ApiResponse<Project>, ApiError>({
     mutationFn: () => projectService.createProject(),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["me"] });
+      queryClient.invalidateQueries({ queryKey: queryKeys.me });
     },
   });
 };
@@ -44,21 +45,21 @@ export const useUpdateProjectStep = () => {
     mutationFn: ({ id, step, data }) =>
       projectService.updateProjectStep(id, step, data),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["project"] });
+      queryClient.invalidateQueries({ queryKey: queryKeys.projects.all() });
     },
   });
 };
 
 export const useProjects = (filters?: ProjectFilters) => {
   return useQuery<ApiResponse<Project[]>, ApiError>({
-    queryKey: ["projects", filters],
+    queryKey: queryKeys.projects.all(filters),
     queryFn: () => projectService.getProjects(filters),
   });
 };
 
 export const useProjectsFeed = (filters?: ProjectFilters) => {
   return useQuery<ApiResponse<Project[]>, ApiError>({
-    queryKey: ["projects-feed", filters],
+    queryKey: queryKeys.projects.feed(filters),
     queryFn: () => projectService.getProjectsFeed(filters),
   });
 };
@@ -69,7 +70,7 @@ export const useSubmitProject = () => {
   return useMutation<ApiResponse<Project>, ApiError, number | string>({
     mutationFn: (id) => projectService.submitProject(id),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["me"] });
+      queryClient.invalidateQueries({ queryKey: queryKeys.me });
     },
   });
 };
@@ -80,7 +81,7 @@ export const useDeleteProject = () => {
   return useMutation<ApiResponse<any>, ApiError, number | string>({
     mutationFn: (id) => projectService.deleteProject(id),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["me"] });
+      queryClient.invalidateQueries({ queryKey: queryKeys.me });
       queryClient.invalidateQueries({ queryKey: ["myProjects"] });
     },
   });
@@ -92,7 +93,9 @@ export const useLikeProject = () => {
   return useMutation<ApiResponse<any>, ApiError, number | string>({
     mutationFn: (id) => projectService.likeProject(id),
     onSuccess: (_, id) => {
-      queryClient.invalidateQueries({ queryKey: ["project", id] });
+      queryClient.invalidateQueries({
+        queryKey: queryKeys.projects.detail(id),
+      });
     },
   });
 };
@@ -127,7 +130,9 @@ export const useCommentOnProject = () => {
       projectService.commentOnProject(id, content),
     onSuccess: (_, { id }) => {
       queryClient.invalidateQueries({ queryKey: ["project-comments", id] });
-      queryClient.invalidateQueries({ queryKey: ["project", id] });
+      queryClient.invalidateQueries({
+        queryKey: queryKeys.projects.detail(id),
+      });
     },
   });
 };
@@ -144,7 +149,9 @@ export const useRateProject = () => {
       projectService.rateProject(id, { score, feedback }),
     onSuccess: (_, { id }) => {
       queryClient.invalidateQueries({ queryKey: ["project-rating", id] });
-      queryClient.invalidateQueries({ queryKey: ["project", id] });
+      queryClient.invalidateQueries({
+        queryKey: queryKeys.projects.detail(id),
+      });
     },
   });
 };

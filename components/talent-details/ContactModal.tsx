@@ -59,7 +59,8 @@ export const ContactModal = ({
                 <div className="flex items-center gap-4 mb-2">
                   <Avatar
                     src={`${talent?.avatar}`}
-                    name={`${talent?.firstName} ${talent?.lastName}`}
+                    color="primary"
+                    showFallback
                     className="w-14 h-14 text-lg"
                   />
                   <div>
