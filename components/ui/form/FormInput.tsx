@@ -4,6 +4,7 @@ import { Input, InputProps } from "@heroui/react";
 import { Controller, Control, FieldValues, Path } from "react-hook-form";
 import { useState } from "react";
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
+import { useSafeTranslate } from "@/hooks/ui/useSafeTranslate";
 
 interface FormInputProps<T extends FieldValues>
   extends Omit<InputProps, "name"> {
@@ -23,13 +24,7 @@ export const FormInput = <T extends FieldValues>({
 
   const toggleVisibility = () => setIsVisible(!isVisible);
 
-  const safeTranslate = (key: string | undefined) => {
-    if (!key) return "";
-    if (t && key.startsWith("Validation.")) {
-      return t(key);
-    }
-    return key;
-  };
+  const safeTranslate = useSafeTranslate(t);
 
   return (
     <Controller

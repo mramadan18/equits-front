@@ -14,7 +14,7 @@ import { LuUserPlus, LuLogIn } from "react-icons/lu";
 
 interface AuthRequiredModalProps {
   isOpen: boolean;
-  onOpenChange: (isOpen: boolean) => void;
+  onOpenChange: () => void;
 }
 
 export const AuthRequiredModal = ({

@@ -16,12 +16,13 @@ import {
   LuLogOut,
   LuShieldCheck,
   LuBriefcase,
-  LuGraduationCap,
   LuMail,
   LuX,
+  LuGraduationCap,
 } from "react-icons/lu";
 import { MainRoutes, AuthRoutes } from "@/types";
 import { User } from "@/types/api";
+import { MobileMenuLink } from "./MobileMenuLink";
 
 interface MobileMenuProps {
   t: (key: string) => string;
@@ -101,18 +102,12 @@ export const MobileMenu = ({
                         </div>
                       </Link>
 
-                      <Link
-                        className="w-full flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-gray-50 transition-colors"
+                      <MobileMenuLink
                         href={MainRoutes.SAVED}
                         onClick={onClose}
-                      >
-                        <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-500">
-                          <LuBookmark size={20} />
-                        </div>
-                        <span className="font-bold text-gray-700">
-                          {t("saved")}
-                        </span>
-                      </Link>
+                        icon={<LuBookmark size={20} />}
+                        label={t("saved")}
+                      />
                     </div>
 
                     {/* Edit Profile Section */}
@@ -121,54 +116,30 @@ export const MobileMenu = ({
                         {t("editProfile")}
                       </p>
                       <div className="flex flex-col gap-1">
-                        <Link
-                          className="w-full flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-gray-50 transition-colors"
+                        <MobileMenuLink
                           href={MainRoutes.SETTINGS_OVERVIEW}
                           onClick={onClose}
-                        >
-                          <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-500">
-                            <LuUser size={20} />
-                          </div>
-                          <span className="font-bold text-gray-700">
-                            {t("overview")}
-                          </span>
-                        </Link>
-                        <Link
-                          className="w-full flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-gray-50 transition-colors"
+                          icon={<LuUser size={20} />}
+                          label={t("overview")}
+                        />
+                        <MobileMenuLink
                           href={MainRoutes.SETTINGS_JOB_TITLE}
                           onClick={onClose}
-                        >
-                          <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-500">
-                            <LuBriefcase size={20} />
-                          </div>
-                          <span className="font-bold text-gray-700">
-                            {t("jobTitle")}
-                          </span>
-                        </Link>
-                        <Link
-                          className="w-full flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-gray-50 transition-colors"
+                          icon={<LuBriefcase size={20} />}
+                          label={t("jobTitle")}
+                        />
+                        <MobileMenuLink
                           href={MainRoutes.SETTINGS_EDUCATION}
                           onClick={onClose}
-                        >
-                          <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-500">
-                            <LuGraduationCap size={20} />
-                          </div>
-                          <span className="font-bold text-gray-700">
-                            {t("education")}
-                          </span>
-                        </Link>
-                        <Link
-                          className="w-full flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-gray-50 transition-colors"
+                          icon={<LuGraduationCap size={20} />}
+                          label={t("education")}
+                        />
+                        <MobileMenuLink
                           href={MainRoutes.SETTINGS_CONTACT_INFO}
                           onClick={onClose}
-                        >
-                          <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-500">
-                            <LuMail size={20} />
-                          </div>
-                          <span className="font-bold text-gray-700">
-                            {t("contactInfo")}
-                          </span>
-                        </Link>
+                          icon={<LuMail size={20} />}
+                          label={t("contactInfo")}
+                        />
                       </div>
                     </div>
 
@@ -178,35 +149,25 @@ export const MobileMenu = ({
                         {t("settings")}
                       </p>
                       <div className="flex flex-col gap-1">
-                        <Link
-                          className="w-full flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-gray-50 transition-colors"
+                        <MobileMenuLink
                           href={MainRoutes.SETTINGS_ACCOUNT}
                           onClick={onClose}
-                        >
-                          <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-500">
-                            <LuShieldCheck size={20} />
-                          </div>
-                          <span className="font-bold text-gray-700">
-                            {t("account")}
-                          </span>
-                        </Link>
+                          icon={<LuShieldCheck size={20} />}
+                          label={t("account")}
+                        />
                       </div>
                     </div>
 
                     {/* Help & Logout Section */}
                     <div className="mt-auto pt-4 border-t border-gray-100">
-                      <Link
-                        className="w-full flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-gray-50 transition-colors mb-2"
-                        href={MainRoutes.HELP}
-                        onClick={onClose}
-                      >
-                        <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-500">
-                          <LuCircleHelp size={20} />
-                        </div>
-                        <span className="font-bold text-gray-700">
-                          {t("help")}
-                        </span>
-                      </Link>
+                      <div className="mb-2">
+                        <MobileMenuLink
+                          href={MainRoutes.HELP}
+                          onClick={onClose}
+                          icon={<LuCircleHelp size={20} />}
+                          label={t("help")}
+                        />
+                      </div>
 
                       {(isLoggedIn || isUnverified) && (
                         <Button
@@ -229,18 +190,12 @@ export const MobileMenu = ({
 
                 {!isLoggedIn && !isUnverified && (
                   <div className="flex flex-col gap-4 pt-2">
-                    <Link
-                      className="w-full flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-gray-50 transition-colors"
+                    <MobileMenuLink
                       href={MainRoutes.HELP}
                       onClick={onClose}
-                    >
-                      <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-500">
-                        <LuCircleHelp size={20} />
-                      </div>
-                      <span className="font-bold text-gray-700">
-                        {t("help")}
-                      </span>
-                    </Link>
+                      icon={<LuCircleHelp size={20} />}
+                      label={t("help")}
+                    />
 
                     <div className="grid grid-cols-2 gap-3">
                       {(!isAuthPage || !isLoginPage) && (

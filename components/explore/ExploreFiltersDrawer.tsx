@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import {
   Drawer,
   DrawerContent,
@@ -18,15 +17,15 @@ interface FilterItem {
   label: string;
 }
 
-interface ExploreFiltersDrawerProps {
-  isOpen: boolean;
-  onClose: () => void;
-}
+import { useFiltersDrawer } from "@/hooks/ui/useFiltersDrawer";
 
 export const ExploreFiltersDrawer = ({
   isOpen,
   onClose,
-}: ExploreFiltersDrawerProps) => {
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+}) => {
   const {
     t,
     currentStage,
@@ -61,7 +60,11 @@ export const ExploreFiltersDrawer = ({
     clearFilters,
   } = useExploreFiltersController();
 
-  const [localFilters, setLocalFilters] = useState({
+  const {
+    localFilters,
+    handleLocalChange,
+    handleArraySelectionChange: handleSelectionChange,
+  } = useFiltersDrawer(isOpen, {
     isAcademic: isAcademic,
     rating: currentRating,
     industryId: currentIndustry,
@@ -77,53 +80,6 @@ export const ExploreFiltersDrawer = ({
     universityId: universityId,
     facultyId: facultyId,
   });
-
-  // Sync local filters with URL when drawer opens
-  useEffect(() => {
-    if (isOpen) {
-      setLocalFilters({
-        isAcademic: isAcademic,
-        rating: currentRating,
-        industryId: currentIndustry,
-        stage: currentStage,
-        projectType: currentProjectType,
-        revenueModel: currentRevenueModel,
-        marketFocus: currentMarketFocus,
-        currentTraction: currentTraction,
-        fundingStage: currentFundingStage,
-        serviceArea: currentServiceArea,
-        fundingAsk: currentFundingAsk,
-        equityStake: currentEquityStake,
-        universityId: universityId,
-        facultyId: facultyId,
-      });
-    }
-  }, [
-    isOpen,
-    isAcademic,
-    currentRating,
-    currentIndustry,
-    currentStage,
-    currentProjectType,
-    currentRevenueModel,
-    currentMarketFocus,
-    currentTraction,
-    currentFundingStage,
-    currentServiceArea,
-    currentFundingAsk,
-    currentEquityStake,
-    universityId,
-    facultyId,
-  ]);
-
-  const handleLocalChange = (key: string, value: string | boolean) => {
-    setLocalFilters((prev) => ({ ...prev, [key]: value }));
-  };
-
-  const handleSelectionChange = (key: string, values: string[]) => {
-    const value = values.length > 0 ? values.join(",") : "all";
-    handleLocalChange(key, value);
-  };
 
   const handleApply = () => {
     const paramsToUpdate: Record<string, string> = {};

@@ -1,6 +1,5 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import {
   Drawer,
   DrawerContent,
@@ -13,6 +12,8 @@ import {
 import { Button } from "@heroui/react";
 import { CheckboxGroup, Checkbox } from "@heroui/checkbox";
 import { useTalentsFiltersController } from "@/hooks/ui/useTalentsFiltersController";
+
+import { useFiltersDrawer } from "@/hooks/ui/useFiltersDrawer";
 
 interface TalentsFiltersDrawerProps {
   isOpen: boolean;
@@ -39,35 +40,17 @@ export const TalentsFiltersDrawer = ({
     clearFilters,
   } = useTalentsFiltersController();
 
-  const [localFilters, setLocalFilters] = useState({
+  const {
+    localFilters,
+    handleLocalChange,
+    handleArraySelectionChange: handleSelectionChange,
+  } = useFiltersDrawer(isOpen, {
     userType,
     experienceLevel,
     cityId,
     universityId,
     facultyId,
   });
-
-  // Sync local filters with URL when drawer opens
-  useEffect(() => {
-    if (isOpen) {
-      setLocalFilters({
-        userType,
-        experienceLevel,
-        cityId,
-        universityId,
-        facultyId,
-      });
-    }
-  }, [isOpen, userType, experienceLevel, cityId, universityId, facultyId]);
-
-  const handleLocalChange = (key: string, value: string) => {
-    setLocalFilters((prev) => ({ ...prev, [key]: value }));
-  };
-
-  const handleSelectionChange = (key: string, values: string[]) => {
-    const value = values.length > 0 ? values.join(",") : "all";
-    handleLocalChange(key, value);
-  };
 
   const handleApply = () => {
     bulkUpdateParams(localFilters);

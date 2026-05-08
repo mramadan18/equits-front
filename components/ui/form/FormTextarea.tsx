@@ -2,6 +2,7 @@
 
 import { Textarea, TextAreaProps } from "@heroui/react";
 import { Controller, Control, FieldValues, Path } from "react-hook-form";
+import { useSafeTranslate } from "@/hooks/ui/useSafeTranslate";
 
 interface FormTextareaProps<T extends FieldValues>
   extends Omit<TextAreaProps, "name"> {
@@ -16,13 +17,7 @@ export const FormTextarea = <T extends FieldValues>({
   t,
   ...props
 }: FormTextareaProps<T>) => {
-  const safeTranslate = (key: string | undefined) => {
-    if (!key) return "";
-    if (t && key.startsWith("Validation.")) {
-      return t(key);
-    }
-    return key;
-  };
+  const safeTranslate = useSafeTranslate(t);
 
   return (
     <Controller

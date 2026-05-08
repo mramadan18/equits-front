@@ -2,6 +2,7 @@
 
 import { Select, SelectProps } from "@heroui/react";
 import { Controller, Control, FieldValues, Path } from "react-hook-form";
+import { useSafeTranslate } from "@/hooks/ui/useSafeTranslate";
 
 interface FormSelectProps<T extends FieldValues>
   extends Omit<SelectProps, "name" | "children"> {
@@ -18,13 +19,7 @@ export const FormSelect = <T extends FieldValues>({
   children,
   ...props
 }: FormSelectProps<T>) => {
-  const safeTranslate = (key: string | undefined) => {
-    if (!key) return "";
-    if (t && key.startsWith("Validation.")) {
-      return t(key);
-    }
-    return key;
-  };
+  const safeTranslate = useSafeTranslate(t);
 
   return (
     <Controller

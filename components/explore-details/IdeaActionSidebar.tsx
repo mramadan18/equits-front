@@ -1,6 +1,7 @@
 "use client";
 
-import { Button, useDisclosure, addToast } from "@heroui/react";
+import { Button, addToast } from "@heroui/react";
+import { useMultipleDisclosures } from "@/hooks/ui/useMultipleDisclosures";
 import { useTranslations } from "next-intl";
 import {
   FiMessageSquare,
@@ -33,33 +34,20 @@ export function IdeaActionSidebar({ project }: { project: Project }) {
   const router = useRouter();
 
   const isOwner = user?.id === project?.ownerId;
-  const {
-    isOpen: isRatingOpen,
-    onOpen: onRatingOpen,
-    onOpenChange: onRatingOpenChange,
-  } = useDisclosure();
-  const {
-    isOpen: isCommentOpen,
-    onOpen: onCommentOpen,
-    onOpenChange: onCommentOpenChange,
-  } = useDisclosure();
-  const {
-    isOpen: isMeetingOpen,
-    onOpen: onMeetingOpen,
-    onOpenChange: onMeetingOpenChange,
-  } = useDisclosure();
-  const {
-    isOpen: isAuthOpen,
-    onOpen: onAuthOpen,
-    onOpenChange: onAuthOpenChange,
-  } = useDisclosure();
+
+  const { rating, comment, meeting, auth } = useMultipleDisclosures([
+    "rating",
+    "comment",
+    "meeting",
+    "auth",
+  ] as const);
 
   const { mutate: toggleWishlist, isPending: isToggling } = useToggleWishlist();
   const isSaved = user?.wishlistIds?.includes(project.id);
 
   const handleToggleWishlist = () => {
     if (!user) {
-      onAuthOpen();
+      auth.onOpen();
       return;
     }
     toggleWishlist(project.id, {
@@ -164,7 +152,7 @@ export function IdeaActionSidebar({ project }: { project: Project }) {
                 startContent={
                   <FaStar className="w-5 h-5 text-secondary mr-2" />
                 }
-                onPress={() => (user ? onRatingOpen() : onAuthOpen())}
+                onPress={() => (user ? rating.onOpen() : auth.onOpen())}
               >
                 {t("ratingTitle")}
               </Button>
@@ -175,7 +163,7 @@ export function IdeaActionSidebar({ project }: { project: Project }) {
                 startContent={
                   <FiMessageSquare className="w-5 h-5 text-[#8ac760] mr-2" />
                 }
-                onPress={() => (user ? onCommentOpen() : onAuthOpen())}
+                onPress={() => (user ? comment.onOpen() : auth.onOpen())}
               >
                 {t("commentTitle")}
               </Button>
@@ -220,7 +208,7 @@ export function IdeaActionSidebar({ project }: { project: Project }) {
                 color="primary"
                 className="w-full justify-start py-6 mt-1 font-semibold text-base shadow-md"
                 startContent={<FiVideo className="w-5 h-5 mr-2" />}
-                onPress={() => (user ? onMeetingOpen() : onAuthOpen())}
+                onPress={() => (user ? meeting.onOpen() : auth.onOpen())}
               >
                 {ts("requestMeeting")}
               </Button>
@@ -273,26 +261,29 @@ export function IdeaActionSidebar({ project }: { project: Project }) {
       </div>
 
       <RatingModal
-        isOpen={isRatingOpen}
-        onOpenChange={onRatingOpenChange}
+        isOpen={rating.isOpen}
+        onOpenChange={rating.onOpenChange}
         projectId={project.id}
       />
 
       <CommentModal
-        isOpen={isCommentOpen}
-        onOpenChange={onCommentOpenChange}
+        isOpen={comment.isOpen}
+        onOpenChange={comment.onOpenChange}
         projectId={project.id}
       />
 
       {project.owner && (
         <RequestMeetingModal
-          isOpen={isMeetingOpen}
-          onOpenChange={onMeetingOpenChange}
+          isOpen={meeting.isOpen}
+          onOpenChange={meeting.onOpenChange}
           talent={project.owner}
         />
       )}
 
-      <AuthRequiredModal isOpen={isAuthOpen} onOpenChange={onAuthOpenChange} />
+      <AuthRequiredModal
+        isOpen={auth.isOpen}
+        onOpenChange={auth.onOpenChange}
+      />
     </div>
   );
 }

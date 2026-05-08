@@ -17,7 +17,7 @@ import { User } from "@/types/api";
 
 interface RequestMeetingModalProps {
   isOpen: boolean;
-  onOpenChange: (isOpen: boolean) => void;
+  onOpenChange: () => void;
   talent: User;
 }
 
