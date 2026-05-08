@@ -25,7 +25,7 @@ export default function HomePage() {
 
   const filters: ProjectFilters = {
     page: Number(searchParams.get("page")) || 1,
-    limit: 10,
+    limit: 16,
     search: searchParams.get("search") || undefined,
     industryId: searchParams.get("industryId") || undefined,
     stage: searchParams.get("stage") || undefined,

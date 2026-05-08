@@ -18,24 +18,8 @@ import { MainRoutes } from "@/types";
 import Link from "next/link";
 import { ConfirmModal } from "@/components/ui/ConfirmModal";
 import { useDeleteProject } from "@/hooks/api/useProject";
+import { fmtCurrency, humanStage } from "@/utils/formatters";
 
-/* ── helpers ───────────────────────────────────────────── */
-const fmtCurrency = (v: string | number | null) => {
-  if (!v) return null;
-  const n = Number(v);
-  if (isNaN(n)) return null;
-  if (n >= 1_000_000) return `$${(n / 1_000_000).toFixed(1)}M`;
-  if (n >= 1_000) return `$${(n / 1_000).toFixed(0)}K`;
-  return `$${n.toLocaleString()}`;
-};
-
-const humanStage = (s: string) =>
-  s
-    .replace(/_/g, " ")
-    .toLowerCase()
-    .replace(/\b\w/g, (c) => c.toUpperCase());
-
-/* ── component ─────────────────────────────────────────── */
 export const MyProjectCard = ({ project }: { project: Project }) => {
   const t = useTranslations("Repo.card");
   const format = useFormatter();

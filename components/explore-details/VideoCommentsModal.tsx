@@ -34,7 +34,7 @@ export function VideoCommentsModal({ project }: { project: Project }) {
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
-  } = useProjectCommentsInfinite(project.id);
+  } = useProjectCommentsInfinite(project.id, 10);
 
   const comments = commentsResponse?.pages.flatMap((page) => page.data) || [];
   const totalComments =

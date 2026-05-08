@@ -48,7 +48,7 @@ export async function fetchServer<T>(
     headers.set("Content-Type", "application/json");
   }
   if (locale) {
-    headers.set("Accept-Language", locale);
+    headers.set("Accept-Language", "en");
   }
   if (token) {
     headers.set("Authorization", `Bearer ${token.value}`);

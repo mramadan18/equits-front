@@ -1,6 +1,6 @@
 "use client";
 
-import { useTranslations, useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useDeleteMe, useChangePassword } from "@/hooks/api/useAuth";
 import { useDisclosure, addToast } from "@heroui/react";
@@ -16,7 +16,6 @@ import { useAuthStore } from "@/stores/useAuthStore";
 export const useAccountSettingsController = () => {
   const t = useTranslations("Settings");
   const validationT = useTranslations("Auth.Validation");
-  const locale = useLocale();
   const router = useRouter();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const { user } = useAuthStore();
@@ -48,7 +47,6 @@ export const useAccountSettingsController = () => {
 
   return {
     t,
-    locale,
     user,
     isOpen,
     onOpen,

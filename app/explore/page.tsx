@@ -34,7 +34,7 @@ export default async function ExplorePage({
   let pagination: PaginationData = {
     total: 0,
     page: 1,
-    limit: 10,
+    limit: 16,
     totalPages: 0,
   };
 

@@ -8,7 +8,6 @@ import { useAccountSettingsController } from "@/hooks/ui/useAccountSettingsContr
 export default function AccountSettingsPage() {
   const {
     t,
-    // locale,
     user,
     isOpen,
     onOpen,

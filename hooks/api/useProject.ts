@@ -105,7 +105,7 @@ export const useLikeProject = () => {
 
 export const useProjectCommentsInfinite = (
   id: number | string,
-  limit: number = 1,
+  limit: number = 10,
 ) => {
   return useInfiniteQuery({
     queryKey: ["project-comments", id],
