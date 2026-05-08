@@ -30,6 +30,9 @@ export const useCreateProject = () => {
     mutationFn: () => projectService.createProject(),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.me });
+      queryClient.invalidateQueries({
+        queryKey: queryKeys.projects.myProjects,
+      });
     },
   });
 };

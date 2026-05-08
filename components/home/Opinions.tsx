@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { SectionHeader } from "@/components/shared/SectionHeader";
+import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 
@@ -11,7 +11,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 import { Avatar, Card, CardBody } from "@heroui/react";
-import { FadeIn } from "@/components/shared/animations";
+import { FadeIn } from "@/components/ui/animations";
 
 export default function Opinions() {
   const t = useTranslations("Opinions");

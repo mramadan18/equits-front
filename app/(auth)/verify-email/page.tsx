@@ -12,7 +12,7 @@ import {
 } from "@/validations/auth.validation";
 import { useVerifyEmail, useResendVerifyEmail } from "@/hooks/api/useAuth";
 import { AuthLayout, AuthHeader, AuthSubmitButton } from "@/components/auth";
-import { StaggerContainer, StaggerItem } from "@/components/shared/animations";
+import { StaggerContainer, StaggerItem } from "@/components/ui/animations";
 import { ApiResponse, SuccessResponse } from "@/types/api";
 import { ApiError } from "@/types/error";
 import { AuthRoutes } from "@/types";

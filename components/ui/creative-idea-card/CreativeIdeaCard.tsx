@@ -1,15 +1,71 @@
 "use client";
-import { Card, CardBody, Button } from "@heroui/react";
+import { Card, CardBody, Button, Chip } from "@heroui/react";
 import { useTranslations } from "next-intl";
 import { FaHeart, FaStar, FaCommentDots } from "react-icons/fa";
-import { CardImage } from "./components/CardImage";
-import { CardHeader } from "./components/CardHeader";
-import { AttributeRow } from "./components/AttributeRow";
-import { CardInfo } from "./components/CardInfo";
-import { Stat } from "./components/Stat";
 import Link from "next/link";
 import { MainRoutes } from "@/types";
 import { Project } from "@/types/api";
+import { Stat } from "../Stat";
+import Image from "next/image";
+
+/* ── sub-components ────────────────────────────────────────── */
+
+const AttributeRow = ({ label, items }: { label: string; items?: any[] }) => (
+  <div className="flex items-center gap-1">
+    <span className="text-xs text-gray2">{label}</span>
+    <div className="flex flex-wrap gap-1">
+      {items?.map((item, idx) => (
+        <Chip
+          key={idx}
+          size="sm"
+          className="bg-gray3 text-dark2 font-medium text-xs"
+        >
+          {item?.name}
+        </Chip>
+      ))}
+    </div>
+  </div>
+);
+
+const CardImage = ({
+  projectId,
+  image,
+  title,
+}: {
+  projectId: number | string;
+  image: string;
+  title: string;
+}) => (
+  <div className="relative h-48 w-full group-hover:opacity-90 transition-opacity">
+    <Link href={`${MainRoutes.PROJECTS}/${projectId}`}>
+      <Image src={image} alt={title} fill className="object-cover" />
+    </Link>
+  </div>
+);
+
+const CardHeader = ({
+  title,
+  description,
+}: {
+  title: string;
+  description: string;
+}) => (
+  <>
+    <h3 className="text-base font-semibold text-dark2 mb-3">{title}</h3>
+    <p className="text-gray2 text-sm leading-relaxed mb-6 line-clamp-4">
+      {description}
+    </p>
+  </>
+);
+
+const CardInfo = ({ date, location }: { date: string; location: string }) => (
+  <div className="flex items-center justify-between text-xs text-gray2 mb-4">
+    <span>{new Date(date).toLocaleDateString()}</span>
+    <span>{location}</span>
+  </div>
+);
+
+/* ── main component ────────────────────────────────────────── */
 
 export const CreativeIdeaCard = ({ item }: { item: Project }) => {
   const t = useTranslations("CreativeIdeas");

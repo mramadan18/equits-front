@@ -7,8 +7,8 @@ import {
 } from "react-icons/fa";
 import { AutocompleteItem } from "@heroui/react";
 import { FormInput, FormAutocomplete } from "@/components/ui/form";
-import { SettingsFormActions } from "@/components/shared/SettingsFormActions";
-import { SettingsPageHeader } from "@/components/shared/SettingsPageHeader";
+import { SettingsFormActions } from "@/components/ui/SettingsFormActions";
+import { SettingsPageHeader } from "@/components/ui/SettingsPageHeader";
 import { useContactInfoController } from "@/hooks/ui/useContactInfoController";
 import { Country, City } from "@/types/api";
 

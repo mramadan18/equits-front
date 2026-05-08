@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { FadeIn } from "../shared/animations";
+import { FadeIn } from "../ui/animations";
 
 interface AuthLayoutProps {
   children: React.ReactNode;

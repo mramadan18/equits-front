@@ -1,11 +1,11 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { SectionHeader } from "@/components/shared/SectionHeader";
+import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Accordion, AccordionItem } from "@heroui/react";
 import Image from "next/image";
 import { FiPlus, FiMinus } from "react-icons/fi";
-import { FadeIn } from "@/components/shared/animations";
+import { FadeIn } from "@/components/ui/animations";
 
 export default function Faq() {
   const t = useTranslations("Faq");

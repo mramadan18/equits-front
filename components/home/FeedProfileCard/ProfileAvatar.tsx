@@ -5,7 +5,7 @@ import { FiCamera } from "react-icons/fi";
 import { User } from "@/types/api";
 import { useDisclosure, Spinner, Avatar } from "@heroui/react";
 import { Area } from "react-easy-crop";
-import { ImageCropModal } from "@/components/common/ImageCropModal";
+import { ImageCropModal } from "@/components/ui/ImageCropModal";
 import { useImageUpload } from "@/hooks/ui/useImageUpload";
 
 export const ProfileAvatar = ({ user }: { user: User | null }) => {

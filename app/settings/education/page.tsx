@@ -8,8 +8,8 @@ import {
   FormAutocomplete,
   FormCheckbox,
 } from "@/components/ui/form";
-import { SettingsFormActions } from "@/components/shared/SettingsFormActions";
-import { SettingsPageHeader } from "@/components/shared/SettingsPageHeader";
+import { SettingsFormActions } from "@/components/ui/SettingsFormActions";
+import { SettingsPageHeader } from "@/components/ui/SettingsPageHeader";
 import { AutocompleteItem, Button, SelectItem } from "@heroui/react";
 import { useEducationController } from "@/hooks/ui/useEducationController";
 import { useWatch } from "react-hook-form";

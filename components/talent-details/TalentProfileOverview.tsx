@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { User } from "@/types/api";
-import { ImageCropModal } from "@/components/common/ImageCropModal";
+import { ImageCropModal } from "@/components/ui/ImageCropModal";
 import { useTalentProfileController } from "@/hooks/ui/useTalentProfileController";
 
 // Sub-components

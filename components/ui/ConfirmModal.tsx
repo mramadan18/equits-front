@@ -7,7 +7,9 @@ import {
   ModalBody,
   ModalFooter,
   Button,
+  Input,
 } from "@heroui/react";
+import { useState, useEffect } from "react";
 
 interface ConfirmModalProps {
   isOpen: boolean;
@@ -18,6 +20,7 @@ interface ConfirmModalProps {
   cancelLabel?: string;
   onConfirm: () => void;
   isLoading?: boolean;
+  confirmationText?: string;
   color?:
     | "danger"
     | "primary"
@@ -36,25 +39,56 @@ export const ConfirmModal = ({
   cancelLabel = "Cancel",
   onConfirm,
   isLoading = false,
+  confirmationText,
   color = "danger",
 }: ConfirmModalProps) => {
+  const [inputValue, setInputValue] = useState("");
+
+  // Reset input when modal closes
+  useEffect(() => {
+    if (!isOpen) {
+      setInputValue("");
+    }
+  }, [isOpen]);
+
+  const isConfirmDisabled =
+    isLoading || (confirmationText ? inputValue !== confirmationText : false);
+
   return (
     <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
       <ModalContent>
         {(onClose) => (
           <>
             <ModalHeader>{title}</ModalHeader>
-            <ModalBody>
+            <ModalBody className="gap-4">
               <p className="text-default-600">{description}</p>
+              {confirmationText && (
+                <div className="flex flex-col gap-2">
+                  <p className="text-sm text-default-500 italic">
+                    Please type{" "}
+                    <span className="font-bold text-danger">
+                      {confirmationText}
+                    </span>{" "}
+                    to confirm.
+                  </p>
+                  <Input
+                    variant="bordered"
+                    placeholder={confirmationText}
+                    value={inputValue}
+                    onValueChange={setInputValue}
+                  />
+                </div>
+              )}
             </ModalBody>
             <ModalFooter>
-              <Button variant="light" onPress={onClose} disabled={isLoading}>
+              <Button variant="light" onPress={onClose} isDisabled={isLoading}>
                 {cancelLabel}
               </Button>
               <Button
                 color={color}
                 onPress={onConfirm}
                 isLoading={isLoading}
+                isDisabled={isConfirmDisabled}
                 className="font-semibold"
               >
                 {confirmLabel}

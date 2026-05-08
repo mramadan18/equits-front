@@ -1,7 +1,7 @@
 "use client";
 
 import { Input, Button, Divider } from "@heroui/react";
-import { ConfirmModal } from "@/components/shared/ConfirmModal";
+import { ConfirmModal } from "@/components/ui/ConfirmModal";
 import { FormInput } from "@/components/ui/form/FormInput";
 import { useAccountSettingsController } from "@/hooks/ui/useAccountSettingsController";
 
@@ -167,6 +167,7 @@ export default function AccountSettingsPage() {
         cancelLabel={t("accountForm.cancel")}
         onConfirm={handleDeleteAccount}
         isLoading={isDeletePending}
+        confirmationText="Delete"
       />
     </div>
   );

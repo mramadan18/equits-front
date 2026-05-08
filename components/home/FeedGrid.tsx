@@ -1,7 +1,7 @@
 import { Project } from "@/types/api";
 import { FeedIdeaCard } from "./FeedIdeaCard";
 import { Skeleton } from "@heroui/skeleton";
-import { NoResults } from "../shared/NoResults";
+import { NoResults } from "../ui/NoResults";
 import { useTranslations } from "next-intl";
 import { useRouter, usePathname } from "next/navigation";
 

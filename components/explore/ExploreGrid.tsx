@@ -1,12 +1,12 @@
 "use client";
 
-import { CreativeIdeaCard } from "@/components/shared/creative-idea-card";
+import { CreativeIdeaCard } from "@/components/ui/creative-idea-card";
 import { Project } from "@/types/api";
 import { PaginationData } from "@/types/filters";
 import { Pagination } from "@heroui/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { NoResults } from "@/components/shared";
+import { NoResults } from "@/components/ui";
 
 export const ExploreGrid = ({
   projects,

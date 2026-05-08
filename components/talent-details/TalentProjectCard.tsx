@@ -4,7 +4,7 @@ import Image from "next/image";
 import { FaHeart, FaCommentDots, FaStar } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
 import Link from "next/link";
-import { Stat } from "@/components/shared/creative-idea-card/components/Stat";
+import { Stat } from "@/components/ui/Stat";
 import { Button } from "@heroui/react";
 import { Project } from "@/types/api";
 import { MainRoutes } from "@/types";

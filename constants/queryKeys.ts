@@ -11,6 +11,7 @@ export const queryKeys = {
     all: (filters?: any) => ["projects", filters] as const,
     feed: (filters?: any) => ["projects-feed", filters] as const,
     detail: (id: number | string) => ["project", id] as const,
+    myProjects: ["myProjects"] as const,
     activeDraft: ["active-draft"] as const,
     comments: (id: number | string) => ["project-comments", id] as const,
     rating: (id: number | string) => ["project-rating", id] as const,

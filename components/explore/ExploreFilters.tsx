@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Badge, Button, Skeleton, Switch } from "@heroui/react";
 import { IoFilterOutline } from "react-icons/io5";
-import { FilterDropdown } from "@/components/shared";
+import { FilterDropdown } from "@/components/ui";
 import { useExploreFiltersController } from "@/hooks/ui/useExploreFiltersController";
 import { ExploreFiltersDrawer } from "./ExploreFiltersDrawer";
 

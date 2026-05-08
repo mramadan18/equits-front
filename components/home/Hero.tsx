@@ -3,7 +3,7 @@ import { Button } from "@heroui/react";
 import { useTranslations } from "next-intl";
 import { BiRightArrowAlt } from "react-icons/bi";
 import { IoTelescopeOutline } from "react-icons/io5";
-import { FadeIn } from "@/components/shared/animations";
+import { FadeIn } from "@/components/ui/animations";
 import Link from "next/link";
 import { MainRoutes } from "@/types";
 

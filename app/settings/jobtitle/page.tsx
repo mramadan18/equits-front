@@ -1,8 +1,8 @@
 "use client";
 
 import { FormInput, FormSelect, FormAutocomplete } from "@/components/ui/form";
-import { SettingsFormActions } from "@/components/shared/SettingsFormActions";
-import { SettingsPageHeader } from "@/components/shared/SettingsPageHeader";
+import { SettingsFormActions } from "@/components/ui/SettingsFormActions";
+import { SettingsPageHeader } from "@/components/ui/SettingsPageHeader";
 import { useJobTitleController } from "@/hooks/ui/useJobTitleController";
 import { AutocompleteItem, SelectItem } from "@heroui/react";
 

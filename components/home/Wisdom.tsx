@@ -1,8 +1,8 @@
 "use client";
 import { useTranslations } from "next-intl";
 import { Button } from "@heroui/react";
-import { SectionHeader } from "@/components/shared/SectionHeader";
-import { FadeIn } from "@/components/shared/animations";
+import { SectionHeader } from "@/components/ui/SectionHeader";
+import { FadeIn } from "@/components/ui/animations";
 import Link from "next/link";
 import { AuthRoutes } from "@/types";
 

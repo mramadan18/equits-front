@@ -9,7 +9,7 @@ import {
   AuthDivider,
   AuthSubmitButton,
 } from "@/components/auth";
-import { StaggerContainer, StaggerItem } from "@/components/shared/animations";
+import { StaggerContainer, StaggerItem } from "@/components/ui/animations";
 import { AuthRoutes } from "@/types";
 import { FormInput, FormCheckbox } from "@/components/ui/form";
 import { useLoginController } from "@/hooks/ui/useLoginController";

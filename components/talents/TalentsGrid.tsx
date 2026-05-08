@@ -4,7 +4,7 @@ import { TalentCard } from "./TalentCard";
 import { User } from "@/types/api";
 import { PaginationData } from "@/types/filters";
 import { Pagination } from "@heroui/react";
-import { NoResults } from "@/components/shared";
+import { NoResults } from "@/components/ui";
 import { useTranslations } from "next-intl";
 
 export const TalentsGrid = ({

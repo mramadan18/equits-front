@@ -1,10 +1,10 @@
-import { CreativeIdeaCard } from "@/components/shared/creative-idea-card";
-import { SectionHeader } from "@/components/shared/SectionHeader";
+import { CreativeIdeaCard } from "@/components/ui/creative-idea-card";
+import { SectionHeader } from "@/components/ui/SectionHeader";
 import {
   FadeIn,
   StaggerContainer,
   StaggerItem,
-} from "@/components/shared/animations";
+} from "@/components/ui/animations";
 import { Project } from "@/types/api";
 import SeeMoreButton from "./SeeMoreButton";
 import { fetchServer } from "@/utils/api-utils";

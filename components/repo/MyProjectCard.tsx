@@ -16,7 +16,7 @@ import { useTranslations, useFormatter } from "next-intl";
 import { useMemo } from "react";
 import { MainRoutes } from "@/types";
 import Link from "next/link";
-import { ConfirmModal } from "@/components/shared/ConfirmModal";
+import { ConfirmModal } from "@/components/ui/ConfirmModal";
 import { useDeleteProject } from "@/hooks/api/useProject";
 
 /* ── helpers ───────────────────────────────────────────── */
@@ -253,6 +253,7 @@ export const MyProjectCard = ({ project }: { project: Project }) => {
         onConfirm={handleDelete}
         isLoading={isDeleting}
         confirmLabel={t("delete", { defaultMessage: "Delete" })}
+        confirmationText="Delete"
         color="danger"
       />
     </>

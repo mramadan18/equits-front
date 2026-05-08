@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Button } from "@heroui/react";
 import { Badge } from "@heroui/badge";
 import { IoFilterOutline } from "react-icons/io5";
-import { FilterDropdown } from "@/components/shared";
+import { FilterDropdown } from "@/components/ui";
 import { useTalentsFiltersController } from "@/hooks/ui/useTalentsFiltersController";
 import { TalentsFiltersDrawer } from "./TalentsFiltersDrawer";
 

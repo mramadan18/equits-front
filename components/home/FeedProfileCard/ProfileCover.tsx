@@ -7,7 +7,7 @@ import { useImageUpload } from "@/hooks/ui/useImageUpload";
 import { User } from "@/types/api";
 import { Area } from "react-easy-crop";
 import { FiCamera } from "react-icons/fi";
-import { ImageCropModal } from "@/components/common/ImageCropModal";
+import { ImageCropModal } from "@/components/ui/ImageCropModal";
 
 export const ProfileCover = ({ user }: { user: User | null }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
