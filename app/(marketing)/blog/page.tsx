@@ -1,6 +1,14 @@
+import { Metadata } from "next";
 import Link from "next/link";
 import { blogPosts } from "./data";
 import Image from "next/image";
+
+export const metadata: Metadata = {
+  title: "Equits Academy",
+  description:
+    "From zero to MVP — follow step-by-step guides on building a successful startup, raising funds, and growing your business.",
+  alternates: { canonical: "/blog" },
+};
 
 export default function BlogPage() {
   return (

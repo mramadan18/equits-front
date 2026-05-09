@@ -6,7 +6,38 @@ import {
 import { fetchServer } from "@/utils/api-utils";
 import { Project, User } from "@/types/api";
 import { getTranslations } from "next-intl/server";
+import { Metadata } from "next";
+import { JsonLd } from "@/components/seo/JsonLd";
 
+interface TalentPageProps {
+  params: Promise<{ talentId: string }>;
+}
+
+export async function generateMetadata({
+  params,
+}: TalentPageProps): Promise<Metadata> {
+  const { talentId } = await params;
+  try {
+    const res = await fetchServer<User>(`/profile/${talentId}`);
+    const talent = res.data;
+    const fullName = `${talent.firstName} ${talent.lastName}`;
+    return {
+      title: `${fullName} | Talent Profile`,
+      description:
+        talent.overview ||
+        `View ${fullName}'s profile, projects, and expertise on Equits.`,
+      openGraph: {
+        title: fullName,
+        description:
+          talent.overview || `${fullName}'s talent profile on Equits`,
+        images: talent.avatar ? [talent.avatar] : [],
+      },
+      alternates: { canonical: `/talents/${talentId}` },
+    };
+  } catch {
+    return { title: "Talent Not Found | Equits" };
+  }
+}
 export default async function TalentDetailsPage({
   params,
 }: {
@@ -59,8 +90,22 @@ export default async function TalentDetailsPage({
   const talents =
     relatedRes.status === "fulfilled" ? relatedRes.value.data : [];
 
+  const talentJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    mainEntity: {
+      "@type": "Person",
+      name: `${talent.firstName} ${talent.lastName}`,
+      description: talent.overview || undefined,
+      image: talent.avatar || undefined,
+      url: `https://equits.net/talents/${talentId}`,
+      jobTitle: talent.jobTitle || undefined,
+    },
+  };
+
   return (
     <div className="w-full bg-slate-50 md:bg-gray-50 pb-16 md:pb-24 pt-8 md:pt-12 min-h-screen">
+      <JsonLd data={talentJsonLd} />
       <div className="container flex flex-col lg:flex-row gap-8 lg:gap-12 relative">
         {/* Left Content Column */}
         <div className="flex-1 flex flex-col gap-6 w-full">

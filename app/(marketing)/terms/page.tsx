@@ -1,3 +1,12 @@
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Terms of Service",
+  description:
+    "Read the Equits Terms of Service. Understand your rights, responsibilities, and how our free startup platform operates.",
+  alternates: { canonical: "/terms" },
+};
+
 export default function TermsPage() {
   return (
     <div className="container mx-auto px-4 py-16 max-w-4xl">

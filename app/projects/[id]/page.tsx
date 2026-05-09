@@ -15,6 +15,7 @@ import { fetchServer } from "@/utils/api-utils";
 import { Project } from "@/types/api";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { JsonLd } from "@/components/seo/JsonLd";
 
 interface ProjectPageProps {
   params: Promise<{ id: string }>;
@@ -36,6 +37,13 @@ export async function generateMetadata({
         description: project.elevatorPitch || project.tagline,
         images: project.cover ? [project.cover] : [],
       },
+      twitter: {
+        card: "summary_large_image",
+        title: project.title,
+        description: project.elevatorPitch || project.tagline,
+        images: project.cover ? [project.cover] : [],
+      },
+      alternates: { canonical: `/projects/${id}` },
     };
   } catch {
     return {
@@ -65,8 +73,28 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     notFound();
   }
 
+  const projectJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    name: project.title,
+    description: project.elevatorPitch || project.tagline,
+    image: project.cover || undefined,
+    url: `https://equits.net/projects/${id}`,
+    author: {
+      "@type": "Person",
+      name: `${project?.owner?.firstName} ${project?.owner?.lastName}`,
+      image: project?.owner?.avatar || undefined,
+      url: project?.owner?.id
+        ? `https://equits.net/talents/${project?.owner?.id}`
+        : undefined,
+    },
+    dateCreated: project.createdAt,
+    dateModified: project.updatedAt || project.createdAt,
+  };
+
   return (
     <div className="w-full bg-gray-50/50 pb-16 md:pb-24 pt-4 md:pt-8 min-h-screen">
+      <JsonLd data={projectJsonLd} />
       <div className="container flex flex-col lg:flex-row gap-8 lg:gap-12">
         {/* Left Content Column */}
         <div className="flex-1 flex flex-col gap-6 sm:gap-8">

@@ -1,3 +1,12 @@
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Privacy Policy",
+  description:
+    "Learn how Equits collects, uses, and protects your personal information and intellectual property.",
+  alternates: { canonical: "/privacy" },
+};
+
 export default function PrivacyPolicyPage() {
   return (
     <div className="container mx-auto px-4 py-16 max-w-4xl">

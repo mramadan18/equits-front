@@ -1,3 +1,12 @@
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "About Us",
+  description:
+    "Learn about Equits — our mission to connect great ideas with talented people, fostering innovation and collaboration.",
+  alternates: { canonical: "/about" },
+};
+
 export default function AboutPage() {
   return (
     <div className="container mx-auto px-4 py-16 max-w-7xl">

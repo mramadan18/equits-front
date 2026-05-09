@@ -1,5 +1,5 @@
 import "@/styles/globals.css";
-import { Metadata } from "next";
+import { Metadata, Viewport } from "next";
 import { Providers } from "./providers";
 import { fontAlexandria } from "@/config/fonts";
 import { Navbar } from "@/components/layout/Navbar";
@@ -9,23 +9,72 @@ import { getMessages } from "next-intl/server";
 import { cookies } from "next/headers";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://equits.net"),
   title: {
-    default: "Equits",
+    default: "Equits - Where Ideas Meet Talent",
     template: `%s - Equits`,
   },
-  description: "Equits",
+  description:
+    "Equits is a free platform connecting entrepreneurs with talented professionals. Pitch your startup ideas, build teams, and bring your vision to life.",
+  keywords: [
+    "startup",
+    "entrepreneur",
+    "pitch",
+    "business plan",
+    "co-founder",
+    "talent",
+    "innovation",
+    "equits",
+  ],
+  authors: [{ name: "Equits" }],
+  creator: "Equits",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    siteName: "Equits",
+    title: "Equits - Where Ideas Meet Talent",
+    description:
+      "Pitch your startup ideas, find co-founders, and build your dream team. Completely free.",
+    images: [
+      {
+        url: "/images/og-default.png",
+        width: 1200,
+        height: 630,
+        alt: "Equits Platform",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Equits - Where Ideas Meet Talent",
+    description:
+      "Pitch your startup ideas, find co-founders, and build your dream team.",
+    images: ["/images/og-default.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   icons: {
     icon: "/favicon.ico",
   },
 };
 
-// export const viewport: Viewport = {
-//   themeColor: [
-//     { media: "(prefers-color-scheme: light)", color: "white" },
-//     // { media: "(prefers-color-scheme: dark)", color: "black" }, // TODO: remove this when we have a way to switch themes
-//     { media: "(prefers-color-scheme: dark)", color: "white" },
-//   ],
-// };
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#000000" },
+  ],
+  width: "device-width",
+  initialScale: 1,
+};
 
 export default async function RootLayout({
   children,
@@ -40,7 +89,6 @@ export default async function RootLayout({
 
   return (
     <html lang="en" suppressHydrationWarning>
-      <head />
       <body className={fontAlexandria.className}>
         <NextIntlClientProvider messages={messages} locale={"en-US"}>
           <Providers session={session}>

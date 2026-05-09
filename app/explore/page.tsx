@@ -1,6 +1,14 @@
+import { Metadata } from "next";
 import { fetchServer } from "@/utils/api-utils";
 import ExploreClient from "./ExploreClient";
 import { Project } from "@/types/api";
+
+export const metadata: Metadata = {
+  title: "Explore Projects",
+  description:
+    "Browse innovative startup ideas and projects on Equits. Filter by industry, stage, funding, and more.",
+  alternates: { canonical: "/explore" },
+};
 
 export default async function ExplorePage({
   searchParams,
