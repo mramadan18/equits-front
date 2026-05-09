@@ -1,58 +1,65 @@
+"use client";
+
 import { TalentsSearchBar } from "@/components/talents/TalentsSearchBar";
 import { TalentsGrid } from "@/components/talents/TalentsGrid";
 import { TalentsFilters } from "@/components/talents/TalentsFilters";
-import { fetchServer } from "@/utils/api-utils";
-import { User } from "@/types/api";
-import { PaginationData } from "@/types/filters";
+import { useInfiniteProfiles } from "@/hooks/api/useProfile";
+import { useInfiniteScroll } from "@/hooks/ui/useInfiniteScroll";
+import { useSearchParams } from "next/navigation";
+import { Skeleton } from "@heroui/skeleton";
+import { useMemo } from "react";
 
-export default async function TalentsPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
-}) {
-  const params = await searchParams;
-  const {
-    search,
-    page = "1",
-    userType = "TALENT",
-    experienceLevel,
-    cityId,
-    universityId,
-    facultyId,
-  } = params;
+export default function TalentsPage() {
+  const searchParams = useSearchParams();
 
-  // Helper to normalize params to string array or undefined
-  const normalizeParam = (val: string | string[] | undefined) => {
-    if (!val || val === "all") return undefined;
-    if (Array.isArray(val)) return val;
-    return val.split(",");
-  };
+  const filters = useMemo(() => {
+    const params: Record<string, string | undefined> = {};
 
-  let allProfiles: User[] = [];
-  let pagination: PaginationData = {
-    total: 0,
-    page: 1,
-    limit: 16,
-    totalPages: 0,
-  };
+    const search = searchParams.get("search");
+    const userType = searchParams.get("userType") || "TALENT";
+    const experienceLevel = searchParams.get("experienceLevel");
+    const cityId = searchParams.get("cityId");
+    const universityId = searchParams.get("universityId");
+    const facultyId = searchParams.get("facultyId");
 
-  try {
-    const data = await fetchServer<User[]>("/profile", {
-      params: {
-        search: Array.isArray(search) ? search[0] : search,
-        page: Array.isArray(page) ? page[0] : page,
-        userType: userType === "all" ? undefined : userType,
-        experienceLevel: normalizeParam(experienceLevel),
-        universityId: normalizeParam(universityId),
-        facultyId: normalizeParam(facultyId),
-        cityId: normalizeParam(cityId),
-      },
-      cache: "no-store",
-    });
-    allProfiles = data.data || [];
-    pagination = data.pagination || pagination;
-  } catch (error) {
-    console.error("Failed to fetch profiles for talents page:", error);
+    if (search) params.search = search;
+    if (userType && userType !== "all") params.userType = userType;
+    if (experienceLevel) params.experienceLevel = experienceLevel;
+    if (cityId) params.cityId = cityId;
+    if (universityId) params.universityId = universityId;
+    if (facultyId) params.facultyId = facultyId;
+
+    return { ...params, limit: 16 };
+  }, [searchParams]);
+
+  const { data, isLoading, hasNextPage, isFetchingNextPage, fetchNextPage } =
+    useInfiniteProfiles(filters);
+
+  const allProfiles = useMemo(
+    () => data?.pages.flatMap((page) => page.data) || [],
+    [data],
+  );
+
+  const sentinelRef = useInfiniteScroll({
+    hasNextPage: !!hasNextPage,
+    isFetchingNextPage,
+    fetchNextPage,
+  });
+
+  if (isLoading) {
+    return (
+      <div className="w-full bg-white pb-16 md:pb-24 pt-8 md:pt-12 min-h-screen">
+        <div className="container">
+          <TalentsSearchBar />
+          <TalentsFilters />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
+              <Skeleton key={i} className="h-[280px] w-full rounded-[20px]" />
+            ))}
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -60,7 +67,11 @@ export default async function TalentsPage({
       <div className="container">
         <TalentsSearchBar />
         <TalentsFilters />
-        <TalentsGrid profiles={allProfiles} pagination={pagination} />
+        <TalentsGrid
+          profiles={allProfiles}
+          isFetchingNextPage={isFetchingNextPage}
+          sentinelRef={sentinelRef}
+        />
       </div>
     </div>
   );

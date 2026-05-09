@@ -1,4 +1,9 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  useMutation,
+  useQuery,
+  useQueryClient,
+  useInfiniteQuery,
+} from "@tanstack/react-query";
 import { profileService } from "@/services/profile.service";
 import { ApiResponse, ProfileStatus, User } from "@/types/api";
 import { ProfileFilters } from "@/types/filters";
@@ -17,13 +22,6 @@ const useProfileMutation = <TRequest, TResponse = User>(
       queryClient.invalidateQueries({ queryKey: queryKeys.profiles.status });
       queryClient.invalidateQueries({ queryKey: queryKeys.me });
     },
-  });
-};
-
-export const useGetAllProfiles = () => {
-  return useQuery<ApiResponse<User[]>, ApiError>({
-    queryKey: queryKeys.profiles.all,
-    queryFn: () => profileService.getAllProfiles(),
   });
 };
 
@@ -67,3 +65,20 @@ export const useUpdateContact = () =>
 
 export const useUpdatePictures = () =>
   useProfileMutation(profileService.updatePictures);
+
+/** Infinite scroll version of profile listing (for Talents page) */
+export const useInfiniteProfiles = (
+  filters?: Omit<Record<string, any>, "page">,
+) => {
+  return useInfiniteQuery({
+    queryKey: ["profiles-infinite", filters],
+    queryFn: ({ pageParam = 1 }) =>
+      profileService.getProfiles({ ...filters, page: pageParam }),
+    initialPageParam: 1,
+    getNextPageParam: (lastPage: ApiResponse<User[]>) => {
+      const totalPages = lastPage.pagination?.totalPages || 1;
+      const currentPage = lastPage.pagination?.page || 1;
+      return currentPage < totalPages ? currentPage + 1 : undefined;
+    },
+  });
+};

@@ -1,18 +1,18 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { FeedGrid } from "@/components/home/FeedGrid";
 import { FeedProfileCard } from "@/components/home/FeedProfileCard";
-import { useProjectsFeed } from "@/hooks/api/useProject";
-import { ProjectFilters } from "@/types/filters";
-import { Pagination } from "@heroui/react";
+import { useInfiniteProjectsFeed } from "@/hooks/api/useProject";
 import { useDebounce } from "@/hooks/ui/useDebounce";
+import { useInfiniteScroll } from "@/hooks/ui/useInfiniteScroll";
 import { HomeSearchBar } from "@/components/home/HomeSearchBar";
 import { PeopleYouMayNeedSidebar } from "@/components/talent-details";
 import { useAuthStore } from "@/stores/useAuthStore";
 import { useRelatedProfiles } from "@/hooks/api/useProfile";
 import ExploreFilters from "@/components/explore/ExploreFilters";
 import { useMediaQuery } from "@/hooks/ui/useMediaQuery";
+import { Spinner } from "@heroui/react";
 
 export default function HomePage() {
   const searchParams = useSearchParams();
@@ -23,29 +23,50 @@ export default function HomePage() {
   const router = useRouter();
   const pathname = usePathname();
 
-  const filters: ProjectFilters = {
-    page: Number(searchParams.get("page")) || 1,
-    limit: 16,
-    search: searchParams.get("search") || undefined,
-    industryId: searchParams.get("industryId") || undefined,
-    stage: searchParams.get("stage") || undefined,
-    fundingAsk: searchParams.get("fundingAsk") || undefined,
-    isAcademic: searchParams.get("isAcademic") || undefined,
-    rating: searchParams.get("rating") || undefined,
-    projectType: searchParams.get("projectType") || undefined,
-    revenueModel: searchParams.get("revenueModel") || undefined,
-    marketFocus: searchParams.get("marketFocus") || undefined,
-    currentTraction: searchParams.get("currentTraction") || undefined,
-    fundingStage: searchParams.get("fundingStage") || undefined,
-    serviceArea: searchParams.get("serviceArea") || undefined,
-    equityStake: searchParams.get("equityStake") || undefined,
-    universityId: searchParams.get("universityId") || undefined,
-    facultyId: searchParams.get("facultyId") || undefined,
-  };
+  const filters = useMemo(() => {
+    const params: Record<string, string | undefined> = {};
+    const keys = [
+      "search",
+      "industryId",
+      "stage",
+      "fundingAsk",
+      "isAcademic",
+      "rating",
+      "projectType",
+      "revenueModel",
+      "marketFocus",
+      "currentTraction",
+      "fundingStage",
+      "serviceArea",
+      "equityStake",
+      "universityId",
+      "facultyId",
+    ];
+
+    keys.forEach((key) => {
+      const val = searchParams.get(key);
+      if (val) params[key] = val;
+    });
+
+    return { ...params, limit: 16 };
+  }, [searchParams]);
 
   const { user, isHydrated } = useAuthStore();
   const isLargeScreen = useMediaQuery("(min-width: 1024px)");
-  const { data: projects, isLoading } = useProjectsFeed(filters);
+
+  const {
+    data: projectsData,
+    isLoading,
+    hasNextPage,
+    isFetchingNextPage,
+    fetchNextPage,
+  } = useInfiniteProjectsFeed(filters);
+
+  const projects = useMemo(
+    () => projectsData?.pages.flatMap((page) => page.data) || [],
+    [projectsData],
+  );
+
   const { data: relatedProfiles, isLoading: isRelatedLoading } =
     useRelatedProfiles(
       {
@@ -54,6 +75,12 @@ export default function HomePage() {
       },
       isLargeScreen,
     );
+
+  const sentinelRef = useInfiniteScroll({
+    hasNextPage: !!hasNextPage,
+    isFetchingNextPage,
+    fetchNextPage,
+  });
 
   // Sync searchTerm state with URL param
   useEffect(() => {
@@ -74,16 +101,10 @@ export default function HomePage() {
       } else {
         params.delete("search");
       }
-      params.set("page", "1");
+      params.delete("page");
       router.push(`${pathname}?${params.toString()}`, { scroll: false });
     }
   }, [debouncedSearchTerm]);
-
-  const handlePageChange = (page: number) => {
-    const params = new URLSearchParams(searchParams.toString());
-    params.set("page", page.toString());
-    router.push(`${pathname}?${params.toString()}`, { scroll: false });
-  };
 
   return (
     <div className="container py-8">
@@ -94,21 +115,14 @@ export default function HomePage() {
           <ExploreFilters
             loading={isLoading || isRelatedLoading || !isHydrated}
           />
-          <FeedGrid projects={projects?.data || []} isLoading={isLoading} />
+          <FeedGrid projects={projects} isLoading={isLoading} />
 
-          {projects?.pagination &&
-            projects.pagination.totalPages &&
-            projects.pagination.totalPages > 1 && (
-              <div className="flex justify-center mt-8">
-                <Pagination
-                  total={projects.pagination.totalPages}
-                  page={filters.page || 1}
-                  onChange={handlePageChange}
-                  color="primary"
-                  variant="flat"
-                />
-              </div>
-            )}
+          {/* Infinite scroll sentinel */}
+          {!isLoading && (
+            <div ref={sentinelRef} className="w-full flex justify-center py-4">
+              {isFetchingNextPage && <Spinner size="lg" color="primary" />}
+            </div>
+          )}
         </div>
 
         {/* Right Sidebar */}

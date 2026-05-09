@@ -2,28 +2,27 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { TalentCard } from "./TalentCard";
 import { User } from "@/types/api";
-import { PaginationData } from "@/types/filters";
-import { Pagination } from "@heroui/react";
 import { NoResults } from "@/components/ui";
 import { useTranslations } from "next-intl";
+import { Spinner } from "@heroui/react";
+
+interface TalentsGridProps {
+  profiles: User[];
+  /** Whether the next page is currently being fetched */
+  isFetchingNextPage?: boolean;
+  /** Sentinel ref for infinite scroll trigger */
+  sentinelRef?: React.Ref<HTMLDivElement>;
+}
 
 export const TalentsGrid = ({
   profiles,
-  pagination,
-}: {
-  profiles: User[];
-  pagination: PaginationData;
-}) => {
+  isFetchingNextPage,
+  sentinelRef,
+}: TalentsGridProps) => {
   const t = useTranslations("TalentsExplore");
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-
-  const handlePageChange = (newPage: number) => {
-    const params = new URLSearchParams(searchParams.toString());
-    params.set("page", newPage.toString());
-    router.push(`${pathname}?${params.toString()}`, { scroll: true });
-  };
 
   const hasActiveFilters = Array.from(searchParams.keys()).some(
     (key) => key !== "page",
@@ -43,23 +42,17 @@ export const TalentsGrid = ({
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-      {profiles.map((item) => (
-        <TalentCard key={item.id} item={item} />
-      ))}{" "}
-      {pagination.totalPages && pagination.totalPages > 1 && (
-        <div className="col-span-full flex items-center justify-center pt-8 border-t border-gray-100">
-          <Pagination
-            showControls
-            total={pagination.totalPages}
-            page={pagination.page}
-            onChange={handlePageChange}
-            color="primary"
-            variant="flat"
-            radius="full"
-          />
-        </div>
-      )}
+    <div className="flex flex-col gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        {profiles.map((item) => (
+          <TalentCard key={item.id} item={item} />
+        ))}
+      </div>
+
+      {/* Infinite scroll sentinel */}
+      <div ref={sentinelRef} className="w-full flex justify-center py-4">
+        {isFetchingNextPage && <Spinner size="lg" color="primary" />}
+      </div>
     </div>
   );
 };

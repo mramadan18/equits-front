@@ -23,7 +23,7 @@ export function ProjectFinancials({ project }: { project: Project }) {
               <FiDollarSign className="text-green-600 text-xl" />
             </div>
             <div className="flex flex-col">
-              <span className="text-xxs font-bold text-gray2 uppercase tracking-[0.1em] mb-0.5">
+              <span className="text-xxs! font-bold text-gray2 uppercase tracking-[0.1em] mb-0.5">
                 {t("fundingAsk")}
               </span>
               <span className="text-2xl font-bold text-dark tabular-nums">
@@ -46,7 +46,7 @@ export function ProjectFinancials({ project }: { project: Project }) {
               <FiPieChart className="text-purple-500 text-xl" />
             </div>
             <div className="flex flex-col">
-              <span className="text-xxs font-bold text-gray2 uppercase tracking-[0.1em] mb-0.5">
+              <span className="text-xxs! font-bold text-gray2 uppercase tracking-[0.1em] mb-0.5">
                 {t("equityStake")}
               </span>
               <span className="text-2xl font-bold text-dark tabular-nums">

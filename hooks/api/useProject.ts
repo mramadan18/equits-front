@@ -53,17 +53,44 @@ export const useUpdateProjectStep = () => {
   });
 };
 
-export const useProjects = (filters?: ProjectFilters) => {
-  return useQuery<ApiResponse<Project[]>, ApiError>({
-    queryKey: queryKeys.projects.all(filters),
-    queryFn: () => projectService.getProjects(filters),
+/** Infinite scroll version of useProjectsFeed */
+export const useInfiniteProjectsFeed = (
+  filters?: Omit<ProjectFilters, "page">,
+) => {
+  return useInfiniteQuery({
+    queryKey: ["projects-feed-infinite", filters],
+    queryFn: ({ pageParam = 1 }) =>
+      projectService.getProjectsFeed({ ...filters, page: pageParam }),
+    initialPageParam: 1,
+    getNextPageParam: (lastPage: ApiResponse<Project[]>) => {
+      const totalPages = lastPage.pagination?.totalPages || 1;
+      const currentPage = lastPage.pagination?.page || 1;
+      return currentPage < totalPages ? currentPage + 1 : undefined;
+    },
   });
 };
 
-export const useProjectsFeed = (filters?: ProjectFilters) => {
-  return useQuery<ApiResponse<Project[]>, ApiError>({
-    queryKey: queryKeys.projects.feed(filters),
-    queryFn: () => projectService.getProjectsFeed(filters),
+/** Infinite scroll version of useProjects (for Explore page) */
+export const useInfiniteProjects = (
+  filters?: Omit<ProjectFilters, "page">,
+  initialData?: ApiResponse<Project[]>,
+) => {
+  return useInfiniteQuery({
+    queryKey: ["projects-infinite", filters],
+    queryFn: ({ pageParam = 1 }) =>
+      projectService.getProjects({ ...filters, page: pageParam }),
+    initialPageParam: 1,
+    getNextPageParam: (lastPage: ApiResponse<Project[]>) => {
+      const totalPages = lastPage.pagination?.totalPages || 1;
+      const currentPage = lastPage.pagination?.page || 1;
+      return currentPage < totalPages ? currentPage + 1 : undefined;
+    },
+    initialData: initialData
+      ? {
+          pages: [initialData],
+          pageParams: [1],
+        }
+      : undefined,
   });
 };
 

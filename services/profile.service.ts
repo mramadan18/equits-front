@@ -12,8 +12,8 @@ import {
 import apiClient, { unwrap } from "./api-client";
 
 export const profileService = {
-  getAllProfiles: (): Promise<ApiResponse<User[]>> =>
-    unwrap(apiClient.get("/profile")),
+  getProfiles: (params?: Record<string, any>): Promise<ApiResponse<User[]>> =>
+    unwrap(apiClient.get("/profile", { params })),
 
   getProfileById: (id: number): Promise<ApiResponse<User>> =>
     unwrap(apiClient.get(`/profile/${id}`)),

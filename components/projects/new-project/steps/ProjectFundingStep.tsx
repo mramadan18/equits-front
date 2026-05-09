@@ -98,7 +98,7 @@ export const ProjectFundingStep = ({
           radius="sm"
           maxLength={1000}
           classNames={{
-            description: "absolute bottom-4 end-4 text-tiny text-gray2",
+            description: "absolute bottom-4 end-4 text-tiny! text-gray2",
             inputWrapper: "relative",
           }}
           description={

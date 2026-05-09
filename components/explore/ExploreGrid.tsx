@@ -2,29 +2,28 @@
 
 import { CreativeIdeaCard } from "@/components/ui/creative-idea-card";
 import { Project } from "@/types/api";
-import { PaginationData } from "@/types/filters";
-import { Pagination } from "@heroui/react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { NoResults } from "@/components/ui";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { Spinner } from "@heroui/react";
+
+interface ExploreGridProps {
+  projects: Project[];
+  /** Whether the next page is currently being fetched */
+  isFetchingNextPage?: boolean;
+  /** Sentinel ref for infinite scroll trigger */
+  sentinelRef?: React.Ref<HTMLDivElement>;
+}
 
 export const ExploreGrid = ({
   projects,
-  pagination,
-}: {
-  projects: Project[];
-  pagination: PaginationData;
-}) => {
+  isFetchingNextPage,
+  sentinelRef,
+}: ExploreGridProps) => {
   const t = useTranslations("Explore");
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-
-  const handlePageChange = (newPage: number) => {
-    const params = new URLSearchParams(searchParams.toString());
-    params.set("page", newPage.toString());
-    router.push(`${pathname}?${params.toString()}`, { scroll: true });
-  };
 
   const hasActiveFilters = Array.from(searchParams.keys()).some(
     (key) => key !== "page",
@@ -51,19 +50,10 @@ export const ExploreGrid = ({
         ))}
       </div>
 
-      {pagination.totalPages && pagination.totalPages > 1 && (
-        <div className="flex justify-center pt-8 border-t border-gray-100">
-          <Pagination
-            total={pagination.totalPages}
-            page={pagination.page}
-            onChange={handlePageChange}
-            showControls
-            color="primary"
-            variant="flat"
-            radius="full"
-          />
-        </div>
-      )}
+      {/* Infinite scroll sentinel */}
+      <div ref={sentinelRef} className="w-full flex justify-center py-4">
+        {isFetchingNextPage && <Spinner size="lg" color="primary" />}
+      </div>
     </div>
   );
 };

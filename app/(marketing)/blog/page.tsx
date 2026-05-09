@@ -7,7 +7,7 @@ export default function BlogPage() {
     <div className="container mx-auto px-4 py-16 max-w-7xl">
       <div className="flex flex-col items-center justify-center space-y-4 mb-16 text-center">
         <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
-          Startup Academy
+          Equits Academy
         </h1>
         <p className="text-lg text-default-500 max-w-2xl">
           From zero background to launching your MVP and raising funds. Follow

@@ -22,7 +22,7 @@ export function IdeaElevatorPitch({ project }: IdeaElevatorPitchProps) {
         </h3>
       </div>
       <div
-        className="text-gray2 leading-relaxed text-xxs md:text-lg font-medium ps-2 border-s-4 border-amber-100"
+        className="text-gray2 leading-relaxed text-xxs! md:text-lg font-medium ps-2 border-s-4 border-amber-100"
         dangerouslySetInnerHTML={{
           __html: project?.elevatorPitch ? `${project.elevatorPitch}` : "",
         }}

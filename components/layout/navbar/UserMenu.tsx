@@ -45,7 +45,7 @@ export const UserMenu = ({
       </Button>
 
       <div className="flex items-center gap-3">
-        <Badge content="2" color="danger" className="w-5 h-5 text-xs">
+        <Badge content="2" color="danger" className="w-5 h-5 text-xxs!">
           <div className="w-10 h-10 bg-[#E9EAEB] rounded-full flex items-center justify-center">
             <IoMdNotificationsOutline size={24} className="text-black" />
           </div>
@@ -56,7 +56,7 @@ export const UserMenu = ({
           href={MainRoutes.SAVED}
           content={user?.wishlistIds?.length || 0}
           color="danger"
-          className="w-5 h-5 text-xs"
+          className="w-5 h-5 text-xxs!"
         >
           <Button
             as={Link}
@@ -69,7 +69,7 @@ export const UserMenu = ({
           </Button>
         </Badge>
 
-        <Badge content="Soon" color="primary" className="px-1 text-xs">
+        <Badge content="Soon" color="primary" className="px-1 text-xxs!">
           <div className="w-10 h-10 bg-[#E9EAEB] rounded-full flex items-center justify-center">
             <PiOpenAiLogoThin size={24} className="text-black" />
           </div>

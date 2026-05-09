@@ -121,7 +121,7 @@ export function IdeaEngagement({ project }: IdeaEngagementProps) {
           </span>
           <div className="flex flex-col gap-0">
             <RatingStars rating={Number(project?.rating || 0)} />
-            <span className="text-xxs sm:text-sm font-bold text-gray-400">
+            <span className="text-xxs! sm:text-sm font-bold text-gray-400">
               {project?.reviewsCount || 0} {t("reviews")}
             </span>
           </div>

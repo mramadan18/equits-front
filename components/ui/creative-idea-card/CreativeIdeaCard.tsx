@@ -3,12 +3,11 @@ import { Card, CardBody, Button, Chip } from "@heroui/react";
 import { useTranslations } from "next-intl";
 import { FaHeart, FaStar, FaCommentDots } from "react-icons/fa";
 import Link from "next/link";
+import dayjs from "dayjs";
 import { MainRoutes } from "@/types";
 import { Project } from "@/types/api";
 import { Stat } from "../Stat";
 import Image from "next/image";
-
-/* ── sub-components ────────────────────────────────────────── */
 
 const AttributeRow = ({ label, items }: { label: string; items?: any[] }) => (
   <div className="flex items-center gap-1">
@@ -60,12 +59,10 @@ const CardHeader = ({
 
 const CardInfo = ({ date, location }: { date: string; location: string }) => (
   <div className="flex items-center justify-between text-xs text-gray2 mb-4">
-    <span>{new Date(date).toLocaleDateString()}</span>
-    <span>{location}</span>
+    <span>{dayjs(date).format("DD / MM / YYYY")}</span>
+    {location ? <span>{location}</span> : null}
   </div>
 );
-
-/* ── main component ────────────────────────────────────────── */
 
 export const CreativeIdeaCard = ({ item }: { item: Project }) => {
   const t = useTranslations("CreativeIdeas");
@@ -98,7 +95,7 @@ export const CreativeIdeaCard = ({ item }: { item: Project }) => {
           <AttributeRow label={t("stage")} items={[{ name: item?.stage }]} />
         </div>
 
-        <CardInfo date={item.createdAt} location={`${item.serviceArea}`} />
+        <CardInfo date={item.createdAt} location={item.serviceArea as string} />
 
         {/* Stats */}
         <div className="flex items-center gap-6 mb-8 text-sm font-semibold">

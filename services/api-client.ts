@@ -1,5 +1,4 @@
 import axios from "axios";
-import { addToast } from "@heroui/react";
 
 const apiClient = axios.create({
   baseURL: `${process.env.NEXT_PUBLIC_API_URL}/api/v1`,
@@ -19,23 +18,26 @@ apiClient.interceptors.request.use((config) => {
 
 apiClient.interceptors.response.use(
   (response) => response,
-  (error) => {
-    if (error.response) {
-      const message = error.response.data?.message || "An error occurred";
-      const status = error.response.status;
+  async (error) => {
+    if (typeof window !== "undefined") {
+      const { addToast } = await import("@heroui/react");
 
-      // Only toast if it's a client/server error and not 401 (usually handled by auth)
-      if (status >= 400) {
+      if (error.response) {
+        const message = error.response.data?.message || "An error occurred";
+        const status = error.response.status;
+
+        if (status >= 400) {
+          addToast({
+            title: message,
+            color: "danger",
+          });
+        }
+      } else if (error.request) {
         addToast({
-          title: message,
+          title: "Network error. Please check your connection.",
           color: "danger",
         });
       }
-    } else if (error.request) {
-      addToast({
-        title: "Network error. Please check your connection.",
-        color: "danger",
-      });
     }
 
     return Promise.reject(error);

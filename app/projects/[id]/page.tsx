@@ -1,5 +1,3 @@
-"use client";
-
 import { ReactNode } from "react";
 import {
   IdeaActionSidebar,
@@ -12,12 +10,39 @@ import {
   IdeaTeam,
   IdeaVideoHero,
   ProjectMetrics,
-  ProjectSkeleton,
 } from "@/components/explore-details";
-import { StatusState } from "@/components/shared/StatusState";
-import { useTranslations } from "next-intl";
-import { useParams } from "next/navigation";
-import { useProject } from "@/hooks/api/useProject";
+import { fetchServer } from "@/utils/api-utils";
+import { Project } from "@/types/api";
+import { Metadata } from "next";
+import { notFound } from "next/navigation";
+
+interface ProjectPageProps {
+  params: Promise<{ id: string }>;
+}
+
+export async function generateMetadata({
+  params,
+}: ProjectPageProps): Promise<Metadata> {
+  const { id } = await params;
+  try {
+    const response = await fetchServer<Project>(`/projects/${id}`);
+    const project = response.data;
+
+    return {
+      title: `${project.title} | Equits`,
+      description: project.elevatorPitch || project.tagline,
+      openGraph: {
+        title: project.title,
+        description: project.elevatorPitch || project.tagline,
+        images: project.cover ? [project.cover] : [],
+      },
+    };
+  } catch {
+    return {
+      title: "Project Not Found | Equits",
+    };
+  }
+}
 
 const SectionWrapper = ({ children }: { children: ReactNode }) => (
   <section className="bg-white p-4 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl border border-gray-100 shadow-sm">
@@ -25,62 +50,57 @@ const SectionWrapper = ({ children }: { children: ReactNode }) => (
   </section>
 );
 
-export default function ProjectPage() {
-  const params = useParams();
-  const id = params.id as string;
-  const t = useTranslations("ProjectDetails");
+export default async function ProjectPage({ params }: ProjectPageProps) {
+  const { id } = await params;
 
-  const { data: projectResponse, isLoading, error } = useProject(id);
-  const project = projectResponse?.data;
+  let project;
+  try {
+    const response = await fetchServer<Project>(`/projects/${id}`);
+    project = response.data;
+  } catch {
+    notFound();
+  }
 
-  const isError = Boolean(error || (!isLoading && !project));
+  if (!project) {
+    notFound();
+  }
 
   return (
-    <StatusState
-      isLoading={isLoading}
-      error={isError}
-      loadingComponent={<ProjectSkeleton />}
-      errorTitle={t("notFound")}
-      errorDescription={error?.response?.data?.message || t("notFound")}
-    >
-      {project && (
-        <div className="w-full bg-gray-50/50 pb-16 md:pb-24 pt-4 md:pt-8 min-h-screen">
-          <div className="container flex flex-col lg:flex-row gap-8 lg:gap-12">
-            {/* Left Content Column */}
-            <div className="flex-1 flex flex-col gap-6 sm:gap-8">
-              <div className="flex flex-col gap-4">
-                <IdeaHeader project={project} />
-                <IdeaVideoHero project={project} />
-                <IdeaEngagement project={project} />
-                <IdeaElevatorPitch project={project} />
-              </div>
-
-              <SectionWrapper>
-                <IdeaClassifications project={project} />
-              </SectionWrapper>
-
-              <SectionWrapper>
-                <ProjectMetrics project={project} />
-              </SectionWrapper>
-
-              <IdeaTeam project={project} />
-
-              <SectionWrapper>
-                <IdeaMarketStrategy project={project} />
-              </SectionWrapper>
-
-              <SectionWrapper>
-                <IdeaBusinessPlan project={project} />
-              </SectionWrapper>
-            </div>
-
-            {/* Right Sidebar */}
-            <div className="lg:w-1/3">
-              <IdeaActionSidebar project={project} />
-            </div>
+    <div className="w-full bg-gray-50/50 pb-16 md:pb-24 pt-4 md:pt-8 min-h-screen">
+      <div className="container flex flex-col lg:flex-row gap-8 lg:gap-12">
+        {/* Left Content Column */}
+        <div className="flex-1 flex flex-col gap-6 sm:gap-8">
+          <div className="flex flex-col gap-4">
+            <IdeaHeader project={project} />
+            <IdeaVideoHero project={project} />
+            <IdeaEngagement project={project} />
+            <IdeaElevatorPitch project={project} />
           </div>
+
+          <SectionWrapper>
+            <IdeaClassifications project={project} />
+          </SectionWrapper>
+
+          <SectionWrapper>
+            <ProjectMetrics project={project} />
+          </SectionWrapper>
+
+          <IdeaTeam project={project} />
+
+          <SectionWrapper>
+            <IdeaMarketStrategy project={project} />
+          </SectionWrapper>
+
+          <SectionWrapper>
+            <IdeaBusinessPlan project={project} />
+          </SectionWrapper>
         </div>
-      )}
-    </StatusState>
+
+        {/* Right Sidebar */}
+        <div className="lg:w-1/3">
+          <IdeaActionSidebar project={project} />
+        </div>
+      </div>
+    </div>
   );
 }

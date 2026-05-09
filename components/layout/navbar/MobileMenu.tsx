@@ -19,6 +19,13 @@ import {
   LuMail,
   LuX,
   LuGraduationCap,
+  LuTelescope,
+  LuUsers,
+  LuBookOpen,
+  LuInfo,
+  LuPhone,
+  LuScale,
+  LuLock,
 } from "react-icons/lu";
 import { MainRoutes, AuthRoutes } from "@/types";
 import { User } from "@/types/api";
@@ -189,38 +196,137 @@ export const MobileMenu = ({
                 )}
 
                 {!isLoggedIn && !isUnverified && (
-                  <div className="flex flex-col gap-4 pt-2">
-                    <MobileMenuLink
-                      href={MainRoutes.HELP}
-                      onClick={onClose}
-                      icon={<LuCircleHelp size={20} />}
-                      label={t("help")}
-                    />
+                  <div className="flex flex-col gap-1">
+                    {/* CTA Banner */}
+                    <div className="rounded-2xl bg-gradient-to-br from-primary to-primary/80 p-4 mb-3 text-white">
+                      <p className="font-bold text-base leading-snug">
+                        {t("guestCta")}
+                      </p>
+                      <p className="text-white/70 text-xs mt-1 leading-relaxed">
+                        {t("guestCtaSub")}
+                      </p>
+                      <Button
+                        as={Link}
+                        href={AuthRoutes.REGISTER}
+                        size="sm"
+                        className="mt-3 bg-white text-primary font-bold rounded-lg"
+                        onClick={onClose}
+                      >
+                        {t("register")}
+                      </Button>
+                    </div>
 
-                    <div className="grid grid-cols-2 gap-3">
-                      {(!isAuthPage || !isLoginPage) && (
-                        <Button
-                          as={Link}
-                          href={AuthRoutes.LOGIN}
-                          variant="flat"
-                          color="primary"
-                          className="font-bold h-12 rounded-xl"
+                    {/* Discover Section */}
+                    <div className="mb-2">
+                      <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 px-2">
+                        {t("discover")}
+                      </p>
+                      <div className="flex flex-col gap-1">
+                        <MobileMenuLink
+                          href={MainRoutes.EXPLORE}
                           onClick={onClose}
-                        >
-                          {t("login")}
-                        </Button>
-                      )}
-                      {(!isAuthPage || !isRegisterPage) && (
-                        <Button
-                          as={Link}
-                          href={AuthRoutes.REGISTER}
-                          color="primary"
-                          className="font-bold h-12 rounded-xl"
+                          icon={<LuTelescope size={20} />}
+                          label={t("exploreProjects")}
+                        />
+                        <MobileMenuLink
+                          href={MainRoutes.TALENTS}
                           onClick={onClose}
-                        >
-                          {t("register")}
-                        </Button>
-                      )}
+                          icon={<LuUsers size={20} />}
+                          label={t("discoverTalents")}
+                        />
+                      </div>
+                    </div>
+
+                    {/* Learn Section */}
+                    <div className="mb-2">
+                      <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 px-2">
+                        {t("learn")}
+                      </p>
+                      <div className="flex flex-col gap-1">
+                        <MobileMenuLink
+                          href={MainRoutes.BLOG}
+                          onClick={onClose}
+                          icon={<LuBookOpen size={20} />}
+                          label={t("startupAcademy")}
+                        />
+                        <MobileMenuLink
+                          href={MainRoutes.ABOUT}
+                          onClick={onClose}
+                          icon={<LuInfo size={20} />}
+                          label={t("aboutUs")}
+                        />
+                      </div>
+                    </div>
+
+                    {/* Support Section */}
+                    <div className="mb-2">
+                      <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 px-2">
+                        {t("support")}
+                      </p>
+                      <div className="flex flex-col gap-1">
+                        <MobileMenuLink
+                          href={MainRoutes.HELP}
+                          onClick={onClose}
+                          icon={<LuCircleHelp size={20} />}
+                          label={t("help")}
+                        />
+                        <MobileMenuLink
+                          href={MainRoutes.CONTACT}
+                          onClick={onClose}
+                          icon={<LuPhone size={20} />}
+                          label={t("contactUs")}
+                        />
+                      </div>
+                    </div>
+
+                    {/* Legal Section */}
+                    <div className="mb-3">
+                      <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 px-2">
+                        {t("legal")}
+                      </p>
+                      <div className="flex flex-col gap-1">
+                        <MobileMenuLink
+                          href={MainRoutes.TERMS}
+                          onClick={onClose}
+                          icon={<LuScale size={20} />}
+                          label={t("terms")}
+                        />
+                        <MobileMenuLink
+                          href={MainRoutes.PRIVACY}
+                          onClick={onClose}
+                          icon={<LuLock size={20} />}
+                          label={t("privacy")}
+                        />
+                      </div>
+                    </div>
+
+                    {/* Login / Register Buttons */}
+                    <div className="pt-3 border-t border-gray-100">
+                      <div className="grid grid-cols-2 gap-3">
+                        {(!isAuthPage || !isLoginPage) && (
+                          <Button
+                            as={Link}
+                            href={AuthRoutes.LOGIN}
+                            variant="flat"
+                            color="primary"
+                            className="font-bold h-12 rounded-xl"
+                            onClick={onClose}
+                          >
+                            {t("login")}
+                          </Button>
+                        )}
+                        {(!isAuthPage || !isRegisterPage) && (
+                          <Button
+                            as={Link}
+                            href={AuthRoutes.REGISTER}
+                            color="primary"
+                            className="font-bold h-12 rounded-xl"
+                            onClick={onClose}
+                          >
+                            {t("register")}
+                          </Button>
+                        )}
+                      </div>
                     </div>
                   </div>
                 )}
