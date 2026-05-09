@@ -5,11 +5,7 @@ import { Button } from "@heroui/react";
 import { FiEye } from "react-icons/fi";
 import { useTranslations } from "next-intl";
 
-interface IdeaBusinessPlanProps {
-  project: Project;
-}
-
-export function IdeaBusinessPlan({ project }: IdeaBusinessPlanProps) {
+export function IdeaBusinessPlan({ project }: { project: Project }) {
   const t = useTranslations("ProjectDetails.businessPlan");
   if (!project.businessPlanUrl) return null;
 

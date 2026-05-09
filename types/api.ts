@@ -3,14 +3,6 @@ import {
   LoginInput,
   RegisterInput,
 } from "../validations/auth.validation";
-import {
-  FundingStage,
-  MarketFocus,
-  ProjectStage,
-  ProjectType,
-  RevenueModel,
-  TractionType,
-} from "./project";
 import { PaginationData } from "./filters";
 
 export enum ExperienceLevel {
@@ -44,12 +36,6 @@ export enum ServiceArea {
   GLOBAL = "GLOBAL",
 }
 
-
-
-
-
-
-
 export type MessageKey =
   | "welcome"
   | "registerSuccess"
@@ -82,7 +68,9 @@ export type MessageKey =
   | "recordNotFound"
   | "invalidReference"
   | "databaseError"
-  | "somethingWentWrong";
+  | "somethingWentWrong"
+  | "memberAdded"
+  | "memberRemoved";
 
 export interface User {
   id: number;
@@ -116,14 +104,25 @@ export interface User {
   country?: Country;
   city?: City;
   wishlistIds?: number[];
+  memberProjects?: ProjectMember[];
+}
+
+export interface ProjectMember {
+  id: number;
+  projectId: number;
+  userId: number;
+  role: string;
+  joinedAt: string;
+  firstName: string;
+  lastName: string;
+  avatar?: string | null;
+  jobTitle?: string | null;
 }
 
 export enum UserType {
   TALENT = "TALENT",
   INVESTOR = "INVESTOR",
 }
-
-
 
 export interface ApiResponse<T> {
   status: "success" | "error";
@@ -261,10 +260,6 @@ export interface ProjectDraft {
   currentStep: number;
 }
 
-
-
-
-
 export interface Project {
   id: number;
   title: string;
@@ -309,8 +304,10 @@ export interface Project {
   serviceArea: ServiceArea | null;
   status: ProjectStatus;
   currentStep: number;
+  isOwner?: boolean;
+  userRole?: string;
   owner?: User;
-  teamMembers?: User[];
+  members?: ProjectMember[];
   university?: University | null;
   faculty?: Faculty | null;
   industry?: Industry | null;

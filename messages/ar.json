@@ -668,7 +668,14 @@
       "equityStake": "نسبة الملكية"
     },
     "team": {
-      "title": "تواصل مع الفريق"
+      "title": "تواصل مع الفريق",
+      "owner": "المالك",
+      "addMember": "إضافة عضو",
+      "removeMember": "حذف عضو",
+      "removeConfirm": "هل أنت متأكد من حذف هذا العضو من الفريق؟",
+      "alreadyMember": "عضو بالفعل",
+      "searchPlaceholder": "ابحث بالاسم، البريد الإلكتروني أو المسمى الوظيفي...",
+      "searchDescription": "ابحث عن المواهب للتعاون معهم في هذا المشروع."
     },
     "businessPlan": {
       "title": "خطة العمل",

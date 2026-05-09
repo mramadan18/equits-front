@@ -80,7 +80,7 @@ export const UserMenu = ({
         <DropdownTrigger>
           <div className="flex items-center gap-2 cursor-pointer">
             <Avatar
-              src={`${user?.avatar}`}
+              src={user?.avatar || undefined}
               isBordered
               className="transition-transform"
               color="primary"

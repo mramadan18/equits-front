@@ -2,6 +2,7 @@ import {
   ApiResponse,
   Project,
   ProjectComment,
+  ProjectMember,
   ProjectRating,
 } from "../types/api";
 import { ProjectFilters } from "../types/filters";
@@ -66,4 +67,21 @@ export const projectService = {
     id: number | string,
   ): Promise<ApiResponse<ProjectRating>> =>
     unwrap(apiClient.get(`/projects/${id}/rating`)),
+
+  addMember: (
+    projectId: number | string,
+    memberData: { userId: number; role: string },
+  ): Promise<ApiResponse<any>> =>
+    unwrap(apiClient.post(`/projects/${projectId}/members`, memberData)),
+
+  removeMember: (
+    projectId: number | string,
+    memberId: number,
+  ): Promise<ApiResponse<any>> =>
+    unwrap(apiClient.delete(`/projects/${projectId}/members/${memberId}`)),
+
+  getProjectMembers: (
+    id: number | string,
+  ): Promise<ApiResponse<ProjectMember[]>> =>
+    unwrap(apiClient.get(`/projects/${id}/members`)),
 };

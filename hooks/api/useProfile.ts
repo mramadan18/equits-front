@@ -82,3 +82,11 @@ export const useInfiniteProfiles = (
     },
   });
 };
+
+export const useSearchTalents = (search: string, enabled: boolean = true) => {
+  return useQuery<ApiResponse<User[]>, ApiError>({
+    queryKey: ["talents-search", search],
+    queryFn: () => profileService.searchTalents(search),
+    enabled: enabled && search.length >= 2,
+  });
+};

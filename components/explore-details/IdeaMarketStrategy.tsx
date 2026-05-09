@@ -63,7 +63,7 @@ export function IdeaMarketStrategy({ project }: { project: Project }) {
                   {strategy.title}
                 </h4>
               </div>
-              <p className="text-gray leading-relaxed font-medium relative z-10 text-xxs! sm:text-base md:text-lg">
+              <p className="text-gray leading-relaxed font-medium relative z-10 text-xxs! sm:text-base! md:text-lg!">
                 {strategy.content}
               </p>
 

@@ -44,4 +44,12 @@ export const profileService = {
     limit: number = 3,
   ): Promise<ApiResponse<User[]>> =>
     unwrap(apiClient.get(`/profile/${id}/related`, { params: { limit } })),
+
+  searchTalents: (
+    search: string,
+    limit: number = 10,
+  ): Promise<ApiResponse<User[]>> =>
+    unwrap(
+      apiClient.get("/profile/search-talents", { params: { search, limit } }),
+    ),
 };

@@ -10,10 +10,12 @@ export function IdeaVideoHero({ project }: IdeaVideoHeroProps) {
   const youtubeId = videoUrl?.includes("watch?v=")
     ? videoUrl.split("watch?v=")[1]
     : null;
-  const youtubeUrl = `https://www.youtube.com/embed/${youtubeId}`;
+  const youtubeUrl = youtubeId
+    ? `https://www.youtube.com/embed/${youtubeId}`
+    : null;
   return (
     <div className="relative w-full sm:h-[450px] aspect-video bg-dark rounded-xl sm:rounded-2xl overflow-hidden group shadow-md">
-      {videoUrl ? (
+      {videoUrl && youtubeId ? (
         <iframe
           src={`${youtubeUrl}`}
           title={`${project?.title}`}

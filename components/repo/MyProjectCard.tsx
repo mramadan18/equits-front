@@ -67,7 +67,7 @@ export const MyProjectCard = ({ project }: { project: Project }) => {
       <div className="group relative bg-white rounded-2xl border border-gray-100 shadow-card overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 text-start">
         {/* ── cover strip ─────────────────────────────────── */}
         <Link
-          href={`/${MainRoutes.PROJECTS}/${project.id}`}
+          href={`${MainRoutes.PROJECTS}/${project.id}`}
           className="block relative h-36 w-full bg-gradient-to-br from-primary/10 via-primary/5 to-secondary/10 overflow-hidden"
         >
           {project.cover ? (
@@ -141,31 +141,45 @@ export const MyProjectCard = ({ project }: { project: Project }) => {
             </div>
 
             <div className="flex items-center gap-2">
-              <Tooltip content={t("delete")} placement="top">
-                <Button
-                  isIconOnly
+              {project.isOwner && (
+                <>
+                  <Tooltip content={t("delete")} placement="top">
+                    <Button
+                      isIconOnly
+                      size="sm"
+                      radius="full"
+                      variant="flat"
+                      color="danger"
+                      onPress={onOpen}
+                    >
+                      <FaTrash size={14} />
+                    </Button>
+                  </Tooltip>
+                  <Tooltip content={t("resumeEditing")} placement="top">
+                    <Button
+                      as={Link}
+                      href={`${MainRoutes.NEW_PROJECT}?id=${project.id}`}
+                      isIconOnly
+                      size="sm"
+                      radius="full"
+                      variant="flat"
+                      color="primary"
+                    >
+                      <FaEdit size={14} />
+                    </Button>
+                  </Tooltip>
+                </>
+              )}
+              {!project.isOwner && project.userRole && (
+                <Chip
                   size="sm"
-                  radius="full"
                   variant="flat"
-                  color="danger"
-                  onPress={onOpen}
+                  color="secondary"
+                  className="font-semibold text-xxs!"
                 >
-                  <FaTrash size={14} />
-                </Button>
-              </Tooltip>
-              <Tooltip content={t("resumeEditing")} placement="top">
-                <Button
-                  as={Link}
-                  href={`${MainRoutes.NEW_PROJECT}?id=${project.id}`}
-                  isIconOnly
-                  size="sm"
-                  radius="full"
-                  variant="flat"
-                  color="primary"
-                >
-                  <FaEdit size={14} />
-                </Button>
-              </Tooltip>
+                  {project.userRole}
+                </Chip>
+              )}
             </div>
           </div>
 

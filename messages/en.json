@@ -667,7 +667,14 @@
       "equityStake": "Equity"
     },
     "team": {
-      "title": "Reach out to the team"
+      "title": "Reach out to the team",
+      "owner": "Owner",
+      "addMember": "Add Member",
+      "removeMember": "Remove Member",
+      "removeConfirm": "Are you sure you want to remove this member?",
+      "alreadyMember": "Already a member",
+      "searchPlaceholder": "Search by name, email or job title...",
+      "searchDescription": "Search for talents to collaborate with on this project."
     },
     "businessPlan": {
       "title": "Business Plan",

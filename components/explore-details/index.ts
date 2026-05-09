@@ -13,3 +13,5 @@ export * from "./RatingModal";
 export * from "./CommentModal";
 export * from "./VideoCommentsModal";
 export * from "./ProjectSkeleton";
+export * from "./AddTeamMemberModal";
+export * from "./TeamMemberCard";

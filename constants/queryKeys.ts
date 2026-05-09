@@ -15,6 +15,7 @@ export const queryKeys = {
     activeDraft: ["active-draft"] as const,
     comments: (id: number | string) => ["project-comments", id] as const,
     rating: (id: number | string) => ["project-rating", id] as const,
+    members: (id: number | string) => ["project-members", id] as const,
   },
   lookup: {
     universities: ["universities"] as const,

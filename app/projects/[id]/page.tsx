@@ -25,6 +25,13 @@ export async function generateMetadata({
   params,
 }: ProjectPageProps): Promise<Metadata> {
   const { id } = await params;
+
+  if (!id || isNaN(Number(id)) || Number(id) <= 0) {
+    return {
+      title: "Project Not Found | Equits",
+    };
+  }
+
   try {
     const response = await fetchServer<Project>(`/projects/${id}`);
     const project = response.data;
@@ -60,6 +67,10 @@ const SectionWrapper = ({ children }: { children: ReactNode }) => (
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
   const { id } = await params;
+
+  if (!id || isNaN(Number(id)) || Number(id) <= 0) {
+    notFound();
+  }
 
   let project;
   try {

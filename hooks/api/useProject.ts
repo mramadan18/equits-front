@@ -11,15 +11,20 @@ import {
   Project,
   ProjectComment,
   ProjectRating,
+  ProjectMember,
 } from "@/types/api";
 import { ProjectFilters } from "@/types/filters";
 import { ApiError } from "@/types/error";
 
-export const useProject = (id: number | string) => {
+export const useProject = (
+  id: number | string,
+  options?: { enabled?: boolean },
+) => {
   return useQuery<ApiResponse<Project>, ApiError>({
     queryKey: queryKeys.projects.detail(id),
     queryFn: () => projectService.getProjectById(id),
-    enabled: !!id,
+    enabled: !!id && options?.enabled !== false,
+    ...options,
   });
 };
 
@@ -191,5 +196,53 @@ export const useProjectRating = (id: number | string) => {
     queryKey: ["project-rating", id],
     queryFn: () => projectService.getProjectRating(id),
     enabled: !!id,
+  });
+};
+
+export const useProjectMembers = (
+  id: number | string,
+  options?: { enabled?: boolean },
+) => {
+  return useQuery<ApiResponse<ProjectMember[]>, ApiError>({
+    queryKey: queryKeys.projects.members(id),
+    queryFn: () => projectService.getProjectMembers(id),
+    enabled: !!id && options?.enabled !== false,
+    ...options,
+  });
+};
+
+export const useAddProjectMember = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation<
+    ApiResponse<any>,
+    ApiError,
+    { projectId: number | string; userId: number; role: string }
+  >({
+    mutationFn: ({ projectId, userId, role }) =>
+      projectService.addMember(projectId, { userId, role }),
+    onSuccess: (_, { projectId }) => {
+      queryClient.invalidateQueries({
+        queryKey: queryKeys.projects.members(projectId),
+      });
+    },
+  });
+};
+
+export const useRemoveProjectMember = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation<
+    ApiResponse<any>,
+    ApiError,
+    { projectId: number | string; memberId: number }
+  >({
+    mutationFn: ({ projectId, memberId }) =>
+      projectService.removeMember(projectId, memberId),
+    onSuccess: (_, { projectId }) => {
+      queryClient.invalidateQueries({
+        queryKey: queryKeys.projects.members(projectId),
+      });
+    },
   });
 };
