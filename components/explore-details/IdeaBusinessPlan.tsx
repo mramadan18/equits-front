@@ -1,3 +1,5 @@
+"use client";
+
 import { Project } from "@/types/api";
 import { Button } from "@heroui/react";
 import { FiEye } from "react-icons/fi";

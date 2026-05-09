@@ -102,8 +102,10 @@ export const ProfileBio = ({
           </>
         )}
         {!talent?.company && !talent?.jobTitle && isOwnProfile && (
-          <div className="flex items-center gap-2">
-            <BsBuildings className="text-lg text-gray4" />
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-lg bg-primary/8 flex items-center justify-center flex-shrink-0">
+              <BsBuildings className="text-lg text-primary" />
+            </div>
             <Link
               href={MainRoutes.SETTINGS_JOB_TITLE}
               className="text-sm font-medium text-primary hover:text-primary/80 transition-colors duration-200 underline underline-offset-2"
@@ -113,8 +115,10 @@ export const ProfileBio = ({
           </div>
         )}
         {!talent?.company && !talent?.jobTitle && !isOwnProfile && (
-          <div className="flex items-center gap-2">
-            <BsBuildings className="text-lg text-gray4" />
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-lg bg-primary/8 flex items-center justify-center flex-shrink-0">
+              <BsBuildings className="text-lg text-primary" />
+            </div>
             <span className="font-medium">{t("noCompany")}</span>
           </div>
         )}

@@ -1,3 +1,5 @@
+"use client";
+
 import { Rating, RoundedStar } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 

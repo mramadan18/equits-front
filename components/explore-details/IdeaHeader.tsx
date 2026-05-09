@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import { FiCalendar } from "react-icons/fi";
 import { Project } from "@/types/api";

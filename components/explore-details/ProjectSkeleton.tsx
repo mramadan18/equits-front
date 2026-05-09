@@ -1,3 +1,5 @@
+"use client";
+
 import { Skeleton, Card, CardBody, Divider } from "@heroui/react";
 
 export const ProjectSkeleton = () => {
