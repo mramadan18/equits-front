@@ -34,6 +34,8 @@ export default function ExploreClient({ initialData }: ExploreClientProps) {
       "equityStake",
       "universityId",
       "facultyId",
+      "sortBy",
+      "sortOrder",
     ];
 
     keys.forEach((key) => {

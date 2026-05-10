@@ -41,6 +41,7 @@ export default function HomePage() {
       "equityStake",
       "universityId",
       "facultyId",
+      "sortBy",
     ];
 
     keys.forEach((key) => {

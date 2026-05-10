@@ -67,6 +67,15 @@ export const useExploreFiltersController = () => {
   const currentEquityStake = searchParams.get("equityStake") || "all";
   const universityId = searchParams.get("universityId") || "all";
   const facultyId = searchParams.get("facultyId") || "all";
+  const currentSortBy = searchParams.get("sortBy") || "createdAt";
+  const currentSortOrder = searchParams.get("sortOrder") || "desc";
+
+  const sortByItems = [
+    { key: "createdAt-desc", label: t("mostRecent") || "الأحدث" },
+    { key: "createdAt-asc", label: t("oldest") || "الأقدم" },
+    { key: "fundingAsk-desc", label: t("highestFunding") || "الأعلى تمويلاً" },
+    { key: "fundingAsk-asc", label: t("lowestFunding") || "الأقل تمويلاً" },
+  ];
 
   const stageItems = [
     { key: "all", label: t("allStages") },
@@ -189,6 +198,8 @@ export const useExploreFiltersController = () => {
     currentFundingStage,
     currentServiceArea,
     currentEquityStake,
+    currentSortBy,
+    currentSortOrder,
     stageItems,
     industryItems,
     fundingAskItems,
@@ -205,6 +216,7 @@ export const useExploreFiltersController = () => {
     facultyItems,
     universityId,
     facultyId,
+    sortByItems,
     updateParam,
     bulkUpdateParams,
     clearFilters: () => {

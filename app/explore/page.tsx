@@ -33,6 +33,8 @@ export default async function ExplorePage({
     equityStake: (resolvedParams.equityStake as string) || undefined,
     universityId: (resolvedParams.universityId as string) || undefined,
     facultyId: (resolvedParams.facultyId as string) || undefined,
+    sortBy: (resolvedParams.sortBy as string) || undefined,
+    sortOrder: (resolvedParams.sortOrder as string) || undefined,
     limit: 15,
   };
 

@@ -14,15 +14,15 @@ export function useUrlSearchParams() {
       } else {
         params.set(key, value);
       }
-      
+
       // Reset page when filtering changes
       if (key !== "page" && params.has("page")) {
         params.set("page", "1");
       }
-      
+
       router.push(pathname + "?" + params.toString(), { scroll: false });
     },
-    [router, pathname, searchParams]
+    [router, pathname, searchParams],
   );
 
   const updateParams = useCallback(
@@ -49,14 +49,14 @@ export function useUrlSearchParams() {
         router.push(pathname + "?" + params.toString(), { scroll: false });
       }
     },
-    [router, pathname, searchParams]
+    [router, pathname, searchParams],
   );
 
   const getParam = useCallback(
     (key: string) => {
       return searchParams.get(key);
     },
-    [searchParams]
+    [searchParams],
   );
 
   const clearParams = useCallback(() => {

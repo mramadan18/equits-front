@@ -37,6 +37,7 @@ export interface ProjectFilters extends BaseFilters {
   equityStake?: string;
   universityId?: number | string;
   facultyId?: number | string;
+  sortBy?: string;
 }
 
 export interface ProfileFilters extends BaseFilters {

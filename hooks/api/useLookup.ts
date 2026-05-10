@@ -46,4 +46,3 @@ export const useCities = (countryId?: number) => {
     enabled: !!countryId,
   });
 };
-

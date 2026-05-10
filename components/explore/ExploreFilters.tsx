@@ -1,10 +1,20 @@
 "use client";
 import { useState } from "react";
-import { Badge, Button, Skeleton, Switch } from "@heroui/react";
+import {
+  Badge,
+  Button,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
+  Skeleton,
+  Switch,
+} from "@heroui/react";
 import { IoFilterOutline } from "react-icons/io5";
 import { FilterDropdown } from "@/components/ui";
 import { useExploreFiltersController } from "@/hooks/ui/useExploreFiltersController";
 import { ExploreFiltersDrawer } from "./ExploreFiltersDrawer";
+import { FaSortDown } from "react-icons/fa";
 
 const ExploreFilters = ({ loading }: { loading: boolean }) => {
   const {
@@ -21,10 +31,14 @@ const ExploreFilters = ({ loading }: { loading: boolean }) => {
     currentFundingStage,
     currentServiceArea,
     currentEquityStake,
+    currentSortBy,
+    currentSortOrder,
     stageItems,
     industryItems,
     fundingAskItems,
+    sortByItems,
     updateParam,
+    bulkUpdateParams,
   } = useExploreFiltersController();
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -74,7 +88,7 @@ const ExploreFilters = ({ loading }: { loading: boolean }) => {
   return (
     <div className="flex flex-col w-full mb-8 md:mb-10 gap-4">
       {/* Mobile Actions Row */}
-      <div className="flex md:hidden items-center justify-between w-full px-1">
+      <div className="flex items-center justify-between w-full">
         <Badge
           content={activeFiltersCount}
           color="primary"
@@ -88,7 +102,7 @@ const ExploreFilters = ({ loading }: { loading: boolean }) => {
           <Button
             variant="bordered"
             radius="full"
-            className="font-bold text-black gap-2 h-10 px-4 border-gray-300"
+            className="font-semibold text-black gap-2 h-10 px-4 border-gray-300"
             startContent={<IoFilterOutline className="text-xl" />}
             onPress={() => setIsDrawerOpen(true)}
           >
@@ -97,14 +111,42 @@ const ExploreFilters = ({ loading }: { loading: boolean }) => {
         </Badge>
 
         {/* Sort Placeholder - To match Udemy's layout */}
-        <Button
-          variant="light"
-          radius="full"
-          className="font-bold text-gray-600 gap-1 h-10"
-          endContent={<span className="text-xs">▼</span>}
+        <Dropdown
+          classNames={{
+            content: "min-w-20 w-48",
+          }}
         >
-          {t("sortBy") || "Most Relevant"}
-        </Button>
+          <DropdownTrigger>
+            <Button
+              variant="light"
+              radius="full"
+              className="font-semibold text-gray-600"
+              endContent={<FaSortDown size={18} />}
+            >
+              {sortByItems.find(
+                (item) => item.key === `${currentSortBy}-${currentSortOrder}`,
+              )?.label || sortByItems[0]?.label}
+            </Button>
+          </DropdownTrigger>
+          <DropdownMenu
+            aria-label="Sort Projects"
+            selectedKeys={new Set([`${currentSortBy}-${currentSortOrder}`])}
+            selectionMode="single"
+            onSelectionChange={(keys) => {
+              const selectedValue = Array.from(keys)[0] as string;
+              if (selectedValue) {
+                const [newSortBy, newSortOrder] = selectedValue.split("-");
+                bulkUpdateParams({
+                  sortBy: newSortBy,
+                  sortOrder: newSortOrder,
+                });
+              }
+            }}
+            items={sortByItems}
+          >
+            {(item) => <DropdownItem key={item.key}>{item.label}</DropdownItem>}
+          </DropdownMenu>
+        </Dropdown>
       </div>
 
       <div className="flex items-center w-full gap-4 overflow-hidden">
@@ -162,25 +204,7 @@ const ExploreFilters = ({ loading }: { loading: boolean }) => {
           />
         </div>
 
-        {/* All Filters Button - Desktop */}
-        <div className="shrink-0 hidden md:block">
-          <Badge
-            content={activeFiltersCount}
-            color="primary"
-            isInvisible={activeFiltersCount === 0}
-            shape="circle"
-          >
-            <Button
-              variant="light"
-              radius="full"
-              className="font-bold text-black gap-2 h-10 px-4 hover:bg-gray-50"
-              startContent={<IoFilterOutline className="text-2xl" />}
-              onPress={() => setIsDrawerOpen(true)}
-            >
-              {t("allFilters")}
-            </Button>
-          </Badge>
-        </div>
+        {/* Desktop actions: Sort and All Filters */}
       </div>
 
       <ExploreFiltersDrawer
