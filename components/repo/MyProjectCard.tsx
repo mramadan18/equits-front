@@ -175,7 +175,7 @@ export const MyProjectCard = ({ project }: { project: Project }) => {
                   size="sm"
                   variant="flat"
                   color="secondary"
-                  className="font-semibold text-xxs!"
+                  className="font-semibold text-[10px]"
                 >
                   {project.userRole}
                 </Chip>
@@ -232,7 +232,7 @@ export const MyProjectCard = ({ project }: { project: Project }) => {
               <div className="flex items-center gap-1">
                 <HiOutlineCurrencyDollar className="w-4 h-4 text-emerald-500" />
                 <span className="text-sm font-bold text-dark">{funding}</span>
-                <span className="text-xxs! text-gray4 font-medium">
+                <span className="text-[10px] text-gray4 font-medium">
                   {t("ask")}
                 </span>
               </div>

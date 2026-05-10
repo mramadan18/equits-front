@@ -43,7 +43,7 @@ export const FeedIdeaCard = ({ idea }: { idea: Project }) => {
               className="object-cover transition-transform duration-300 group-hover:scale-105"
             />
           </Link>
-          <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-md px-2.5 py-1 rounded-full text-xxs! font-bold text-dark shadow-sm">
+          <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-md px-2.5 py-1 rounded-full text-[10px] font-bold text-dark shadow-sm">
             {idea.stage}
           </div>
         </div>

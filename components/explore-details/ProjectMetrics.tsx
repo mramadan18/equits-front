@@ -142,7 +142,7 @@ export function ProjectMetrics({ project }: { project: Project }) {
                   {metric.icon}
                 </div>
                 <div className="flex flex-col justify-center items-center text-center">
-                  <span className="text-xxs! font-bold text-gray2 uppercase tracking-[0.1em] mb-0.5">
+                  <span className="text-[10px] font-bold text-gray2 uppercase tracking-[0.1em] mb-0.5">
                     {metric.label}
                   </span>
                   <span className="text-base sm:text-lg font-bold text-dark tabular-nums">

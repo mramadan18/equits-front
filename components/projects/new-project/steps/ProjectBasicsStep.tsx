@@ -50,7 +50,7 @@ export const ProjectBasicsStep = ({
           maxLength={60}
           classNames={{
             description:
-              "absolute bottom-1 right-2 text-tiny! text-default-400",
+              "absolute bottom-1 right-2 text-[8px] text-default-400",
             inputWrapper: "relative",
           }}
         />
@@ -66,7 +66,7 @@ export const ProjectBasicsStep = ({
           maxLength={160}
           classNames={{
             description:
-              "absolute bottom-1 right-2 text-tiny! text-default-400",
+              "absolute bottom-1 right-2 text-[8px] text-default-400",
             inputWrapper: "relative",
           }}
         />
@@ -108,7 +108,7 @@ export const ProjectBasicsStep = ({
             </div>
           }
           classNames={{
-            description: "absolute bottom-4 end-4 text-tiny! text-gray2",
+            description: "absolute bottom-4 end-4 text-[8px] text-gray2",
             inputWrapper: "relative",
           }}
         />

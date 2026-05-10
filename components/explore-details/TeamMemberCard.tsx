@@ -26,9 +26,9 @@ const CARD_BASE =
 
 const BADGE_STYLES = {
   owner:
-    "text-xxs! font-bold text-primary uppercase tracking-wider bg-primary/10 px-2.5 py-1 rounded-full",
+    "text-[10px] font-bold text-primary uppercase tracking-wider bg-primary/10 px-2.5 py-1 rounded-full",
   member:
-    "text-xxs! font-bold text-zinc-600 uppercase tracking-wider bg-zinc-200/60 px-2.5 py-1 rounded-full",
+    "text-[10px] font-bold text-zinc-600 uppercase tracking-wider bg-zinc-200/60 px-2.5 py-1 rounded-full",
 } as const;
 
 export function TeamMemberCard({

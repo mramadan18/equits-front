@@ -171,7 +171,7 @@ export const ProjectMarketStep = ({
           radius="sm"
           maxLength={2000}
           classNames={{
-            description: "absolute bottom-4 end-4 text-tiny! text-gray2",
+            description: "absolute bottom-4 end-4 text-[8px] text-gray2",
             inputWrapper: "relative",
           }}
           description={
@@ -192,7 +192,7 @@ export const ProjectMarketStep = ({
           radius="sm"
           maxLength={2000}
           classNames={{
-            description: "absolute bottom-4 end-4 text-tiny! text-gray2",
+            description: "absolute bottom-4 end-4 text-[8px] text-gray2",
             inputWrapper: "relative",
           }}
           description={
@@ -213,7 +213,7 @@ export const ProjectMarketStep = ({
           radius="sm"
           maxLength={2000}
           classNames={{
-            description: "absolute bottom-4 end-4 text-tiny! text-gray2",
+            description: "absolute bottom-4 end-4 text-[8px] text-gray2",
             inputWrapper: "relative",
           }}
           description={
