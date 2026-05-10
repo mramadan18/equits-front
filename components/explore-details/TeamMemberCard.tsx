@@ -10,7 +10,7 @@ interface TeamMemberCardProps {
   avatar?: string | null;
   firstName: string;
   lastName: string;
-  jobTitle?: string | null;
+  // jobTitle?: string | null;
   /** Badge label shown below the name (e.g. "Owner", "Designer") */
   badge: string;
   /** Visual variant — owner gets primary colors, members get neutral */
@@ -36,7 +36,6 @@ export function TeamMemberCard({
   avatar,
   firstName,
   lastName,
-  jobTitle,
   badge,
   variant = "member",
   canRemove = false,
@@ -60,11 +59,11 @@ export function TeamMemberCard({
         </span>
         <div className="flex flex-col items-center gap-1.5 w-full">
           <span className={BADGE_STYLES[variant]}>{badge}</span>
-          {jobTitle && (
+          {/* {jobTitle && (
             <span className="text-xs font-medium text-gray-500 truncate w-full px-2">
               {jobTitle}
             </span>
-          )}
+          )} */}
         </div>
       </div>
 

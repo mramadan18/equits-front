@@ -277,6 +277,7 @@ export function IdeaActionSidebar({ project }: { project: Project }) {
           isOpen={meeting.isOpen}
           onOpenChange={meeting.onOpenChange}
           talent={project.owner}
+          projectId={project.id}
         />
       )}
 

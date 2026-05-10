@@ -8,6 +8,8 @@ import Opinions from "@/components/home/Opinions";
 import Faq from "@/components/home/Faq";
 import { JsonLd } from "@/components/seo/JsonLd";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Equits - Where Ideas Meet Talent",
   description:

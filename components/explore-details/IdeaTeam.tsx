@@ -148,7 +148,6 @@ export function IdeaTeam({ project }: { project: Project }) {
                 avatar={owner.avatar}
                 firstName={owner.firstName}
                 lastName={owner.lastName}
-                jobTitle={owner.jobTitle}
                 badge={t("owner")}
                 variant="owner"
               />
@@ -163,7 +162,6 @@ export function IdeaTeam({ project }: { project: Project }) {
                 avatar={member.avatar}
                 firstName={member.firstName}
                 lastName={member.lastName}
-                jobTitle={member.jobTitle}
                 badge={member.role}
                 variant="member"
                 canRemove={isOwner}

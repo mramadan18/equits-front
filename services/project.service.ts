@@ -84,4 +84,15 @@ export const projectService = {
     id: number | string,
   ): Promise<ApiResponse<ProjectMember[]>> =>
     unwrap(apiClient.get(`/projects/${id}/members`)),
+
+  requestMeeting: (
+    id: number | string,
+    data: {
+      preferredDate: string;
+      preferredTime: string;
+      contactMethod: string;
+      message?: string;
+    },
+  ): Promise<ApiResponse<any>> =>
+    unwrap(apiClient.post(`/projects/${id}/request-meeting`, data)),
 };

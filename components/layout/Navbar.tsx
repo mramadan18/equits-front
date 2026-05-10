@@ -1,5 +1,5 @@
 "use client";
-
+// Force rebuild to resolve hydration mismatch after logo size update
 import { useState, useEffect } from "react";
 import {
   Navbar as HeroUINavbar,
@@ -53,8 +53,10 @@ export const Navbar = ({
   } = useNavbarController(session, isVerified);
 
   const [isMobile, setIsMobile] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const checkMobile = () => setIsMobile(window.innerWidth < 1024);
     checkMobile();
     window.addEventListener("resize", checkMobile);
@@ -74,7 +76,7 @@ export const Navbar = ({
       />
       <HeroUINavbar
         maxWidth="full"
-        shouldHideOnScroll={isMobile}
+        shouldHideOnScroll={mounted && isMobile}
         className="bg-white shadow-sm h-16 lg:h-20"
         classNames={{
           item: "flex relative h-full items-center px-2 data-[active=true]:after:content-[''] data-[active=true]:after:absolute data-[active=true]:after:bottom-0 data-[active=true]:after:left-0 data-[active=true]:after:right-0 data-[active=true]:after:h-0.5 data-[active=true]:after:bg-primary",
@@ -87,9 +89,9 @@ export const Navbar = ({
               <Image
                 src="/images/logo.png"
                 alt={t("logoAlt")}
-                width={120}
+                width={170}
                 height={30}
-                className="w-24 lg:w-[120px] h-auto"
+                className="w-36 lg:w-[170px] h-auto"
                 priority
               />
             </Link>

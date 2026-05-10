@@ -246,3 +246,22 @@ export const useRemoveProjectMember = () => {
     },
   });
 };
+
+export const useRequestMeeting = () => {
+  return useMutation<
+    ApiResponse<any>,
+    ApiError,
+    {
+      id: number | string;
+      data: {
+        preferredDate: string;
+        preferredTime: string;
+        contactMethod: string;
+        contactInfo?: string;
+        message?: string;
+      };
+    }
+  >({
+    mutationFn: ({ id, data }) => projectService.requestMeeting(id, data),
+  });
+};
