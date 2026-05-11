@@ -135,9 +135,7 @@ export const ProfileBio = ({
               </div>
               <span className="text-sm font-medium leading-snug">
                 {t("educationInfo", {
-                  degree:
-                    education?.degree?.charAt(0).toUpperCase() +
-                    education?.degree?.slice(1).toLowerCase(),
+                  degree: ts(`educationForm.degrees.${education.degree}`),
                   faculty: education?.faculty,
                   university: education?.university,
                 })}

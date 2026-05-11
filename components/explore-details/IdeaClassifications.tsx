@@ -167,12 +167,6 @@ export function IdeaClassifications({ project }: IdeaClassificationsProps) {
 
   return (
     <div className="flex flex-col gap-6 mt-4">
-      {/* <div className="flex items-center gap-3">
-        <h3 className="text-base sm:text-xl font-semibold text-dark">
-          {t("title")}
-        </h3>
-      </div> */}
-
       {/* Classifications Grid */}
       <div className="grid grid-cols-2 sm:grid-cols-2 gap-2 sm:gap-6 w-full">
         {activeItems.map((item, idx) => (

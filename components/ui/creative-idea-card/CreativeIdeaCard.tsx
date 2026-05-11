@@ -8,6 +8,7 @@ import { MainRoutes } from "@/types";
 import { Project } from "@/types/api";
 import { Stat } from "../Stat";
 import Image from "next/image";
+import { formatEnum } from "@/utils/formatters";
 
 const AttributeRow = ({ label, items }: { label: string; items?: any[] }) => (
   <div className="flex items-center gap-1">
@@ -86,16 +87,24 @@ export const CreativeIdeaCard = ({ item }: { item: Project }) => {
           />
           <AttributeRow
             label={t("type")}
-            items={item.projectTypes.map((type) => ({ name: type }))}
+            items={item.projectTypes.map((type) => ({
+              name: formatEnum(type),
+            }))}
           />
           <AttributeRow
             label={t("businessModel")}
-            items={[{ name: item?.revenueModel }]}
+            items={[{ name: formatEnum(item?.revenueModel) }]}
           />
-          <AttributeRow label={t("stage")} items={[{ name: item?.stage }]} />
+          <AttributeRow
+            label={t("stage")}
+            items={[{ name: formatEnum(item?.stage) }]}
+          />
         </div>
 
-        <CardInfo date={item.createdAt} location={item.serviceArea as string} />
+        <CardInfo
+          date={item.createdAt}
+          location={formatEnum(item.serviceArea as string)}
+        />
 
         {/* Stats */}
         <div className="flex items-center gap-6 mb-8 text-sm font-semibold">

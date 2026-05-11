@@ -7,7 +7,7 @@ export const fmtCurrency = (v: string | number | null) => {
   return `$${n.toLocaleString()}`;
 };
 
-export const humanStage = (s: string) => {
+export const formatEnum = (s: string | null | undefined) => {
   if (!s) return "";
   return s
     .replace(/_/g, " ")

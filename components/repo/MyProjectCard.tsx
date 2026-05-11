@@ -18,7 +18,7 @@ import { MainRoutes } from "@/types";
 import Link from "next/link";
 import { ConfirmModal } from "@/components/ui/ConfirmModal";
 import { useDeleteProject } from "@/hooks/api/useProject";
-import { fmtCurrency, humanStage } from "@/utils/formatters";
+import { fmtCurrency, formatEnum } from "@/utils/formatters";
 
 export const MyProjectCard = ({ project }: { project: Project }) => {
   const t = useTranslations("Repo.card");
@@ -193,7 +193,7 @@ export const MyProjectCard = ({ project }: { project: Project }) => {
             {project.stage && (
               <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-primary/5 text-primary text-[11px] font-semibold">
                 <FaChartLine className="w-3 h-3" />
-                {humanStage(project.stage)}
+                {formatEnum(project.stage)}
               </span>
             )}
             {project.industry?.name && (
@@ -205,7 +205,7 @@ export const MyProjectCard = ({ project }: { project: Project }) => {
             {project.serviceArea && (
               <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gray3 text-gray2 text-[11px] font-semibold">
                 <FaMapMarkerAlt className="w-3 h-3" />
-                {humanStage(project.serviceArea)}
+                {formatEnum(project.serviceArea)}
               </span>
             )}
           </div>

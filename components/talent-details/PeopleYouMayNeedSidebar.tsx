@@ -7,6 +7,7 @@ import Link from "next/link";
 import { MainRoutes } from "@/types";
 import { Skeleton } from "@heroui/skeleton";
 import { User } from "@/types/api";
+import { formatEnum } from "@/utils/formatters";
 
 export const PeopleYouMayNeedSidebar = ({
   talents,
@@ -87,13 +88,12 @@ export const PeopleYouMayNeedSidebar = ({
                 </div>
                 <div className="text-sm font-medium text-gray-700 leading-tight">
                   {talent?.experienceLevel && (
-                    <span className="me-1">{talent?.experienceLevel}</span>
+                    <span className="me-1">
+                      {formatEnum(talent?.experienceLevel)}
+                    </span>
                   )}{" "}
                   {talent?.jobTitle}
                 </div>
-                {/* <div className="text-sm text-gray-500 font-medium">
-                @ {talent.company}
-              </div> */}
               </div>
             </div>
 

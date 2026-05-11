@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { MainRoutes } from "@/types";
 import { MdAddCircleOutline } from "react-icons/md";
+import { formatEnum } from "@/utils/formatters";
 
 export const ProfileDetails = ({ user }: { user: User | null }) => {
   const t = useTranslations("FeedProfileCard");
@@ -16,10 +17,7 @@ export const ProfileDetails = ({ user }: { user: User | null }) => {
         <div className="flex items-center gap-3">
           <PiCertificateBold className="text-gray2 shrink-0" size={24} />
           <div>
-            <span>
-              {user?.educationCertificates[0].degree.charAt(0).toUpperCase() +
-                user?.educationCertificates[0].degree.slice(1).toLowerCase()}
-            </span>
+            <span>{formatEnum(user?.educationCertificates[0].degree)}</span>
             <span> of </span>
             <span>{user?.educationCertificates[0].faculty}</span>
             {", "}
