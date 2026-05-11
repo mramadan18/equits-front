@@ -43,7 +43,8 @@ export default function NotificationsPage() {
   const { mutate: markAllReadMutate } = useMarkAllRead();
   const { mutate: deleteNotificationMutate } = useDeleteNotification();
   const { mutate: updateMeetingStatus } = useUpdateMeetingStatus();
-  const { mutate: respondToProjectInvitation } = useRespondToProjectInvitation();
+  const { mutate: respondToProjectInvitation } =
+    useRespondToProjectInvitation();
 
   const [activeTab, setActiveTab] = useState("all");
 
