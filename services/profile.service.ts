@@ -52,4 +52,7 @@ export const profileService = {
     unwrap(
       apiClient.get("/profile/search-talents", { params: { search, limit } }),
     ),
+
+  requestMeeting: (id: number | string, data: any): Promise<ApiResponse<any>> =>
+    unwrap(apiClient.post(`/profile/${id}/request-meeting`, data)),
 };

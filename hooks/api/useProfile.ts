@@ -5,7 +5,7 @@ import {
   useInfiniteQuery,
 } from "@tanstack/react-query";
 import { profileService } from "@/services/profile.service";
-import { ApiResponse, ProfileStatus, User } from "@/types/api";
+import { ApiResponse, MeetingType, ProfileStatus, User } from "@/types/api";
 import { ProfileFilters } from "@/types/filters";
 import { ApiError } from "@/types/error";
 import { queryKeys } from "@/constants/queryKeys";
@@ -88,5 +88,31 @@ export const useSearchTalents = (search: string, enabled: boolean = true) => {
     queryKey: ["talents-search", search],
     queryFn: () => profileService.searchTalents(search),
     enabled: enabled && search.length >= 2,
+  });
+};
+
+export const useRequestTalentMeeting = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation<
+    ApiResponse<any>,
+    ApiError,
+    {
+      id: number | string;
+      data: {
+        type: MeetingType;
+        preferredDate: string;
+        preferredTime: string;
+        contactMethod: string;
+        contactInfo?: string;
+        message?: string;
+        otherType?: string;
+      };
+    }
+  >({
+    mutationFn: ({ id, data }) => profileService.requestMeeting(id, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["meeting-eligibility"] });
+    },
   });
 };

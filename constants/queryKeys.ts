@@ -26,4 +26,12 @@ export const queryKeys = {
     countries: ["countries"] as const,
     cities: (countryId?: number) => ["cities", countryId] as const,
   },
+  notifications: {
+    all: ["notifications"] as const,
+    unreadCount: ["notifications-unread-count"] as const,
+  },
+  meetings: {
+    eligibility: (projectId?: number, receiverId?: number) =>
+      ["meeting-eligibility", { projectId, receiverId }] as const,
+  },
 } as const;

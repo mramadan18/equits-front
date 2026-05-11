@@ -205,9 +205,6 @@ export function AddTeamMemberModal({
           addToast({ title: res.message as string, color: "success" });
           handleClose();
         },
-        onError: (err) => {
-          addToast({ title: err.message as string, color: "danger" });
-        },
       },
     );
   };

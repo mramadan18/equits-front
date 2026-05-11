@@ -361,6 +361,14 @@
     "editProfileBtn": "تعديل الملف",
     "requestMeetingModal": {
       "title": "طلب اجتماع",
+      "meetingType": "نوع الاجتماع",
+      "meetingTypes": {
+        "projectInquiry": "استفسار عن المشروع",
+        "joinAsMember": "طلب انضمام للفريق",
+        "generalNetworking": "تواصل عام",
+        "investmentDisc": "مناقشة استثمارية",
+        "other": "أخرى"
+      },
       "preferredDate": "التاريخ المفضل",
       "preferredTime": "الوقت المفضل",
       "preferredContactMethod": "وسيلة التواصل المفضلة",
@@ -369,6 +377,8 @@
       "phoneLabel": "رقم هاتفك",
       "message": "الرسالة",
       "messagePlaceholder": "اكتب رسالة قصيرة لمالك المشروع...",
+      "otherTypeLabel": "الغرض من الاجتماع",
+      "otherTypePlaceholder": "مثال: شراكة، إرشاد، إلخ.",
       "noteLabel": "ملاحظة",
       "note": "ملاحظة: سيتم إرسال هذا الطلب إلى الطالب. ستتم المراسلات اللاحقة خارج المنصة باستخدام وسيلة التواصل المفضلة لديك.",
       "cancel": "إلغاء",
@@ -377,6 +387,17 @@
         "phone": "الهاتف",
         "email": "البريد الإلكتروني",
         "whatsapp": "واتساب"
+      },
+      "validation": {
+        "dateRequired": "التاريخ مطلوب",
+        "timeRequired": "الوقت مطلوب",
+        "contactRequired": "معلومات التواصل مطلوبة",
+        "futureDate": "يرجى اختيار تاريخ في المستقبل",
+        "futureTime": "يرجى اختيار وقت في المستقبل",
+        "invalidEmail": "يرجى إدخال بريد إلكتروني صحيح",
+        "invalidOption": "خيار غير صالح",
+        "otherTypeRequired": "يرجى تحديد الغرض من الاجتماع",
+        "otherTypeTooLong": "الغرض يجب أن يكون 20 حرفاً أو أقل"
       }
     }
   },
@@ -954,5 +975,32 @@
     "emptyTitle": "لا توجد مشاريع محفوظة بعد",
     "emptyDesc": "المشاريع التي تقوم بحفظها ستظهر هنا.",
     "exploreBtn": "استكشف المشاريع"
+  },
+  "Notifications": {
+    "title": "الإشعارات",
+    "markAllRead": "تحديد الكل كمقروء",
+    "markRead": "تحديد كمقروء",
+    "accept": "قبول",
+    "decline": "رفض",
+    "viewDetails": "عرض التفاصيل",
+    "empty": "لا توجد إشعارات بعد",
+    "unread": "غير مقروءة",
+    "all": "الكل",
+    "delete": "حذف",
+    "justNow": "الآن",
+    "types": {
+      "MEETING_REQUEST": "طلب اجتماع",
+      "MEETING_ACCEPTED": "تم قبول الاجتماع",
+      "MEETING_DECLINED": "تم رفض الاجتماع",
+      "PROJECT_LIKE": "إعجاب بالمشروع",
+      "PROJECT_COMMENT": "تعليق على المشروع"
+    },
+    "meetingTypes": {
+      "PROJECT_INQUIRY": "استفسار عن المشروع",
+      "JOIN_AS_MEMBER": "طلب انضمام للفريق",
+      "GENERAL_NETWORKING": "تواصل عام",
+      "INVESTMENT_DISC": "مناقشة استثمارية",
+      "OTHER": "أخرى"
+    }
   }
 }

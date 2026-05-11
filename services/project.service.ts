@@ -88,10 +88,13 @@ export const projectService = {
   requestMeeting: (
     id: number | string,
     data: {
+      type: string;
       preferredDate: string;
       preferredTime: string;
       contactMethod: string;
+      contactInfo?: string;
       message?: string;
+      otherType?: string;
     },
   ): Promise<ApiResponse<any>> =>
     unwrap(apiClient.post(`/projects/${id}/request-meeting`, data)),

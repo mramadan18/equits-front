@@ -16,6 +16,7 @@ import { MainRoutes } from "@/types";
 import { PitchModal } from "./PitchModal";
 import { AuthRequiredModal } from "./AuthRequiredModal";
 import { useNavbarController } from "@/hooks/ui/useNavbarController";
+import { useUnreadCount } from "@/hooks/api/useNotification";
 
 // Sub-components
 import { NavItems } from "./navbar/NavItems";
@@ -51,6 +52,9 @@ export const Navbar = ({
     isAuthRequiredOpen,
     onAuthRequiredOpenChange,
   } = useNavbarController(session, isVerified);
+
+  const { data: unreadData } = useUnreadCount();
+  const unreadCount = unreadData?.data.count || 0;
 
   const [isMobile, setIsMobile] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -117,14 +121,18 @@ export const Navbar = ({
 
             {isLoggedIn && (
               <Badge
-                content="2"
+                content={unreadCount > 0 ? unreadCount : undefined}
                 color="danger"
                 className="w-4 h-4 text-[8px]"
                 size="sm"
+                isInvisible={unreadCount === 0}
               >
-                <div className="w-8 h-8 bg-[#E9EAEB] rounded-full flex items-center justify-center">
+                <Link
+                  href={MainRoutes.NOTIFICATIONS}
+                  className="w-8 h-8 bg-[#E9EAEB] rounded-full flex items-center justify-center"
+                >
                   <IoMdNotificationsOutline size={18} className="text-black" />
-                </div>
+                </Link>
               </Badge>
             )}
           </div>

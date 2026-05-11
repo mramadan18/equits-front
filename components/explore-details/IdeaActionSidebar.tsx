@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, addToast } from "@heroui/react";
+import { Button, Modal, addToast, Tooltip } from "@heroui/react";
 import { useMultipleDisclosures } from "@/hooks/ui/useMultipleDisclosures";
 import { useTranslations } from "next-intl";
 import {
@@ -9,6 +9,8 @@ import {
   FiExternalLink,
   FiVideo,
   FiShare2,
+  FiInfo,
+  FiXCircle,
 } from "react-icons/fi";
 import { FaBookmark, FaStar, FaEdit } from "react-icons/fa";
 import { RatingModal } from "./RatingModal";
@@ -26,6 +28,16 @@ import { RequestMeetingModal } from "../talent-details/RequestMeetingModal";
 import { AuthRequiredModal } from "../layout/AuthRequiredModal";
 import { useRouter } from "next/navigation";
 import { MainRoutes } from "@/types";
+import {
+  useCancelMeeting,
+  useCheckMeetingEligibility,
+} from "@/hooks/api/useMeeting";
+import {
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+} from "@heroui/react";
 
 export function IdeaActionSidebar({ project }: { project: Project }) {
   const { user } = useAuthStore();
@@ -35,15 +47,60 @@ export function IdeaActionSidebar({ project }: { project: Project }) {
 
   const isOwner = user?.id === project?.ownerId;
 
-  const { rating, comment, meeting, auth } = useMultipleDisclosures([
-    "rating",
-    "comment",
-    "meeting",
-    "auth",
-  ] as const);
+  const { rating, comment, meeting, auth, cancelConfirm } =
+    useMultipleDisclosures([
+      "rating",
+      "comment",
+      "meeting",
+      "auth",
+      "cancelConfirm",
+    ] as const);
 
   const { mutate: toggleWishlist, isPending: isToggling } = useToggleWishlist();
   const isSaved = user?.wishlistIds?.includes(project.id);
+
+  const { data: eligibilityData, isLoading: isCheckingEligibility } =
+    useCheckMeetingEligibility({
+      projectId: project.id,
+      enabled: !!user && !isOwner,
+    });
+
+  const isEligible = eligibilityData?.data?.eligible !== false;
+  const eligibilityReason = eligibilityData?.data?.reason;
+  const eligibilityMessage = eligibilityData?.data?.message;
+  const pendingRequestId = eligibilityData?.data?.meetingRequestId;
+
+  const { mutate: cancelMeeting, isPending: isCancelling } = useCancelMeeting();
+
+  const handleMeetingPress = () => {
+    if (!user) {
+      auth.onOpen();
+      return;
+    }
+
+    if (eligibilityReason === "PENDING") {
+      cancelConfirm.onOpen();
+      return;
+    }
+
+    if (isEligible) {
+      meeting.onOpen();
+    }
+  };
+
+  const handleCancelMeeting = () => {
+    if (pendingRequestId) {
+      cancelMeeting(pendingRequestId, {
+        onSuccess: () => {
+          addToast({
+            title: "Meeting request cancelled",
+            color: "success",
+          });
+          cancelConfirm.onClose();
+        },
+      });
+    }
+  };
 
   const handleToggleWishlist = () => {
     if (!user) {
@@ -55,12 +112,6 @@ export function IdeaActionSidebar({ project }: { project: Project }) {
         addToast({
           title: response.message || "Updated wishlist",
           color: "success",
-        });
-      },
-      onError: (error: any) => {
-        addToast({
-          title: error.message || "Failed to update wishlist",
-          color: "danger",
         });
       },
     });
@@ -204,14 +255,50 @@ export function IdeaActionSidebar({ project }: { project: Project }) {
                 {isSaved ? ts("saved") || "Saved" : ts("saveForLater")}
               </Button>
 
-              <Button
-                color="primary"
-                className="w-full justify-start py-6 mt-1 font-semibold text-base shadow-md"
-                startContent={<FiVideo className="w-5 h-5 mr-2" />}
-                onPress={() => (user ? meeting.onOpen() : auth.onOpen())}
+              <Tooltip
+                content={eligibilityMessage}
+                isDisabled={
+                  isEligible || eligibilityReason === "PENDING" || !user
+                }
+                color="danger"
               >
-                {ts("requestMeeting")}
-              </Button>
+                <div className="w-full">
+                  <Button
+                    color={
+                      eligibilityReason === "PENDING"
+                        ? "primary"
+                        : isEligible
+                          ? "primary"
+                          : "default"
+                    }
+                    variant={
+                      isEligible || eligibilityReason === "PENDING"
+                        ? "solid"
+                        : "flat"
+                    }
+                    className={`w-full justify-start py-6 mt-1 font-semibold text-base shadow-md ${!isEligible && eligibilityReason !== "PENDING" ? "opacity-70 grayscale-[0.5]" : ""}`}
+                    startContent={
+                      eligibilityReason === "PENDING" ? (
+                        <FiXCircle className="w-5 h-5 mr-2" />
+                      ) : isEligible ? (
+                        <FiVideo className="w-5 h-5 mr-2" />
+                      ) : (
+                        <FiInfo className="w-5 h-5 mr-2" />
+                      )
+                    }
+                    onPress={handleMeetingPress}
+                    isDisabled={
+                      (!isEligible && eligibilityReason !== "PENDING") ||
+                      isCheckingEligibility
+                    }
+                    isLoading={isCheckingEligibility || isCancelling}
+                  >
+                    {eligibilityReason === "PENDING"
+                      ? "Cancel Meeting Request"
+                      : ts("requestMeeting")}
+                  </Button>
+                </div>
+              </Tooltip>
             </div>
           </>
         )}
@@ -273,18 +360,55 @@ export function IdeaActionSidebar({ project }: { project: Project }) {
       />
 
       {project.owner && (
-        <RequestMeetingModal
+        <Modal
           isOpen={meeting.isOpen}
           onOpenChange={meeting.onOpenChange}
-          talent={project.owner}
-          projectId={project.id}
-        />
+          size="xl"
+          backdrop="blur"
+          scrollBehavior="inside"
+        >
+          <RequestMeetingModal
+            onOpenChange={meeting.onOpenChange}
+            projectId={project.id}
+          />
+        </Modal>
       )}
 
       <AuthRequiredModal
         isOpen={auth.isOpen}
         onOpenChange={auth.onOpenChange}
       />
+
+      <Modal
+        isOpen={cancelConfirm.isOpen}
+        onOpenChange={cancelConfirm.onOpenChange}
+        backdrop="blur"
+      >
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-col gap-1">
+                Cancel Meeting Request
+              </ModalHeader>
+              <ModalBody>
+                <p>Are you sure you want to cancel your meeting request?</p>
+              </ModalBody>
+              <ModalFooter>
+                <Button variant="light" onPress={onClose}>
+                  No, Keep it
+                </Button>
+                <Button
+                  color="danger"
+                  isLoading={isCancelling}
+                  onPress={handleCancelMeeting}
+                >
+                  Yes, Cancel
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
     </div>
   );
 }

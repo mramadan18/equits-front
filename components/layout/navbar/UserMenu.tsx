@@ -17,6 +17,7 @@ import Link from "next/link";
 import { MainRoutes } from "@/types";
 import { User } from "@/types/api";
 import { FaRegBookmark } from "react-icons/fa";
+import { useUnreadCount } from "@/hooks/api/useNotification";
 
 interface UserMenuProps {
   user: User | null;
@@ -33,6 +34,9 @@ export const UserMenu = ({
   onPitchPress,
   isCreatingProject,
 }: UserMenuProps) => {
+  const { data: unreadData } = useUnreadCount();
+  const unreadCount = unreadData?.data.count || 0;
+
   return (
     <div className="flex items-center gap-4">
       <Button
@@ -45,10 +49,21 @@ export const UserMenu = ({
       </Button>
 
       <div className="flex items-center gap-3">
-        <Badge content="2" color="danger" className="w-5 h-5 text-[10px]">
-          <div className="w-10 h-10 bg-[#E9EAEB] rounded-full flex items-center justify-center">
+        <Badge
+          content={unreadCount > 0 ? unreadCount : undefined}
+          color="danger"
+          className="w-5 h-5 text-[10px]"
+          isInvisible={unreadCount === 0}
+        >
+          <Button
+            as={Link}
+            href={MainRoutes.NOTIFICATIONS}
+            isIconOnly
+            radius="full"
+            className="w-10 h-10 bg-[#E9EAEB]"
+          >
             <IoMdNotificationsOutline size={24} className="text-black" />
-          </div>
+          </Button>
         </Badge>
 
         <Badge

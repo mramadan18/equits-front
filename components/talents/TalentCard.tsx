@@ -1,5 +1,5 @@
 "use client";
-import { Card, CardBody, Avatar } from "@heroui/react";
+import { Card, CardBody, Avatar, Modal } from "@heroui/react";
 import { Button } from "@heroui/react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
@@ -9,7 +9,7 @@ import Link from "next/link";
 import { MainRoutes } from "@/types";
 import { User } from "@/types/api";
 import { useDisclosure } from "@heroui/react";
-import { RequestMeetingModal } from "../talent-details/RequestMeetingModal";
+import { RequestTalentMeetingModal } from "../talent-details/RequestTalentMeetingModal";
 
 export const TalentCard = ({ item }: { item: User }) => {
   const t = useTranslations("TalentsExplore");
@@ -93,11 +93,19 @@ export const TalentCard = ({ item }: { item: User }) => {
           </Button>
         </div>
       </CardBody>
-      <RequestMeetingModal
+
+      <Modal
         isOpen={isOpen}
         onOpenChange={onOpenChange}
-        talent={item}
-      />
+        size="xl"
+        backdrop="blur"
+        scrollBehavior="inside"
+      >
+        <RequestTalentMeetingModal
+          onOpenChange={onOpenChange}
+          talentId={item.id}
+        />
+      </Modal>
     </Card>
   );
 };

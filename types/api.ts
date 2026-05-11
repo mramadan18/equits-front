@@ -36,6 +36,14 @@ export enum ServiceArea {
   GLOBAL = "GLOBAL",
 }
 
+export enum MeetingType {
+  PROJECT_INQUIRY = "PROJECT_INQUIRY",
+  JOIN_AS_MEMBER = "JOIN_AS_MEMBER",
+  GENERAL_NETWORKING = "GENERAL_NETWORKING",
+  INVESTMENT_DISC = "INVESTMENT_DISC",
+  OTHER = "OTHER",
+}
+
 export type MessageKey =
   | "welcome"
   | "registerSuccess"

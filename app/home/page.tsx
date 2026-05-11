@@ -42,6 +42,7 @@ export default function HomePage() {
       "universityId",
       "facultyId",
       "sortBy",
+      "sortOrder",
     ];
 
     keys.forEach((key) => {

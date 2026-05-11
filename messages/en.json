@@ -361,6 +361,14 @@
     "educationInfo": "{degree} of {faculty}, {university}",
     "requestMeetingModal": {
       "title": "Request Meeting",
+      "meetingType": "Meeting Type",
+      "meetingTypes": {
+        "projectInquiry": "Project Inquiry",
+        "joinAsMember": "Join as Team Member",
+        "generalNetworking": "General Networking",
+        "investmentDisc": "Investment Discussion",
+        "other": "Other"
+      },
       "preferredDate": "Preferred Date",
       "preferredTime": "Preferred Time",
       "preferredContactMethod": "Preferred Contact Method",
@@ -369,6 +377,8 @@
       "phoneLabel": "Your Phone Number",
       "message": "Message",
       "messagePlaceholder": "Write a short message to the project owner...",
+      "otherTypeLabel": "Meeting Purpose",
+      "otherTypePlaceholder": "E.g. Partnership, Mentorship, etc.",
       "noteLabel": "Note",
       "note": "Note: This request will be sent to the owner. Further communication will happen off-platform using your preferred contact method.",
       "cancel": "Cancel",
@@ -377,6 +387,17 @@
         "phone": "Phone",
         "email": "Email",
         "whatsapp": "WhatsApp"
+      },
+      "validation": {
+        "dateRequired": "Date is required",
+        "timeRequired": "Time is required",
+        "contactRequired": "Contact information is required",
+        "futureDate": "Please select a date in the future",
+        "futureTime": "Please select a time in the future",
+        "invalidEmail": "Please enter a valid email address",
+        "invalidOption": "Invalid option selected",
+        "otherTypeRequired": "Please specify the meeting purpose",
+        "otherTypeTooLong": "Purpose must be 20 characters or less"
       }
     }
   },
@@ -953,5 +974,32 @@
     "emptyTitle": "No saved projects yet",
     "emptyDesc": "Projects you save will appear here.",
     "exploreBtn": "Explore Projects"
+  },
+  "Notifications": {
+    "title": "Notifications",
+    "markAllRead": "Mark all as read",
+    "markRead": "Mark as read",
+    "accept": "Accept",
+    "decline": "Decline",
+    "viewDetails": "View Details",
+    "empty": "No notifications yet",
+    "unread": "Unread",
+    "all": "All",
+    "delete": "Delete",
+    "justNow": "Just now",
+    "types": {
+      "MEETING_REQUEST": "Meeting Request",
+      "MEETING_ACCEPTED": "Meeting Accepted",
+      "MEETING_DECLINED": "Meeting Declined",
+      "PROJECT_LIKE": "Project Like",
+      "PROJECT_COMMENT": "Project Comment"
+    },
+    "meetingTypes": {
+      "PROJECT_INQUIRY": "Project Inquiry",
+      "JOIN_AS_MEMBER": "Join as Team Member",
+      "GENERAL_NETWORKING": "General Networking",
+      "INVESTMENT_DISC": "Investment Discussion",
+      "OTHER": "Other"
+    }
   }
 }

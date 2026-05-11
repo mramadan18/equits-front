@@ -4,7 +4,7 @@ import { useRef } from "react";
 import Image from "next/image";
 import { HiOutlineCloudArrowUp } from "react-icons/hi2";
 import { useUploadSingle } from "@/hooks/api/useUpload";
-import { addToast, Spinner } from "@heroui/react";
+import { Spinner } from "@heroui/react";
 import { FiFile } from "react-icons/fi";
 import { useTranslations } from "next-intl";
 
@@ -52,13 +52,6 @@ export const FileUploader = ({
         {
           onSuccess: (response) => {
             onChange(response.data.url);
-          },
-          onError: () => {
-            addToast({
-              title: t("errorTitle"),
-              description: t("errorDescription"),
-              color: "danger",
-            });
           },
         },
       );

@@ -45,7 +45,15 @@ export function Providers({
         <HeroUIProvider navigate={router.push}>
           <AuthInitializer session={session} />
           {children}
-          <ToastProvider placement="top-center" />
+          <ToastProvider
+            placement="top-center"
+            toastProps={{
+              hideIcon: true,
+              classNames: {
+                title: "whitespace-normal line-clamp-none text-center",
+              },
+            }}
+          />
         </HeroUIProvider>
       </GoogleOAuthProvider>
     </QueryClientProvider>

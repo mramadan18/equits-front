@@ -18,7 +18,6 @@ import {
 import { AuthLayout, AuthHeader, AuthSubmitButton } from "@/components/auth";
 import { StaggerContainer, StaggerItem } from "@/components/ui/animations";
 import { ApiResponse, SuccessResponse } from "@/types/api";
-import { ApiError } from "@/types/error";
 import { AuthRoutes } from "@/types";
 
 export default function VerifyResetOtpPage() {
@@ -51,12 +50,6 @@ export default function VerifyResetOtpPage() {
           color: "success",
         });
         setTimeLeft(30);
-      },
-      onError: (error: ApiError) => {
-        addToast({
-          title: error.response?.data?.message || "Resend failed",
-          color: "danger",
-        });
       },
     });
   };
@@ -93,12 +86,6 @@ export default function VerifyResetOtpPage() {
         });
         if (callbackUrl) queryParams.set("callbackUrl", callbackUrl);
         router.push(`${AuthRoutes.RESET_PASSWORD}?${queryParams.toString()}`);
-      },
-      onError: (error: ApiError) => {
-        addToast({
-          title: error.response?.data?.message || "Verification failed",
-          color: "danger",
-        });
       },
     });
   };

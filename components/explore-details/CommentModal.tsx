@@ -57,12 +57,6 @@ export function CommentModal({
           reset();
           onOpenChange();
         },
-        onError: (error) => {
-          addToast({
-            title: error.response?.data?.message || t("commentModal.error"),
-            color: "danger",
-          });
-        },
       },
     );
   };

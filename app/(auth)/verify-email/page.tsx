@@ -14,7 +14,6 @@ import { useVerifyEmail, useResendVerifyEmail } from "@/hooks/api/useAuth";
 import { AuthLayout, AuthHeader, AuthSubmitButton } from "@/components/auth";
 import { StaggerContainer, StaggerItem } from "@/components/ui/animations";
 import { ApiResponse, SuccessResponse } from "@/types/api";
-import { ApiError } from "@/types/error";
 import { AuthRoutes } from "@/types";
 
 export default function VerifyEmailPage() {
@@ -47,12 +46,6 @@ export default function VerifyEmailPage() {
           color: "success",
         });
         setTimeLeft(30);
-      },
-      onError: (error: ApiError) => {
-        addToast({
-          title: error.response?.data?.message || "Resend failed",
-          color: "danger",
-        });
       },
     });
   };

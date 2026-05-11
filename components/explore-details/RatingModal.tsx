@@ -60,12 +60,6 @@ export function RatingModal({
           reset();
           onOpenChange();
         },
-        onError: (error) => {
-          addToast({
-            title: error.response?.data?.message || t("ratingModal.error"),
-            color: "danger",
-          });
-        },
       },
     );
   };

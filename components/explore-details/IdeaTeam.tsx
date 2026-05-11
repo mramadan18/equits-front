@@ -81,9 +81,6 @@ export function IdeaTeam({ project }: { project: Project }) {
           addToast({ title: res.message as string, color: "success" });
           onDeleteModalOpenChange();
         },
-        onError: (err) => {
-          addToast({ title: err.message as string, color: "danger" });
-        },
       },
     );
   };

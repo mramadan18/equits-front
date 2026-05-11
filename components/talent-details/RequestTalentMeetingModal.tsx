@@ -1,26 +1,49 @@
 "use client";
 
-import { useRequestMeeting } from "@/hooks/api/useProject";
 import { RequestMeetingForm } from "./RequestMeetingForm";
 import { ModalContent, addToast } from "@heroui/react";
 import { RequestMeetingFormValues } from "@/validations/meeting.validation";
 import { SubmitHandler } from "react-hook-form";
 
-export const RequestMeetingModal = ({
+import { useRequestTalentMeeting } from "@/hooks/api/useProfile";
+import { useTranslations } from "next-intl";
+import { MeetingType } from "@/types/api";
+
+export const RequestTalentMeetingModal = ({
   onOpenChange,
-  projectId,
+  talentId,
 }: {
   onOpenChange: () => void;
-  projectId: number;
+  talentId: number;
 }) => {
-  const { mutate: requestMeeting, isPending } = useRequestMeeting();
+  const t = useTranslations("TalentDetails");
+  const { mutate: requestMeeting, isPending } = useRequestTalentMeeting();
+
+  const meetingTypes = [
+    {
+      key: MeetingType.GENERAL_NETWORKING,
+      label: t("requestMeetingModal.meetingTypes.generalNetworking"),
+    },
+    {
+      key: MeetingType.JOIN_AS_MEMBER,
+      label: t("requestMeetingModal.meetingTypes.joinAsMember"),
+    },
+    {
+      key: MeetingType.INVESTMENT_DISC,
+      label: t("requestMeetingModal.meetingTypes.investmentDisc"),
+    },
+    {
+      key: MeetingType.OTHER,
+      label: t("requestMeetingModal.meetingTypes.other"),
+    },
+  ];
 
   const onSubmit: SubmitHandler<RequestMeetingFormValues> = (data) => {
-    if (!projectId) return;
+    if (!talentId) return;
 
     requestMeeting(
       {
-        id: projectId,
+        id: talentId,
         data: {
           type: data.type,
           preferredDate: data.date.toString(),
@@ -32,7 +55,7 @@ export const RequestMeetingModal = ({
         },
       },
       {
-        onSuccess: (res: any) => {
+        onSuccess: (res) => {
           addToast({
             title: res.message || "Request sent successfully",
             color: "success",
@@ -47,9 +70,10 @@ export const RequestMeetingModal = ({
     <ModalContent>
       {(onClose: any) => (
         <RequestMeetingForm
-          onClose={onClose as any}
+          onClose={onClose}
           onSubmit={onSubmit}
           isPending={isPending}
+          types={meetingTypes}
         />
       )}
     </ModalContent>

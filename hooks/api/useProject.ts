@@ -248,20 +248,27 @@ export const useRemoveProjectMember = () => {
 };
 
 export const useRequestMeeting = () => {
+  const queryClient = useQueryClient();
+
   return useMutation<
     ApiResponse<any>,
     ApiError,
     {
       id: number | string;
       data: {
+        type: string;
         preferredDate: string;
         preferredTime: string;
         contactMethod: string;
         contactInfo?: string;
         message?: string;
+        otherType?: string;
       };
     }
   >({
     mutationFn: ({ id, data }) => projectService.requestMeeting(id, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["meeting-eligibility"] });
+    },
   });
 };
