@@ -53,7 +53,7 @@ export const Navbar = ({
     onAuthRequiredOpenChange,
   } = useNavbarController(session, isVerified);
 
-  const { data: unreadData } = useUnreadCount();
+  const { data: unreadData } = useUnreadCount({ enabled: isLoggedIn });
   const unreadCount = unreadData?.data.count || 0;
 
   const [isMobile, setIsMobile] = useState(false);

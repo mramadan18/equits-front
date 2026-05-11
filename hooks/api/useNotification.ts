@@ -7,17 +7,19 @@ import { queryKeys } from "@/constants/queryKeys";
 import { ApiResponse } from "@/types/api";
 import { ApiError } from "@/types/error";
 
-export const useNotifications = () => {
+export const useNotifications = (options?: { enabled?: boolean }) => {
   return useQuery<ApiResponse<Notification[]>, ApiError>({
     queryKey: queryKeys.notifications.all,
     queryFn: () => notificationService.getNotifications(),
+    ...options,
   });
 };
 
-export const useUnreadCount = () => {
+export const useUnreadCount = (options?: { enabled?: boolean }) => {
   return useQuery<ApiResponse<{ count: number }>, ApiError>({
     queryKey: queryKeys.notifications.unreadCount,
     queryFn: () => notificationService.getUnreadCount(),
+    ...options,
   });
 };
 

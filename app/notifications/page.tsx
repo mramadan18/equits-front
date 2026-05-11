@@ -19,6 +19,7 @@ import {
   useMarkAllRead,
   useDeleteNotification,
 } from "@/hooks/api/useNotification";
+import { useAuthStore } from "@/stores/useAuthStore";
 import { useUpdateMeetingStatus } from "@/hooks/api/useMeeting";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -31,8 +32,11 @@ dayjs.extend(relativeTime);
 
 export default function NotificationsPage() {
   const t = useTranslations("Notifications");
-  const { data: notificationsData, isLoading: loading } = useNotifications();
-  const { data: unreadData } = useUnreadCount();
+  const { isAuthenticated } = useAuthStore();
+  const { data: notificationsData, isLoading: loading } = useNotifications({
+    enabled: isAuthenticated,
+  });
+  const { data: unreadData } = useUnreadCount({ enabled: isAuthenticated });
   const { mutate: markAsReadMutate } = useMarkAsRead();
   const { mutate: markAllReadMutate } = useMarkAllRead();
   const { mutate: deleteNotificationMutate } = useDeleteNotification();

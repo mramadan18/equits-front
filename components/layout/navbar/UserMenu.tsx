@@ -34,7 +34,7 @@ export const UserMenu = ({
   onPitchPress,
   isCreatingProject,
 }: UserMenuProps) => {
-  const { data: unreadData } = useUnreadCount();
+  const { data: unreadData } = useUnreadCount({ enabled: !!user });
   const unreadCount = unreadData?.data.count || 0;
 
   return (
