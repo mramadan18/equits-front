@@ -66,7 +66,7 @@ export const PeopleYouMayNeedSidebar = ({
             <div className="flex items-start gap-4 mb-3">
               <div className="w-14 h-14 md:w-16 md:h-16">
                 <Avatar
-                  src={`${talent.avatar}`}
+                  src={talent.avatar || undefined}
                   alt={`${talent.firstName} ${talent.lastName}`}
                   color="primary"
                   showFallback

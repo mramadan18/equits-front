@@ -5,18 +5,21 @@ import {
 } from "@/components/talent-details";
 import { fetchServer } from "@/utils/api-utils";
 import { Project, User } from "@/types/api";
-import { getTranslations } from "next-intl/server";
 import { Metadata } from "next";
 import { JsonLd } from "@/components/seo/JsonLd";
-
-interface TalentPageProps {
-  params: Promise<{ talentId: string }>;
-}
+import { notFound } from "next/navigation";
 
 export async function generateMetadata({
   params,
-}: TalentPageProps): Promise<Metadata> {
+}: {
+  params: Promise<{ talentId: string }>;
+}): Promise<Metadata> {
   const { talentId } = await params;
+
+  if (!talentId || isNaN(Number(talentId)) || Number(talentId) <= 0) {
+    return { title: "Talent Not Found | Equits" };
+  }
+
   try {
     const res = await fetchServer<User>(`/profile/${talentId}`);
     const talent = res.data;
@@ -44,20 +47,9 @@ export default async function TalentDetailsPage({
   params: Promise<{ talentId: string }>;
 }) {
   const { talentId } = await params;
-  const t = await getTranslations("TalentDetails");
 
-  // Basic validation for talentId
-  if (!talentId || talentId === "null" || isNaN(Number(talentId))) {
-    return (
-      <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-800 mb-2">
-            {t("notFoundTitle")}
-          </h1>
-          <p className="text-gray-600">{t("notFoundDescription")}</p>
-        </div>
-      </div>
-    );
+  if (!talentId || isNaN(Number(talentId)) || Number(talentId) <= 0) {
+    notFound();
   }
 
   const [talentRes, projectsRes, relatedRes] = await Promise.allSettled([
@@ -72,16 +64,7 @@ export default async function TalentDetailsPage({
   ]);
 
   if (talentRes.status === "rejected" || !talentRes.value?.data) {
-    return (
-      <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-800 mb-2">
-            {t("notFoundTitle")}
-          </h1>
-          <p className="text-gray-600">{t("retrievalError")}</p>
-        </div>
-      </div>
-    );
+    notFound();
   }
 
   const talent = talentRes.value.data;

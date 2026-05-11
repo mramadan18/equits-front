@@ -25,8 +25,8 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import "dayjs/locale/en";
 import "dayjs/locale/ar";
-import { NotificationItem } from "./components/NotificationItem";
-import { EmptyNotifications } from "./components/EmptyNotifications";
+import { NotificationItem } from "@/components/notifications/NotificationItem";
+import { EmptyNotifications } from "@/components/notifications/EmptyNotifications";
 
 dayjs.extend(relativeTime);
 

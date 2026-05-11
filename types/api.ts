@@ -5,6 +5,19 @@ import {
 } from "../validations/auth.validation";
 import { PaginationData } from "./filters";
 
+export enum NotificationType {
+  MEETING_REQUEST = "MEETING_REQUEST",
+  MEETING_ACCEPTED = "MEETING_ACCEPTED",
+  MEETING_DECLINED = "MEETING_DECLINED",
+}
+
+export enum MeetingStatus {
+  PENDING = "PENDING",
+  ACCEPTED = "ACCEPTED",
+  DECLINED = "DECLINED",
+  CANCELLED = "CANCELLED",
+}
+
 export enum ExperienceLevel {
   STUDENT = "STUDENT",
   JUNIOR = "JUNIOR",

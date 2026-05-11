@@ -6,7 +6,7 @@ import dayjs from "dayjs";
 import { MeetingRequestDetails } from "./MeetingRequestDetails";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import { MainRoutes } from "@/types";
+import { MainRoutes, NotificationType, MeetingStatus } from "@/types";
 
 interface NotificationItemProps {
   notification: any;
@@ -69,7 +69,7 @@ export const NotificationItem = ({
             const { type, metadata, message } = notification;
             if (!metadata) return message;
 
-            if (type === "MEETING_REQUEST") {
+            if (type === NotificationType.MEETING_REQUEST) {
               const parts = message.split(metadata.senderName);
               const afterSender = parts[1] || "";
               const projectParts = afterSender.split(metadata.projectName);
@@ -97,7 +97,10 @@ export const NotificationItem = ({
               );
             }
 
-            if (type === "MEETING_ACCEPTED" || type === "MEETING_DECLINED") {
+            if (
+              type === NotificationType.MEETING_ACCEPTED ||
+              type === NotificationType.MEETING_DECLINED
+            ) {
               const name = metadata.receiverName;
               const projectName = metadata.projectName;
               const parts = message.split(name);
@@ -133,15 +136,16 @@ export const NotificationItem = ({
           })()}
         </div>
 
-        {notification.type === "MEETING_REQUEST" && notification.metadata && (
-          <MeetingRequestDetails metadata={notification.metadata} />
-        )}
+        {notification.type === NotificationType.MEETING_REQUEST &&
+          notification.metadata && (
+            <MeetingRequestDetails metadata={notification.metadata} />
+          )}
 
         <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-          {notification.type === "MEETING_REQUEST" &&
+          {notification.type === NotificationType.MEETING_REQUEST &&
             notification.metadata?.meetingRequestId && (
               <div className="flex flex-wrap gap-2 w-full sm:w-auto">
-                {notification.metadata?.status === "PENDING" ||
+                {notification.metadata?.status === MeetingStatus.PENDING ||
                 !notification.metadata?.status ? (
                   <>
                     <Button
@@ -151,7 +155,7 @@ export const NotificationItem = ({
                       onPress={() =>
                         onStatusUpdate(
                           notification.metadata.meetingRequestId,
-                          "ACCEPTED",
+                          MeetingStatus.ACCEPTED,
                         )
                       }
                     >
@@ -165,7 +169,7 @@ export const NotificationItem = ({
                       onPress={() => {
                         onStatusUpdate(
                           notification.metadata.meetingRequestId,
-                          "DECLINED",
+                          MeetingStatus.DECLINED,
                         );
                       }}
                     >
@@ -175,7 +179,7 @@ export const NotificationItem = ({
                 ) : (
                   <div
                     className={`text-xs font-bold px-3 py-1.5 rounded-md text-center flex-grow sm:flex-grow-0 ${
-                      notification.metadata.status === "ACCEPTED"
+                      notification.metadata.status === MeetingStatus.ACCEPTED
                         ? "bg-success-50 text-success border border-success-200"
                         : "bg-danger-50 text-danger border border-danger-200"
                     }`}

@@ -32,7 +32,7 @@ export const ProfileAvatar = ({
       {/* Avatar container */}
       <div className="relative w-full h-full rounded-full border-4 border-white bg-gray-100 overflow-hidden shadow-xl ring-2 ring-primary/20">
         <Avatar
-          src={`${talent?.avatar}`}
+          src={talent?.avatar || undefined}
           alt={`${talent?.firstName} ${talent?.lastName}`}
           className="w-full h-full"
           showFallback

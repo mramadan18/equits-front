@@ -11,6 +11,8 @@ export const useNotifications = (options?: { enabled?: boolean }) => {
   return useQuery<ApiResponse<Notification[]>, ApiError>({
     queryKey: queryKeys.notifications.all,
     queryFn: () => notificationService.getNotifications(),
+    staleTime: 0,
+    gcTime: 0,
     ...options,
   });
 };
@@ -19,6 +21,7 @@ export const useUnreadCount = (options?: { enabled?: boolean }) => {
   return useQuery<ApiResponse<{ count: number }>, ApiError>({
     queryKey: queryKeys.notifications.unreadCount,
     queryFn: () => notificationService.getUnreadCount(),
+    refetchInterval: 5 * 60 * 1000,
     ...options,
   });
 };

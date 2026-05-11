@@ -17,13 +17,11 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/seo/JsonLd";
 
-interface ProjectPageProps {
-  params: Promise<{ id: string }>;
-}
-
 export async function generateMetadata({
   params,
-}: ProjectPageProps): Promise<Metadata> {
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
   const { id } = await params;
 
   if (!id || isNaN(Number(id)) || Number(id) <= 0) {
@@ -65,7 +63,11 @@ const SectionWrapper = ({ children }: { children: ReactNode }) => (
   </section>
 );
 
-export default async function ProjectPage({ params }: ProjectPageProps) {
+export default async function ProjectPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
   const { id } = await params;
 
   if (!id || isNaN(Number(id)) || Number(id) <= 0) {
