@@ -21,6 +21,9 @@ export const profileService = {
   getStatus: (): Promise<ApiResponse<ProfileStatus>> =>
     unwrap(apiClient.get("/profile/status")),
 
+  dismissStatusModal: (): Promise<ApiResponse<null>> =>
+    unwrap(apiClient.post("/profile/status/dismiss")),
+
   updateJobTitle: (data: UpdateJobTitleRequest): Promise<ApiResponse<User>> =>
     unwrap(apiClient.patch("/profile/job-title", data)),
 

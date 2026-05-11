@@ -9,6 +9,15 @@ export enum NotificationType {
   MEETING_REQUEST = "MEETING_REQUEST",
   MEETING_ACCEPTED = "MEETING_ACCEPTED",
   MEETING_DECLINED = "MEETING_DECLINED",
+  PROJECT_LIKE = "PROJECT_LIKE",
+  PROJECT_COMMENT = "PROJECT_COMMENT",
+  PROJECT_RATING = "PROJECT_RATING",
+  PROJECT_PUBLISHED = "PROJECT_PUBLISHED",
+  PROJECT_REJECTED = "PROJECT_REJECTED",
+  PROJECT_INVITATION = "PROJECT_INVITATION",
+  PROJECT_INVITATION_ACCEPTED = "PROJECT_INVITATION_ACCEPTED",
+  PROJECT_INVITATION_DECLINED = "PROJECT_INVITATION_DECLINED",
+  PROJECT_MEMBER_REMOVED = "PROJECT_MEMBER_REMOVED",
 }
 
 export enum MeetingStatus {
@@ -126,6 +135,7 @@ export interface User {
   city?: City;
   wishlistIds?: number[];
   memberProjects?: ProjectMember[];
+  meetingStatus?: "NONE" | "PENDING" | "COOLDOWN";
 }
 
 export interface ProjectMember {
@@ -133,6 +143,7 @@ export interface ProjectMember {
   projectId: number;
   userId: number;
   role: string;
+  status: string;
   joinedAt: string;
   firstName: string;
   lastName: string;
@@ -175,6 +186,7 @@ export type UpdateMeRequest = Partial<
 
 export interface ProfileStatus {
   progress: number;
+  shouldShowModal: boolean;
   checklist: {
     profilePictures: boolean;
     jobTitle: boolean;

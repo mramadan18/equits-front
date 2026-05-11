@@ -4,6 +4,7 @@ import { Avatar, Button } from "@heroui/react";
 import { MainRoutes } from "@/types";
 import Link from "next/link";
 import { FiArrowRight, FiTrash2 } from "react-icons/fi";
+import { useTranslations } from "next-intl";
 
 interface TeamMemberCardProps {
   userId: number;
@@ -15,6 +16,8 @@ interface TeamMemberCardProps {
   badge: string;
   /** Visual variant — owner gets primary colors, members get neutral */
   variant?: "owner" | "member";
+  /** Status of the membership (ACCEPTED, PENDING, DECLINED) */
+  status?: string;
   /** Show the delete button on hover */
   canRemove?: boolean;
   isRemoving?: boolean;
@@ -29,6 +32,10 @@ const BADGE_STYLES = {
     "text-[10px] font-bold text-primary uppercase tracking-wider bg-primary/10 px-2.5 py-1 rounded-full",
   member:
     "text-[10px] font-bold text-zinc-600 uppercase tracking-wider bg-zinc-200/60 px-2.5 py-1 rounded-full",
+  invited:
+    "text-[10px] font-bold text-warning-600 uppercase tracking-wider bg-warning-100 px-2.5 py-1 rounded-full",
+  declined:
+    "text-[10px] font-bold text-danger-600 uppercase tracking-wider bg-danger-100 px-2.5 py-1 rounded-full",
 } as const;
 
 export function TeamMemberCard({
@@ -38,16 +45,22 @@ export function TeamMemberCard({
   lastName,
   badge,
   variant = "member",
+  status = "ACCEPTED",
   canRemove = false,
   isRemoving = false,
   onRemove,
 }: TeamMemberCardProps) {
+  const t = useTranslations("ProjectDetails.team");
+  const isPending = status === "PENDING";
+  const isDeclined = status === "DECLINED";
+  const isNotAccepted = isPending || isDeclined;
+
   return (
-    <div className={CARD_BASE}>
+    <div className={`${CARD_BASE} ${isNotAccepted ? "opacity-75" : ""}`}>
       {/* Avatar */}
       <Avatar
         src={avatar || undefined}
-        color="primary"
+        color={isNotAccepted ? "default" : "primary"}
         showFallback
         className="w-16 h-16 text-large shrink-0 border-3 border-white shadow-md group-hover:scale-105 transition-transform"
       />
@@ -59,11 +72,12 @@ export function TeamMemberCard({
         </span>
         <div className="flex flex-col items-center gap-1.5 w-full">
           <span className={BADGE_STYLES[variant]}>{badge}</span>
-          {/* {jobTitle && (
-            <span className="text-xs font-medium text-gray-500 truncate w-full px-2">
-              {jobTitle}
-            </span>
-          )} */}
+          {isPending && (
+            <span className={BADGE_STYLES.invited}>{t("invited")}</span>
+          )}
+          {isDeclined && (
+            <span className={BADGE_STYLES.declined}>{t("declined")}</span>
+          )}
         </div>
       </div>
 

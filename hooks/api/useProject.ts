@@ -235,13 +235,18 @@ export const useRemoveProjectMember = () => {
   return useMutation<
     ApiResponse<any>,
     ApiError,
-    { projectId: number | string; memberId: number }
+    { projectId: number | string; userId: number }
   >({
-    mutationFn: ({ projectId, memberId }) =>
-      projectService.removeMember(projectId, memberId),
+    mutationFn: ({ projectId, userId }) =>
+      projectService.removeMember(projectId, userId),
     onSuccess: (_, { projectId }) => {
+      // Invalidate members list
       queryClient.invalidateQueries({
         queryKey: queryKeys.projects.members(projectId),
+      });
+      // Also invalidate project detail just in case members count is cached there
+      queryClient.invalidateQueries({
+        queryKey: queryKeys.projects.detail(projectId),
       });
     },
   });
@@ -269,6 +274,29 @@ export const useRequestMeeting = () => {
     mutationFn: ({ id, data }) => projectService.requestMeeting(id, data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["meeting-eligibility"] });
+    },
+  });
+};
+export const useRespondToProjectInvitation = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation<
+    ApiResponse<any>,
+    ApiError,
+    { projectId: number | string; status: "ACCEPTED" | "DECLINED" }
+  >({
+    mutationFn: ({ projectId, status }) =>
+      projectService.respondToInvitation(projectId, status),
+    onSuccess: (_, { projectId }) => {
+      queryClient.invalidateQueries({
+        queryKey: queryKeys.projects.members(projectId),
+      });
+      queryClient.invalidateQueries({
+        queryKey: queryKeys.notifications.all,
+      });
+      queryClient.invalidateQueries({
+        queryKey: queryKeys.notifications.unreadCount,
+      });
     },
   });
 };

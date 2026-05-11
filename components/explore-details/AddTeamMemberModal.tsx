@@ -26,6 +26,7 @@ import {
   useAddProjectMember,
   useProjectMembers,
   useProject,
+  useRemoveProjectMember,
 } from "@/hooks/api/useProject";
 import { User as UserType } from "@/types/api";
 import { useTranslations } from "next-intl";
@@ -42,15 +43,20 @@ interface AddTeamMemberModalProps {
 /** Search results list item */
 function TalentListItem({
   talent,
-  isExisting,
-  existingLabel,
+  status,
+  t,
   onSelect,
+  onCancel,
 }: {
   talent: UserType;
-  isExisting: boolean;
-  existingLabel: string;
+  status: string | null;
+  t: any;
   onSelect: (talent: UserType) => void;
+  onCancel: (id: number) => void;
 }) {
+  const isExisting = status === "ACCEPTED" || status === "OWNER";
+  const isPending = status === "PENDING";
+
   return (
     <div
       className={`group flex items-center justify-between p-3 rounded-xl transition-all border border-transparent ${
@@ -58,7 +64,7 @@ function TalentListItem({
           ? "opacity-60 cursor-not-allowed bg-zinc-50/50 dark:bg-zinc-800/30"
           : "hover:bg-primary-50 dark:hover:bg-primary-500/10 cursor-pointer hover:border-primary-100 dark:hover:border-primary-500/20"
       }`}
-      onClick={() => !isExisting && onSelect(talent)}
+      onClick={() => !isExisting && !isPending && onSelect(talent)}
     >
       <User
         name={`${talent.firstName} ${talent.lastName}`}
@@ -67,8 +73,25 @@ function TalentListItem({
       />
       {isExisting ? (
         <Chip size="sm" variant="flat" color="default">
-          {existingLabel}
+          {status === "OWNER" ? t("owner") : t("alreadyMember")}
         </Chip>
+      ) : isPending ? (
+        <div className="flex items-center gap-2">
+          <Chip size="sm" variant="flat" color="warning">
+            {t("invited")}
+          </Chip>
+          <Button
+            size="sm"
+            color="danger"
+            variant="light"
+            onPress={() => {
+              onCancel(talent.id);
+            }}
+            className="h-7 px-2 min-w-0"
+          >
+            Cancel
+          </Button>
+        </div>
       ) : (
         <Button
           size="sm"
@@ -159,21 +182,36 @@ export function AddTeamMemberModal({
   });
   const { data: projectRes } = useProject(projectId, { enabled: isOpen });
   const { mutate: addMember, isPending: isSubmitting } = useAddProjectMember();
+  const { mutate: removeMember } = useRemoveProjectMember();
 
   // ── Derived data ──
   const talents = talentsData?.data || [];
   const members = membersRes?.data || [];
   const project = projectRes?.data;
 
-  const isAlreadyMember = useCallback(
+  const getMemberStatus = useCallback(
     (talentId: number) => {
-      return (
-        members.some((m) => m.userId === talentId) ||
-        project?.ownerId === talentId
-      );
+      if (project?.ownerId === talentId) return "OWNER";
+      const member = members.find((m) => m.userId === talentId);
+      return member?.status || null;
     },
     [members, project?.ownerId],
   );
+
+  const handleCancelInvitation = (talentId: number) => {
+    const member = members.find((m) => m.userId === talentId);
+    if (!member) return;
+
+    removeMember(
+      { projectId, userId: member.userId },
+
+      {
+        onSuccess: (res) => {
+          addToast({ title: res.message as string, color: "success" });
+        },
+      },
+    );
+  };
 
   const showEmptyState =
     !isSearching &&
@@ -278,9 +316,10 @@ export function AddTeamMemberModal({
                         <TalentListItem
                           key={talent.id}
                           talent={talent}
-                          isExisting={isAlreadyMember(talent.id)}
-                          existingLabel={t("alreadyMember")}
+                          status={getMemberStatus(talent.id)}
+                          t={t}
                           onSelect={setSelectedTalent}
+                          onCancel={handleCancelInvitation}
                         />
                       ))
                     ) : showEmptyState ? (

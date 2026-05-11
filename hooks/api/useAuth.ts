@@ -23,7 +23,7 @@ export const useLogin = () => {
     mutationFn: (data: LoginRequest) => authService.login(data),
     onSuccess: (response) => {
       setUser(response.data.user);
-      queryClient.setQueryData(queryKeys.me, response.data.user);
+      queryClient.invalidateQueries({ queryKey: queryKeys.me });
       queryClient.invalidateQueries({ queryKey: queryKeys.profiles.status });
     },
   });

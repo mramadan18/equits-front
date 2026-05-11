@@ -14,6 +14,7 @@ interface MeetingRequestDetailsProps {
     preferredTime: string;
     contactMethod: string;
     contactInfo?: string;
+    message?: string;
   };
 }
 
@@ -82,6 +83,17 @@ export const MeetingRequestDetails = ({
             </span>
           </div>
         ))}
+
+        {metadata.message && (
+          <div className="flex flex-col sm:flex-row sm:items-baseline gap-0.5 sm:gap-4">
+            <span className="text-default-400 text-[11px] sm:text-xs sm:w-36 flex-shrink-0 font-medium">
+              Message:
+            </span>
+            <span className="text-sm font-bold text-default-700">
+              {metadata.message}
+            </span>
+          </div>
+        )}
 
         {metadata.contactInfo && (
           <div className="flex flex-col sm:flex-row sm:items-baseline gap-0.5 sm:gap-4">

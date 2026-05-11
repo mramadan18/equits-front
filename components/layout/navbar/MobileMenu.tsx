@@ -93,7 +93,7 @@ export const MobileMenu = ({
                         onClick={onClose}
                       >
                         <Avatar
-                          src={`${user?.avatar}`}
+                          src={user?.avatar || undefined}
                           size="md"
                           className="w-10 h-10"
                           color="primary"

@@ -56,16 +56,16 @@ export const ProfileBio = ({
     <div className="mt-20 md:mt-24 w-full">
       {/* Name, Verified, & Type Badge */}
       <div className="flex items-center gap-3 mb-1.5">
-        <h1 className="text-2xl md:text-3xl font-bold text-dark tracking-tight">
+        <h1 className="text-xl md:text-2xl font-semibold text-dark tracking-tight line-clamp-1">
           {talent?.firstName} {talent?.lastName}
         </h1>
         {talent?.isTrusted ? (
-          <MdVerified className="text-primary text-2xl md:text-3xl flex-shrink-0" />
+          <MdVerified className="text-primary text-xl md:text-2xl flex-shrink-0" />
         ) : (
-          <MdVerified className="text-gray4 text-2xl md:text-3xl flex-shrink-0" />
+          <MdVerified className="text-gray4 text-xl md:text-2xl flex-shrink-0" />
         )}
         {talent?.userType && (
-          <span className="px-3 py-0.5 bg-gradient-to-r from-primary/10 to-primary/5 text-primary font-semibold text-xs rounded-full border border-primary/20 tracking-wide uppercase">
+          <span className="px-2 py-0.5 bg-gradient-to-r from-primary/10 to-primary/5 text-primary font-semibold text-xs rounded-full border border-primary/20 tracking-wide uppercase">
             {talent?.userType === UserType.INVESTOR && "INVS"}
             {talent?.userType === UserType.TALENT && "TLNT"}
           </span>
@@ -75,7 +75,7 @@ export const ProfileBio = ({
       {/* Job Title & Company */}
       <div className="flex items-center gap-1.5 flex-wrap mb-4 text-gray2">
         {talent?.experienceLevel && (
-          <span className="font-medium">
+          <span className="font-medium text-sm">
             {ts(`jobTitleForm.levels.${talent.experienceLevel}`)}
           </span>
         )}
@@ -83,21 +83,21 @@ export const ProfileBio = ({
           <span className="text-gray4">·</span>
         )}
         {talent?.jobTitle && (
-          <span className="font-medium">{talent?.jobTitle}</span>
+          <span className="font-medium text-sm">{talent?.jobTitle}</span>
         )}
         {(talent?.company || talent?.companyLink) && (
           <>
-            {talent?.jobTitle && <span className="text-gray4">@</span>}
+            {talent?.jobTitle && <span className="text-gray4 text-sm">@</span>}
             {talent?.companyLink ? (
               <Link
                 href={`${talent?.companyLink}`}
                 target="_blank"
-                className="font-semibold text-primary hover:text-primary/80 transition-colors duration-200"
+                className="font-semibold text-sm text-primary hover:text-primary/80 transition-colors duration-200"
               >
                 {talent?.company}
               </Link>
             ) : (
-              <span className="font-medium">{talent?.company}</span>
+              <span className="font-medium text-sm">{talent?.company}</span>
             )}
           </>
         )}

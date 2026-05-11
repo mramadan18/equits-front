@@ -58,7 +58,7 @@ export const ProfileAvatar = ({ user }: { user: User | null }) => {
         <Avatar
           showFallback
           color="primary"
-          src={`${user?.avatar}`}
+          src={user?.avatar || undefined}
           alt={`${user?.firstName} ${user?.lastName}`}
           className="object-cover w-full h-full"
         />

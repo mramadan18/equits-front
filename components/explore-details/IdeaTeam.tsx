@@ -43,10 +43,11 @@ export function IdeaTeam({ project }: { project: Project }) {
   });
 
   // ── Data fetching ──
-  const { data: membersRes, isLoading: membersLoading } = useProjectMembers(
-    project.id,
-    { enabled: inView },
-  );
+  const {
+    data: membersRes,
+    isLoading: membersLoading,
+    refetch: membersRefetch,
+  } = useProjectMembers(project.id, { enabled: inView });
   const members = membersRes?.data || [];
 
   // ── Modals ──
@@ -62,24 +63,25 @@ export function IdeaTeam({ project }: { project: Project }) {
   } = useDisclosure();
 
   // ── Member removal ──
-  const [memberToDelete, setMemberToDelete] = useState<number | null>(null);
+  const [userIdToDelete, setUserIdToDelete] = useState<number | null>(null);
   const { mutate: removeMember, isPending: isRemoving } =
     useRemoveProjectMember();
 
-  const handleRemoveMember = (memberId: number) => {
-    setMemberToDelete(memberId);
+  const handleRemoveMember = (userId: number) => {
+    setUserIdToDelete(userId);
     onDeleteModalOpen();
   };
 
   const confirmRemoveMember = () => {
-    if (!memberToDelete) return;
+    if (!userIdToDelete) return;
 
     removeMember(
-      { projectId: project.id, memberId: memberToDelete },
+      { projectId: project.id, userId: userIdToDelete },
       {
         onSuccess: (res) => {
           addToast({ title: res.message as string, color: "success" });
           onDeleteModalOpenChange();
+          membersRefetch();
         },
       },
     );
@@ -130,6 +132,7 @@ export function IdeaTeam({ project }: { project: Project }) {
         </div>
       ) : (
         <Swiper
+          key={`${project.id}-${members.length}`}
           modules={[Navigation, Pagination, Autoplay]}
           spaceBetween={12}
           slidesPerView={1.8}
@@ -160,10 +163,11 @@ export function IdeaTeam({ project }: { project: Project }) {
                 firstName={member.firstName}
                 lastName={member.lastName}
                 badge={member.role}
+                status={member.status}
                 variant="member"
                 canRemove={isOwner}
                 isRemoving={isRemoving}
-                onRemove={() => handleRemoveMember(member.id)}
+                onRemove={() => handleRemoveMember(member.userId)}
               />
             </SwiperSlide>
           ))}

@@ -10,10 +10,22 @@ import { MainRoutes } from "@/types";
 import { User } from "@/types/api";
 import { useDisclosure } from "@heroui/react";
 import { RequestTalentMeetingModal } from "../talent-details/RequestTalentMeetingModal";
+import { useAuthStore } from "@/stores/useAuthStore";
+import { AuthRequiredModal } from "../layout/AuthRequiredModal";
 
 export const TalentCard = ({ item }: { item: User }) => {
   const t = useTranslations("TalentsExplore");
+  const { user } = useAuthStore();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const authModal = useDisclosure();
+
+  const handleRequestMeeting = () => {
+    if (!user) {
+      authModal.onOpen();
+    } else {
+      onOpen();
+    }
+  };
 
   return (
     <Card className="border-1 border-gray-200 shadow-sm hover:shadow-lg transition-all duration-300 rounded-xl overflow-hidden bg-white group flex flex-col pt-0 p-0 h-full">
@@ -41,7 +53,7 @@ export const TalentCard = ({ item }: { item: User }) => {
           href={`${MainRoutes.TALENTS}/${item.id}`}
         >
           <Avatar
-            src={`${item?.avatar}`}
+            src={item?.avatar || undefined}
             alt={`${item.firstName} ${item.lastName}`}
             showFallback
             color="primary"
@@ -80,16 +92,21 @@ export const TalentCard = ({ item }: { item: User }) => {
         {/* Action Button */}
         <div className="mt-auto pt-2">
           <Button
-            color="primary"
-            variant="solid"
+            color={item.meetingStatus === "NONE" ? "primary" : "default"}
+            variant={item.meetingStatus === "NONE" ? "solid" : "flat"}
+            isDisabled={item.meetingStatus !== "NONE"}
             fullWidth
             className="font-bold shadow-md"
             radius="sm"
             size="md"
             startContent={<FaVideo className="text-lg" />}
-            onPress={onOpen}
+            onPress={handleRequestMeeting}
           >
-            {t("requestMeeting")}
+            {item.meetingStatus === "PENDING"
+              ? t("meetingPending")
+              : item.meetingStatus === "COOLDOWN"
+                ? t("meetingSent")
+                : t("requestMeeting")}
           </Button>
         </div>
       </CardBody>
@@ -106,6 +123,10 @@ export const TalentCard = ({ item }: { item: User }) => {
           talentId={item.id}
         />
       </Modal>
+      <AuthRequiredModal
+        isOpen={authModal.isOpen}
+        onOpenChange={authModal.onOpenChange}
+      />
     </Card>
   );
 };

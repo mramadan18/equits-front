@@ -331,6 +331,8 @@
     "all": "كل المواهب",
     "new": "أحدث المواهب",
     "requestMeeting": "طلب اجتماع",
+    "meetingPending": "طلب معلق",
+    "meetingSent": "تم الإرسال",
     "noResultsTitle": "لم يتم العثور على مواهب",
     "noResultsDescription": "حاول تعديل الفلاتر أو كلمات البحث للعثور على ما تبحث عنه.",
     "clearAllFilters": "مسح جميع الفلاتر",
@@ -710,6 +712,8 @@
       "removeMember": "حذف عضو",
       "removeConfirm": "هل أنت متأكد من حذف هذا العضو من الفريق؟",
       "alreadyMember": "عضو بالفعل",
+      "invited": "تمت دعوته",
+      "declined": "رفض الدعوة",
       "searchPlaceholder": "ابحث بالاسم، البريد الإلكتروني أو المسمى الوظيفي...",
       "searchDescription": "ابحث عن المواهب للتعاون معهم في هذا المشروع."
     },
@@ -987,6 +991,9 @@
     "unread": "غير مقروءة",
     "all": "الكل",
     "delete": "حذف",
+    "viewProject": "مشاهدة المشروع",
+    "invitationAccepted": "تم قبول الدعوة",
+    "invitationDeclined": "تم رفض الدعوة",
     "justNow": "الآن",
     "types": {
       "MEETING_REQUEST": "طلب اجتماع",

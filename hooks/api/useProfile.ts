@@ -40,6 +40,17 @@ export const useProfileStatus = (enabled: boolean = true) => {
   });
 };
 
+export const useDismissProfileStatusModal = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation<ApiResponse<null>, ApiError>({
+    mutationFn: () => profileService.dismissStatusModal(),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: queryKeys.profiles.status });
+    },
+  });
+};
+
 export const useRelatedProfiles = (
   params: ProfileFilters,
   enabled: boolean = true,

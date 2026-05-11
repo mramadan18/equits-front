@@ -132,6 +132,124 @@ export const NotificationItem = ({
               );
             }
 
+            if (
+              type === NotificationType.PROJECT_LIKE ||
+              type === NotificationType.PROJECT_COMMENT ||
+              type === NotificationType.PROJECT_RATING
+            ) {
+              const name =
+                metadata.lastLikerName ||
+                metadata.senderName ||
+                metadata.raters?.[0]; // Fallback
+              const projectName = metadata.projectName;
+
+              if (!name || !projectName) return message;
+
+              const parts = message.split(name);
+              const afterName = parts[1] || "";
+              const projectParts = afterName.split(projectName);
+
+              return (
+                <p>
+                  {parts[0]}
+                  <span className="font-bold text-primary">{name}</span>
+                  {projectParts[0]}
+                  <Link
+                    href={`${MainRoutes.PROJECTS}/${metadata.projectId}`}
+                    className="font-bold text-primary hover:underline"
+                  >
+                    {projectName}
+                  </Link>
+                  {projectParts[1]}
+                </p>
+              );
+            }
+
+            if (
+              type === NotificationType.PROJECT_PUBLISHED ||
+              type === NotificationType.PROJECT_REJECTED
+            ) {
+              const projectName = metadata.projectName;
+              if (!projectName) return message;
+
+              const parts = message.split(projectName);
+
+              return (
+                <p>
+                  {parts[0]}
+                  <Link
+                    href={`${MainRoutes.PROJECTS}/${metadata.projectId}`}
+                    className="font-bold text-primary hover:underline"
+                  >
+                    {projectName}
+                  </Link>
+                  {parts[1]}
+                </p>
+              );
+            }
+
+            if (
+              type === NotificationType.PROJECT_INVITATION ||
+              type === NotificationType.PROJECT_INVITATION_ACCEPTED ||
+              type === NotificationType.PROJECT_INVITATION_DECLINED
+            ) {
+              const name = metadata.ownerName;
+              const projectName = metadata.projectName;
+              const role = metadata.role;
+
+              if (!name || !projectName) return message;
+
+              const parts = message.split(name);
+              const afterName = parts[1] || "";
+              const projectParts = afterName.split(projectName);
+              const afterProject = projectParts[1] || "";
+              const roleParts = role
+                ? afterProject.split(role)
+                : [afterProject];
+
+              return (
+                <p>
+                  {parts[0]}
+                  <Link
+                    href={`${MainRoutes.TALENTS}/${metadata.ownerId}`}
+                    className="font-bold text-primary hover:underline"
+                  >
+                    {name}
+                  </Link>
+                  {projectParts[0]}
+                  <Link
+                    href={`${MainRoutes.PROJECTS}/${metadata.projectId}`}
+                    className="font-bold text-primary hover:underline"
+                  >
+                    {projectName}
+                  </Link>
+                  {roleParts[0]}
+                  {role && <span className="font-bold">{role}</span>}
+                  {roleParts[1]}
+                </p>
+              );
+            }
+
+            if (type === NotificationType.PROJECT_MEMBER_REMOVED) {
+              const projectName = metadata.projectName;
+              if (!projectName) return message;
+
+              const parts = message.split(projectName);
+
+              return (
+                <p>
+                  {parts[0]}
+                  <Link
+                    href={`${MainRoutes.PROJECTS}/${metadata.projectId}`}
+                    className="font-bold text-primary hover:underline"
+                  >
+                    {projectName}
+                  </Link>
+                  {parts[1]}
+                </p>
+              );
+            }
+
             return message;
           })()}
         </div>
@@ -191,6 +309,75 @@ export const NotificationItem = ({
                 )}
               </div>
             )}
+
+          {(notification.type === NotificationType.PROJECT_INVITATION ||
+            notification.type ===
+              NotificationType.PROJECT_INVITATION_ACCEPTED ||
+            notification.type ===
+              NotificationType.PROJECT_INVITATION_DECLINED) &&
+            notification.metadata?.projectId && (
+              <div className="flex flex-wrap gap-2 w-full sm:w-auto">
+                {notification.type === NotificationType.PROJECT_INVITATION ? (
+                  <>
+                    <Button
+                      size="sm"
+                      color="primary"
+                      className="font-bold flex-grow sm:flex-grow-0 px-4 sm:px-6"
+                      onPress={() =>
+                        onStatusUpdate(
+                          notification.metadata.projectId,
+                          "ACCEPTED",
+                        )
+                      }
+                    >
+                      {t("accept")}
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="flat"
+                      color="danger"
+                      className="font-bold flex-grow sm:flex-grow-0 px-4 sm:px-6"
+                      onPress={() => {
+                        onStatusUpdate(
+                          notification.metadata.projectId,
+                          "DECLINED",
+                        );
+                      }}
+                    >
+                      {t("decline")}
+                    </Button>
+                  </>
+                ) : (
+                  <div
+                    className={`text-xs font-bold px-3 py-1.5 rounded-md text-center flex-grow sm:flex-grow-0 ${
+                      notification.type ===
+                      NotificationType.PROJECT_INVITATION_ACCEPTED
+                        ? "bg-success-50 text-success border border-success-200"
+                        : "bg-danger-50 text-danger border border-danger-200"
+                    }`}
+                  >
+                    {notification.type ===
+                    NotificationType.PROJECT_INVITATION_ACCEPTED
+                      ? t("invitationAccepted")
+                      : t("invitationDeclined")}
+                  </div>
+                )}
+              </div>
+            )}
+
+          {notification.link && notification.type?.includes("PROJECT") && (
+            <Button
+              as={Link}
+              href={notification.link}
+              size="sm"
+              variant="flat"
+              color="primary"
+              className="font-bold flex-grow sm:flex-grow-0 px-4 sm:px-6"
+            >
+              {t("viewProject")}
+            </Button>
+          )}
+
           {!notification.isRead && (
             <Button
               size="sm"

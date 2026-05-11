@@ -82,7 +82,7 @@ export const ProfileAbout = ({
           {/* Overview Text */}
           {overview && (
             <div>
-              <p className="text-gray2 leading-[1.8] text-[15px] whitespace-pre-line">
+              <p className="text-gray2 leading-[1.8] text-sm whitespace-pre-line">
                 {displayText}
               </p>
               {isLongText && (

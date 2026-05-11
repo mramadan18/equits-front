@@ -331,6 +331,8 @@
     "all": "All Talents",
     "new": "New Talents",
     "requestMeeting": "Request Meeting",
+    "meetingPending": "Meeting Pending",
+    "meetingSent": "Sent Recently",
     "noResultsTitle": "No talents found",
     "noResultsDescription": "Try adjusting your filters or search terms to find what you're looking for.",
     "clearAllFilters": "Clear all filters",
@@ -709,6 +711,8 @@
       "removeMember": "Remove Member",
       "removeConfirm": "Are you sure you want to remove this member?",
       "alreadyMember": "Already a member",
+      "invited": "Invited",
+      "declined": "Declined",
       "searchPlaceholder": "Search by name, email or job title...",
       "searchDescription": "Search for talents to collaborate with on this project."
     },
@@ -986,6 +990,9 @@
     "unread": "Unread",
     "all": "All",
     "delete": "Delete",
+    "viewProject": "View Project",
+    "invitationAccepted": "Invitation Accepted",
+    "invitationDeclined": "Invitation Declined",
     "justNow": "Just now",
     "types": {
       "MEETING_REQUEST": "Meeting Request",

@@ -21,12 +21,14 @@ import {
 } from "@/hooks/api/useNotification";
 import { useAuthStore } from "@/stores/useAuthStore";
 import { useUpdateMeetingStatus } from "@/hooks/api/useMeeting";
+import { useRespondToProjectInvitation } from "@/hooks/api/useProject";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import "dayjs/locale/en";
 import "dayjs/locale/ar";
 import { NotificationItem } from "@/components/notifications/NotificationItem";
 import { EmptyNotifications } from "@/components/notifications/EmptyNotifications";
+import { NotificationType } from "@/types";
 
 dayjs.extend(relativeTime);
 
@@ -40,7 +42,8 @@ export default function NotificationsPage() {
   const { mutate: markAsReadMutate } = useMarkAsRead();
   const { mutate: markAllReadMutate } = useMarkAllRead();
   const { mutate: deleteNotificationMutate } = useDeleteNotification();
-  const { mutate: updateStatus } = useUpdateMeetingStatus();
+  const { mutate: updateMeetingStatus } = useUpdateMeetingStatus();
+  const { mutate: respondToProjectInvitation } = useRespondToProjectInvitation();
 
   const [activeTab, setActiveTab] = useState("all");
 
@@ -50,8 +53,25 @@ export default function NotificationsPage() {
   const handleMarkAsRead = (id: number) => markAsReadMutate(id);
   const handleMarkAllRead = () => markAllReadMutate();
   const handleDelete = (id: number) => deleteNotificationMutate(id);
-  const handleStatusUpdate = (meetingId: number, status: string) => {
-    updateStatus({ id: meetingId, status });
+
+  const handleStatusUpdate = (id: number, status: string) => {
+    // Check if this id belongs to a project invitation or meeting request
+    const notification = notifications.find(
+      (n) =>
+        (n.type === NotificationType.MEETING_REQUEST &&
+          n.metadata?.meetingRequestId === id) ||
+        (n.type === NotificationType.PROJECT_INVITATION &&
+          n.metadata?.projectId === id),
+    );
+
+    if (notification?.type === NotificationType.PROJECT_INVITATION) {
+      respondToProjectInvitation({
+        projectId: id,
+        status: status as "ACCEPTED" | "DECLINED",
+      });
+    } else {
+      updateMeetingStatus({ id, status });
+    }
   };
 
   const filteredNotifications =

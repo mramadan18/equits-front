@@ -3,6 +3,7 @@ import { useState, useEffect, useMemo } from "react";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { FeedGrid } from "@/components/home/FeedGrid";
 import { FeedProfileCard } from "@/components/home/FeedProfileCard";
+import { ProfileCompletionAutoModal } from "@/components/home/ProfileCompletionAutoModal";
 import { useInfiniteProjectsFeed } from "@/hooks/api/useProject";
 import { useDebounce } from "@/hooks/ui/useDebounce";
 import { useInfiniteScroll } from "@/hooks/ui/useInfiniteScroll";
@@ -110,6 +111,7 @@ export default function HomePage() {
 
   return (
     <div className="container py-8">
+      <ProfileCompletionAutoModal />
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         {/* Main Feed */}
         <div className="lg:col-span-8 flex flex-col gap-6">

@@ -98,4 +98,10 @@ export const projectService = {
     },
   ): Promise<ApiResponse<any>> =>
     unwrap(apiClient.post(`/projects/${id}/request-meeting`, data)),
+
+  respondToInvitation: (
+    id: number | string,
+    status: "ACCEPTED" | "DECLINED",
+  ): Promise<ApiResponse<any>> =>
+    unwrap(apiClient.patch(`/projects/${id}/members/respond`, { status })),
 };

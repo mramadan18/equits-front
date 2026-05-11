@@ -54,7 +54,7 @@ const ProgressSection = ({
         </svg>
         <div className="relative w-[82%] h-[82%] rounded-full border-[6px] border-white bg-gray-100 overflow-hidden shadow-sm">
           <Avatar
-            src={`${user?.avatar}`}
+            src={user?.avatar || undefined}
             isBordered
             color="primary"
             size="lg"
@@ -125,22 +125,22 @@ export const CompleteProfileModal = () => {
     },
     {
       key: "overview",
-      href: `${MainRoutes.SETTINGS_OVERVIEW}`,
+      href: MainRoutes.SETTINGS_OVERVIEW,
       isCompleted: status?.checklist.overview || false,
     },
     {
       key: "jobTitle",
-      href: `${MainRoutes.SETTINGS_JOB_TITLE}`,
+      href: MainRoutes.SETTINGS_JOB_TITLE,
       isCompleted: status?.checklist.jobTitle || false,
     },
     {
       key: "education",
-      href: `${MainRoutes.SETTINGS_EDUCATION}`,
+      href: MainRoutes.SETTINGS_EDUCATION,
       isCompleted: status?.checklist.education || false,
     },
     {
       key: "contactInfo",
-      href: `${MainRoutes.SETTINGS_CONTACT_INFO}`,
+      href: MainRoutes.SETTINGS_CONTACT_INFO,
       isCompleted: status?.checklist.contactInfo || false,
     },
   ];
@@ -152,6 +152,19 @@ export const CompleteProfileModal = () => {
           <ProgressSection user={user} progress={progress} />
 
           <div className="w-full md:w-[65%] p-10 flex flex-col relative bg-white">
+            {/* Mobile Progress Bar */}
+            <div className="flex md:hidden items-center gap-3 mb-6">
+              <div className="flex-1 h-2 bg-gray-200 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-primary transition-all duration-1000 ease-out"
+                  style={{ width: `${progress}%` }}
+                />
+              </div>
+              <span className="text-primary font-bold text-sm">
+                {progress}%
+              </span>
+            </div>
+
             <div className="mb-8">
               <h2 className="text-xl font-semibold text-primary mb-2">
                 {t("title")}
@@ -166,7 +179,7 @@ export const CompleteProfileModal = () => {
                 </div>
               ) : (
                 tasks.map((task) => (
-                  <Link key={task.key} href={task.href}>
+                  <Link key={task.key} href={task.href} className="block">
                     <TaskItem
                       title={t(`tasks.${task.key}.title`)}
                       description={t(`tasks.${task.key}.description`)}
