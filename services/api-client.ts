@@ -25,12 +25,26 @@ apiClient.interceptors.response.use(
       if (error.response) {
         const message = error.response.data?.message || "An error occurred";
         const status = error.response.status;
+        const unauthenticatedMessages = [
+          "You are not logged in! Please log in to get access.",
+          "The user belonging to this token does no longer exist.",
+          "User recently changed password! Please log in again.",
+          "Unauthorized access",
+        ];
+
+        const isUnAuthenticated = unauthenticatedMessages.some((msg) =>
+          message?.includes(msg),
+        );
 
         if (status >= 400) {
-          addToast({
-            title: message,
-            color: "danger",
-          });
+          if (status === 401 && isUnAuthenticated) {
+            window.location.reload();
+          } else {
+            addToast({
+              title: message,
+              color: "danger",
+            });
+          }
         }
       } else if (error.request) {
         addToast({
