@@ -48,7 +48,10 @@ export const PeopleYouMayNeedSidebar = ({
   }
 
   return (
-    <div className="bg-white rounded-2xl shadow-md flex flex-col h-max overflow-hidden sticky top-24">
+    <div
+      id="people-may-need"
+      className="bg-white rounded-2xl shadow-md flex flex-col h-max overflow-hidden sticky top-24"
+    >
       {/* Header */}
       <div className="p-6 pb-4">
         <h2 className="text-lg md:text-xl font-semibold text-dark">

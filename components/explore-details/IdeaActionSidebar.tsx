@@ -144,7 +144,10 @@ export function IdeaActionSidebar({ project }: { project: Project }) {
   };
 
   return (
-    <div className="w-full lg:w-[340px] xl:w-[380px] flex-shrink-0 mt-8 lg:mt-0">
+    <div
+      id="project-action-sidebar"
+      className="w-full lg:w-[340px] xl:w-[380px] flex-shrink-0 mt-8 lg:mt-0"
+    >
       <div className="lg:sticky lg:top-28 flex flex-col gap-5">
         {isOwner && (
           <>
@@ -264,6 +267,7 @@ export function IdeaActionSidebar({ project }: { project: Project }) {
               >
                 <div className="w-full">
                   <Button
+                    id="project-request-meeting-button"
                     color={
                       eligibilityReason === "PENDING"
                         ? "primary"

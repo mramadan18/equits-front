@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 import { Input, Button } from "@heroui/react";
 import { IoSearchOutline, IoAddOutline } from "react-icons/io5";
 import Link from "next/link";
-import { MainRoutes } from "@/types";
+import { AuthRoutes } from "@/types";
 import { useAuthStore } from "@/stores/useAuthStore";
 import { Skeleton } from "@heroui/skeleton";
 
@@ -20,7 +20,10 @@ export const HomeSearchBar = ({
   const { user } = useAuthStore();
 
   return (
-    <div className="flex flex-row items-center gap-3 md:gap-4 mb-6 md:mb-8 w-full">
+    <div
+      id="home-search-bar"
+      className="flex flex-row items-center gap-3 md:gap-4 mb-6 md:mb-8 w-full"
+    >
       {isHydrated ? (
         <Input
           value={value}
@@ -64,7 +67,7 @@ export const HomeSearchBar = ({
           {/* Desktop Add Button: Text + Icon */}
           <Button
             as={Link}
-            href={MainRoutes.NEW_PROJECT}
+            href={AuthRoutes.LOGIN}
             color="primary"
             variant="flat"
             radius="full"

@@ -92,6 +92,7 @@ export const TalentCard = ({ item }: { item: User }) => {
         {/* Action Button */}
         <div className="mt-auto pt-2">
           <Button
+            id="talents-request-meeting"
             color={item.meetingStatus === "NONE" ? "primary" : "default"}
             variant={item.meetingStatus === "NONE" ? "solid" : "flat"}
             isDisabled={item.meetingStatus !== "NONE"}

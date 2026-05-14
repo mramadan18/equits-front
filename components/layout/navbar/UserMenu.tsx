@@ -40,6 +40,7 @@ export const UserMenu = ({
   return (
     <div className="flex items-center gap-4">
       <Button
+        id="navbar-pitch-button"
         className="bg-[#E9EAEB] text-black font-semibold rounded-full px-4 py-3"
         endContent={<FiPlus size={20} />}
         onPress={onPitchPress}

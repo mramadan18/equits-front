@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { ToastProvider } from "@heroui/react";
 import { AuthInitializer } from "@/components/auth/AuthInitializer";
+import { TourGuide } from "@/components/shared/TourGuide";
 
 declare module "@react-types/shared" {
   interface RouterConfig {
@@ -44,6 +45,7 @@ export function Providers({
       >
         <HeroUIProvider navigate={router.push}>
           <AuthInitializer session={session} />
+          <TourGuide />
           {children}
           <ToastProvider
             placement="top-center"

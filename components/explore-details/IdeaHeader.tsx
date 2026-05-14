@@ -18,7 +18,7 @@ export function IdeaHeader({ project }: { project: Project }) {
     : t("na");
 
   return (
-    <div className="flex items-start justify-between gap-4">
+    <div id="project-header" className="flex items-start justify-between gap-4">
       <div className="flex items-start gap-3">
         {project?.logo && (
           <Image

@@ -21,6 +21,7 @@
     "axios": "^1.15.2",
     "clsx": "2.1.1",
     "dayjs": "^1.11.20",
+    "driver.js": "^1.4.0",
     "framer-motion": "11.18.2",
     "next": "15.5.9",
     "next-intl": "^4.8.3",

@@ -86,7 +86,10 @@ const ExploreFilters = ({ loading }: { loading: boolean }) => {
   }
 
   return (
-    <div className="flex flex-col w-full mb-8 md:mb-10 gap-4">
+    <div
+      id="explore-filters"
+      className="flex flex-col w-full mb-8 md:mb-10 gap-4"
+    >
       {/* Mobile Actions Row */}
       <div className="flex items-center justify-between w-full">
         <Badge

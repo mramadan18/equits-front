@@ -65,13 +65,19 @@ export default function TalentsPage() {
   return (
     <div className="w-full bg-white pb-16 md:pb-24 pt-8 md:pt-12 min-h-screen">
       <div className="container">
-        <TalentsSearchBar />
-        <TalentsFilters />
-        <TalentsGrid
-          profiles={allProfiles}
-          isFetchingNextPage={isFetchingNextPage}
-          sentinelRef={sentinelRef}
-        />
+        <div id="talents-search-bar">
+          <TalentsSearchBar />
+        </div>
+        <div id="talents-filters">
+          <TalentsFilters />
+        </div>
+        <div id="talents-grid">
+          <TalentsGrid
+            profiles={allProfiles}
+            isFetchingNextPage={isFetchingNextPage}
+            sentinelRef={sentinelRef}
+          />
+        </div>
       </div>
     </div>
   );

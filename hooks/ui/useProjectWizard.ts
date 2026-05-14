@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect, useRef } from "react";
+import { useState, useMemo, useEffect } from "react";
 import {
   initialStep1Form,
   initialStep2Form,
@@ -20,9 +20,8 @@ import {
   useUpdateProjectStep,
   useSubmitProject,
   useProject,
-  useCreateProject,
 } from "@/hooks/api/useProject";
-import { useRouter, useSearchParams, usePathname } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { MainRoutes } from "@/types";
 import { addToast } from "@heroui/react";
 import {
@@ -54,43 +53,21 @@ export const useProjectWizard = (id?: string) => {
     id || searchParams.get("id") || null,
   );
   const router = useRouter();
-  const pathname = usePathname();
 
   useEffect(() => {
     const urlId = searchParams.get("id");
+    if (!urlId && !id) {
+      router.replace(MainRoutes.HOME);
+      return;
+    }
+
     if (urlId && urlId !== projectId) {
       setProjectId(urlId);
     }
-  }, [searchParams, projectId]);
+  }, [searchParams, projectId, id, router]);
 
   const { data: projectData } = useProject(projectId as string);
   const [hasInitialized, setHasInitialized] = useState(false);
-
-  const { mutateAsync: createProject } = useCreateProject();
-  const createProjectCalled = useRef(false);
-
-  useEffect(() => {
-    if (!projectId && !createProjectCalled.current) {
-      createProjectCalled.current = true;
-      createProject()
-        .then((res) => {
-          if (res.data?.id) {
-            const newId = String(res.data.id);
-            setProjectId(newId);
-            router.replace(`${pathname}?id=${newId}`);
-          }
-        })
-        .catch(() => {
-          createProjectCalled.current = false;
-          addToast({
-            title: t("toasts.error"),
-            description: "Failed to initialize project. Please try again.",
-            color: "danger",
-          });
-          router.replace(MainRoutes.HOME);
-        });
-    }
-  }, [projectId, createProject, router, pathname, t]);
 
   const { mutateAsync: updateStep, isPending: isUpdating } =
     useUpdateProjectStep();

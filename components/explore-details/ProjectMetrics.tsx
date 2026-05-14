@@ -112,7 +112,7 @@ export function ProjectMetrics({ project }: { project: Project }) {
   };
 
   return (
-    <div className="flex flex-col gap-6 mt-4">
+    <div id="project-metrics" className="flex flex-col gap-6 mt-4">
       {/* <div className="flex items-center gap-3">
         <h3 className="text-base sm:text-xl font-semibold text-dark">
           {t("title")}

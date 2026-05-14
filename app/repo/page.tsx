@@ -6,11 +6,10 @@ import { projectService } from "@/services/project.service";
 import { MyProjectCard } from "@/components/repo/MyProjectCard";
 import { StatusState } from "@/components/shared/StatusState";
 import { Skeleton } from "@heroui/skeleton";
-import { Button, Chip } from "@heroui/react";
+import { Chip } from "@heroui/react";
 import { useTranslations } from "next-intl";
 import { useRouter, useSearchParams } from "next/navigation";
 import {
-  HiOutlineDocumentAdd,
   HiOutlineFolder,
   HiOutlineClipboardCheck,
   HiOutlineGlobe,
@@ -210,7 +209,7 @@ export default function RepoPage() {
                 ? t("empty.all.description")
                 : t("empty.status.description")}
             </p>
-            {activeFilter === "ALL" && (
+            {/* {activeFilter === "ALL" && (
               <Button
                 color="primary"
                 radius="lg"
@@ -220,7 +219,7 @@ export default function RepoPage() {
               >
                 {t("empty.all.action")}
               </Button>
-            )}
+            )} */}
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">

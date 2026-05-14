@@ -6,14 +6,13 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useDebounce } from "@/hooks/ui/useDebounce";
 import Link from "next/link";
-import { MainRoutes } from "@/types";
+import { AuthRoutes } from "@/types";
 import { useAuthStore } from "@/stores/useAuthStore";
 
 interface BaseSearchBarProps {
   placeholder: string;
   addLabel: string;
   searchParamKey?: string;
-  onAddPress?: () => void;
   showAddButton?: boolean;
   buttonBgClass?: string;
 }
@@ -22,7 +21,6 @@ export const BaseSearchBar = ({
   placeholder,
   addLabel,
   searchParamKey = "search",
-  onAddPress,
   showAddButton = true,
   buttonBgClass = "bg-primary-50",
 }: BaseSearchBarProps) => {
@@ -73,11 +71,12 @@ export const BaseSearchBar = ({
         <>
           {/* Mobile Add Button */}
           <Button
+            as={Link}
+            href={AuthRoutes.LOGIN}
             color="primary"
             variant="flat"
             radius="full"
             isIconOnly
-            onPress={onAddPress}
             className={`md:hidden h-12 w-12 flex-shrink-0 ${buttonBgClass} text-primary border-1 border-primary/20 shadow-sm`}
           >
             <IoAddOutline className="text-2xl" />
@@ -86,11 +85,10 @@ export const BaseSearchBar = ({
           {/* Desktop Add Button */}
           <Button
             as={Link}
-            href={MainRoutes.NEW_PROJECT}
+            href={AuthRoutes.LOGIN}
             color="primary"
             variant="flat"
             radius="full"
-            onPress={onAddPress}
             className={`hidden md:flex h-14 px-8 font-bold text-primary ${buttonBgClass} min-w-max border-1 border-primary/20 hover:border-primary shadow-sm transition-all`}
             endContent={<IoAddOutline className="text-xl" />}
           >

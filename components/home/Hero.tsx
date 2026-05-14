@@ -5,7 +5,7 @@ import { BiRightArrowAlt } from "react-icons/bi";
 import { IoTelescopeOutline } from "react-icons/io5";
 import { FadeIn } from "@/components/ui/animations";
 import Link from "next/link";
-import { MainRoutes } from "@/types";
+import { AuthRoutes, MainRoutes } from "@/types";
 
 export default function Hero() {
   const t = useTranslations("Hero");
@@ -69,7 +69,7 @@ export default function Hero() {
           </Button>
           <Button
             as={Link}
-            href={MainRoutes.NEW_PROJECT}
+            href={AuthRoutes.LOGIN}
             color="primary"
             size="lg"
             radius="sm"

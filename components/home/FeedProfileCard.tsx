@@ -55,7 +55,10 @@ export const FeedProfileCard = () => {
   }
 
   return (
-    <div className="bg-white rounded-xl overflow-hidden shadow-md">
+    <div
+      id="feed-profile-card"
+      className="bg-white rounded-xl overflow-hidden shadow-md"
+    >
       <ProfileCover user={user} />
 
       <div className="px-5 py-2 pb-4 relative">
