@@ -797,7 +797,8 @@
       "jobTitle": "Job title",
       "overview": "Overview",
       "education": "Education",
-      "contactInfo": "Contact info"
+      "contactInfo": "Contact info",
+      "interests": "Interests"
     },
     "account": {
       "title": "Account",
@@ -1008,5 +1009,15 @@
       "INVESTMENT_DISC": "Investment Discussion",
       "OTHER": "Other"
     }
+  },
+  "Interests": {
+    "title": "Select Your Interests",
+    "subtitle": "Choose the industries you are interested in. This helps us recommend the most relevant projects and talents for you.",
+    "searchPlaceholder": "Search industries...",
+    "submit": "Save and Continue",
+    "skip": "Skip for now",
+    "success": "Interests updated successfully!",
+    "error": "Failed to update interests",
+    "minSelection": "Please select at least one interest to continue."
   }
 }

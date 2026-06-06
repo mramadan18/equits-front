@@ -73,7 +73,7 @@ export default function VerifyEmailPage() {
             `${AuthRoutes.LOGIN}?callbackUrl=${encodeURIComponent(callbackUrl)}`,
           );
         } else {
-          router.push(AuthRoutes.LOGIN);
+          router.push(`${AuthRoutes.LOGIN}?callbackUrl=/interests`);
         }
         router.refresh();
       },

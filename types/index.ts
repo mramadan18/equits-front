@@ -25,6 +25,7 @@ export enum MainRoutes {
   EXPLORE = "/explore",
   REPO = "/repo",
   TALENTS = "/talents",
+  INTERESTS = "/interests",
   SERVICES = "/services",
   BOOST = "/boost",
   PROJECTS = "/projects",

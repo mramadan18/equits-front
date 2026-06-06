@@ -136,6 +136,7 @@ export interface User {
   wishlistIds?: number[];
   memberProjects?: ProjectMember[];
   meetingStatus?: "NONE" | "PENDING" | "COOLDOWN";
+  interests?: Industry[];
 }
 
 export interface ProjectMember {
@@ -166,6 +167,7 @@ export interface ApiResponse<T> {
 export interface AuthResponse {
   user: User;
   token: string;
+  isNewUser?: boolean;
 }
 
 export interface SuccessResponse {

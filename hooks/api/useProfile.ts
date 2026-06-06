@@ -77,6 +77,9 @@ export const useUpdateContact = () =>
 export const useUpdatePictures = () =>
   useProfileMutation(profileService.updatePictures);
 
+export const useUpdateInterests = () =>
+  useProfileMutation<number[], any>(profileService.updateInterests);
+
 /** Infinite scroll version of profile listing (for Talents page) */
 export const useInfiniteProfiles = (
   filters?: Omit<Record<string, any>, "page">,

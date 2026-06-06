@@ -48,7 +48,11 @@ export const useRegisterController = () => {
             title: response.message || "Logged in with Google successfully",
             color: "success",
           });
-          router.push(callbackUrl || MainRoutes.HOME);
+          if (response.data.isNewUser) {
+            router.push(MainRoutes.INTERESTS);
+          } else {
+            router.push(callbackUrl || MainRoutes.HOME);
+          }
           router.refresh();
         },
       });

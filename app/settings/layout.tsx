@@ -52,6 +52,7 @@ export default function SettingsLayout({ children }: { children: ReactNode }) {
                 className="w-full"
               />
               <Tab key="education" title={t("editProfile.education")} />
+              <Tab key="interests" title={t("editProfile.interests")} />
               <Tab key="contactinfo" title={t("editProfile.contactInfo")} />
             </Tabs>
           </div>

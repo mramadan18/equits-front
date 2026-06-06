@@ -39,6 +39,9 @@ export const profileService = {
   updatePictures: (data: UpdatePicturesRequest): Promise<ApiResponse<User>> =>
     unwrap(apiClient.patch("/profile/pictures", data)),
 
+  updateInterests: (industryIds: number[]): Promise<ApiResponse<any>> =>
+    unwrap(apiClient.patch("/profile/interests", { industryIds })),
+
   getProfileProjects: (id: string): Promise<ApiResponse<Project[]>> =>
     unwrap(apiClient.get(`/profile/${id}/projects`)),
 

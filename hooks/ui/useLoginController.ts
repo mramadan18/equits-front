@@ -44,7 +44,11 @@ export const useLoginController = () => {
             title: response.message || "Logged in with Google successfully",
             color: "success",
           });
-          router.push(callbackUrl);
+          if (response.data.isNewUser) {
+            router.push(MainRoutes.INTERESTS);
+          } else {
+            router.push(callbackUrl);
+          }
           router.refresh();
         },
       });

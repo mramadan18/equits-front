@@ -17,6 +17,7 @@ const protectedPages = [
   MainRoutes.SETTINGS,
   MainRoutes.SAVED,
   MainRoutes.NOTIFICATIONS,
+  MainRoutes.INTERESTS,
 ];
 
 export default function middleware(request: NextRequest) {
