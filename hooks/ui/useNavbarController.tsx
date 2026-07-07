@@ -55,7 +55,7 @@ export const useNavbarController = (
     useCreateProject();
 
   const isLoggedIn = isHydrated
-    ? isAuthenticated && user?.isEmailVerified
+    ? isAuthenticated && user?.isEmailVerified && !!session
     : !!session && isVerified;
   const isAuthPage = authRoutes.includes(pathname as AuthRoutes);
   const isLoginPage = pathname === AuthRoutes.LOGIN;

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useAuthStore } from "@/stores/useAuthStore";
 
 const apiClient = axios.create({
   baseURL: `${process.env.NEXT_PUBLIC_API_URL}/api/v1`,
@@ -38,6 +39,7 @@ apiClient.interceptors.response.use(
 
         if (status >= 400) {
           if (status === 401 && isUnAuthenticated) {
+            useAuthStore.getState().logout();
             window.location.reload();
           } else {
             addToast({
